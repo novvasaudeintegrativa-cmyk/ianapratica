@@ -430,7 +430,7 @@ a { color: inherit; }
    (não mais restrito ao hero/CTA final). Decisão do cliente: a mesma cor do
    chip de destaque vira a cor de todo botão primário, em qualquer seção e tema. */
 .btn-primary {
-  background: linear-gradient(135deg, var(--clay-vivid-bright), var(--clay-vivid));
+  background: var(--clay-vivid);
   color: #1a0d05;
   border-color: transparent;
   box-shadow: 0 10px 30px -10px rgba(255, 90, 31, 0.5), var(--btn-shadow);

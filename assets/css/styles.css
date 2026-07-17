@@ -97,10 +97,10 @@
   gap: 8px;
   height: 40px;
   padding-inline: 14px;
-  border: 1px solid rgba(255, 90, 31, 0.4);
+  border: 1px solid transparent;
   border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--clay-vivid);
+  background: var(--clay-vivid);
+  color: #ffffff;
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 600;
@@ -283,7 +283,7 @@
 .hero-impact .hero-meta-item span { color: rgba(250, 249, 245, 0.52); }
 .hero-impact .hero-meta-item strong { color: #faf9f5; }
 .hero-impact .btn-primary {
-  background: linear-gradient(135deg, var(--clay-vivid-bright), var(--clay-vivid));
+  background: var(--clay-vivid);
   border-color: transparent;
   color: #1a0d05;
   box-shadow: 0 10px 34px -8px rgba(255, 90, 31, 0.6), var(--btn-shadow);
