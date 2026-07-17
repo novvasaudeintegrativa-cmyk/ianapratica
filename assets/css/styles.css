@@ -94,12 +94,17 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
+  gap: 8px;
   height: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding-inline: 14px;
+  border: 1px solid rgba(255, 90, 31, 0.4);
   border-radius: var(--radius-sm);
   background: transparent;
-  color: #faf9f5;
+  color: var(--clay-vivid);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   cursor: pointer;
 }
 .mobile-nav {
