@@ -179,7 +179,12 @@
 .hero-impact {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(160deg, #0c0b0a 0%, #1b120c 45%, #2a1409 100%);
+  padding-block: 35px;
+  background:
+    linear-gradient(rgba(250, 249, 245, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 249, 245, 0.05) 1px, transparent 1px),
+    linear-gradient(160deg, #0c0b0a 0%, #1b120c 45%, #2a1409 100%);
+  background-size: 40px 40px, 40px 40px, 100% 100%;
   border-bottom-color: rgba(255, 90, 31, 0.25);
 }
 .hero-impact-glow {
@@ -192,18 +197,78 @@
   filter: blur(10px);
   pointer-events: none;
 }
-.hero-impact-mark {
+/* Marcas decorativas com a imagem do Claude, espalhadas pelo fundo do hero
+   em tamanhos/posições diferentes, com efeito alfa (opacidade baixa) — puramente
+   decorativo, por isso são <div aria-hidden> vazias, fora da ordem de leitura.
+   Usa a própria imagem como máscara CSS (em vez de <img>) pra poder colorir de
+   laranja com background-color — mesmo resultado visual de um SVG colorido,
+   sem depender de vetorizar o PNG. */
+.hero-impact-motif {
   position: absolute;
-  top: 50%;
-  left: -6%;
-  width: 640px;
-  max-width: 60vw;
-  height: auto;
-  color: var(--clay-vivid);
-  opacity: 0.05;
-  transform: translateY(-50%) rotate(-8deg);
+  aspect-ratio: 1;
   pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  background-color: var(--clay-vivid);
+  -webkit-mask-image: var(--claude-mask);
+  mask-image: var(--claude-mask);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
+.hero-impact-motif-1 {
+  top: -14%;
+  right: -10%;
+  width: 480px;
+  max-width: 52vw;
+  opacity: 0.2;
+  transform: rotate(-8deg);
+  filter: blur(3px);
+}
+.hero-impact-motif-2 {
+  bottom: -18%;
+  left: 0%;
+  width: 340px;
+  max-width: 38vw;
+  opacity: 0.22;
+  transform: rotate(12deg);
+}
+.hero-impact-motif-3 {
+  top: 54%;
+  right: 14%;
+  width: 240px;
+  max-width: 28vw;
+  opacity: 0.24;
+  transform: rotate(-16deg);
+}
+
+/* Marcas do Claude espalhadas pelo RESTO do site (fora do hero) — mesma técnica
+   de máscara CSS, reaproveitável em qualquer seção. Posição/tamanho/rotação de
+   cada instância vai inline no HTML (são só uns 20 usos pontuais, não vale a
+   pena uma classe nomeada pra cada uma); aqui só o essencial (mask + cor +
+   z-index) e os dois níveis de opacidade pedidos: sólida e em alfa. */
+.site-motif {
+  position: absolute;
+  aspect-ratio: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  background-color: var(--clay-vivid);
+  -webkit-mask-image: var(--claude-mask);
+  mask-image: var(--claude-mask);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+.site-motif-solid { opacity: 1; }
+.site-motif-alpha { opacity: 0.14; }
+
 .hero-impact .container { position: relative; z-index: 1; }
 .hero-impact .hero-eyebrow { color: rgba(250, 249, 245, 0.66); }
 .hero-impact .hero-eyebrow .dot { background: var(--clay-vivid); box-shadow: 0 0 12px 1px rgba(255, 90, 31, 0.8); }
@@ -237,12 +302,18 @@
    do body (o próprio .section não pinta cor de fundo, só essa camada de
    gradiente — o grid continua aparecendo por trás, inclusive sob o brilho). */
 .section {
+  position: relative;
+  overflow: hidden;
   padding-block: var(--space-24);
   border-bottom: 1px solid var(--color-border);
   background-image: radial-gradient(60% 55% at 50% 0%, rgba(255, 90, 31, 0.15), transparent 70%);
   background-repeat: no-repeat;
 }
 .section:last-of-type { border-bottom: none; }
+/* Precisa ficar acima das marcas decorativas (.site-motif, z-index:0, position:absolute
+   sem z-index positivo pintam DEPOIS do conteúdo em fluxo normal — ver nota em .site-motif). */
+.section > .container,
+.inverse-section > .container { position: relative; z-index: 1; }
 .section-header {
   max-width: 720px;
   margin: 0 auto var(--space-12);
@@ -304,6 +375,28 @@
 }
 .section-muted .testimonial-who span:not(.pending),
 .section-muted .instructor-role:not(.pending) { color: rgba(255, 255, 255, 0.45); }
+
+/* Bastidores — mesmo fundo escuro do antigo .bastidor-panel, mas na seção
+   inteira (id em vez de classe, pra não virar um tratamento genérico
+   reutilizável ainda: é um teste de layout, só texto por enquanto). Ao
+   contrário de .section-muted, aqui o quadriculado continua visível por cima
+   do gradiente escuro — daí as duas camadas de linha antes do gradiente base. */
+#bastidores {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(250, 249, 245, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 249, 245, 0.06) 1px, transparent 1px),
+    linear-gradient(160deg, #0c0b0a 0%, #1b120c 45%, #2a1409 100%);
+  background-size: 40px 40px, 40px 40px, 100% 100%;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+#bastidores .text-eyebrow { color: rgba(255, 255, 255, 0.55); }
+#bastidores h2.text-heading { color: #faf9f5; }
+#bastidores .section-header p { color: rgba(255, 255, 255, 0.72); }
+#bastidores .section-header p strong { color: #ffffff; }
+#bastidores > .container > p.text-body { color: rgba(255, 255, 255, 0.72); }
+#bastidores > .container > p.text-body strong { color: #ffffff; }
 
 /* ---------- Programação (aulas) ---------- */
 .schedule-list { display: grid; gap: var(--space-4); position: relative; }
@@ -388,6 +481,24 @@
 .schedule-item p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
 .schedule-date { font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-muted-foreground); }
 
+/* Aviso em destaque dentro de um bloco da Programação (ex: pré-requisito
+   obrigatório) — precisa de mais especificidade que ".schedule-item p" acima
+   pra garantir fundo laranja + texto branco em vez do parágrafo padrão do card. */
+.schedule-item .schedule-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: var(--space-3) 0 0;
+  padding: 10px 14px;
+  background: var(--clay-vivid);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+.schedule-item .schedule-alert svg { flex: none; margin-top: 2px; }
+
 /* Linhas de intervalo/almoço — mais discretas que os blocos de conteúdo, para o olho
    distinguir rapidamente "aqui se aprende algo" de "aqui é pausa" */
 .schedule-break {
@@ -402,6 +513,18 @@
 }
 .schedule-break span:first-child { font-variant-numeric: tabular-nums; }
 .schedule-break span:last-child::before { content: "· "; }
+
+/* Divisor de dia (Dia 1 / Dia 2) — reaproveita o mesmo componente do
+   .schedule-break, só mais robusto visualmente pra marcar a virada de dia,
+   não apenas um intervalo dentro do mesmo dia. */
+.schedule-break-day {
+  gap: var(--space-2);
+  padding: 10px var(--space-6);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-foreground);
+}
+.schedule-break-day span:first-child { color: var(--clay-vivid); }
 
 /* Desktop: trilho no meio. Os horários/intervalos viram um badge centralizado
    sobre o trilho (.schedule-break); só os blocos numerados (01–04) alternam de
@@ -446,39 +569,39 @@
   }
 }
 
-/* ---------- Bastidores (como a gente mesmo usa IA) — painel-diagrama ----------
-   Fixo escuro independentemente do tema (mesmo compromisso do hero/section-muted):
-   um "organograma" simples em CSS — nó raiz, barra conectora e 4 ramos — em vez
-   da grade genérica de cards, pra dar mais impacto visual a essa seção específica. */
-.bastidor-panel {
-  position: relative;
-  overflow: hidden;
-  margin-top: var(--space-4);
-  padding: var(--space-16) var(--space-8) var(--space-12);
-  border-radius: var(--radius-xl);
-  background: linear-gradient(160deg, #0c0b0a 0%, #1b120c 45%, #2a1409 100%);
-  border: 1px solid rgba(255, 90, 31, 0.22);
-  box-shadow: var(--elevation-overlay);
+/* ---------- Transformação (frase de impacto abaixo do hero) ---------- */
+#transformacao h2.text-heading .text-accent-lg { font-size: 1.25em; }
+.transformacao-punch {
+  max-width: var(--reading-column);
+  margin: var(--space-4) auto 0;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: clamp(1.25rem, 1.2vw + 1rem, 1.75rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
 }
-.bastidor-panel-glow {
-  position: absolute;
-  top: -30%;
-  left: 50%;
-  width: 70%;
-  aspect-ratio: 1;
-  transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(255, 90, 31, 0.35) 0%, rgba(255, 90, 31, 0) 70%);
-  filter: blur(20px);
-  pointer-events: none;
-}
-.bastidor-tree { position: relative; z-index: 1; }
 
+/* ---------- Bastidores (como a gente mesmo usa IA) — timeline vertical ----------
+   Reaproveita o MESMO componente de timeline da Programação (.schedule-list /
+   .timeline-rail / .timeline-dot / [data-timeline]) — já resolvido e testado
+   pra mobile (rail à esquerda, cards indentados) — só com skin escura e ícones
+   coloridos por ramo em vez de números. Evita reinventar a responsividade. */
 .bastidor-root { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
 .bastidor-root-mark {
-  width: 34px; height: 34px;
-  color: var(--clay-vivid);
+  width: 34px;
+  aspect-ratio: 1;
+  margin: 0 auto 4px;
+  background-color: var(--clay-vivid);
+  -webkit-mask-image: var(--claude-mask);
+  mask-image: var(--claude-mask);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
   filter: drop-shadow(0 0 10px rgba(255, 90, 31, 0.6));
-  margin-bottom: 4px;
 }
 .bastidor-root strong { font-family: var(--font-sans); font-size: 1.0625rem; font-weight: 700; color: #faf9f5; }
 .bastidor-root span { font-family: var(--font-sans); font-size: 0.8125rem; color: rgba(250, 249, 245, 0.55); }
@@ -486,55 +609,42 @@
   content: "";
   display: block;
   width: 2px;
-  height: 40px;
+  height: 32px;
   margin: var(--space-3) auto 0;
   background: linear-gradient(rgba(255, 90, 31, 0.55), rgba(255, 90, 31, 0.12));
 }
 
-.bastidor-branches {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-6) var(--space-4);
-  padding-top: 40px;
+.bastidor-timeline { margin-top: 0; }
+.bastidor-timeline .timeline-rail { background: rgba(255, 255, 255, 0.14); }
+.bastidor-timeline .timeline-dot { background: rgba(255, 255, 255, 0.2); }
+.bastidor-timeline .schedule-item {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: none;
 }
-.bastidor-branches::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 12.5%;
-  right: 12.5%;
-  height: 2px;
-  background: rgba(255, 90, 31, 0.3);
-}
-.bastidor-branch { position: relative; text-align: center; }
-.bastidor-branch::before {
-  content: "";
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  width: 2px;
+.bastidor-timeline .schedule-item h3 { color: #faf9f5; }
+.bastidor-timeline .schedule-item p { color: rgba(250, 249, 245, 0.62); margin-bottom: 0; }
+
+.bastidor-node-icon {
+  width: 40px;
   height: 40px;
-  background: rgba(255, 90, 31, 0.3);
-  transform: translateX(-50%);
-}
-.bastidor-branch-icon {
-  width: 44px;
-  height: 44px;
-  margin: 0 auto var(--space-3);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid transparent;
 }
-.bastidor-branch h3 { margin: 0 0 var(--space-2); font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 700; color: #faf9f5; }
-.bastidor-branch p { margin: 0; font-family: var(--font-body); font-size: 0.875rem; line-height: 1.5; color: rgba(250, 249, 245, 0.62); }
-
-.bastidor-branch-clay .bastidor-branch-icon { background: rgba(217, 119, 87, 0.18); border-color: rgba(217, 119, 87, 0.5); color: #d97757; }
-.bastidor-branch-sky .bastidor-branch-icon { background: rgba(106, 155, 204, 0.18); border-color: rgba(106, 155, 204, 0.5); color: #6a9bcc; }
-.bastidor-branch-olive .bastidor-branch-icon { background: rgba(120, 140, 93, 0.2); border-color: rgba(120, 140, 93, 0.55); color: #9ab37a; }
-.bastidor-branch-kraft .bastidor-branch-icon { background: rgba(212, 162, 127, 0.2); border-color: rgba(212, 162, 127, 0.5); color: #d4a27f; }
+/* Todos os ícones em laranja (--clay-vivid), independente do modificador de
+   cor (is-clay/is-sky/is-olive/is-kraft) — mantém as classes no HTML por
+   enquanto, só unifica a cor visual entre os 4 ramos. */
+.bastidor-node-icon.is-clay,
+.bastidor-node-icon.is-sky,
+.bastidor-node-icon.is-olive,
+.bastidor-node-icon.is-kraft {
+  background: rgba(255, 90, 31, 0.18);
+  border-color: rgba(255, 90, 31, 0.5);
+  color: var(--clay-vivid);
+}
 
 .bastidor-footer {
   display: flex;
@@ -548,20 +658,13 @@
 .bastidor-tag {
   font-family: var(--font-sans);
   font-size: 0.75rem;
-  font-weight: 500;
-  color: rgba(250, 249, 245, 0.8);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--clay-vivid-bright), var(--clay-vivid));
+  border: 1px solid transparent;
   border-radius: var(--radius-full);
   padding: 6px 14px;
-}
-
-@media (max-width: 720px) {
-  .bastidor-panel { padding: var(--space-12) var(--space-4); }
-  .bastidor-branches { grid-template-columns: 1fr; gap: var(--space-8); padding-top: var(--space-6); }
-  .bastidor-branches::before,
-  .bastidor-branch::before { display: none; }
-  .bastidor-root::after { height: 24px; }
+  box-shadow: 0 6px 16px -8px rgba(255, 90, 31, 0.6);
 }
 
 /* ---------- Grades (para quem é / transformação / diferenciais) ---------- */
@@ -694,14 +797,14 @@
   justify-content: space-between;
   gap: var(--space-4);
   padding: var(--space-4) var(--space-6);
-  background: transparent;
+  background: var(--clay-vivid);
   border: none;
   text-align: left;
   cursor: pointer;
   font-family: var(--font-sans);
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-foreground);
+  color: #ffffff;
 }
 .faq-question .chevron { flex: none; transition: transform var(--duration-normal) var(--ease-out); }
 .faq-item[data-open="true"] .chevron { transform: rotate(180deg); }
@@ -717,26 +820,51 @@
 .faq-item[data-open="true"] .faq-answer { grid-template-rows: 1fr; }
 
 /* ---------- Footer ---------- */
-.site-footer { padding-block: var(--space-16) var(--space-8); }
+/* Fundo laranja fixo (mesmo compromisso "sempre nessa cor" do hero/CTA final) —
+   por isso os overrides de contraste abaixo: tudo que antes usava cores
+   pensadas pro fundo claro (cinza mudo, --color-border, --clay-vivid em texto)
+   precisa virar branco/translúcido pra continuar legível sobre o laranja. */
+.site-footer {
+  padding-block: var(--space-16) var(--space-8);
+  background: #141413;
+  color: #faf9f5;
+}
 .footer-grid {
   display: grid;
   gap: var(--space-8);
   grid-template-columns: 1fr;
   padding-bottom: var(--space-8);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   margin-bottom: var(--space-6);
 }
 @media (min-width: 720px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; } }
-.footer-grid h4 { font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 600; margin: 0 0 var(--space-3); color: var(--color-muted-foreground); }
+.footer-grid h4 { font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 600; margin: 0 0 var(--space-3); color: rgba(255, 255, 255, 0.5); }
 .footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.footer-grid a { text-decoration: none; color: var(--color-ink-soft); font-family: var(--font-sans); font-size: 0.9375rem; }
-.footer-grid a:hover { color: var(--color-foreground); }
-.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); color: var(--color-muted-foreground); font-family: var(--font-sans); font-size: 0.8125rem; }
+.footer-grid a { text-decoration: none; color: rgba(255, 255, 255, 0.82); font-family: var(--font-sans); font-size: 0.9375rem; }
+.footer-grid a:hover { color: #ffffff; text-decoration: underline; }
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); color: rgba(255, 255, 255, 0.5); font-family: var(--font-sans); font-size: 0.8125rem; }
+.site-footer .brand { color: #faf9f5; }
+.site-footer .brand-mark { color: var(--clay-vivid); }
+.site-footer .text-muted { color: rgba(255, 255, 255, 0.6); }
+.site-footer .pending { color: var(--clay-vivid); }
 
 /* ---------- Utilidades de placeholder visível ---------- */
 .pending {
   color: var(--clay-vivid);
   font-weight: 600;
+}
+
+/* Variante em badge sólido (fundo laranja + texto branco) — pra "pending" que
+   precisa de mais destaque que o texto colorido sozinho, ex: hero-meta. Sem
+   isso, texto laranja direto sobre fundo escuro/quadriculado fica meio "solto". */
+.pending-badge {
+  display: inline-flex;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--clay-vivid-bright), var(--clay-vivid));
+  border-radius: var(--radius-full);
+  padding: 3px 12px;
+  font-size: 0.875rem;
+  box-shadow: 0 6px 16px -8px rgba(255, 90, 31, 0.6);
 }
 
 /* ---------- Revelação genérica ao rolar (fora da Programação, que tem sua
