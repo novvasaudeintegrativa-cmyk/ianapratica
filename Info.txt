@@ -1,0 +1,83 @@
+npx plugins add vercel/vercel-plugin
+
+
+[ Insights ]
+Voz de marca, calendário editorial com copy pronto, landing page, proposta comercial, análise de concorrentes. O que antes levava semanas sai em uma sessão.
+Instalação, configuração e primeiro fluxo automatizado rodando ainda durante a aula. Gmail, Google Drive e os primeiros processos que passam a rodar sem você precisar estar presente em cada etapa.
+
+[ VERCEL - Hospedagem ]
+
+npx plugins add vercel/vercel-plugin
+Domínio Provisório: https://ianapratica-three.vercel.app/
+Dominio: https://imersaoianapratica.com.br
+
+Refs.: Design System e Copy
+1) https://cursos.m2br.academy/presenciais/claude-na-pratica)
+2) https://imersao.iacomtata.com.br/
+
+Dicas da Tatá: Criar um Método pra dar autoridade.
+
+[ Kiwify ]
+
+Card do Ingresso — Imersão IA na Prática (ao vivo no Zoom)
+De R$ 247 | por R$ 147 à vista
+
+1 dia de imersão ao vivo via Zoom (9h às 16h)
+Interação em tempo real com os instrutores
+Materiais e templates usados em aula
+[Certificado de participação — a confirmar]
+[Condições de parcelamento a definir]
+
++ Order Bump - Gravação da Live 
+De R$ 247 | por R$ 147 à vista
+(Criar Copy)
+Bônus - 12 Agentes R$0
+
+[ Garantia Pessoal ]
+Gerar Copy
+
+_FAQ (Ref. https://imersao.iacomtata.com.br/) Sem Campanhas ou Tráfego
+
+
+XXXXXXXXXXXXXXXX
+
+
+Mentoria (Definir Valor)
+
+[ DEV - Desenvolvimento ]
+
+_ Landing Pages com IA
+
+LLM Claude
+Visual Studio Code
+AIOX - Orquestração de Agentes IA
+
+_ Hospedagem
+FTP (Gerenciador de Arquivos)
+
+_ GitHub
+Deploy no GitHub 
+Automação via FTP (Actions secrets and variables - Repository secrets)
+ 
+_ Criação de Imagens via API Gemini
+
+Criando API Key no Google (https://aistudio.google.com/)
+
+_ Gestão de Negócios
+ClickUp (Automatizando Processos)
+
+
+[ BÔNUS ]
+
+Obsidian (Método Andrej Karpathy)
+Prototipação com Claude (Antigo FIGMA)
+
+
+
+554a14c2-fd0171bc
+5960f9d4-6a0d8eac
+bd385bfa-d8097bc1
+c8a02c1a-fe8dfed6
+d3c6914b-7471a237
+e10fa965-5f58e237
+

@@ -1,0 +1,535 @@
+/*
+  Design System — Anthropic (v2.2)
+  Slate-on-ivory editorial system. Ivory canvas, slate-dark CTA no modo claro,
+  clay como acento de marca, Serif no corpo/display, Sans na UI/headings.
+
+  Este arquivo é o SISTEMA DE DESIGN reutilizável do projeto: tokens (custom
+  properties) + classes utilitárias de tipografia + recipes de componente.
+  Páginas consomem estas classes; não redefinem cor/tipografia localmente.
+*/
+
+/* ==========================================================================
+   1. TOKENS — modo claro (padrão)
+   ========================================================================== */
+:root {
+  color-scheme: light;
+
+  /* Slots semânticos */
+  --color-primary: #141413;
+  --color-primary-foreground: #faf9f5;
+  --color-secondary: #f0eee6;
+  --color-secondary-foreground: #141413;
+  --color-tertiary: #788c5d;
+  --color-neutral: #5e5d59;
+  --color-background: #faf9f5;
+  --color-foreground: #141413;
+  --color-surface: #faf9f5;
+  --color-surface-foreground: #141413;
+  --color-card: #ffffff;
+  --color-card-foreground: #141413;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #141413;
+  --color-muted: #f0eee6;
+  --color-muted-foreground: #5e5d59;
+  --color-accent: #d97757;
+  --color-accent-foreground: #faf9f5;
+  --color-destructive: #b43232;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #1414131a;
+  --color-input: #e8e6dc;
+  --color-ring: #d97757;
+  --color-primary-hover: #3d3d3a;
+  --color-success: #2f7613;
+  --color-warning: #865a07;
+  --color-info: #6a9bcc;
+
+  --chart-1: #d97757;
+  --chart-2: #788c5d;
+  --chart-3: #6a9bcc;
+  --chart-4: #d4a27f;
+  --chart-5: #c46686;
+
+  /* Ladder de superfícies (M3-like) */
+  --surface-container-low: #faf9f5;
+  --surface-container: #f0eee6;
+  --surface-container-high: #e8e6dc;
+  --surface-container-highest: #d1cfc5;
+  --surface-bright: #d97757;
+  --surface-dim: #b0aea5;
+  --surface-inverse: #141413;
+  --surface-inverse-foreground: #faf9f5;
+
+  /* Aliases semânticos */
+  --color-primary-deep: #c6613f;
+  --color-primary-soft: #f2d9ce;
+  --color-paper: #f0eee6;
+  --color-paper-deep: #e8e6dc;
+  --color-ink: #141413;
+  --color-ink-soft: #3d3d3a;
+  --color-ink-muted: #5e5d59;
+
+  /* Swatches de marca (não variam por tema — são a paleta crua) */
+  --swatch-clay: #d97757;
+  --swatch-clay-deep: #c6613f;
+  --swatch-ivory-light: #faf9f5;
+  --swatch-ivory-medium: #f0eee6;
+  --swatch-ivory-dark: #e8e6dc;
+  --swatch-slate-dark: #141413;
+  --swatch-slate-medium: #3d3d3a;
+  --swatch-slate-light: #5e5d59;
+  --swatch-cloud-dark: #87867f;
+  --swatch-cloud-medium: #b0aea5;
+  --swatch-cloud-light: #d1cfc5;
+  --swatch-olive: #788c5d;
+  --swatch-sky: #6a9bcc;
+  --swatch-kraft: #d4a27f;
+  --swatch-manilla: #ebdbbc;
+  --swatch-oat: #e3dacc;
+  --swatch-cactus: #bcd1ca;
+  --swatch-heather: #cbcadb;
+  --swatch-fig: #c46686;
+  --swatch-coral: #ebcece;
+  --swatch-white: #ffffff;
+
+  /* Clay vívido — variante intensificada do acento de marca, reservada para o
+     hero de impacto e para o fechamento (inverse-section). Não substitui o
+     --swatch-clay padrão usado no resto do site. */
+  --clay-vivid: #ff5a1f;
+  --clay-vivid-bright: #ffb35c;
+
+  /* Linha do quadriculado de fundo (grid sutil sobre as áreas claras) */
+  --pattern-line: rgba(20, 20, 19, 0.055);
+
+  /* Elevação */
+  --elevation-flat: none;
+  --elevation-raised: 0 1px 6px rgba(0, 0, 0, 0.10);
+  --elevation-floating: 0 2px 2px rgba(0, 0, 0, 0.012), 0 4px 4px rgba(0, 0, 0, 0.02), 0 16px 24px rgba(0, 0, 0, 0.04);
+  --elevation-overlay: 0 16px 40px rgba(20, 20, 19, 0.14);
+  --elevation-modal: 0 24px 64px rgba(20, 20, 19, 0.18);
+  --shadow-clay: 0 16px 40px -16px rgba(215, 119, 87, 0.4);
+
+  /* Tipografia — famílias */
+  --font-display: "Anthropic Serif", Georgia, serif;
+  --font-body: "Anthropic Serif", Georgia, serif;
+  --font-eyebrow: "Anthropic Sans", Arial, sans-serif;
+  --font-mono: "Anthropic Mono", "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "Anthropic Sans", Arial, sans-serif;
+  --font-serif: "Anthropic Serif", Georgia, serif;
+
+  /* Espaçamento — base 4px */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --space-site-margin: 80px;
+  --space-site-gutter: 24px;
+  --container-max: 1400px;
+  --reading-column: 640px;
+
+  /* Raio */
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Movimento */
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-gentle: 350ms;
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Geometria de botão (assinatura da marca) */
+  --btn-height: 48px;
+  --btn-padx: 24px;
+  --btn-pady: 14px;
+  --btn-shadow: 0 4px 4px rgba(8, 8, 8, 0.08), 0 1px 2px rgba(8, 8, 8, 0.20),
+    inset 0 6px 12px rgba(255, 255, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.19);
+  --btn-shadow-hover: 0 1px 1px rgba(8, 8, 8, 0.08), 0 1px 1px rgba(8, 8, 8, 0.20),
+    inset 0 6px 12px rgba(255, 255, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.19);
+}
+
+/* ==========================================================================
+   2. TOKENS — modo escuro (preferência do sistema)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --color-background: #242322;
+    --color-foreground: #faf9f5;
+    --color-card: #1f1e1d;
+    --color-card-foreground: #faf9f5;
+    --color-popover: #2f2e2d;
+    --color-popover-foreground: #faf9f5;
+    --color-primary: #d97757;
+    --color-primary-foreground: #ffffff;
+    --color-secondary: #1f1e1d;
+    --color-secondary-foreground: #faf9f5;
+    --color-muted: #141413;
+    --color-muted-foreground: #9a9790;
+    --color-accent: #141413;
+    --color-accent-foreground: #faf9f5;
+    --color-destructive: #d36b6b;
+    --color-destructive-foreground: #ffffff;
+    --color-border: #d1cfc5;
+    --color-input: rgba(250, 249, 245, 0.08);
+    --color-ring: #d97757;
+    --color-primary-hover: #c6613f;
+
+    --chart-1: #d97757;
+    --chart-2: #788c5d;
+    --chart-3: #6a9bcc;
+    --chart-4: #c46686;
+    --chart-5: #cbcadb;
+
+    --color-surface: #242322;
+    --color-surface-foreground: #faf9f5;
+    --surface-container-low: #1f1e1d;
+    --surface-container: #141413;
+    --surface-container-high: #3d3d3a;
+    --surface-container-highest: #5e5d59;
+    --surface-bright: #d97757;
+    --surface-dim: #0a0a09;
+    --surface-inverse: #faf9f5;
+    --surface-inverse-foreground: #141413;
+
+    --elevation-raised: 0 1px 2px rgba(0, 0, 0, 0.40);
+    --elevation-floating: 0 4px 4px rgba(0, 0, 0, 0.40), 0 1px 2px rgba(0, 0, 0, 0.60);
+    --elevation-overlay: 0 2px 2px rgba(0, 0, 0, 0.20), 0 4px 4px rgba(0, 0, 0, 0.25), 0 16px 24px rgba(0, 0, 0, 0.35);
+    --elevation-modal: 0 4px 8px rgba(0, 0, 0, 0.35), 0 16px 32px rgba(0, 0, 0, 0.45), 0 32px 64px rgba(0, 0, 0, 0.55);
+
+    --color-ink: #faf9f5;
+    --color-ink-soft: #bdbbb4;
+    --color-ink-muted: #9a9790;
+
+    --pattern-line: rgba(250, 249, 245, 0.05);
+  }
+}
+
+/* ==========================================================================
+   3. TOKENS — override manual (toggle claro/escuro na página)
+   O atributo data-theme no <html> sempre vence a preferência do sistema,
+   nos dois sentidos.
+   ========================================================================== */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-background: #242322;
+  --color-foreground: #faf9f5;
+  --color-card: #1f1e1d;
+  --color-card-foreground: #faf9f5;
+  --color-popover: #2f2e2d;
+  --color-popover-foreground: #faf9f5;
+  --color-primary: #d97757;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #1f1e1d;
+  --color-secondary-foreground: #faf9f5;
+  --color-muted: #141413;
+  --color-muted-foreground: #9a9790;
+  --color-accent: #141413;
+  --color-accent-foreground: #faf9f5;
+  --color-destructive: #d36b6b;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #d1cfc5;
+  --color-input: rgba(250, 249, 245, 0.08);
+  --color-ring: #d97757;
+  --color-primary-hover: #c6613f;
+  --color-surface: #242322;
+  --color-surface-foreground: #faf9f5;
+  --surface-container-low: #1f1e1d;
+  --surface-container: #141413;
+  --surface-container-high: #3d3d3a;
+  --surface-container-highest: #5e5d59;
+  --surface-bright: #d97757;
+  --surface-dim: #0a0a09;
+  --surface-inverse: #faf9f5;
+  --surface-inverse-foreground: #141413;
+  --elevation-raised: 0 1px 2px rgba(0, 0, 0, 0.40);
+  --elevation-floating: 0 4px 4px rgba(0, 0, 0, 0.40), 0 1px 2px rgba(0, 0, 0, 0.60);
+  --elevation-overlay: 0 2px 2px rgba(0, 0, 0, 0.20), 0 4px 4px rgba(0, 0, 0, 0.25), 0 16px 24px rgba(0, 0, 0, 0.35);
+  --elevation-modal: 0 4px 8px rgba(0, 0, 0, 0.35), 0 16px 32px rgba(0, 0, 0, 0.45), 0 32px 64px rgba(0, 0, 0, 0.55);
+  --color-ink: #faf9f5;
+  --color-ink-soft: #bdbbb4;
+  --color-ink-muted: #9a9790;
+  --pattern-line: rgba(250, 249, 245, 0.05);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-background: #faf9f5;
+  --color-foreground: #141413;
+  --color-card: #ffffff;
+  --color-card-foreground: #141413;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #141413;
+  --color-primary: #141413;
+  --color-primary-foreground: #faf9f5;
+  --color-secondary: #f0eee6;
+  --color-secondary-foreground: #141413;
+  --color-muted: #f0eee6;
+  --color-muted-foreground: #5e5d59;
+  --color-accent: #d97757;
+  --color-accent-foreground: #faf9f5;
+  --color-destructive: #b43232;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #1414131a;
+  --color-input: #e8e6dc;
+  --color-ring: #d97757;
+  --color-primary-hover: #3d3d3a;
+  --color-surface: #faf9f5;
+  --color-surface-foreground: #141413;
+  --surface-container-low: #faf9f5;
+  --surface-container: #f0eee6;
+  --surface-container-high: #e8e6dc;
+  --surface-container-highest: #d1cfc5;
+  --surface-bright: #d97757;
+  --surface-dim: #b0aea5;
+  --surface-inverse: #141413;
+  --surface-inverse-foreground: #faf9f5;
+  --elevation-raised: 0 1px 6px rgba(0, 0, 0, 0.10);
+  --elevation-floating: 0 2px 2px rgba(0, 0, 0, 0.012), 0 4px 4px rgba(0, 0, 0, 0.02), 0 16px 24px rgba(0, 0, 0, 0.04);
+  --elevation-overlay: 0 16px 40px rgba(20, 20, 19, 0.14);
+  --elevation-modal: 0 24px 64px rgba(20, 20, 19, 0.18);
+  --color-ink: #141413;
+  --color-ink-soft: #3d3d3a;
+  --color-ink-muted: #5e5d59;
+  --pattern-line: rgba(20, 20, 19, 0.055);
+}
+
+/* ==========================================================================
+   4. RESET MÍNIMO
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body {
+  margin: 0;
+  background-color: var(--color-background);
+  /* Quadriculado sutil: cobre a página inteira, mas só "aparece" nas áreas
+     claras (.section) — os blocos escuros (hero, section-muted, inverse-section,
+     nav-header) pintam fundo opaco próprio por cima e escondem o padrão. */
+  background-image:
+    linear-gradient(var(--pattern-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--pattern-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+  transition: background-color var(--duration-normal) var(--ease-out), color var(--duration-normal) var(--ease-out);
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ==========================================================================
+   5. TIPOGRAFIA — classes utilitárias por papel
+   ========================================================================== */
+.text-display {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 3.2vw + 1.5rem, 4.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  -webkit-text-stroke: 0.4px currentColor;
+}
+.text-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 1.6vw + 1.3rem, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  -webkit-text-stroke: 0.3px currentColor;
+}
+.text-title {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.text-subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.text-body-lg { font-family: var(--font-body); font-size: 1.25rem; font-weight: 400; line-height: 1.4; }
+.text-body { font-family: var(--font-body); font-size: 1.125rem; font-weight: 400; line-height: 1.55; }
+.text-body-sm { font-family: var(--font-body); font-size: 1rem; font-weight: 400; line-height: 1.4; }
+.text-label { font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500; line-height: 1.4; letter-spacing: -0.005em; }
+.text-caption { font-family: var(--font-sans); font-size: 0.75rem; font-weight: 400; line-height: 1.4; }
+.text-mono { font-family: var(--font-mono); font-size: 0.875rem; font-weight: 400; line-height: 1.5; }
+.text-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--color-ink-muted);
+}
+.text-muted { color: var(--color-muted-foreground); }
+.text-accent { color: var(--clay-vivid); }
+
+/* ==========================================================================
+   6. COMPONENTES
+   ========================================================================== */
+
+/* Botões */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--btn-height);
+  padding: var(--btn-pady) var(--btn-padx);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color var(--duration-normal) var(--ease-out),
+    color var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+/* Botão primário — clay vívido como cor de ação padrão do sistema inteiro
+   (não mais restrito ao hero/CTA final). Decisão do cliente: a mesma cor do
+   chip de destaque vira a cor de todo botão primário, em qualquer seção e tema. */
+.btn-primary {
+  background: linear-gradient(135deg, var(--clay-vivid-bright), var(--clay-vivid));
+  color: #1a0d05;
+  border-color: transparent;
+  box-shadow: 0 10px 30px -10px rgba(255, 90, 31, 0.5), var(--btn-shadow);
+}
+.btn-primary:hover { filter: brightness(1.06); box-shadow: 0 6px 18px -6px rgba(255, 90, 31, 0.55), var(--btn-shadow-hover); }
+.btn-secondary {
+  background: transparent;
+  color: var(--color-foreground);
+  border-color: var(--color-foreground);
+}
+.btn-secondary:hover { background: var(--color-foreground); color: var(--color-background); }
+.btn-ghost {
+  background: transparent;
+  color: var(--color-foreground);
+  border-color: var(--color-border);
+  height: 44px;
+  padding: 8px 16px;
+}
+.btn-ghost:hover { border-color: rgba(20, 20, 19, 0.3); }
+.btn-sm { height: 44px; padding: 10px 20px; }
+
+/* Cards */
+.card {
+  background: var(--color-card);
+  color: var(--color-card-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--elevation-raised);
+  transition: background-color var(--duration-gentle) var(--ease-out), box-shadow var(--duration-gentle) var(--ease-out);
+}
+.card-hover:hover {
+  background: rgba(20, 20, 19, 0.10);
+  box-shadow: var(--elevation-floating);
+}
+
+/* Cards de placeholder — sinaliza dado ainda não confirmado */
+.card-placeholder {
+  border-style: dashed;
+  border-color: var(--color-border);
+  background: transparent;
+  box-shadow: none;
+  color: var(--color-muted-foreground);
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  background: var(--color-input);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+}
+.input:focus-visible { border-color: var(--color-ring); }
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-muted);
+  color: var(--color-muted-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: 4px 10px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.badge-accent { background: var(--color-primary-soft); color: var(--color-primary-deep); border-color: transparent; }
+
+/* Navegação — fixa em escuro com calor de clay (gradiente, não laranja chapado,
+   pra não engolir o contraste do botão de CTA), mesmo compromisso "sempre
+   escuro" do hero/CTA final/seções quietas. */
+.nav-header {
+  background: linear-gradient(180deg, rgba(22, 15, 10, 0.94) 0%, rgba(12, 11, 10, 0.88) 100%);
+  backdrop-filter: blur(10px);
+  color: #faf9f5;
+  border-bottom: 1px solid rgba(255, 90, 31, 0.18);
+  height: 64px;
+}
+
+/* Seção inversa — compromisso fixo com slate-dark independentemente do tema.
+   Gradiente radial com o clay vívido do hero (mesma família de cor do bloco de
+   abertura), para a página abrir e fechar com a mesma energia — sem perder a
+   leitura "flat e calma" do restante do sistema, que fica entre as duas pontas. */
+.inverse-section {
+  background:
+    radial-gradient(120% 160% at 8% -10%, rgba(255, 90, 31, 0.22) 0%, rgba(255, 90, 31, 0) 45%),
+    radial-gradient(140% 140% at 100% 120%, #232220 0%, #141413 55%),
+    #141413;
+  color: #faf9f5;
+  padding: var(--space-24) var(--space-16);
+}
+/* .btn-primary já é clay vívido por padrão (ver base acima) — nada a sobrescrever aqui. */
+
+/* Hero editorial */
+.editorial-hero {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  padding: clamp(4rem, 6vw + 2rem, var(--space-32)) var(--space-16) var(--space-24);
+}
+
+/* Superfícies utilitárias */
+.surface-muted { background: var(--color-muted); }
+.surface-card { background: var(--color-card); }

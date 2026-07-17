@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IA na Prática — Imersão ao vivo via Zoom</title>
+<meta name="description" content="Imersão ao vivo via Zoom, em um dia — das 9h às 16h — para aplicar IA no seu dia a dia. Vagas limitadas por turma." />
+<meta property="og:title" content="IA na Prática — Imersão ao vivo via Zoom" />
+<meta property="og:description" content="Um dia inteiro, ao vivo, das 9h às 16h, para sair usando IA na prática, não só assistindo." />
+<meta property="og:type" content="website" />
+<!-- TODO(og:image): definir imagem de compartilhamento (1200x630) quando houver identidade de marca fechada -->
+<link rel="stylesheet" href="assets/css/tokens.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+
+<!--
+  NOTA PARA O TIME DE CONTEÚDO
+  Esta página segue o PRD em docs/prd/prd-imersao-ia-na-pratica.md.
+  Itens marcados com a classe "pending" ou comentários TODO ainda não têm
+  dado real confirmado (datas, instrutores, depoimentos, estatísticas,
+  dados legais). Preço (ingresso de R$ 247 por R$ 147; order bump — gravação —
+  de R$ 247 por R$ 147) e gateway (Kiwify) já estão confirmados e não devem
+  ser tratados como placeholder.
+-->
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header nav-header" data-site-header>
+  <div class="container">
+    <a class="brand" href="#topo">
+      <span class="brand-mark">IA</span> na Prática
+    </a>
+
+    <ul class="nav-list">
+      <li><a href="#programacao">Programação</a></li>
+      <li><a href="#para-quem-e">Para quem é</a></li>
+      <li><a href="#instrutores">Instrutores</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#investimento">Investimento</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" type="button" data-theme-cycle aria-label="Tema: sistema. Clique para alternar.">
+        <svg class="theme-icon theme-icon-system" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="3.5" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 15.5H11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <svg class="theme-icon theme-icon-light" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="3.4" stroke="currentColor" stroke-width="1.4"/><path d="M9 1.6V3.4M9 14.6V16.4M16.4 9H14.6M3.4 9H1.6M14.1 3.9L12.8 5.2M5.2 12.8L3.9 14.1M14.1 14.1L12.8 12.8M5.2 5.2L3.9 3.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <svg class="theme-icon theme-icon-dark" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15.5 10.4A6.5 6.5 0 0 1 7.6 2.5a6.5 6.5 0 1 0 7.9 7.9Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm" href="#investimento">Garantir minha vaga</a>
+      <button class="mobile-nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M2 5H16M2 9H16M2 13H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Menu principal">
+    <a href="#programacao">Programação</a>
+    <a href="#para-quem-e">Para quem é</a>
+    <a href="#instrutores">Instrutores</a>
+    <a href="#depoimentos">Depoimentos</a>
+    <a href="#investimento">Investimento</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+</header>
+
+<main id="conteudo">
+
+  <!-- HERO -->
+  <section class="hero hero-impact" id="topo">
+    <div class="hero-impact-glow" aria-hidden="true"></div>
+    <svg class="hero-impact-mark" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+      <path d="M100 10 L114 82 L190 100 L114 118 L100 190 L86 118 L10 100 L86 82 Z" fill="currentColor"/>
+    </svg>
+    <div class="container hero-grid">
+      <div>
+        <span class="hero-eyebrow text-eyebrow"><span class="dot"></span> Imersão ao vivo via Zoom · 1 dia</span>
+        <h1 class="text-display">IA na prática, não em teoria.</h1>
+        <p class="hero-lead text-body-lg">
+          Um dia inteiro, ao vivo, das 9h às 16h, para você sair usando IA no seu trabalho
+          de verdade — escrevendo com a sua voz, organizando tarefas e automatizando o
+          que hoje toma seu tempo. Você não assiste: você faz, ao vivo, com suporte de
+          quem já aplica isso todos os dias.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#investimento">Garantir minha vaga</a>
+          <a class="btn btn-ghost" href="#programacao">Ver a programação</a>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="text-caption text-muted">Formato</span>
+            <strong>Ao vivo, via Zoom</strong>
+          </div>
+          <div class="hero-meta-item">
+            <span class="text-caption text-muted">Duração</span>
+            <strong>1 dia · 9h às 16h</strong>
+          </div>
+          <div class="hero-meta-item">
+            <span class="text-caption text-muted">Próxima turma</span>
+            <strong class="pending">[data a definir]</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-media hero-media-impact">
+        <img src="assets/img/hero-device-mockup.jpg" alt="Mockup de laptop, tablet e celular exibindo uma chamada de vídeo ao vivo em grade" width="1344" height="768" />
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMAÇÃO -->
+  <section class="section" id="programacao">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Programação</span>
+        <h2 class="text-heading">Um dia inteiro, das 9h às 16h</h2>
+        <p class="text-body">
+          Sete horas em quatro blocos práticos, com intervalos para descanso e almoço.
+          <span class="pending">[Data desta turma a definir.]</span>
+        </p>
+      </div>
+
+      <!-- TODO: a divisão em blocos e os horários intermediários são uma sugestão de estrutura para
+           preencher as 7h (09h–16h) confirmadas; validar/ajustar com o conteudista (PRD seção 10).
+           A data do dia em si ainda não foi definida. -->
+      <div class="schedule-list" data-timeline>
+        <div class="timeline-rail" aria-hidden="true"></div>
+
+        <div class="schedule-break timeline-item">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>09h00</span><span>Abertura e boas-vindas</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-left">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">01</span>
+          <div>
+            <span class="schedule-date">09h15</span>
+            <h3>Fundamentos do prompt profissional</h3>
+            <p>Como estruturar pedidos claros, dar contexto e obter respostas consistentes desde o primeiro momento — a base para tudo o que vem depois.</p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>10h45</span><span>Intervalo</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-right">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">02</span>
+          <div>
+            <span class="schedule-date">11h00</span>
+            <h3>Produção de conteúdo e materiais</h3>
+            <p>Textos, propostas e apresentações com qualidade e agilidade, mantendo a voz e o tom da sua marca.</p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>12h30</span><span>Almoço</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-left">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">03</span>
+          <div>
+            <span class="schedule-date">13h30</span>
+            <h3>Automatizando tarefas do dia a dia</h3>
+            <p>Conectando IA a e-mail, planilhas e documentos para tirar do seu prato o que é repetitivo.</p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>15h00</span><span>Intervalo</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-right">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">04</span>
+          <div>
+            <span class="schedule-date">15h15</span>
+            <h3>Seu plano de 30 dias</h3>
+            <p>Prioridades, fluxos e próximos passos organizados para aplicar tudo no seu contexto específico.</p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>16h00</span><span>Encerramento</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUEM É -->
+  <section class="section section-muted" id="para-quem-e">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Para quem é</span>
+        <h2 class="text-heading">Feito para quem decide, produz ou orienta outros</h2>
+      </div>
+
+      <div class="grid-2">
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p><strong>Empreendedores</strong> que querem ganhar velocidade operacional usando IA no dia a dia do negócio.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p><strong>Profissionais de marketing, tráfego e social media</strong> que precisam produzir mais, com consistência.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p><strong>Gestores e autônomos</strong> interessados em automatizar tarefas repetitivas.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p><strong>Quem já usa outra IA</strong> e quer uma base estruturada, em vez de aprender por vídeos soltos.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p><strong>Quem está começando agora</strong> e quer um caminho guiado, com prática real desde o primeiro bloco.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE MUDA DEPOIS -->
+  <section class="section" id="resultados">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Resultados</span>
+        <h2 class="text-heading">O que você sai sabendo fazer</h2>
+      </div>
+
+      <div class="grid-3">
+        <article class="card card-hover">
+          <p class="text-body">Criar um assistente de IA que conhece a voz, o tom e as ofertas do seu negócio.</p>
+        </article>
+        <article class="card card-hover">
+          <p class="text-body">Produzir conteúdo, propostas e apresentações em uma fração do tempo, com consistência.</p>
+        </article>
+        <article class="card card-hover">
+          <p class="text-body">Conectar a IA a ferramentas do dia a dia — e-mail, planilhas, documentos — com supervisão mínima.</p>
+        </article>
+        <article class="card card-hover">
+          <p class="text-body">Sair da imersão com um primeiro fluxo automatizado já funcionando.</p>
+        </article>
+        <article class="card card-hover">
+          <p class="text-body">Entender o básico de agentes de IA sem precisar programar.</p>
+        </article>
+        <article class="card card-hover">
+          <p class="text-body">Levar um plano de 30 dias priorizando o que traz mais retorno no seu contexto.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section class="section section-muted" id="diferenciais">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Por que esta imersão</span>
+        <h2 class="text-heading">Prática de verdade, turma pequena, sem enrolação</h2>
+      </div>
+
+      <div class="grid-2">
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p>Você não assiste — você faz junto, em tempo real, com suporte dos instrutores durante a própria aula.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p>Turmas reduzidas, para garantir atenção real a cada aluno — não um webinar de milhares de pessoas.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p>Conteúdo vivo: os instrutores usam IA operacionalmente no próprio trabalho, todos os dias.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p>Um único dia, cronograma fechado — sem se estender por semanas, sem curso infinito parado no Drive.</p>
+        </div>
+      </div>
+
+      <!-- TODO: números de credibilidade — não publicar sem confirmação real (PRD seção 10) -->
+      <div class="stat-row">
+        <div class="stat">
+          <strong class="pending">[nº]</strong>
+          <span>alunos formados</span>
+        </div>
+        <div class="stat">
+          <strong class="pending">[nº]</strong>
+          <span>anos de experiência prática</span>
+        </div>
+        <div class="stat">
+          <strong class="pending">[nº]%</strong>
+          <span>de aprovação nas turmas</span>
+        </div>
+        <div class="stat">
+          <strong class="pending">[nº]</strong>
+          <span>dias de acesso à gravação (order bump)</span>
+        </div>
+      </div>
+
+      <!-- Prova social institucional — dobrada aqui em vez de seção própria, para não empilhar
+           três blocos consecutivos de conteúdo majoritariamente placeholder (instrutores/empresas/depoimentos) -->
+      <div class="trust-strip">
+        <span class="text-caption text-muted pending">[Opcional — incluir apenas com logos e autorização de uso de marca:]</span>
+        <div class="logos-row">
+          <span class="logo-chip">[Empresa 1]</span>
+          <span class="logo-chip">[Empresa 2]</span>
+          <span class="logo-chip">[Empresa 3]</span>
+          <span class="logo-chip">[Empresa 4]</span>
+          <span class="logo-chip">[Empresa 5]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTRUTORES -->
+  <section class="section" id="instrutores">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Quem ensina</span>
+        <h2 class="text-heading">Instrutores a confirmar</h2>
+        <p class="text-body">
+          A imersão será conduzida por quem aplica IA na prática, todos os dias, no próprio
+          negócio. Perfis, fotos e bios completas entram aqui assim que confirmados.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card card-placeholder instructor-card">
+          <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="pending">[Nome do instrutor]</h3>
+          <span class="instructor-role pending">[Cargo / especialidade]</span>
+          <p class="pending">[Bio curta — trajetória e credibilidade em 2–3 linhas]</p>
+        </article>
+        <article class="card card-placeholder instructor-card">
+          <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="pending">[Nome do instrutor]</h3>
+          <span class="instructor-role pending">[Cargo / especialidade]</span>
+          <p class="pending">[Bio curta — trajetória e credibilidade em 2–3 linhas]</p>
+        </article>
+        <article class="card card-placeholder instructor-card">
+          <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="pending">[Nome do instrutor]</h3>
+          <span class="instructor-role pending">[Cargo / especialidade]</span>
+          <p class="pending">[Bio curta — trajetória e credibilidade em 2–3 linhas]</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="section section-muted" id="depoimentos">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Quem já viveu isso</span>
+        <h2 class="text-heading">Depoimentos</h2>
+        <p class="text-body">
+          Ainda não há depoimentos desta turma. Os primeiros entram aqui assim que os
+          alunos autorizarem o uso do nome, da foto e da citação.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card card-placeholder testimonial-card">
+          <p class="quote pending">"[Depoimento a definir]"</p>
+          <div class="testimonial-who">
+            <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+            <div>
+              <strong class="pending">[Nome]</strong>
+              <span class="pending">[Profissão]</span>
+            </div>
+          </div>
+        </article>
+        <article class="card card-placeholder testimonial-card">
+          <p class="quote pending">"[Depoimento a definir]"</p>
+          <div class="testimonial-who">
+            <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+            <div>
+              <strong class="pending">[Nome]</strong>
+              <span class="pending">[Profissão]</span>
+            </div>
+          </div>
+        </article>
+        <article class="card card-placeholder testimonial-card">
+          <p class="quote pending">"[Depoimento a definir]"</p>
+          <div class="testimonial-who">
+            <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+            <div>
+              <strong class="pending">[Nome]</strong>
+              <span class="pending">[Profissão]</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTIMENTO -->
+  <section class="section" id="investimento">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Investimento</span>
+        <h2 class="text-heading">Uma imersão, dois jeitos de aproveitar</h2>
+        <p class="text-body">O ingresso garante o dia inteiro de imersão ao vivo, das 9h às 16h. A gravação é um complemento opcional, oferecido só no momento do checkout.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="card price-card is-featured">
+          <div class="price-card-head">
+            <span class="text-subtitle">Ingresso — imersão ao vivo</span>
+          </div>
+          <div class="price-tag">
+            <span class="price-was">De R$ 247</span>
+            <span class="price-now">R$ 147<small>&nbsp;à vista</small></span>
+          </div>
+          <ul class="price-includes">
+            <li>1 dia de imersão ao vivo via Zoom (9h às 16h)</li>
+            <li>Interação em tempo real com os instrutores</li>
+            <li>Materiais e templates usados em aula</li>
+            <li class="pending">[Certificado de participação — a confirmar]</li>
+          </ul>
+          <p class="text-caption pending">[Condições de parcelamento a definir]</p>
+          <a class="btn btn-primary" href="#" aria-disabled="true" title="Link de checkout a configurar (Kiwify)">Garantir minha vaga</a>
+        </div>
+
+        <div class="card price-card price-card-bump">
+          <div class="price-card-head">
+            <span class="bump-tag">Order bump no checkout</span>
+          </div>
+          <span class="text-subtitle">Gravação completa da imersão</span>
+          <div class="price-tag">
+            <span class="price-was">De R$ 247</span>
+            <span class="price-now">+ R$ 147</span>
+          </div>
+          <ul class="price-includes">
+            <li>Acesso à gravação completa do dia</li>
+            <li>Reveja qualquer bloco no seu ritmo</li>
+            <li class="pending">[Prazo de acesso à gravação a definir]</li>
+          </ul>
+          <p class="bump-note">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Esta opção não é escolhida aqui — ela aparece dentro do checkout, depois que você clicar em "Garantir minha vaga".
+          </p>
+        </div>
+      </div>
+
+      <p class="text-caption text-muted" style="margin-top: var(--space-6);">
+        Pagamento processado via Kiwify. <span class="pending">[Link de checkout a configurar antes da publicação.]</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="final-cta inverse-section">
+    <div class="container">
+      <span class="badge">Vagas limitadas por turma</span>
+      <h2 class="text-heading">Bora? A próxima turma está com inscrições abertas.</h2>
+      <p class="text-body-lg">
+        Um dia, uma decisão: continuar aprendendo IA por vídeo solto, ou sair sabendo
+        aplicar de verdade no seu trabalho.
+      </p>
+      <a class="btn btn-primary" href="#investimento">Garantir minha vaga</a>
+      <p class="text-body-sm" style="margin-top: var(--space-6); color: rgba(250,249,245,0.6);">
+        Dúvidas antes de decidir? <a href="#faq" style="color:#faf9f5; text-decoration: underline;">Veja o FAQ</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-muted" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Perguntas frequentes</span>
+        <h2 class="text-heading">FAQ</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Como funciona o formato ao vivo online?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>A imersão acontece ao vivo via Zoom, com câmera aberta e interação direta com os instrutores — você participa, faz perguntas e pratica durante o próprio dia.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Por quanto tempo fico com acesso à gravação?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Se você adicionar o order bump da gravação (de R$ 247 por R$ 147) no checkout, terá acesso à gravação completa do dia. <span class="pending">[Prazo exato de acesso a definir.]</span></p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Preciso de algum equipamento especial?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Só um computador ou celular com internet estável e o Zoom instalado. Nenhum software adicional é necessário para acompanhar a imersão.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Qual é o cronograma completo?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>É um único dia de imersão, das 9h às 16h, dividido em quatro blocos com intervalos — veja a programação completa acima. <span class="pending">[Data desta turma a confirmar.]</span></p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Como recebo o link do Zoom?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p class="pending">[Definir fluxo: envio por e-mail após confirmação do pagamento, ou área de acesso própria.]</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>E se eu não conseguir participar no dia?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Se você tiver o order bump da gravação, pode assistir depois. Sem ele, a imersão ao vivo não é recuperável — por isso vale reservar o dia inteiro na agenda com antecedência.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Preciso ter conhecimento técnico prévio?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Não. A imersão parte do básico até um uso mais avançado — o único pré-requisito é disposição para praticar durante o dia.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Como funciona o pagamento?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>O ingresso sai de R$ 247 por R$ 147 à vista, com a gravação como complemento opcional (de R$ 247 por R$ 147) no checkout, processado via Kiwify. <span class="pending">[Condições de parcelamento a confirmar.]</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#topo"><span class="brand-mark">IA</span> na Prática</a>
+        <p class="text-body-sm text-muted" style="margin-top: var(--space-3); max-width: 32ch;">
+          Imersão ao vivo via Zoom para aplicar IA no seu dia a dia.
+        </p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#programacao">Programação</a></li>
+          <li><a href="#instrutores">Instrutores</a></li>
+          <li><a href="#investimento">Investimento</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li class="pending">[Endereço a definir]</li>
+          <li class="pending">[Telefone a definir]</li>
+          <li class="pending">[E-mail a definir]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IA na Prática. Todos os direitos reservados.</span>
+      <span class="pending">[CNPJ a definir]</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
