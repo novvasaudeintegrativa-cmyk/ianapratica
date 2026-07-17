@@ -446,6 +446,124 @@
   }
 }
 
+/* ---------- Bastidores (como a gente mesmo usa IA) — painel-diagrama ----------
+   Fixo escuro independentemente do tema (mesmo compromisso do hero/section-muted):
+   um "organograma" simples em CSS — nó raiz, barra conectora e 4 ramos — em vez
+   da grade genérica de cards, pra dar mais impacto visual a essa seção específica. */
+.bastidor-panel {
+  position: relative;
+  overflow: hidden;
+  margin-top: var(--space-4);
+  padding: var(--space-16) var(--space-8) var(--space-12);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(160deg, #0c0b0a 0%, #1b120c 45%, #2a1409 100%);
+  border: 1px solid rgba(255, 90, 31, 0.22);
+  box-shadow: var(--elevation-overlay);
+}
+.bastidor-panel-glow {
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  width: 70%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(255, 90, 31, 0.35) 0%, rgba(255, 90, 31, 0) 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+.bastidor-tree { position: relative; z-index: 1; }
+
+.bastidor-root { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.bastidor-root-mark {
+  width: 34px; height: 34px;
+  color: var(--clay-vivid);
+  filter: drop-shadow(0 0 10px rgba(255, 90, 31, 0.6));
+  margin-bottom: 4px;
+}
+.bastidor-root strong { font-family: var(--font-sans); font-size: 1.0625rem; font-weight: 700; color: #faf9f5; }
+.bastidor-root span { font-family: var(--font-sans); font-size: 0.8125rem; color: rgba(250, 249, 245, 0.55); }
+.bastidor-root::after {
+  content: "";
+  display: block;
+  width: 2px;
+  height: 40px;
+  margin: var(--space-3) auto 0;
+  background: linear-gradient(rgba(255, 90, 31, 0.55), rgba(255, 90, 31, 0.12));
+}
+
+.bastidor-branches {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6) var(--space-4);
+  padding-top: 40px;
+}
+.bastidor-branches::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12.5%;
+  right: 12.5%;
+  height: 2px;
+  background: rgba(255, 90, 31, 0.3);
+}
+.bastidor-branch { position: relative; text-align: center; }
+.bastidor-branch::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  width: 2px;
+  height: 40px;
+  background: rgba(255, 90, 31, 0.3);
+  transform: translateX(-50%);
+}
+.bastidor-branch-icon {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto var(--space-3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+}
+.bastidor-branch h3 { margin: 0 0 var(--space-2); font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 700; color: #faf9f5; }
+.bastidor-branch p { margin: 0; font-family: var(--font-body); font-size: 0.875rem; line-height: 1.5; color: rgba(250, 249, 245, 0.62); }
+
+.bastidor-branch-clay .bastidor-branch-icon { background: rgba(217, 119, 87, 0.18); border-color: rgba(217, 119, 87, 0.5); color: #d97757; }
+.bastidor-branch-sky .bastidor-branch-icon { background: rgba(106, 155, 204, 0.18); border-color: rgba(106, 155, 204, 0.5); color: #6a9bcc; }
+.bastidor-branch-olive .bastidor-branch-icon { background: rgba(120, 140, 93, 0.2); border-color: rgba(120, 140, 93, 0.55); color: #9ab37a; }
+.bastidor-branch-kraft .bastidor-branch-icon { background: rgba(212, 162, 127, 0.2); border-color: rgba(212, 162, 127, 0.5); color: #d4a27f; }
+
+.bastidor-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-12);
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.bastidor-tag {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(250, 249, 245, 0.8);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+}
+
+@media (max-width: 720px) {
+  .bastidor-panel { padding: var(--space-12) var(--space-4); }
+  .bastidor-branches { grid-template-columns: 1fr; gap: var(--space-8); padding-top: var(--space-6); }
+  .bastidor-branches::before,
+  .bastidor-branch::before { display: none; }
+  .bastidor-root::after { height: 24px; }
+}
+
 /* ---------- Grades (para quem é / transformação / diferenciais) ---------- */
 .grid-3 { display: grid; gap: var(--space-4); grid-template-columns: 1fr; }
 @media (min-width: 720px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
