@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IA na Prática — Imersão ao vivo via Zoom</title>
+<meta name="description" content="Imersão ao vivo via Zoom, em 2 dias — das 9h às 16h — para aplicar IA no seu dia a dia. Vagas limitadas por turma." />
+<meta property="og:title" content="IA na Prática — Imersão ao vivo via Zoom" />
+<meta property="og:description" content="Dois dias inteiros, ao vivo, das 9h às 16h, para sair usando IA na prática, não só assistindo." />
+<meta property="og:type" content="website" />
+<!-- TODO(og:image): definir imagem de compartilhamento (1200x630) quando houver identidade de marca fechada -->
+<link rel="stylesheet" href="assets/css/tokens.css" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+
+<!--
+  NOTA PARA O TIME DE CONTEÚDO
+  Esta página segue o PRD em docs/prd/prd-imersao-ia-na-pratica.md.
+  Itens marcados com a classe "pending" ou comentários TODO ainda não têm
+  dado real confirmado (datas, instrutores, depoimentos, estatísticas,
+  dados legais). Preço (ingresso de R$ 247 por R$ 147; order bump — gravação —
+  de R$ 247 por R$ 147) e gateway (Kiwify) já estão confirmados e não devem
+  ser tratados como placeholder.
+-->
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="site-header nav-header" data-site-header>
+  <div class="container">
+    <a class="brand" href="#topo">
+      <span class="brand-mark">IA </span>na Prática
+    </a>
+
+    <ul class="nav-list">
+      <li><a href="#programacao">Programação</a></li>
+      <li><a href="#para-quem-e">Para quem é</a></li>
+      <li><a href="#instrutores">Instrutores</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#investimento">Investimento</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="theme-toggle-btn" type="button" data-theme-cycle aria-label="Tema: sistema. Clique para alternar.">
+        <svg class="theme-icon theme-icon-system" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="3.5" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 15.5H11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <svg class="theme-icon theme-icon-light" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="3.4" stroke="currentColor" stroke-width="1.4"/><path d="M9 1.6V3.4M9 14.6V16.4M16.4 9H14.6M3.4 9H1.6M14.1 3.9L12.8 5.2M5.2 12.8L3.9 14.1M14.1 14.1L12.8 12.8M5.2 5.2L3.9 3.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <svg class="theme-icon theme-icon-dark" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M15.5 10.4A6.5 6.5 0 0 1 7.6 2.5a6.5 6.5 0 1 0 7.9 7.9Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="mobile-nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menu">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M2 5H16M2 9H16M2 13H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <span>MENU</span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Menu principal">
+    <a href="#programacao">Programação</a>
+    <a href="#para-quem-e">Para quem é</a>
+    <a href="#instrutores">Instrutores</a>
+    <a href="#depoimentos">Depoimentos</a>
+    <a href="#investimento">Investimento</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+</header>
+
+<main id="conteudo">
+
+  <!-- HERO -->
+  <section class="hero hero-impact" id="topo">
+    <div class="hero-impact-glow" aria-hidden="true"></div>
+    <div class="hero-impact-motif hero-impact-motif-1" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div>
+        <span class="hero-eyebrow text-eyebrow"><span class="dot"></span> Imersão ao vivo via Zoom · 2 dias</span>
+        <h1 class="text-display"><span class="text-accent">IA</span> na Prática, não em teoria.</h1>
+        <p class="hero-lead text-body-lg">
+          Dois dias inteiros, ao vivo, das 9h às 16h, para você sair usando IA no seu trabalho
+          de verdade — escrevendo com a sua voz, criando conteúdo, organizando tarefas e
+          automatizando o que hoje toma seu tempo. Você não assiste: você faz, ao vivo, com
+          quem usa essas mesmas ferramentas todos os dias para criar projetos reais — sites,
+          campanhas, materiais de vendas.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#investimento">Garantir minha vaga</a>
+          <a class="btn btn-ghost" href="#programacao">Ver a programação</a>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="text-caption text-muted">Formato</span>
+            <strong>Ao vivo, via Zoom</strong>
+          </div>
+          <div class="hero-meta-item">
+            <span class="text-caption text-muted">Duração</span>
+            <strong>2 dias · 9h às 16h</strong>
+          </div>
+          <div class="hero-meta-item">
+            <span class="text-caption text-muted">Próxima turma</span>
+            <strong class="pending-badge">29 e 30 de agosto</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-media hero-media-impact">
+        <img src="assets/img/hero-device-mockup.jpg" alt="Mockup de laptop, tablet e celular exibindo uma chamada de vídeo ao vivo em grade" width="1344" height="768" />
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSFORMAÇÃO -->
+  <section class="section" id="transformacao">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Sua transformação em 2 dias</span>
+        <h2 class="text-heading">De quem nunca programou a <span class="text-accent text-accent-lg">Dev Front-End</span> (Desenvolvedor de Sites) pronto para o mercado, com <span class="text-accent">conhecimentos em IA</span> — em 2 dias</h2>
+        <p class="text-body">
+          Você não vai sair só "sabendo mexer em IA". Vai sair criando e publicando sites
+          sozinho, com as mesmas ferramentas que profissionais de tecnologia usam todos os
+          dias — a IA fazendo o trabalho pesado de código por você.
+        </p>
+      </div>
+
+      <p class="transformacao-punch">
+        Sem faculdade. Sem curso de programação. Sem meses de estudo. <span class="text-accent">Dois dias.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- COMPARATIVO (teste de copy) -->
+  <section class="section" id="comparativo">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Por que não é só mais um curso</span>
+        <h2 class="text-heading">O que você vai <span class="text-strike">ver</span> <span class="text-accent">construir</span> nessa imersão?</h2>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-col compare-col-bad">
+          <span class="compare-col-title">Cursos comuns</span>
+          <ul>
+            <li>Slides e teoria</li>
+            <li>Você assiste e esquece</li>
+            <li>Nada funcionando no final</li>
+            <li>Meses de curso pra nunca aplicar</li>
+          </ul>
+        </div>
+        <div class="compare-col compare-col-good">
+          <span class="compare-col-title">IA na Prática</span>
+          <ul>
+            <li>Você constrói ao vivo, com suporte</li>
+            <li>Sai sabendo aplicar, não só assistindo</li>
+            <li>Primeiro site no ar antes de acabar o Dia 1</li>
+            <li>Em 2 dias, não em meses</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO A GENTE MESMO USA IA (bastidores / prova social do método) -->
+  <section class="section" id="bastidores">
+    <div class="site-motif site-motif-alpha" style="width:240px; top:6%; right:6%; transform:rotate(20deg);" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Como a gente mesmo usa IA</span>
+        <h2 class="text-heading">Este site que você está vendo agora? Foi criado com o que a <span class="text-accent">IA na Prática</span> vai te ensinar.</h2>
+        <p class="text-body">
+          Antes de você se inscrever, queremos mostrar uma coisa: <strong>tudo neste projeto —
+          do texto que você está lendo até o design da página — foi criado com IA, na prática,
+          pela nossa equipe.</strong> Não é papo de vendedor. É assim que trabalhamos com nossos
+          clientes todos os dias.
+        </p>
+      </div>
+
+      <div class="bastidor-root">
+        <div class="bastidor-root-mark" aria-hidden="true"></div>
+        <strong>O time que criou este site</strong>
+        <span>12 assistentes de IA, coordenados por um "gerente"</span>
+      </div>
+
+      <div class="schedule-list bastidor-timeline" data-timeline>
+        <div class="timeline-rail" aria-hidden="true"></div>
+
+        <article class="card schedule-item schedule-item-media timeline-item timeline-item-left" style="background-image: url('Imgs/card-time-ias-v2.png');">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <div class="schedule-item-body">
+            <span class="bastidor-node-icon is-clay" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="7" cy="7.5" r="3" stroke="currentColor" stroke-width="1.4"/><circle cx="14" cy="9" r="2.6" stroke="currentColor" stroke-width="1.4"/><path d="M2.3 17c0-2.8 2.1-4.6 4.7-4.6s4.7 1.8 4.7 4.6M11.6 17c0-2.3 1.7-3.8 3.8-3.8s3.8 1.5 3.8 3.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <h3>Time de IAs especialistas</h3>
+            <p>Um cuida dos textos, outro do design, outro da estrutura — como uma agência inteira trabalhando junto, em horas.</p>
+          </div>
+        </article>
+
+        <article class="card schedule-item schedule-item-media timeline-item timeline-item-right" style="background-image: url('Imgs/card-construcao-real.png');">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <div class="schedule-item-body">
+            <span class="bastidor-node-icon is-sky" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 6L3 10L7 14M13 6L17 10L13 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3>Construção real</h3>
+            <p>A página vira código de verdade, do jeito que sustenta qualquer site profissional — rápida e sem travar.</p>
+          </div>
+        </article>
+
+        <article class="card schedule-item schedule-item-media timeline-item timeline-item-left" style="background-image: url('Imgs/card-lugar-seguro.png');">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <div class="schedule-item-body">
+            <span class="bastidor-node-icon is-olive" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2.5L16.5 5V9.5C16.5 13.5 13.7 16.8 10 17.5C6.3 16.8 3.5 13.5 3.5 9.5V5L10 2.5Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M7.3 10L9.2 11.8L12.8 8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3>Lugar seguro pra guardar tudo</h3>
+            <p>Cada versão fica salva num repositório — como um "Google Drive" para código — sempre reversível.</p>
+          </div>
+        </article>
+
+        <article class="card schedule-item schedule-item-media timeline-item timeline-item-right" style="background-image: url('Imgs/card-imagens-sob-medida.png');">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <div class="schedule-item-body">
+            <span class="bastidor-node-icon is-kraft" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="3.5" width="15" height="13" rx="1.5" stroke="currentColor" stroke-width="1.4"/><circle cx="7" cy="8" r="1.4" stroke="currentColor" stroke-width="1.2"/><path d="M3 14L7.5 10L11 13L14 10.5L17 13.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <h3>Imagens sob medida</h3>
+            <p>Nada de banco de imagens genérico — outra IA especializada gera exatamente o que o projeto precisa.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="bastidor-footer">
+        <span class="bastidor-tag">Do texto ao site no ar</span>
+        <span class="bastidor-tag">Versionado e reversível</span>
+        <span class="bastidor-tag">Mesmo fluxo que você vai aprender</span>
+      </div>
+
+      <p class="text-body" style="max-width: var(--reading-column); margin: var(--space-12) auto 0; text-align: center;">
+        <strong>O resultado prático:</strong> o que levaria uma equipe tradicional semanas para
+        produzir — copy, design, site no ar — a gente faz em dias. E é exatamente esse tipo de
+        fluxo, adaptado pra sua realidade, que você vai aprender a montar (na medida certa pra
+        você, sem precisar virar programador) na imersão.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROGRAMAÇÃO -->
+  <section class="section" id="programacao">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Programação</span>
+        <h2 class="text-heading">2 dias inteiros de <span class="text-accent">IA na Prática</span>, das 9h às 16h</h2>
+        <p class="text-body">
+          Catorze horas ao longo de 2 dias, oito blocos práticos, com intervalos para descanso e almoço.
+          Turma de <strong>29 e 30 de agosto</strong>.
+        </p>
+      </div>
+
+      <!-- TODO: a divisão em blocos e os horários intermediários são uma sugestão de estrutura para
+           preencher as 2x7h (09h–16h) confirmadas; validar/ajustar com o conteudista (PRD seção 10).
+           As datas dos dois dias ainda não foram definidas. -->
+      <div class="day-toggle" role="tablist" aria-label="Escolha o dia">
+        <button type="button" class="day-toggle-btn is-active" data-day-toggle="1" role="tab" aria-selected="true">Dia 1</button>
+        <button type="button" class="day-toggle-btn" data-day-toggle="2" role="tab" aria-selected="false">Dia 2</button>
+      </div>
+
+      <div class="schedule-list" data-timeline>
+        <div class="timeline-rail" aria-hidden="true"></div>
+
+        <div class="schedule-break schedule-break-day timeline-item" data-day="1">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span>Dia 1</span><span>Do zero ao seu primeiro projeto com o Claude Code</span>
+        </div>
+
+        <div class="schedule-break timeline-item" data-day="1">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>09h00</span><span>Abertura e boas-vindas</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-left" data-day="1">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">01</span>
+          <div>
+            <span class="schedule-date">09h15</span>
+            <h3><span class="card-title-word">Claude</span>, do zero ao <span class="card-title-word">ambiente pronto</span> — em 90 minutos</h3>
+            <p>Instale e configure o Claude Code de verdade, mesmo sem nunca ter programado. Sem trava, sem gambiarra, sem passar a manhã sozinho tentando descobrir sozinho. <strong>Isso sozinho já economiza o que você pagaria numa consultoria de setup — e tira aquele medo de "eu não sou da área de tecnologia".</strong></p>
+            <p class="schedule-alert">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 8.5C3 6 4.5 4.5 6.5 4V5.5C5.3 5.9 4.6 6.7 4.6 7.8C4.6 7.9 4.7 8 4.8 8C5.8 8 6.5 8.7 6.5 9.6C6.5 10.6 5.7 11.3 4.7 11.3C3.6 11.3 3 10.3 3 8.5Z" fill="currentColor"/><path d="M7.5 8.5C7.5 6 9 4.5 11 4V5.5C9.8 5.9 9.1 6.7 9.1 7.8C9.1 7.9 9.2 8 9.3 8C10.3 8 11 8.7 11 9.6C11 10.6 10.2 11.3 9.2 11.3C8.1 11.3 7.5 10.3 7.5 8.5Z" fill="currentColor"/></svg>
+              O Claude provou ao mercado que a melhor IA não é a mais barulhenta, mas a que entrega eficiência cirúrgica, velocidade e retorno financeiro real.
+            </p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item" data-day="1">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>10h45</span><span>Intervalo</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-right" data-day="1">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">02</span>
+          <div>
+            <span class="schedule-date">11h00</span>
+            <h3><span class="card-title-word">Use o Claude da maneira certa</span>, sem saber escrever uma linha de código</h3>
+            <p>Os comandos que separam quem "brinca" com IA de quem trabalha com ela de verdade. Em 90 minutos você domina o essencial — e ainda instala uma ferramenta usando a própria IA, ao vivo. <strong>Quem não sabe os comandos certos paga a mesma assinatura e usa 10% do potencial.</strong></p>
+            <p class="schedule-alert">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 8.5C3 6 4.5 4.5 6.5 4V5.5C5.3 5.9 4.6 6.7 4.6 7.8C4.6 7.9 4.7 8 4.8 8C5.8 8 6.5 8.7 6.5 9.6C6.5 10.6 5.7 11.3 4.7 11.3C3.6 11.3 3 10.3 3 8.5Z" fill="currentColor"/><path d="M7.5 8.5C7.5 6 9 4.5 11 4V5.5C9.8 5.9 9.1 6.7 9.1 7.8C9.1 7.9 9.2 8 9.3 8C10.3 8 11 8.7 11 9.6C11 10.6 10.2 11.3 9.2 11.3C8.1 11.3 7.5 10.3 7.5 8.5Z" fill="currentColor"/></svg>
+              Pare de chutar comandos e aprenda o método por trás do Claude.
+            </p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item" data-day="1">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>12h30</span><span>Almoço</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-left" data-day="1">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">03</span>
+          <div>
+            <span class="schedule-date">13h30</span>
+            <h3>Seu primeiro <span class="card-title-word">projeto, no ar no GitHub</span> (Armazenamento nas Nuvens)</h3>
+            <p>Você pede, a IA constrói — e você acompanha cada arquivo, cada tarefa, em tempo real. Sai desse bloco com um projeto seu, documentado e salvo. Não é print de tela, é código de verdade.</p>
+            <p class="schedule-alert">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 8.5C3 6 4.5 4.5 6.5 4V5.5C5.3 5.9 4.6 6.7 4.6 7.8C4.6 7.9 4.7 8 4.8 8C5.8 8 6.5 8.7 6.5 9.6C6.5 10.6 5.7 11.3 4.7 11.3C3.6 11.3 3 10.3 3 8.5Z" fill="currentColor"/><path d="M7.5 8.5C7.5 6 9 4.5 11 4V5.5C9.8 5.9 9.1 6.7 9.1 7.8C9.1 7.9 9.2 8 9.3 8C10.3 8 11 8.7 11 9.6C11 10.6 10.2 11.3 9.2 11.3C8.1 11.3 7.5 10.3 7.5 8.5Z" fill="currentColor"/></svg>
+              Do prompt ao repositório: seu código real, guardado e rodando na nuvem hoje mesmo.
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item" data-day="1">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>15h00</span><span>Intervalo</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-right" data-day="1">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">04</span>
+          <div>
+            <span class="schedule-date">15h15</span>
+            <h3>O gostinho do Dia 2: <span class="card-title-word">Seu primeiro site no ar</span>, sem digitar uma linha de código</h3>
+            <p>Você vai ver o Claude transformar simples instruções em um site completo, funcional e pronto para publicar. Sem complicação, sem linguagens de programação e sem depender de ninguém. E ainda, um time de agentes de IA otimizando tudo, multiplicando sua produtividade (sem funcionários). <strong></p>
+            <p class="schedule-alert">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.4"/><path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              Economize milhares de reais em agências e crie você mesmo a estrutura web que o seu negócio precisa.
+            </p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item" data-day="1">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>16h00</span><span>Fim do Dia 1</span>
+        </div>
+
+        <div class="schedule-break schedule-break-day timeline-item" data-day="2">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span>Dia 2</span><span>Do primeiro site a pronto para o mercado</span>
+        </div>
+
+        <div class="schedule-break timeline-item" data-day="2">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>09h00</span><span>Abertura do Dia 2</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-left" data-day="2">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">05</span>
+          <div>
+            <span class="schedule-date">09h15</span>
+            <h3>Orquestração de Agentes de IA</h3>
+            <p>Aqui você vai conhecer o time de 12 agentes de IA especializados — cada um focado numa função: um cuida do texto de venda, outro do design, outro da estrutura do site, e assim por diante. Um agente central, o AIOS Master, coordena todo mundo, distribuindo as tarefas e garantindo que o resultado final saia consistente do início ao fim.</p>
+            <p class="schedule-alert">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.4"/><path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              Na prática: em vez de você fazer tudo sozinho, você aprende a "montar uma equipe" de IA e deixar cada parte do trabalho com o especialista certo — como ter uma agência inteira trabalhando pra você, em minutos.
+            </p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item" data-day="2">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>10h45</span><span>Intervalo</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-right" data-day="2">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">06</span>
+          <div>
+            <span class="schedule-date">11h00</span>
+            <h3>Produção de conteúdo e materiais</h3>
+            <p>Textos, propostas e apresentações com qualidade e agilidade, mantendo a voz e o tom da marca — prontos pra usar em projetos de verdade, seus ou de clientes.</p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item" data-day="2">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>12h30</span><span>Almoço</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-left" data-day="2">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">07</span>
+          <div>
+            <span class="schedule-date">13h30</span>
+            <h3>Pronto pra vender: seu posicionamento no mercado</h3>
+            <p>Como transformar o que você construiu nos dois dias em portfólio, proposta comercial e um primeiro passo real — seja como freelancer, autônomo ou dentro do seu próprio negócio.</p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item" data-day="2">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>15h00</span><span>Intervalo</span>
+        </div>
+
+        <article class="card schedule-item timeline-item timeline-item-right" data-day="2">
+          <span class="timeline-dot timeline-dot-major" aria-hidden="true"></span>
+          <span class="schedule-num text-mono">08</span>
+          <div>
+            <span class="schedule-date">15h15</span>
+            <h3>Seu plano de 30 dias</h3>
+            <p>Prioridades, fluxos e próximos passos organizados para aplicar tudo no seu contexto específico — o fechamento dos dois dias de imersão.</p>
+          </div>
+        </article>
+
+        <div class="schedule-break timeline-item" data-day="2">
+          <span class="timeline-dot timeline-dot-minor" aria-hidden="true"></span>
+          <span>16h00</span><span>Encerramento</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUEM É -->
+  <section class="section section-muted" id="para-quem-e">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Para quem é?</span>
+        <h2 class="text-heading">Essa Imersão <span class="text-accent">IA na Prática</span> é para quem quer:</h2>
+        <ul class="benefit-list">
+          <li>Reduzir custos operacionais</li>
+          <li>Aumentar a produtividade</li>
+          <li>Automatizar tarefas repetitivas</li>
+          <li>Economizar milhares de reais</li>
+        </ul>
+      </div>
+
+      <div class="grid-2">
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p><strong>Empreendedores</strong> que ouvem falar de IA todos os dias, mas ainda não sabem por onde começar a usar de verdade no negócio.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p><strong>Profissionais de marketing, tráfego e social media</strong> que precisam produzir mais conteúdo, com qualidade, sem virar refém do relógio.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p><strong>Gestores e autônomos</strong> cansados de tarefas repetitivas que uma IA bem configurada resolveria em minutos.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p><strong>Quem já testou o ChatGPT ou outra IA</strong> algumas vezes, mas sente que só arranhou a superfície — e quer uma base estruturada, não vídeo solto no YouTube.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p><strong>Quem está começando do zero</strong> e quer um caminho guiado, prático, sem precisar aprender a programar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE MUDA DEPOIS -->
+  <section class="section" id="resultados">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Resultados</span>
+        <h2 class="text-heading">O que você aprender na Imersão <span class="text-accent">IA na Prática?</span></h2>
+      </div>
+
+      <div class="grid-3">
+        <article class="card card-hover">
+          <p class="text-body"><strong>Ambiente de desenvolvimento pronto</strong> — Claude Code instalado e configurado (terminal + VS Code + Git), pronto pra usar em qualquer projeto, não só na imersão.</p>
+        </article>
+        <article class="card card-hover">
+          <p class="text-body"><strong>Domínio dos comandos essenciais</strong> — <code>/help</code>, <code>/model</code> e os 3 modos de execução (padrão, auto-aceitar, planejamento), sem precisar decorar nada.</p>
+        </article>
+        <article class="card card-hover">
+          <p class="text-body"><strong>Um projeto real construído do zero</strong>, com os arquivos gerados e documentados (<code>CLAUDE.md</code>).</p>
+        </article>
+        <article class="card card-hover">
+          <p class="text-body"><strong>Repositório próprio no GitHub</strong>, com histórico de versões — nunca mais perder trabalho ou depender de pen drive/print de tela.</p>
+        </article>
+        <article class="card card-hover">
+          <p class="text-body"><strong>Noção real de segurança com IA</strong> — como reconhecer e se proteger de prompt injection antes de dar acesso aos seus arquivos.</p>
+        </article>
+        <article class="card card-hover">
+          <p class="text-body"><strong>Primeiro contato com Skills e Agentes de IA</strong> — a porta de entrada pro que aprofunda no Dia 2.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFERENCIAIS -->
+  <section class="section section-muted" id="diferenciais">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Por que esta imersão</span>
+        <h2 class="text-heading"><span class="text-accent">IA na Prática</span> de verdade, turma pequena, sem enrolação</h2>
+      </div>
+
+      <div class="grid-2">
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p>Você não assiste — você faz junto, em tempo real, com suporte dos instrutores durante a própria aula.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p>Turmas reduzidas, para garantir atenção real a cada aluno — não um webinar de milhares de pessoas.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p>Conteúdo vivo: os instrutores usam IA operacionalmente no próprio trabalho, todos os dias.</p>
+        </div>
+        <div class="simple-item">
+          <span class="icon" aria-hidden="true">→</span>
+          <p>Dois dias, cronograma fechado — sem se estender por semanas, sem curso infinito parado no Drive.</p>
+        </div>
+      </div>
+
+      <!-- TODO: números de credibilidade — não publicar sem confirmação real (PRD seção 10) -->
+      <div class="stat-row">
+        <div class="stat">
+          <strong class="pending">[nº]</strong>
+          <span>alunos formados</span>
+        </div>
+        <div class="stat">
+          <strong class="pending">[nº]</strong>
+          <span>anos de experiência prática</span>
+        </div>
+        <div class="stat">
+          <strong class="pending">[nº]%</strong>
+          <span>de aprovação nas turmas</span>
+        </div>
+        <div class="stat">
+          <strong class="pending">[nº]</strong>
+          <span>dias de acesso à gravação (order bump)</span>
+        </div>
+      </div>
+
+      <!-- Prova social institucional — dobrada aqui em vez de seção própria, para não empilhar
+           três blocos consecutivos de conteúdo majoritariamente placeholder (instrutores/empresas/depoimentos) -->
+      <div class="trust-strip">
+        <span class="text-caption text-muted pending">[Opcional — incluir apenas com logos e autorização de uso de marca:]</span>
+        <div class="logos-row">
+          <span class="logo-chip">[Empresa 1]</span>
+          <span class="logo-chip">[Empresa 2]</span>
+          <span class="logo-chip">[Empresa 3]</span>
+          <span class="logo-chip">[Empresa 4]</span>
+          <span class="logo-chip">[Empresa 5]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTRUTORES -->
+  <section class="section" id="instrutores">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Quem ensina</span>
+        <h2 class="text-heading">Instrutores a confirmar</h2>
+        <p class="text-body">
+          A imersão será conduzida por quem aplica IA na prática, todos os dias, no próprio
+          negócio. Perfis, fotos e bios completas entram aqui assim que confirmados.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card instructor-card">
+          <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Anderson <span class="pending">[sobrenome]</span></h3>
+          <span class="instructor-role">Especialista em Marketing Digital, Automação e Criação de Projetos com IA</span>
+          <p>Há mais de 10 anos trabalhando com design e marketing digital, Anderson aplica IA todos os dias na criação de campanhas, páginas de vendas, vídeos e automações para clientes reais — não é teoria de curso, é o trabalho que ele entrega. É o mesmo processo usado para criar esta própria imersão, do texto ao site no ar.</p>
+        </article>
+        <article class="card card-placeholder instructor-card">
+          <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="pending">[Nome do instrutor]</h3>
+          <span class="instructor-role pending">[Cargo / especialidade]</span>
+          <p class="pending">[Bio curta — trajetória e credibilidade em 2–3 linhas]</p>
+        </article>
+        <article class="card card-placeholder instructor-card">
+          <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+          <h3 class="pending">[Nome do instrutor]</h3>
+          <span class="instructor-role pending">[Cargo / especialidade]</span>
+          <p class="pending">[Bio curta — trajetória e credibilidade em 2–3 linhas]</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="section section-muted" id="depoimentos">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Quem já viveu isso</span>
+        <h2 class="text-heading">Depoimentos</h2>
+        <p class="text-body">
+          Ainda não há depoimentos desta turma. Os primeiros entram aqui assim que os
+          alunos autorizarem o uso do nome, da foto e da citação.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card card-placeholder testimonial-card">
+          <p class="quote pending">"[Depoimento a definir]"</p>
+          <div class="testimonial-who">
+            <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+            <div>
+              <strong class="pending">[Nome]</strong>
+              <span class="pending">[Profissão]</span>
+            </div>
+          </div>
+        </article>
+        <article class="card card-placeholder testimonial-card">
+          <p class="quote pending">"[Depoimento a definir]"</p>
+          <div class="testimonial-who">
+            <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+            <div>
+              <strong class="pending">[Nome]</strong>
+              <span class="pending">[Profissão]</span>
+            </div>
+          </div>
+        </article>
+        <article class="card card-placeholder testimonial-card">
+          <p class="quote pending">"[Depoimento a definir]"</p>
+          <div class="testimonial-who">
+            <div class="avatar-placeholder" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </div>
+            <div>
+              <strong class="pending">[Nome]</strong>
+              <span class="pending">[Profissão]</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTIMENTO -->
+  <section class="section" id="investimento">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Investimento</span>
+        <h2 class="text-heading">Uma imersão, dois jeitos de aproveitar</h2>
+        <p class="text-body">O ingresso garante os 2 dias inteiros de imersão ao vivo, das 9h às 16h cada um. A gravação é um complemento opcional, oferecido só no momento do checkout.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="card price-card is-featured">
+          <div class="price-card-head">
+            <span class="text-subtitle">Ingresso — imersão ao vivo</span>
+          </div>
+          <div class="price-tag">
+            <span class="price-was">De R$ 247</span>
+            <span class="price-now">R$ 147<small>&nbsp;à vista</small></span>
+          </div>
+          <ul class="price-includes">
+            <li>2 dias de imersão ao vivo via Zoom (9h às 16h cada um)</li>
+            <li>Interação em tempo real com os instrutores</li>
+            <li>Materiais e templates usados em aula</li>
+            <li class="pending">[Certificado de participação — a confirmar]</li>
+          </ul>
+          <p class="text-caption pending">[Condições de parcelamento a definir]</p>
+          <a class="btn btn-primary" href="#" aria-disabled="true" title="Link de checkout a configurar (Kiwify)">Garantir minha vaga</a>
+        </div>
+
+        <div class="card price-card price-card-bump">
+          <div class="price-card-head">
+            <span class="bump-tag">Order bump no checkout</span>
+          </div>
+          <span class="text-subtitle">Gravação completa da imersão</span>
+          <div class="price-tag">
+            <span class="price-was">De R$ 247</span>
+            <span class="price-now">+ R$ 147</span>
+          </div>
+          <ul class="price-includes">
+            <li>Acesso à gravação completa do dia</li>
+            <li>Reveja qualquer bloco no seu ritmo</li>
+            <li class="pending">[Prazo de acesso à gravação a definir]</li>
+          </ul>
+          <p class="bump-note">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Esta opção não é escolhida aqui — ela aparece dentro do checkout, depois que você clicar em "Garantir minha vaga".
+          </p>
+        </div>
+      </div>
+
+      <p class="text-caption text-muted" style="margin-top: var(--space-6);">
+        Pagamento processado via Kiwify. <span class="pending">[Link de checkout a configurar antes da publicação.]</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="final-cta inverse-section">
+    <div class="site-motif site-motif-alpha" style="width:310px; top:-6%; right:4%; transform:rotate(-10deg);" aria-hidden="true"></div>
+    <div class="container">
+      <span class="badge">Vagas limitadas por turma</span>
+      <h2 class="text-heading">Bora? A próxima turma da <span class="text-accent">IA na Prática</span> está com inscrições abertas.</h2>
+      <p class="text-body-lg">
+        Dois dias, uma decisão: continuar aprendendo IA por vídeo solto, ou sair sabendo
+        aplicar de verdade no seu trabalho.
+      </p>
+      <a class="btn btn-primary" href="#investimento">Garantir minha vaga</a>
+      <p class="text-body-sm" style="margin-top: var(--space-6); color: rgba(250,249,245,0.6);">
+        Dúvidas antes de decidir? <a href="#faq" style="color:#faf9f5; text-decoration: underline;">Veja o FAQ</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="text-eyebrow">Perguntas frequentes</span>
+        <h2 class="text-heading">FAQ</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Como funciona o formato ao vivo online?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>A imersão acontece ao vivo via Zoom, com câmera aberta e interação direta com os instrutores — você participa, faz perguntas e pratica durante o próprio dia.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Por quanto tempo fico com acesso à gravação?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Se você adicionar o order bump da gravação (de R$ 247 por R$ 147) no checkout, terá acesso à gravação completa do dia. <span class="pending">[Prazo exato de acesso a definir.]</span></p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Preciso de algum equipamento especial?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Só um computador ou celular com internet estável e o Zoom instalado. Nenhum software adicional é necessário para acompanhar a imersão.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Qual é o cronograma completo?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>São dois dias de imersão, das 9h às 16h cada um, com quatro blocos e intervalos por dia — veja a programação completa acima. A próxima turma acontece nos dias <strong>29 e 30 de agosto</strong>.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Como recebo o link do Zoom?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p class="pending">[Definir fluxo: envio por e-mail após confirmação do pagamento, ou área de acesso própria.]</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>E se eu não conseguir participar no dia?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Se você tiver o order bump da gravação, pode assistir depois. Sem ele, a imersão ao vivo não é recuperável — por isso vale reservar os dois dias inteiros na agenda com antecedência.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Preciso ter conhecimento técnico prévio?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Não. A imersão parte do básico até um uso mais avançado — o único pré-requisito é disposição para praticar durante o dia.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>Como funciona o pagamento?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>O ingresso sai de R$ 247 por R$ 147 à vista, com a gravação como complemento opcional (de R$ 247 por R$ 147) no checkout, processado via Kiwify. <span class="pending">[Condições de parcelamento a confirmar.]</span></p>
+          </div>
+        </div>
+
+        <div class="faq-item" data-faq-item data-open="false">
+          <button class="faq-question" data-faq-question aria-expanded="false">
+            <span>A imersão vai ensinar a usar as mesmas ferramentas que vocês usam pra criar sites e campanhas?</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Vamos ensinar a lógica por trás — como estruturar pedidos pra IA, como montar fluxos que automatizam tarefas, como produzir conteúdo com consistência. Você não vai sair programando, mas vai entender como um time de IAs trabalha junto numa tarefa, e vai levar isso pronto pra aplicar no seu contexto, seja um negócio, um conteúdo ou um projeto pessoal.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#topo"><span class="brand-mark">IA</span> na Prática</a>
+        <p class="text-body-sm text-muted" style="margin-top: var(--space-3); max-width: 32ch;">
+          Imersão ao vivo via Zoom para aplicar IA no seu dia a dia.
+        </p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#programacao">Programação</a></li>
+          <li><a href="#instrutores">Instrutores</a></li>
+          <li><a href="#investimento">Investimento</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li class="pending">[Endereço a definir]</li>
+          <li class="pending">[Telefone a definir]</li>
+          <li class="pending">[E-mail a definir]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IA na Prática. Todos os direitos reservados.</span>
+      <span class="pending">[CNPJ a definir]</span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <div class="sticky-cta-inner">
+    <div class="sticky-cta-price">
+      <span class="sticky-cta-was">De R$ 247</span>
+      <strong>R$ 147 <small>à vista</small></strong>
+    </div>
+    <a class="btn btn-primary" href="#investimento">Garantir minha vaga</a>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

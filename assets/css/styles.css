@@ -61,11 +61,6 @@
 .schedule-list [data-day].is-day-hidden { display: none; }
 
 .sticky-cta {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 50;
   background: #141413;
   border-top: 1px solid rgba(255, 90, 31, 0.3);
   padding: 10px clamp(1rem, 3vw, 2rem);
@@ -84,7 +79,6 @@
 .sticky-cta-price strong small { font-size: 0.75rem; font-weight: 500; color: rgba(255, 255, 255, 0.6); }
 .sticky-cta-was { font-family: var(--font-sans); font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); text-decoration: line-through; }
 .sticky-cta .btn { flex: none; }
-body:has(.sticky-cta) { padding-bottom: 84px; }
 
 .container {
   max-width: var(--container-max);
