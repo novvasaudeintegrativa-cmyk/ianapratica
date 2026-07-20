@@ -462,9 +462,28 @@ a { color: inherit; }
   box-shadow: var(--elevation-raised);
   transition: background-color var(--duration-gentle) var(--ease-out), box-shadow var(--duration-gentle) var(--ease-out);
 }
+.card-hover {
+  background: rgba(255, 90, 31, 0.2);
+  border: 2px solid var(--clay-vivid);
+  transition: background-color var(--duration-gentle) var(--ease-out),
+    border-color var(--duration-gentle) var(--ease-out),
+    color var(--duration-gentle) var(--ease-out),
+    transform var(--duration-gentle) var(--ease-out),
+    box-shadow var(--duration-gentle) var(--ease-out);
+}
 .card-hover:hover {
-  background: rgba(20, 20, 19, 0.10);
+  background: var(--clay-vivid);
+  border-color: var(--clay-vivid);
+  color: #ffffff;
   box-shadow: var(--elevation-floating);
+  position: relative;
+  z-index: 2;
+  animation: card-hover-pop var(--duration-gentle) var(--ease-out) forwards;
+}
+@keyframes card-hover-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 /* Cards de placeholder — sinaliza dado ainda não confirmado */

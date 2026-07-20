@@ -1,5 +1,8 @@
 npx plugins add vercel/vercel-plugin
 
+1) Implementação
+2) 
+
 
 [ Insights ]
 Voz de marca, calendário editorial com copy pronto, landing page, proposta comercial, análise de concorrentes. O que antes levava semanas sai em uma sessão.

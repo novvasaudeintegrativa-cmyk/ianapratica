@@ -136,4 +136,28 @@
       revealObserver.observe(el);
     });
   }
+
+  /* Toggle Dia 1 / Dia 2 na Programação (teste de copy) — filtra os itens da
+     timeline existente por [data-day] em vez de duplicar a marcação; só roda
+     se os botões existirem na página, então não afeta quem não tem essa UI. */
+  var dayToggleBtns = document.querySelectorAll("[data-day-toggle]");
+  if (dayToggleBtns.length) {
+    var dayItems = document.querySelectorAll(".schedule-list [data-day]");
+    var setDay = function (day) {
+      dayItems.forEach(function (item) {
+        item.classList.toggle("is-day-hidden", item.getAttribute("data-day") !== day);
+      });
+      dayToggleBtns.forEach(function (btn) {
+        var isActive = btn.getAttribute("data-day-toggle") === day;
+        btn.classList.toggle("is-active", isActive);
+        btn.setAttribute("aria-selected", String(isActive));
+      });
+    };
+    dayToggleBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setDay(btn.getAttribute("data-day-toggle"));
+      });
+    });
+    setDay("1");
+  }
 })();

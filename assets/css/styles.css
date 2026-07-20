@@ -4,6 +4,88 @@
   tokens.css — este arquivo só compõe layout.
 */
 
+/* ---------- Teste de copy (index_backup001.html) — strikethrough, comparativo,
+   toggle de dia e CTA sticky. Regras "mortas" em qualquer página que não tenha
+   a marcação correspondente, exceto o padding do body via :has() abaixo, que
+   é justamente pra só afetar a página que realmente tem o .sticky-cta. ---------- */
+.text-strike {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-destructive);
+  color: var(--color-muted-foreground);
+  font-weight: 400;
+}
+
+.compare-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+  margin-top: var(--space-4);
+}
+@media (min-width: 720px) { .compare-grid { grid-template-columns: 1fr 1fr; } }
+.compare-col { border-radius: var(--radius-lg); padding: var(--space-8) var(--space-6); }
+.compare-col-title {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+.compare-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+.compare-col li { font-family: var(--font-sans); font-size: 0.9375rem; padding-left: 26px; position: relative; }
+.compare-col-bad { background: var(--color-muted); border: 1px dashed var(--color-border); color: var(--color-muted-foreground); }
+.compare-col-bad .compare-col-title { color: var(--color-muted-foreground); }
+.compare-col-bad li { text-decoration: line-through; opacity: 0.85; }
+.compare-col-bad li::before { content: "✕"; position: absolute; left: 0; color: var(--color-destructive); font-weight: 700; }
+.compare-col-good { background: var(--color-card); border: 1px solid var(--clay-vivid); box-shadow: var(--shadow-clay); }
+.compare-col-good .compare-col-title { color: var(--clay-vivid); }
+.compare-col-good li::before { content: "✓"; position: absolute; left: 0; color: var(--color-success); font-weight: 700; }
+
+.day-toggle { display: flex; justify-content: center; gap: var(--space-2); margin-bottom: var(--space-8); }
+.day-toggle-btn {
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+.day-toggle-btn:hover { border-color: rgba(255, 90, 31, 0.4); }
+.day-toggle-btn.is-active { background: var(--clay-vivid); border-color: transparent; color: #ffffff; }
+.schedule-list [data-day].is-day-hidden { display: none; }
+
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  background: #141413;
+  border-top: 1px solid rgba(255, 90, 31, 0.3);
+  padding: 10px clamp(1rem, 3vw, 2rem);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.25);
+}
+.sticky-cta-inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+.sticky-cta-price { display: flex; flex-direction: column; line-height: 1.15; }
+.sticky-cta-price strong { color: #ffffff; font-family: var(--font-sans); font-size: 1.125rem; }
+.sticky-cta-price strong small { font-size: 0.75rem; font-weight: 500; color: rgba(255, 255, 255, 0.6); }
+.sticky-cta-was { font-family: var(--font-sans); font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); text-decoration: line-through; }
+.sticky-cta .btn { flex: none; }
+body:has(.sticky-cta) { padding-bottom: 84px; }
+
 .container {
   max-width: var(--container-max);
   margin-inline: auto;
@@ -342,6 +424,23 @@
     linear-gradient(180deg, #0c0b0a 0%, #171310 55%, #0c0b0a 100%);
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
+
+/* "Por que esta imersão" — mesma nebulosa, com a foto de orquestração como
+   camada de fundo (o gradiente escuro fica translúcido em vez de opaco, pra
+   deixar a imagem aparecer por baixo dos glows de cor). */
+#diferenciais {
+  padding-top: 200px;
+  padding-bottom: 200px;
+  background-image:
+    radial-gradient(55% 55% at 12% 10%, rgba(255, 138, 61, 0.30) 0%, transparent 62%),
+    radial-gradient(50% 60% at 88% 20%, rgba(142, 108, 255, 0.22) 0%, transparent 65%),
+    radial-gradient(65% 65% at 50% 105%, rgba(255, 90, 31, 0.20) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(12, 11, 10, 0.8) 0%, rgba(23, 19, 16, 0.6) 55%, rgba(12, 11, 10, 0.88) 100%),
+    url('../../Imgs/orquestracao.png');
+  background-size: auto, auto, auto, auto, cover;
+  background-position: 0 0, 0 0, 0 0, 0 0, center center;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+}
 .section-muted::before {
   content: "";
   position: absolute;
@@ -411,6 +510,30 @@
   gap: var(--space-6);
   padding: var(--space-6);
 }
+
+/* Variante com imagem cobrindo o card inteiro (teste de copy) — o texto fica
+   ancorado embaixo, sobre um gradiente laranja "de baixo pra cima" que garante
+   leitura, deixando o topo da foto mais visível/limpo. */
+.schedule-item-media {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 300px;
+  padding: 0;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center 25%;
+}
+.schedule-item-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #170f0a 0%, rgba(23, 15, 10, 0.88) 30%, rgba(255, 90, 31, 0.3) 55%, rgba(255, 90, 31, 0) 90%);
+  pointer-events: none;
+}
+.schedule-item-body { position: relative; z-index: 1; padding: var(--space-6); }
+.schedule-item-media .timeline-dot { z-index: 2; }
 
 /* ---------- Timeline (linha do tempo que revela conforme rola) ----------
    Trilho vertical + bolinhas alinhadas a cada item. Bolinhas grandes (blocos de
@@ -483,6 +606,8 @@
   box-shadow: 0 4px 14px -4px rgba(255, 90, 31, 0.55);
 }
 .schedule-item h3 { margin: 0 0 6px; font-family: var(--font-sans); font-size: 1.125rem; font-weight: 700; }
+/* Palavra-gancho do título maior que o resto — teste de copy (Dia 1) */
+.card-title-word { font-size: 1.6em; line-height: 0.85; color: var(--clay-vivid); font-weight: 800; }
 .schedule-item p { margin: 0 0 var(--space-2); color: var(--color-ink-soft); }
 .schedule-date { font-family: var(--font-sans); font-size: 0.8125rem; color: var(--color-muted-foreground); }
 
@@ -629,6 +754,14 @@
 }
 .bastidor-timeline .schedule-item h3 { color: #faf9f5; }
 .bastidor-timeline .schedule-item p { color: rgba(250, 249, 245, 0.62); margin-bottom: 0; }
+/* .schedule-item-media usa background (atalho) na própria classe pra imagem de
+   fundo — precisa vencer o "background" acima (mesma especificidade, mas essa
+   regra roda antes), senão volta pro tamanho/posição padrão da imagem. */
+.bastidor-timeline .schedule-item-media {
+  background-size: cover;
+  background-position: center 45%;
+  background-repeat: no-repeat;
+}
 
 .bastidor-node-icon {
   width: 40px;
@@ -784,6 +917,26 @@
   color: var(--color-muted-foreground);
 }
 .bump-note svg { flex: none; margin-top: 3px; }
+
+/* Lista de benefícios em bullet (ex: "Para quem é? Para quem quer:") — teste de copy */
+.benefit-list {
+  list-style: none;
+  margin: var(--space-4) auto 0;
+  padding: 0;
+  display: inline-grid;
+  gap: 10px;
+  text-align: left;
+}
+.benefit-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.0625rem;
+}
+.benefit-list li::before { content: "✓"; color: var(--clay-vivid); font-weight: 700; flex: none; }
+.section-muted .benefit-list li { color: rgba(255, 255, 255, 0.9); }
 
 /* ---------- CTA final (inverse) ---------- */
 .final-cta { text-align: left; }
