@@ -482,7 +482,7 @@ a { color: inherit; }
 }
 @keyframes card-hover-pop {
   0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+  50% { transform: scale(1.02); }
   100% { transform: scale(1); }
 }
 
