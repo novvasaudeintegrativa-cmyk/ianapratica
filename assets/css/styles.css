@@ -453,6 +453,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 959px) {
+  .hero-media {
+    margin-top: calc(-1 * var(--space-12));
+  }
+}
+
 .hero-media img {
   width: 100%;
   height: 100%;
