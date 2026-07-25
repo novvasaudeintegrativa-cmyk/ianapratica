@@ -722,11 +722,19 @@
     min-height: 1150px;
     padding-top: 50px;
     background-image:
-      linear-gradient(180deg, #151214 0%, #151214 340px, rgba(21, 18, 20, 0.85) 420px, rgba(21, 18, 20, 0.35) 560px, transparent 820px),
+      linear-gradient(180deg, rgba(21, 18, 20, 0.2) 0%, transparent 30%),
       url('../../Imgs/CaludeeInstagram_Bg.png');
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
+  }
+
+  #orquestracao .section-header {
+    position: relative;
+    z-index: 1;
+    background: #151214;
+    padding: var(--space-6) var(--space-4);
+    border-radius: var(--radius-lg);
   }
 
   #orquestracao .orquestracao-img {
