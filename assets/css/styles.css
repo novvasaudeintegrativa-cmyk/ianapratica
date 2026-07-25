@@ -719,10 +719,10 @@
 
 @media (max-width: 767px) {
   #orquestracao {
-    min-height: 760px;
+    min-height: 1150px;
     padding-top: 50px;
     background-image:
-      linear-gradient(180deg, rgba(21, 18, 20, 0.35) 0%, rgba(21, 18, 20, 0.55) 55%, #151214 100%),
+      linear-gradient(180deg, #151214 0%, #151214 340px, rgba(21, 18, 20, 0.85) 420px, rgba(21, 18, 20, 0.35) 560px, transparent 820px),
       url('../../Imgs/CaludeeInstagram_Bg.png');
     background-size: cover;
     background-position: top center;
