@@ -1175,12 +1175,18 @@
   border-radius: var(--radius-lg);
 }
 
+#orquestracao .section-header {
+  margin-bottom: 0;
+}
+
 .orquestracao-img {
   display: block;
   width: 100%;
   max-width: 900px;
-  margin: 0 auto;
+  margin-top: 0;
+  margin-inline: auto;
   border-radius: var(--radius-lg);
+  background: #151214;
   box-shadow: var(--elevation-floating);
 }
 
