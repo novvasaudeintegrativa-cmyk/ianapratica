@@ -611,6 +611,18 @@
   object-fit: contain;
 }
 
+.hero-h1-small {
+  font-size: 0.5em;
+}
+
+.hero-lead-note {
+  margin: 0 0 var(--space-6);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: rgba(250, 249, 245, 0.52);
+}
+
 /* ---------- Seções genéricas ---------- */
 /* Brilho quente bem sutil no topo de cada seção clara, por cima do quadriculado
    do body (o próprio .section não pinta cor de fundo, só essa camada de
@@ -1348,6 +1360,61 @@
   color: var(--color-muted-foreground);
   font-family: var(--font-sans);
   font-size: 0.8125rem;
+}
+
+/* ---------- Credibilidade (Fortune 100 / citação Anthropic) — vive dentro do
+   #diferenciais (nebulosa fixa e escura), por isso as cores são fixas e não
+   seguem o toggle claro/escuro, igual ao resto da seção. ---------- */
+.credibility-row {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+  margin-top: var(--space-12);
+}
+
+@media (min-width: 720px) {
+  .credibility-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.credibility-card {
+  border-top: 3px solid var(--clay-vivid);
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.credibility-eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #faf9f5;
+  margin-bottom: var(--space-4);
+}
+
+.credibility-heading,
+.credibility-quote {
+  margin: 0;
+  color: var(--clay-vivid);
+  font-size: 1.375rem;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.credibility-quote {
+  margin-bottom: var(--space-3);
+}
+
+.credibility-source {
+  display: block;
+  font-style: normal;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* ---------- Instrutores ---------- */
