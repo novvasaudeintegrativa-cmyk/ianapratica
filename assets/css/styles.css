@@ -641,7 +641,8 @@
   object-fit: contain;
 }
 
-.hero-h1-small {
+.hero-h1-small,
+.text-heading-small {
   font-size: 0.5em;
 }
 
@@ -1160,12 +1161,24 @@
   font-size: 1.25em;
 }
 
+.transformacao-lead {
+  font-size: clamp(1rem, 0.8vw + 0.8rem, 1.25rem);
+}
+
+.transformacao-instagram-img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  margin: var(--space-6) auto 0;
+  border-radius: var(--radius-lg);
+}
+
 .transformacao-punch {
   max-width: var(--reading-column);
   margin: var(--space-4) auto 0;
   text-align: center;
   font-family: var(--font-sans);
-  font-size: clamp(1.25rem, 1.2vw + 1rem, 1.75rem);
+  font-size: clamp(1rem, 0.8vw + 0.8rem, 1.25rem);
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: -0.01em;
