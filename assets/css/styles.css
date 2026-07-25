@@ -366,7 +366,24 @@
 @media (min-width: 960px) {
   .hero-grid {
     grid-template-columns: 1.1fr 0.9fr;
-    gap: var(--space-16);
+    grid-template-areas:
+      "top    media"
+      "bottom media";
+    gap: var(--space-8) var(--space-16);
+    align-items: start;
+  }
+
+  .hero-col-top {
+    grid-area: top;
+  }
+
+  .hero-media {
+    grid-area: media;
+    align-self: center;
+  }
+
+  .hero-col-bottom {
+    grid-area: bottom;
   }
 }
 
@@ -383,6 +400,13 @@
   border-radius: 50%;
   background: var(--swatch-clay);
   display: inline-block;
+}
+
+.hero-claude-logo {
+  display: block;
+  width: 44px;
+  height: 44px;
+  margin-bottom: var(--space-4);
 }
 
 .hero h1 {
