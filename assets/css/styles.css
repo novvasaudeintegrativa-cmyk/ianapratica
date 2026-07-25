@@ -717,31 +717,6 @@
   background: #151214;
 }
 
-@media (max-width: 767px) {
-  #orquestracao {
-    min-height: 850px;
-    padding-top: 50px;
-    background-image:
-      linear-gradient(180deg, rgba(21, 18, 20, 0.2) 0%, transparent 30%),
-      url('../../Imgs/CaludeeInstagram_Bg.png');
-    background-size: contain;
-    background-position: top center;
-    background-repeat: no-repeat;
-  }
-
-  #orquestracao .section-header {
-    position: relative;
-    z-index: 1;
-    background: #151214;
-    padding: var(--space-6) var(--space-4);
-    border-radius: var(--radius-lg);
-  }
-
-  #orquestracao .orquestracao-img {
-    display: none;
-  }
-}
-
 /* "Por que esta imersão" — mesma nebulosa, com a foto de orquestração como
    camada de fundo (o gradiente escuro fica translúcido em vez de opaco, pra
    deixar a imagem aparecer por baixo dos glows de cor). */
