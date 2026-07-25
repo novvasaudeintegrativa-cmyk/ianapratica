@@ -714,7 +714,6 @@
 }
 
 #orquestracao {
-  background: #151214;
   padding-top: 20px;
 }
 
@@ -1191,7 +1190,6 @@
   margin-top: 0;
   margin-inline: auto;
   border-radius: var(--radius-lg);
-  background: #151214;
   box-shadow: var(--elevation-floating);
 }
 
