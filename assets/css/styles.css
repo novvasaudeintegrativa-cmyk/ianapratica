@@ -713,6 +713,10 @@
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
+#orquestracao {
+  background: #151214;
+}
+
 /* "Por que esta imersão" — mesma nebulosa, com a foto de orquestração como
    camada de fundo (o gradiente escuro fica translúcido em vez de opaco, pra
    deixar a imagem aparecer por baixo dos glows de cor). */
