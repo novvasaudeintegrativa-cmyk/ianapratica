@@ -523,7 +523,11 @@
 
 @media (max-width: 720px) {
   .hero-impact-figure {
-    height: 101%;
+    top: 0;
+    left: auto;
+    right: -6%;
+    transform: none;
+    height: 182%;
   }
 }
 
