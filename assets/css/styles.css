@@ -525,8 +525,8 @@
   .hero-impact-figure {
     top: 0;
     left: auto;
-    right: -6%;
-    transform: none;
+    right: 0;
+    transform: translateX(50%);
     height: 182%;
   }
 }
