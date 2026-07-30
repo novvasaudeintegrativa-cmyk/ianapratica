@@ -355,7 +355,7 @@ a { color: inherit; }
    ========================================================================== */
 .text-display {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 3.2vw + 1.5rem, 4.5rem);
+  font-size: clamp(2.2rem, 2.8vw + 1.3rem, 3.9rem);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
