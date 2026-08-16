@@ -1,0 +1,1542 @@
+/*
+  Tutorial Guiado — IA na Prática
+  Camada de estilos específica do mini-site de tutorial. Consome os tokens e
+  classes utilitárias de /assets/css/tokens.css e /assets/css/styles.css
+  (paleta ivory/slate/clay, tipografia Anthropic Sans/Serif) — não redefine
+  cor ou tipografia base aqui, só compõe os componentes próprios do guia:
+  shell com sidebar, passos numerados, blocos de código copiáveis e callouts.
+*/
+
+/* ==========================================================================
+   1. SHELL — cabeçalho de contexto + grid sidebar/conteúdo
+   ========================================================================== */
+.guide-context-bar {
+  background: var(--color-muted);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.guide-context-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.guide-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+  flex-wrap: wrap;
+}
+
+.guide-breadcrumb a {
+  text-decoration: none;
+  color: var(--color-muted-foreground);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.guide-breadcrumb a:hover {
+  color: var(--color-foreground);
+}
+
+.guide-breadcrumb .is-current {
+  color: var(--color-foreground);
+  font-weight: 600;
+}
+
+.guide-context-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-tertiary);
+}
+
+.guide-context-badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-tertiary);
+}
+
+.guide-shell {
+  padding-block: var(--space-12) var(--space-24);
+}
+
+.guide-shell .container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .guide-shell .container {
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: var(--space-16);
+  }
+}
+
+/* ==========================================================================
+   2. SIDEBAR — trilha do curso (card fixo: marca, progresso, navegação)
+   ========================================================================== */
+.guide-sidebar {
+  position: relative;
+}
+
+@media (min-width: 960px) {
+  .guide-sidebar {
+    position: sticky;
+    top: calc(64px + var(--space-6));
+    max-height: calc(100vh - 64px - var(--space-12));
+  }
+}
+
+.guide-sidebar-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  max-height: inherit;
+}
+
+/* Cabeçalho de marca — ícone em quadrado clay + título/subtítulo */
+.guide-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+}
+
+.guide-sidebar-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--clay-vivid);
+  color: #ffffff;
+}
+
+.guide-sidebar-brand strong {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-foreground);
+}
+
+.guide-sidebar-brand span {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+}
+
+/* Progresso — barra linear real, preenche conforme as lições visitadas
+   (localStorage, sem login) crescem em relação ao total de lições da trilha */
+.guide-sidebar-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.guide-progress-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.guide-progress-percent {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-foreground);
+}
+
+.guide-progress-label {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-muted-foreground);
+}
+
+.guide-progress-bar-track {
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-border);
+  overflow: hidden;
+}
+
+.guide-progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--radius-full);
+  background: var(--clay-vivid);
+  transition: width var(--duration-gentle) var(--ease-out);
+}
+
+/* Navegação — rolável, agrupada por dia > categoria > passo */
+.guide-sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+}
+
+.guide-nav-section + .guide-nav-section {
+  margin-top: var(--space-5);
+}
+
+.guide-nav-section-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+  margin: 0 0 var(--space-3);
+}
+
+.guide-nav-category + .guide-nav-category {
+  margin-top: var(--space-4);
+}
+
+.guide-nav-category-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.guide-nav-cat-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  color: var(--color-muted-foreground);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.guide-nav-cat-name {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-foreground);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+/* Categoria que contém a lição atual — ícone e nome ganham a cor de marca,
+   igual ao destaque do módulo ativo no menu de referência. */
+.guide-nav-category.is-active-category .guide-nav-cat-icon,
+.guide-nav-category.is-active-category .guide-nav-cat-name {
+  color: var(--clay-vivid);
+}
+
+.guide-nav-items {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.guide-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  margin-left: -8px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-muted-foreground);
+  transition: color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+
+.guide-nav-item::before {
+  content: "";
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+a.guide-nav-item:hover {
+  color: var(--color-foreground);
+  background: var(--color-card);
+}
+
+.guide-nav-item.is-active {
+  color: var(--clay-vivid);
+  background: var(--color-card);
+  font-weight: 700;
+}
+
+.guide-nav-item.is-active::before {
+  background: var(--clay-vivid);
+  opacity: 1;
+}
+
+.guide-nav-item.is-done::before {
+  background: var(--color-success);
+  opacity: 1;
+}
+
+.guide-nav-item.is-locked {
+  color: var(--surface-dim);
+  cursor: default;
+  pointer-events: none;
+}
+
+.guide-sidebar-cta {
+  margin: 0 var(--space-4) var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+}
+
+.guide-sidebar-cta p {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   3. CONTEÚDO — cabeçalho da lição, meta info, corpo
+   ========================================================================== */
+.guide-content {
+  min-width: 0;
+}
+
+.guide-lesson-header {
+  margin-bottom: var(--space-8);
+}
+
+.guide-lesson-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-tertiary);
+  margin-bottom: var(--space-3);
+}
+
+.guide-lesson-eyebrow .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-tertiary);
+  flex-shrink: 0;
+}
+
+.guide-lesson-header h1 {
+  margin: 0 0 var(--space-4);
+}
+
+.guide-lesson-lead {
+  max-width: var(--reading-column);
+  color: var(--color-ink-soft);
+  margin: 0;
+}
+
+.guide-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.guide-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  background: var(--color-muted);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-ink-soft);
+}
+
+.guide-meta-pill svg {
+  color: var(--color-tertiary);
+  flex-shrink: 0;
+}
+
+/* Trilha de passos — chips de navegação rápida no topo da lição */
+.guide-step-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-6) 0 var(--space-12);
+  padding: var(--space-4);
+  background: var(--color-muted);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.guide-step-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+  text-decoration: none;
+  transition: border-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.guide-step-nav a:hover {
+  border-color: var(--clay-vivid);
+  color: var(--color-foreground);
+}
+
+/* Card de link — sempre que uma instalação pede visitar um site externo,
+   isso fica clicável e visível em vez de um nome solto no meio do texto.
+   Também serve pra quem grava o passo a passo: mesmo link, mesma tela. */
+.guide-download-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: var(--reading-column);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  text-decoration: none;
+  color: var(--color-foreground);
+  transition: border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.guide-download-card:hover {
+  border-color: var(--clay-vivid);
+  background: rgba(255, 90, 31, 0.06);
+}
+
+.guide-download-card-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--color-muted);
+  color: var(--clay-vivid);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-download-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.guide-download-card-body strong {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.guide-download-card-body span {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+}
+
+.guide-download-card-arrow {
+  flex-shrink: 0;
+  color: var(--color-muted-foreground);
+  font-size: 1.1rem;
+  transition: transform var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.guide-download-card:hover .guide-download-card-arrow {
+  color: var(--clay-vivid);
+  transform: translate(2px, -2px);
+}
+
+.guide-step-nav a[data-step-nav-active="true"] {
+  background: var(--clay-vivid);
+  border-color: var(--clay-vivid);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   4. PASSOS — bloco numerado principal do guia
+   ========================================================================== */
+.guide-step {
+  position: relative;
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--color-border);
+  scroll-margin-top: calc(64px + var(--space-6));
+}
+
+.guide-step:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.guide-step-head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.guide-step-num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--clay-vivid);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.guide-step-titles {
+  padding-top: 4px;
+}
+
+.guide-step-titles h2 {
+  margin: 0 0 4px;
+  font-family: var(--font-sans);
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-foreground);
+}
+
+.guide-step-titles .guide-step-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+.guide-step-body {
+  padding-left: calc(40px + var(--space-4));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.guide-step-body > p {
+  margin: 0;
+  max-width: var(--reading-column);
+}
+
+.guide-step-body > ul,
+.guide-step-body > ol {
+  max-width: var(--reading-column);
+  margin: 0;
+  padding-left: 1.25em;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+@media (max-width: 640px) {
+  .guide-step-body {
+    padding-left: 0;
+  }
+}
+
+/* ==========================================================================
+   5. BLOCO DE CÓDIGO — sempre escuro (independente do tema), com copiar
+   ========================================================================== */
+.code-block {
+  background: #141413;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--elevation-raised);
+  max-width: var(--reading-column);
+}
+
+.code-block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 10px 14px;
+  background: #1f1e1d;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.code-block-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(250, 249, 245, 0.6);
+}
+
+.code-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: rgba(250, 249, 245, 0.85);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+
+.code-copy-btn:hover {
+  border-color: var(--clay-vivid);
+  color: #ffffff;
+}
+
+.code-copy-btn[data-copied="true"] {
+  background: var(--color-success);
+  border-color: var(--color-success);
+  color: #ffffff;
+}
+
+.code-block pre {
+  margin: 0;
+  padding: var(--space-4);
+  overflow-x: auto;
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #faf9f5;
+  white-space: pre;
+}
+
+/* ==========================================================================
+   6. CALLOUTS — esperado / atenção / erro comum / observação
+   ========================================================================== */
+.callout {
+  display: flex;
+  gap: 12px;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  max-width: var(--reading-column);
+}
+
+.callout-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+}
+
+.callout-body {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.callout-body strong {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.callout-body code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: rgba(20, 20, 19, 0.06);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.callout-success {
+  background: rgba(47, 118, 19, 0.08);
+  border-color: rgba(47, 118, 19, 0.3);
+}
+.callout-success .callout-icon { color: var(--color-success); }
+.callout-success strong { color: var(--color-success); }
+
+.callout-info {
+  background: rgba(106, 155, 204, 0.1);
+  border-color: rgba(106, 155, 204, 0.35);
+}
+.callout-info .callout-icon { color: var(--color-info); }
+.callout-info strong { color: #3d7bb0; }
+
+.callout-warning {
+  background: rgba(134, 90, 7, 0.08);
+  border-color: rgba(134, 90, 7, 0.3);
+}
+.callout-warning .callout-icon { color: var(--color-warning); }
+.callout-warning strong { color: var(--color-warning); }
+
+/* Marcar como concluída — só isso libera a próxima lição na trilha;
+   abrir a página sozinha nunca conta como progresso. */
+.guide-complete-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-10);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--color-muted);
+  border: 1px solid var(--color-border);
+}
+
+.guide-complete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--btn-height);
+  padding: 0 var(--btn-padx);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: var(--clay-vivid);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color var(--duration-fast) var(--ease-out), filter var(--duration-fast) var(--ease-out);
+}
+
+.guide-complete-btn:hover {
+  filter: brightness(1.06);
+}
+
+.guide-complete-check {
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.guide-complete-btn[data-completed="true"] {
+  background: var(--color-success);
+  cursor: default;
+}
+
+.guide-complete-btn[data-completed="true"] .guide-complete-check {
+  opacity: 1;
+}
+
+.guide-complete-note {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+  flex: 1;
+  min-width: 200px;
+}
+
+.callout-danger {
+  background: rgba(180, 50, 50, 0.08);
+  border-color: rgba(180, 50, 50, 0.3);
+}
+.callout-danger .callout-icon { color: var(--color-destructive); }
+.callout-danger strong { color: var(--color-destructive); }
+
+/* ==========================================================================
+   7. PRINTS — placeholders para as capturas de tela reais (a inserir)
+   ========================================================================== */
+.screenshot-slot {
+  max-width: var(--reading-column);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  background: var(--color-muted);
+}
+
+.screenshot-slot-icon {
+  color: var(--color-muted-foreground);
+}
+
+.screenshot-slot strong {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-foreground);
+}
+
+.screenshot-slot span {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+  line-height: 1.5;
+}
+
+.screenshot-slot img {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+/* ==========================================================================
+   7b. MOCKUPS — simulações realistas de tela (terminal, menus, instalador),
+   pra usar no lugar do "print sugerido" até a captura real chegar.
+   ========================================================================== */
+.mockup-frame {
+  max-width: var(--reading-column);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--elevation-floating);
+  border: 1px solid rgba(20, 20, 19, 0.12);
+}
+
+.mockup-caption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+}
+
+.mockup-caption svg {
+  flex-shrink: 0;
+  color: var(--color-muted-foreground);
+}
+
+/* Barra de título — Windows */
+.mockup-titlebar-win {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 32px;
+  padding-left: 12px;
+  background: #012456;
+  color: #e8e8e8;
+  font-family: "Segoe UI", var(--font-sans);
+  font-size: 0.75rem;
+}
+
+.mockup-win-controls {
+  display: flex;
+  height: 100%;
+}
+
+.mockup-win-controls span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 100%;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mockup-win-controls span:last-child {
+  font-size: 0.8rem;
+}
+
+/* Barra de título — Mac */
+.mockup-titlebar-mac {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  position: relative;
+  background: #3b3a39;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.mockup-mac-dots {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 7px;
+}
+
+.mockup-mac-dots span {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.mockup-mac-dots span:nth-child(1) { background: #ff5f57; }
+.mockup-mac-dots span:nth-child(2) { background: #febc2e; }
+.mockup-mac-dots span:nth-child(3) { background: #28c840; }
+
+/* Corpo do terminal — comum às duas plataformas */
+.mockup-term-body {
+  background: #1a1a1a;
+  color: #f0f0f0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  padding: var(--space-4);
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.mockup-term-body .t-prompt { color: #6a9bcc; }
+.mockup-term-body .t-path { color: #d4a27f; }
+.mockup-term-body .t-out { color: #9a9790; }
+.mockup-term-body .t-ok { color: #4fd671; font-weight: 600; }
+.mockup-term-body .t-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: #f0f0f0;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+  animation: mockup-blink 1s step-end infinite;
+}
+
+@keyframes mockup-blink {
+  50% { opacity: 0; }
+}
+
+/* Menu Iniciar do Windows — busca */
+.mockup-winsearch {
+  background: rgba(30, 30, 30, 0.97);
+  padding: var(--space-4) var(--space-4) var(--space-5);
+}
+
+.mockup-searchbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 9px 12px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.mockup-searchbar span {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: #ffffff;
+}
+
+.mockup-result-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.45);
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.mockup-result-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.mockup-result-icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  background: #012456;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.mockup-result-title {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: #ffffff;
+}
+
+.mockup-result-sub {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Spotlight do Mac */
+.mockup-spotlight {
+  background: rgba(235, 235, 235, 0.97);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+}
+
+.mockup-spotlight-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #6e6e73;
+}
+
+.mockup-spotlight-bar span {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: #1d1d1f;
+}
+
+.mockup-spotlight-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  margin: var(--space-3) 0;
+}
+
+.mockup-spotlight-result {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: 6px;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.mockup-spotlight-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  background: #1d1d1f;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mockup-spotlight-title {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: #1d1d1f;
+}
+
+.mockup-spotlight-sub {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: #6e6e73;
+}
+
+.mockup-spotlight-tag {
+  margin-left: auto;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  color: #6e6e73;
+  padding-right: 4px;
+}
+
+/* Instalador do Node.js */
+.mockup-installer-body {
+  display: flex;
+  background: #ffffff;
+  min-height: 190px;
+}
+
+.mockup-installer-side {
+  width: 130px;
+  flex-shrink: 0;
+  background: linear-gradient(160deg, #3c873a 0%, #215732 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mockup-installer-hex {
+  width: 56px;
+  height: 64px;
+  background: #ffffff;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: #215732;
+  letter-spacing: -0.02em;
+}
+
+.mockup-installer-main {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.mockup-installer-main h4 {
+  margin: 0;
+  font-family: "Segoe UI", var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.mockup-installer-main p {
+  margin: 0;
+  font-family: "Segoe UI", var(--font-sans);
+  font-size: 0.8125rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.mockup-installer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: var(--space-3) var(--space-4);
+  background: #f0f0f0;
+  border-top: 1px solid #d8d8d8;
+}
+
+.mockup-btn {
+  font-family: "Segoe UI", var(--font-sans);
+  font-size: 0.75rem;
+  padding: 6px 18px;
+  border-radius: 3px;
+  border: 1px solid #adadad;
+  background: #e1e1e1;
+  color: #555;
+}
+
+.mockup-btn-primary {
+  background: #0067c0;
+  border-color: #0067c0;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Navegador — tela de autorização OAuth */
+.mockup-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  background: #e8e6e0;
+  border-bottom: 1px solid #d8d6d0;
+}
+
+.mockup-browser-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.mockup-browser-dots span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.mockup-browser-dots span:nth-child(1) { background: #ff5f57; }
+.mockup-browser-dots span:nth-child(2) { background: #febc2e; }
+.mockup-browser-dots span:nth-child(3) { background: #28c840; }
+
+.mockup-browser-url {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mockup-browser-body {
+  background: #faf9f5;
+  padding: var(--space-8) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+}
+
+.mockup-browser-body h4 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: #1a1a1a;
+}
+
+.mockup-browser-body p {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: #6e6e73;
+  max-width: 34ch;
+}
+
+/* ==========================================================================
+   8. PAGINAÇÃO — navegação entre lições no rodapé do conteúdo
+   ========================================================================== */
+.guide-pagination {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-16);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-border);
+}
+
+.guide-pagination-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  text-decoration: none;
+  color: var(--color-foreground);
+  transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+
+.guide-pagination-link:hover {
+  border-color: var(--clay-vivid);
+}
+
+.guide-pagination-link.is-disabled {
+  color: var(--color-muted-foreground);
+  pointer-events: none;
+  border-style: dashed;
+}
+
+.guide-pagination-next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.guide-pagination-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+.guide-pagination-title {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .guide-pagination {
+    grid-template-columns: 1fr;
+  }
+  .guide-pagination-next {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+/* ==========================================================================
+   9. HUB — página índice do tutorial (cards de módulo)
+   ========================================================================== */
+.guide-hub-hero {
+  padding: var(--space-24) 0 var(--space-16);
+  text-align: center;
+}
+
+.guide-hub-hero .text-eyebrow {
+  display: inline-flex;
+  margin: 0 auto var(--space-4);
+}
+
+.guide-hub-hero h1 {
+  max-width: 20ch;
+  margin: 0 auto var(--space-4);
+}
+
+.guide-hub-hero p {
+  max-width: var(--reading-column);
+  margin: 0 auto;
+  color: var(--color-ink-soft);
+}
+
+.guide-track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.guide-track-day {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--clay-vivid);
+  margin: 0 0 var(--space-4);
+}
+
+.guide-hub-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+@media (min-width: 720px) {
+  .guide-hub-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.guide-hub-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--color-card-foreground);
+  position: relative;
+}
+
+.guide-hub-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.guide-hub-card-num {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+}
+
+.guide-hub-status {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+}
+
+.guide-hub-status-available {
+  background: rgba(47, 118, 19, 0.12);
+  color: var(--color-success);
+}
+
+.guide-hub-status-soon {
+  background: var(--color-muted);
+  color: var(--color-muted-foreground);
+}
+
+.guide-hub-card h3 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.guide-hub-card p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  color: var(--color-ink-soft);
+}
+
+.guide-hub-card.is-locked {
+  cursor: default;
+  color: var(--color-muted-foreground);
+}
+
+.guide-hub-card.is-locked h3 {
+  color: var(--color-muted-foreground);
+}
+
+/* ==========================================================================
+   10. DIAS — dois cards (Dia 1 / Dia 2), lições em sequência dentro de
+   cada um em vez de um card por lição. O efeito de hover é no card do
+   dia inteiro: amplia 5% e esquenta levemente a cor de fundo.
+   ========================================================================== */
+.guide-days-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 780px) {
+  .guide-days-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.guide-day-card {
+  /* Variáveis locais — trocar só estas no estado "ativo" (laranja) evita
+     duplicar regra por regra pros dois estados. */
+  --day-bg: var(--color-card);
+  --day-fg: var(--color-card-foreground);
+  --day-border: var(--color-border);
+  --day-item-border: var(--color-border);
+  --day-item-muted: var(--color-muted-foreground);
+  --day-badge-bg: rgba(47, 118, 19, 0.12);
+  --day-badge-fg: var(--color-success);
+  --day-badge-soon-bg: var(--color-muted);
+  --day-badge-soon-fg: var(--color-muted-foreground);
+  --day-link-hover: var(--clay-vivid);
+
+  background: var(--day-bg);
+  color: var(--day-fg);
+  border: 1px solid var(--day-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--elevation-raised);
+  transition: transform var(--duration-gentle) var(--ease-out),
+    background-color var(--duration-gentle) var(--ease-out),
+    color var(--duration-gentle) var(--ease-out),
+    border-color var(--duration-gentle) var(--ease-out),
+    box-shadow var(--duration-gentle) var(--ease-out);
+}
+
+.guide-day-card:hover {
+  transform: scale(1.05);
+  box-shadow: var(--elevation-floating);
+  position: relative;
+  z-index: 2;
+}
+
+/* Estado ativo — laranja com letras brancas. Por padrão é o card do
+   Dia 1; passar o mouse no outro card transfere esse estado pra ele
+   (ver tutorial.js), e o Dia 1 volta a ficar branco. */
+.guide-day-card.is-active-day {
+  --day-bg: var(--clay-vivid);
+  --day-fg: #ffffff;
+  --day-border: transparent;
+  --day-item-border: rgba(255, 255, 255, 0.2);
+  --day-item-muted: rgba(255, 255, 255, 0.65);
+  --day-badge-bg: rgba(255, 255, 255, 0.22);
+  --day-badge-fg: #ffffff;
+  --day-badge-soon-bg: rgba(255, 255, 255, 0.14);
+  --day-badge-soon-fg: rgba(255, 255, 255, 0.78);
+  --day-link-hover: #ffffff;
+}
+
+.guide-day-title {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--day-fg);
+}
+
+.guide-day-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.guide-day-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 11px 0;
+  border-bottom: 1px solid var(--day-item-border);
+  text-decoration: none;
+  color: var(--day-fg);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-gentle) var(--ease-out);
+}
+
+.guide-day-list li:last-child .guide-day-item,
+.guide-day-list > li:last-child {
+  border-bottom: none;
+}
+
+a.guide-day-item:hover {
+  color: var(--day-link-hover);
+  text-decoration: underline;
+}
+
+.guide-day-item.is-locked {
+  color: var(--day-item-muted);
+}
+
+.guide-day-item-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--day-item-muted);
+  margin-right: 10px;
+}
+
+.guide-day-item-status {
+  flex-shrink: 0;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  transition: background-color var(--duration-gentle) var(--ease-out), color var(--duration-gentle) var(--ease-out);
+}
+
+.guide-day-item-status.available {
+  background: var(--day-badge-bg);
+  color: var(--day-badge-fg);
+}
+
+.guide-day-item-status.soon {
+  background: var(--day-badge-soon-bg);
+  color: var(--day-badge-soon-fg);
+}

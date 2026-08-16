@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Criar o App no Meta — Tutorial Guiado IA na Prática</title>
+  <meta name="description"
+    content="Como criar o app no Meta for Developers, através do Gerenciador de Negócios, pra depois liberar o acesso do Claude ao Instagram." />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/tutorial.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header nav-header" data-site-header>
+    <div class="container">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">IA </span>na Prática
+      </a>
+
+      <ul class="nav-list">
+        <li><a href="index.html">Trilha do curso</a></li>
+        <li><a href="../index.html#investimento">Garantir minha vaga</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" type="button" data-theme-cycle
+          aria-label="Tema: sistema. Clique para alternar.">
+          <svg class="theme-icon theme-icon-system" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <rect x="2" y="3.5" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4" />
+            <path d="M6.5 15.5H11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <svg class="theme-icon theme-icon-light" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <circle cx="9" cy="9" r="3.4" stroke="currentColor" stroke-width="1.4" />
+            <path
+              d="M9 1.6V3.4M9 14.6V16.4M16.4 9H14.6M3.4 9H1.6M14.1 3.9L12.8 5.2M5.2 12.8L3.9 14.1M14.1 14.1L12.8 12.8M5.2 5.2L3.9 3.9"
+              stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <svg class="theme-icon theme-icon-dark" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <path d="M15.5 10.4A6.5 6.5 0 0 1 7.6 2.5a6.5 6.5 0 1 0 7.9 7.9Z" stroke="currentColor" stroke-width="1.4"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+        <button class="mobile-nav-toggle" type="button" data-nav-toggle aria-expanded="false"
+          aria-controls="mobile-nav" aria-label="Abrir menu">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M2 5H16M2 9H16M2 13H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+          <span>MENU</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Menu principal">
+      <a href="index.html">Trilha do curso</a>
+      <a href="../index.html#investimento">Garantir minha vaga</a>
+    </nav>
+  </header>
+
+  <div class="guide-context-bar">
+    <div class="container">
+      <div class="guide-breadcrumb">
+        <a href="index.html">Trilha do curso</a>
+        <span aria-hidden="true">/</span>
+        <span>Conectar ao Instagram</span>
+        <span aria-hidden="true">/</span>
+        <span class="is-current">Criar o App no Meta</span>
+      </div>
+      <span class="guide-context-badge"><span class="dot"></span> Dia 2 · Lição 6 de 7</span>
+    </div>
+  </div>
+
+  <main id="conteudo">
+    <section class="guide-shell">
+      <div class="container">
+
+        <aside class="guide-sidebar">
+          <div class="guide-sidebar-card">
+            <div class="guide-sidebar-brand">
+              <span class="guide-sidebar-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
+                  <path d="M3 5c1.8-.9 3.6-.9 5 0v9c-1.4-.9-3.2-.9-5 0V5Z" stroke="currentColor" stroke-width="1.4"
+                    stroke-linejoin="round" />
+                  <path d="M17 5c-1.8-.9-3.6-.9-5 0v9c1.4-.9 3.2-.9 5 0V5Z" stroke="currentColor" stroke-width="1.4"
+                    stroke-linejoin="round" />
+                </svg>
+              </span>
+              <div>
+                <strong>Tutorial IA na Prática</strong>
+                <span>Do Claude ao Instagram Automatizado</span>
+              </div>
+            </div>
+
+            <div class="guide-sidebar-progress">
+              <div class="guide-progress-top">
+                <span class="guide-progress-label" data-progress-label>0 lições concluídas</span>
+                <span class="guide-progress-percent" data-progress-percent>0%</span>
+              </div>
+              <div class="guide-progress-bar-track">
+                <div class="guide-progress-bar-fill" data-progress-bar></div>
+              </div>
+            </div>
+
+            <nav class="guide-sidebar-nav" aria-label="Trilha do curso">
+              <div class="guide-nav-section">
+                <p class="guide-nav-section-label">Dia 1 · Setup e primeiros passos</p>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path
+                          d="M9.8 3.2a2.6 2.6 0 0 0-3.4 3.1L2.8 9.9a1 1 0 0 0 0 1.4l.9.9a1 1 0 0 0 1.4 0l3.6-3.6a2.6 2.6 0 0 0 3.1-3.4l-1.6 1.6-1.4-.1-.1-1.4 1.6-1.6Z"
+                          stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">O Setup Perfeito</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><a class="guide-nav-item" href="instalar-git.html">Instalar o Git</a></li>
+                    <li><a class="guide-nav-item" href="criar-conta-github.html">Criar Conta no GitHub</a></li>
+                    <li><a class="guide-nav-item" href="instalacao-windows.html">Instalação no Windows</a></li>
+                    <li><a class="guide-nav-item" href="instalacao-mac.html">Instalação no Mac</a></li>
+                    <li><span class="guide-nav-item is-locked">Instalação no Linux</span></li>
+                    <li><span class="guide-nav-item is-locked">Cowork (opcional)</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M5.5 4L2 8l3.5 4M10.5 4L14 8l-3.5 4" stroke="currentColor" stroke-width="1.3"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Claude Code no VS Code</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="1.5" y="2.5" width="13" height="11" rx="1.3" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M4 6l2.5 2L4 10M8 10.5h4" stroke="currentColor" stroke-width="1.2"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Domine os comandos</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M4 2h5l3 3v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z" stroke="currentColor"
+                          stroke-width="1.2" stroke-linejoin="round" />
+                        <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                        <path d="M4.5 8.5h7M4.5 11h5" stroke="currentColor" stroke-width="1.1"
+                          stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">CLAUDE.md</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="guide-nav-section">
+                <p class="guide-nav-section-label">Dia 2 · Orquestração e Instagram</p>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="2" y="2" width="12" height="12" rx="3.5" stroke="currentColor" stroke-width="1.2" />
+                        <circle cx="8" cy="8" r="2.6" stroke="currentColor" stroke-width="1.2" />
+                        <circle cx="11.3" cy="4.7" r="0.7" fill="currentColor" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Conectar ao Instagram</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><a class="guide-nav-item" href="conta-facebook.html">Criar Conta do Facebook</a></li>
+                    <li><a class="guide-nav-item" href="proteger-conta.html">Proteger a Conta (2FA)</a></li>
+                    <li><a class="guide-nav-item" href="criar-pagina-facebook.html">Criar a Página do Facebook</a>
+                    </li>
+                    <li><a class="guide-nav-item" href="criar-business-manager.html">Gerenciador de Negócios</a></li>
+                    <li><a class="guide-nav-item" href="vincular-pagina.html">Vincular a Página</a></li>
+                    <li><a class="guide-nav-item" href="criar-app-meta.html">Criar o App no Meta</a></li>
+                    <li><a class="guide-nav-item" href="gerar-token-acesso.html">Gerar o Token de Acesso</a></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="5.5" cy="5.5" r="2.2" stroke="currentColor" stroke-width="1.2" />
+                        <circle cx="11" cy="7" r="2" stroke="currentColor" stroke-width="1.2" />
+                        <path d="M2 13.5c0-2.2 1.6-3.6 3.6-3.6s3.6 1.4 3.6 3.6M9.2 13.5c0-1.8 1.3-3 3-3s3 1.2 3 3"
+                          stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Orquestração de Agentes</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="1.5" y="2.5" width="13" height="10" rx="1.2" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <circle cx="5" cy="6" r="1.1" stroke="currentColor" stroke-width="1" />
+                        <path d="M2 11l3.2-3 2.3 2.2L10 8l3.5 3" stroke="currentColor" stroke-width="1.2"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Produção de conteúdo</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="1.8" y="5" width="12.4" height="8.5" rx="1.2" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M5.5 5V3.8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V5" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M1.8 9h12.4" stroke="currentColor" stroke-width="1.2" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Pronto pra vender</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="2" y="3" width="12" height="10.5" rx="1.3" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M2 6.5h12" stroke="currentColor" stroke-width="1.2" />
+                        <path d="M5 1.8v3M11 1.8v3" stroke="currentColor" stroke-width="1.2"
+                          stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Seu plano de 30 dias</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+
+            <div class="guide-sidebar-cta">
+              <p>Quer o acesso completo, com todas as lições e a gravação da imersão?</p>
+              <a class="btn btn-primary btn-sm" href="../index.html#investimento"
+                style="width:100%;">Garantir minha vaga</a>
+            </div>
+          </div>
+        </aside>
+
+        <div class="guide-content">
+
+          <div class="guide-lesson-header">
+            <span class="guide-lesson-eyebrow"><span class="dot"></span> Conectar ao Instagram · 6 de 7</span>
+            <h1 class="text-heading">Criar o App no Meta</h1>
+            <p class="guide-lesson-lead text-body">
+              O App é a "credencial" que o Claude vai usar pra falar com o Instagram em seu
+              nome. Sem ele, não existe Token — e sem Token, o Agente de IA não consegue
+              publicar nada sozinho. O detalhe importante aqui é <strong>onde</strong> você cria
+              esse app, não só como.
+            </p>
+
+            <div class="guide-meta-row">
+              <span class="guide-meta-pill">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.4" />
+                  <path d="M9 5.5V9L11.5 10.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+                <span>~10 minutos</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="callout callout-danger" style="max-width: 100%; margin-bottom: var(--space-8);">
+            <span class="callout-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                <path d="M11 7V12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                <path d="M11 14.7V14.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </span>
+            <div class="callout-body">
+              <strong>Não crie o app direto em developers.facebook.com</strong>
+              Se você for direto lá e clicar em "Criar App", corre o risco de escolher sem
+              querer um app do tipo errado (voltado a jogos, por exemplo) ou de criar um app
+              solto, sem vínculo com o Gerenciador de Negócios que você acabou de montar. O
+              caminho abaixo, passando pelo Gerenciador, evita esse problema de raiz.
+            </div>
+          </div>
+
+          <article class="guide-step" style="border-top: none; padding-top: 0;">
+            <div class="guide-step-head">
+              <span class="guide-step-num">1</span>
+              <div class="guide-step-titles">
+                <p class="guide-step-kicker">Criação</p>
+                <h2>Criar o App pelo Gerenciador de Negócios</h2>
+              </div>
+            </div>
+            <div class="guide-step-body">
+              <a class="guide-download-card" href="https://business.facebook.com/latest/settings/apps"
+                target="_blank" rel="noopener noreferrer">
+                <span class="guide-download-card-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <rect x="3" y="3" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4" />
+                    <rect x="10" y="3" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4" />
+                    <rect x="3" y="10" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4" />
+                    <rect x="10" y="10" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4" />
+                  </svg>
+                </span>
+                <span class="guide-download-card-body">
+                  <strong>business.facebook.com/latest/settings/apps</strong>
+                  <span>Apps, dentro do Gerenciador de Negócios</span>
+                </span>
+                <span class="guide-download-card-arrow" aria-hidden="true">↗</span>
+              </a>
+
+              <ol class="text-body">
+                <li>Clique no link acima, já dentro do Gerenciador de Negócios que você criou.
+                </li>
+                <li>Clique em <strong>"Criar aplicativo novo"</strong>.</li>
+                <li>Escolha o tipo <strong>"Negócios"</strong> (Business) — nunca "Game" ou
+                  outro tipo.</li>
+                <li>Confirme que o app está vinculado ao seu Gerenciador de Negócios.</li>
+                <li>Dentro do app, adicione o produto de <strong>API do Instagram</strong> à
+                  lista de produtos (o nome exato pode variar — procure por algo relacionado a
+                  "Instagram" na tela de produtos disponíveis; a Meta muda esses nomes com
+                  frequência).</li>
+                <li>Em <strong>Configurações → Básico</strong>, mude o modo do app de
+                  "Development" para <strong>"Live"</strong> quando estiver pronto pra usar de
+                  verdade (em modo Development, só você consegue testar).</li>
+              </ol>
+
+              <div class="screenshot-slot">
+                <span class="screenshot-slot-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.4" />
+                    <circle cx="8.5" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3" />
+                    <path d="M4 17l4.5-4.2 3.2 3 3.8-3.5L20 16.5" stroke="currentColor" stroke-width="1.4"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <strong>Print sugerido</strong>
+                <span>Tela do app já criado, dentro do Gerenciador, mostrando o tipo "Negócios" e
+                  o produto de Instagram adicionado.</span>
+              </div>
+
+              <div class="callout callout-info">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                    <path d="M11 9.8V15.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                    <path d="M11 7.2V7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Por que criar assim, e não direto</strong>
+                  Criando o app por dentro do Gerenciador de Negócios, ele já nasce vinculado à
+                  conta certa — sem precisar arrumar permissão depois. É o mesmo motivo pelo
+                  qual vinculamos a Página antes de chegar aqui.
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <div class="guide-complete-bar">
+            <button type="button" class="guide-complete-btn" data-mark-complete data-completed="false">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.4" />
+                <path class="guide-complete-check" d="M5.5 9.3L7.8 11.6L12.5 6.5" stroke="currentColor"
+                  stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span data-complete-label>Marcar esta lição como concluída</span>
+            </button>
+            <span class="guide-complete-note">Isso libera a próxima lição na trilha — sem marcar, ela fica
+              travada.</span>
+          </div>
+
+          <nav class="guide-pagination" aria-label="Navegação entre lições">
+            <a class="guide-pagination-link" href="vincular-pagina.html">
+              <span class="guide-pagination-label">← Anterior</span>
+              <span class="guide-pagination-title">Vincular a Página ao Gerenciador</span>
+            </a>
+            <a class="guide-pagination-link guide-pagination-next" href="gerar-token-acesso.html">
+              <span class="guide-pagination-label">Próxima</span>
+              <span class="guide-pagination-title">Gerar o Token de Acesso</span>
+            </a>
+          </nav>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 IA na Prática. Todos os direitos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="assets/js/tutorial.js"></script>
+</body>
+
+</html>

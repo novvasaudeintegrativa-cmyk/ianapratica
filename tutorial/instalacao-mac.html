@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instalação no Mac — Tutorial Guiado IA na Prática</title>
+  <meta name="description"
+    content="Passo a passo completo para instalar o Claude Code no macOS: Terminal, instalação, PATH e primeiro login." />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/tutorial.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header nav-header" data-site-header>
+    <div class="container">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">IA </span>na Prática
+      </a>
+
+      <ul class="nav-list">
+        <li><a href="index.html">Trilha do curso</a></li>
+        <li><a href="../index.html#investimento">Garantir minha vaga</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" type="button" data-theme-cycle
+          aria-label="Tema: sistema. Clique para alternar.">
+          <svg class="theme-icon theme-icon-system" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <rect x="2" y="3.5" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4" />
+            <path d="M6.5 15.5H11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <svg class="theme-icon theme-icon-light" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <circle cx="9" cy="9" r="3.4" stroke="currentColor" stroke-width="1.4" />
+            <path
+              d="M9 1.6V3.4M9 14.6V16.4M16.4 9H14.6M3.4 9H1.6M14.1 3.9L12.8 5.2M5.2 12.8L3.9 14.1M14.1 14.1L12.8 12.8M5.2 5.2L3.9 3.9"
+              stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <svg class="theme-icon theme-icon-dark" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <path d="M15.5 10.4A6.5 6.5 0 0 1 7.6 2.5a6.5 6.5 0 1 0 7.9 7.9Z" stroke="currentColor" stroke-width="1.4"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+        <button class="mobile-nav-toggle" type="button" data-nav-toggle aria-expanded="false"
+          aria-controls="mobile-nav" aria-label="Abrir menu">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M2 5H16M2 9H16M2 13H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+          <span>MENU</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Menu principal">
+      <a href="index.html">Trilha do curso</a>
+      <a href="../index.html#investimento">Garantir minha vaga</a>
+    </nav>
+  </header>
+
+  <div class="guide-context-bar">
+    <div class="container">
+      <div class="guide-breadcrumb">
+        <a href="index.html">Trilha do curso</a>
+        <span aria-hidden="true">/</span>
+        <span>O Setup Perfeito</span>
+        <span aria-hidden="true">/</span>
+        <span class="is-current">Instalação no Mac</span>
+      </div>
+      <span class="guide-context-badge"><span class="dot"></span> Dia 1 · Lição 01.2</span>
+    </div>
+  </div>
+
+  <main id="conteudo">
+    <section class="guide-shell">
+      <div class="container">
+
+        <aside class="guide-sidebar">
+          <div class="guide-sidebar-card">
+            <div class="guide-sidebar-brand">
+              <span class="guide-sidebar-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
+                  <path d="M3 5c1.8-.9 3.6-.9 5 0v9c-1.4-.9-3.2-.9-5 0V5Z" stroke="currentColor" stroke-width="1.4"
+                    stroke-linejoin="round" />
+                  <path d="M17 5c-1.8-.9-3.6-.9-5 0v9c1.4-.9 3.2-.9 5 0V5Z" stroke="currentColor" stroke-width="1.4"
+                    stroke-linejoin="round" />
+                </svg>
+              </span>
+              <div>
+                <strong>Tutorial IA na Prática</strong>
+                <span>Do Claude ao Instagram Automatizado</span>
+              </div>
+            </div>
+
+            <div class="guide-sidebar-progress">
+              <div class="guide-progress-top">
+                <span class="guide-progress-label" data-progress-label>0 lições concluídas</span>
+                <span class="guide-progress-percent" data-progress-percent>0%</span>
+              </div>
+              <div class="guide-progress-bar-track">
+                <div class="guide-progress-bar-fill" data-progress-bar></div>
+              </div>
+            </div>
+
+            <nav class="guide-sidebar-nav" aria-label="Trilha do curso">
+              <div class="guide-nav-section">
+                <p class="guide-nav-section-label">Dia 1 · Setup e primeiros passos</p>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path
+                          d="M9.8 3.2a2.6 2.6 0 0 0-3.4 3.1L2.8 9.9a1 1 0 0 0 0 1.4l.9.9a1 1 0 0 0 1.4 0l3.6-3.6a2.6 2.6 0 0 0 3.1-3.4l-1.6 1.6-1.4-.1-.1-1.4 1.6-1.6Z"
+                          stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">O Setup Perfeito</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><a class="guide-nav-item" href="instalar-git.html">Instalar o Git</a></li>
+                    <li><a class="guide-nav-item" href="criar-conta-github.html">Criar Conta no GitHub</a></li>
+                    <li><a class="guide-nav-item" href="instalacao-windows.html">Instalação no Windows</a></li>
+                    <li><a class="guide-nav-item" href="instalacao-mac.html">Instalação no Mac</a></li>
+                    <li><span class="guide-nav-item is-locked">Instalação no Linux</span></li>
+                    <li><span class="guide-nav-item is-locked">Cowork (opcional)</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M5.5 4L2 8l3.5 4M10.5 4L14 8l-3.5 4" stroke="currentColor" stroke-width="1.3"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Claude Code no VS Code</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="1.5" y="2.5" width="13" height="11" rx="1.3" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M4 6l2.5 2L4 10M8 10.5h4" stroke="currentColor" stroke-width="1.2"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Domine os comandos</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M4 2h5l3 3v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z" stroke="currentColor"
+                          stroke-width="1.2" stroke-linejoin="round" />
+                        <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                        <path d="M4.5 8.5h7M4.5 11h5" stroke="currentColor" stroke-width="1.1"
+                          stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">CLAUDE.md</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="guide-nav-section">
+                <p class="guide-nav-section-label">Dia 2 · Orquestração e Instagram</p>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="2" y="2" width="12" height="12" rx="3.5" stroke="currentColor" stroke-width="1.2" />
+                        <circle cx="8" cy="8" r="2.6" stroke="currentColor" stroke-width="1.2" />
+                        <circle cx="11.3" cy="4.7" r="0.7" fill="currentColor" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Conectar ao Instagram</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><a class="guide-nav-item" href="conta-facebook.html">Criar Conta do Facebook</a></li>
+                    <li><a class="guide-nav-item" href="proteger-conta.html">Proteger a Conta (2FA)</a></li>
+                    <li><a class="guide-nav-item" href="criar-pagina-facebook.html">Criar a Página do Facebook</a>
+                    </li>
+                    <li><a class="guide-nav-item" href="criar-business-manager.html">Gerenciador de Negócios</a></li>
+                    <li><a class="guide-nav-item" href="vincular-pagina.html">Vincular a Página</a></li>
+                    <li><a class="guide-nav-item" href="criar-app-meta.html">Criar o App no Meta</a></li>
+                    <li><a class="guide-nav-item" href="gerar-token-acesso.html">Gerar o Token de Acesso</a></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="5.5" cy="5.5" r="2.2" stroke="currentColor" stroke-width="1.2" />
+                        <circle cx="11" cy="7" r="2" stroke="currentColor" stroke-width="1.2" />
+                        <path d="M2 13.5c0-2.2 1.6-3.6 3.6-3.6s3.6 1.4 3.6 3.6M9.2 13.5c0-1.8 1.3-3 3-3s3 1.2 3 3"
+                          stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Orquestração de Agentes</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="1.5" y="2.5" width="13" height="10" rx="1.2" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <circle cx="5" cy="6" r="1.1" stroke="currentColor" stroke-width="1" />
+                        <path d="M2 11l3.2-3 2.3 2.2L10 8l3.5 3" stroke="currentColor" stroke-width="1.2"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Produção de conteúdo</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="1.8" y="5" width="12.4" height="8.5" rx="1.2" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M5.5 5V3.8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V5" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M1.8 9h12.4" stroke="currentColor" stroke-width="1.2" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Pronto pra vender</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="2" y="3" width="12" height="10.5" rx="1.3" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M2 6.5h12" stroke="currentColor" stroke-width="1.2" />
+                        <path d="M5 1.8v3M11 1.8v3" stroke="currentColor" stroke-width="1.2"
+                          stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Seu plano de 30 dias</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+
+            <div class="guide-sidebar-cta">
+              <p>Quer o acesso completo, com todas as lições e a gravação da imersão?</p>
+              <a class="btn btn-primary btn-sm" href="../index.html#investimento"
+                style="width:100%;">Garantir minha vaga</a>
+            </div>
+          </div>
+        </aside>
+
+        <div class="guide-content">
+
+          <div class="guide-lesson-header">
+            <span class="guide-lesson-eyebrow"><span class="dot"></span> O Setup Perfeito</span>
+            <h1 class="text-heading">Instalação no Mac</h1>
+            <p class="guide-lesson-lead text-body">
+              No macOS o processo é mais curto: o Terminal já vem com tudo que o instalador do
+              Claude Code precisa, então não existe um passo separado de pré-requisito como no
+              Windows. Siga na ordem e em poucos minutos você já está com o Claude Code rodando.
+            </p>
+
+            <div class="guide-meta-row">
+              <span class="guide-meta-pill">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.4" />
+                  <path d="M9 5.5V9L11.5 10.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+                <span>~5 minutos</span>
+              </span>
+              <span class="guide-meta-pill">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <rect x="2.5" y="2.5" width="13" height="10" rx="1.4" stroke="currentColor" stroke-width="1.4" />
+                  <path d="M6 15.5H12M9 12.5V15.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                </svg>
+                <span>macOS</span>
+              </span>
+              <span class="guide-meta-pill">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                  <circle cx="9" cy="6" r="2.6" stroke="currentColor" stroke-width="1.4" />
+                  <path d="M3.2 15c0-2.9 2.6-4.8 5.8-4.8s5.8 1.9 5.8 4.8" stroke="currentColor" stroke-width="1.4"
+                    stroke-linecap="round" />
+                </svg>
+                <span>Nível: iniciante</span>
+              </span>
+            </div>
+          </div>
+
+          <nav class="guide-step-nav" data-step-nav aria-label="Passos desta lição">
+            <a href="#passo-1">1. Abrir o Terminal</a>
+            <a href="#passo-2">2. Instalar o Claude Code</a>
+            <a href="#passo-3">3. Configurar o PATH</a>
+            <a href="#passo-4">4. Reiniciar o Terminal</a>
+            <a href="#passo-5">5. Iniciar e autenticar</a>
+          </nav>
+
+          <!-- PASSO 1 -->
+          <article class="guide-step" id="passo-1">
+            <div class="guide-step-head">
+              <span class="guide-step-num">1</span>
+              <div class="guide-step-titles">
+                <p class="guide-step-kicker">Preparar o terminal</p>
+                <h2>Abrir o Terminal</h2>
+              </div>
+            </div>
+            <div class="guide-step-body">
+              <p class="text-body">
+                Aperte <strong>Command + Espaço</strong> pra abrir o Spotlight, digite
+                <strong>Terminal</strong> e aperte Enter. Esse é o app que vamos usar em toda a
+                instalação — nada de instalar programa nenhum pra esse passo, ele já vem no Mac.
+              </p>
+
+              <div class="mockup-frame">
+                <div class="mockup-spotlight">
+                  <div class="mockup-spotlight-bar">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                      <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.6" />
+                      <path d="M12.5 12.5L16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                    </svg>
+                    <span>Terminal</span>
+                  </div>
+                  <div class="mockup-spotlight-divider"></div>
+                  <div class="mockup-spotlight-result">
+                    <span class="mockup-spotlight-icon">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <rect x="1.5" y="2.5" width="13" height="11" rx="1.3" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M4 6l2.5 2L4 10M8 10.5h4" stroke="currentColor" stroke-width="1.2"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <div>
+                      <div class="mockup-spotlight-title">Terminal</div>
+                      <div class="mockup-spotlight-sub">Aplicativos</div>
+                    </div>
+                    <span class="mockup-spotlight-tag">Melhor correspondência</span>
+                  </div>
+                </div>
+              </div>
+              <p class="mockup-caption">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+                Simulação de como a tela aparece — troque pelo print real quando tiver.
+              </p>
+            </div>
+          </article>
+
+          <!-- PASSO 2 -->
+          <article class="guide-step" id="passo-2">
+            <div class="guide-step-head">
+              <span class="guide-step-num">2</span>
+              <div class="guide-step-titles">
+                <p class="guide-step-kicker">Instalação</p>
+                <h2>Instalar o Claude Code</h2>
+              </div>
+            </div>
+            <div class="guide-step-body">
+              <p class="text-body">
+                Com o Terminal aberto, cole o comando abaixo e aperte Enter. Ele baixa e roda o
+                instalador oficial direto do domínio da Anthropic.
+              </p>
+
+              <div class="code-block">
+                <div class="code-block-head">
+                  <span class="code-block-label">Terminal</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="cmd-install-claude-mac">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
+                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
+                    </svg>
+                    <span data-copy-label>Copiar</span>
+                  </button>
+                </div>
+                <pre><code id="cmd-install-claude-mac">curl -fsSL https://claude.ai/install.sh | bash</code></pre>
+              </div>
+
+              <p class="text-body">
+                <code>curl</code> baixa o script de instalação e <code>bash</code> executa o que
+                foi baixado — o mesmo princípio do comando usado no Windows, só que com as
+                ferramentas nativas do macOS.
+              </p>
+
+              <div class="mockup-frame">
+                <div class="mockup-titlebar-mac">
+                  <div class="mockup-mac-dots"><span></span><span></span><span></span></div>
+                  <span>terminal — zsh — 80×24</span>
+                </div>
+                <pre class="mockup-term-body">voce@MacBook-Pro ~ % curl -fsSL https://claude.ai/install.sh | bash
+<span class="t-out">Baixando o instalador...
+Instalando o Claude Code...
+</span>
+<span class="t-ok">✔ Claude Code successfully installed!</span>
+
+voce@MacBook-Pro ~ % <span class="t-cursor"></span></pre>
+              </div>
+              <p class="mockup-caption">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+                Simulação de como a tela aparece — troque pelo print real quando tiver.
+              </p>
+
+              <div class="callout callout-info">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                    <path d="M11 9.8V15.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                    <path d="M11 7.2V7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Esperado</strong>
+                  Aguarde de 1 a 3 minutos até aparecer a mensagem
+                  <code>Claude Code successfully installed!</code> no terminal.
+                </div>
+              </div>
+
+              <div class="callout callout-danger">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                    <path d="M11 7V12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                    <path d="M11 14.7V14.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Hábito de segurança</strong>
+                  Só cole e execute comandos <code>curl ... | bash</code> quando confia 100% na
+                  origem — nesse caso, o domínio oficial <code>claude.ai</code>. Nunca rode esse
+                  padrão de comando com links que alguém te mandou sem conferir de onde vêm.
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PASSO 3 -->
+          <article class="guide-step" id="passo-3">
+            <div class="guide-step-head">
+              <span class="guide-step-num">3</span>
+              <div class="guide-step-titles">
+                <p class="guide-step-kicker">Configuração — o passo mais importante!</p>
+                <h2>Configurar o PATH</h2>
+              </div>
+            </div>
+            <div class="guide-step-body">
+              <p class="text-body">
+                O PATH é a "lista de lugares" onde o macOS procura programas quando você digita
+                um comando. Cole o comando abaixo e aperte Enter pra garantir que o Terminal
+                sempre encontre o <code>claude</code>:
+              </p>
+
+              <div class="code-block">
+                <div class="code-block-head">
+                  <span class="code-block-label">Terminal — zsh (padrão do macOS)</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="cmd-path-mac">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
+                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
+                    </svg>
+                    <span data-copy-label>Copiar</span>
+                  </button>
+                </div>
+                <pre><code id="cmd-path-mac">echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc</code></pre>
+              </div>
+
+              <div class="callout callout-info">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                    <path d="M11 9.8V15.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                    <path d="M11 7.2V7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Esperado</strong>
+                  O comando roda sem mostrar nenhuma mensagem — silêncio total é sucesso aqui.
+                  Esse comando faz duas coisas: adiciona a linha no arquivo de configuração do
+                  seu terminal (<code>~/.zshrc</code>) e já aplica a mudança na sessão atual.
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PASSO 4 -->
+          <article class="guide-step" id="passo-4">
+            <div class="guide-step-head">
+              <span class="guide-step-num">4</span>
+              <div class="guide-step-titles">
+                <p class="guide-step-kicker">Aplicar a configuração</p>
+                <h2>Reiniciar o Terminal</h2>
+              </div>
+            </div>
+            <div class="guide-step-body">
+              <p class="text-body">
+                Feche o Terminal por completo com <strong>Command + Q</strong> e abra um novo
+                pelo Spotlight, do mesmo jeito que fez no Passo 1 — isso garante que a
+                configuração do Passo 3 seja carregada do zero.
+              </p>
+
+              <div class="callout callout-warning">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <path d="M11 3L20 18H2L11 3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" />
+                    <path d="M11 9V13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                    <path d="M11 15.6V15.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Erro comum</strong>
+                  Fechar só a aba (Command + W) não é suficiente — use Command + Q pra encerrar
+                  o aplicativo Terminal inteiro antes de reabrir.
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PASSO 5 -->
+          <article class="guide-step" id="passo-5">
+            <div class="guide-step-head">
+              <span class="guide-step-num">5</span>
+              <div class="guide-step-titles">
+                <p class="guide-step-kicker">Primeiro acesso</p>
+                <h2>Iniciar o Claude Code e autenticar</h2>
+              </div>
+            </div>
+            <div class="guide-step-body">
+              <p class="text-body">No terminal novo, digite:</p>
+
+              <div class="code-block">
+                <div class="code-block-head">
+                  <span class="code-block-label">Terminal</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="cmd-start-claude-mac">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
+                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
+                    </svg>
+                    <span data-copy-label>Copiar</span>
+                  </button>
+                </div>
+                <pre><code id="cmd-start-claude-mac">claude</code></pre>
+              </div>
+
+              <p class="text-body">Na primeira vez, o Claude Code vai te guiar por uma
+                configuração rápida:</p>
+              <ol class="text-body">
+                <li>Escolha o tema do terminal (light ou dark) — só uma preferência visual, dá
+                  pra mudar depois.</li>
+                <li>Escolha a forma de login — a mais simples é <strong>"login com o
+                    navegador"</strong>: o Claude Code abre o navegador automaticamente.</li>
+                <li>Faça login com a sua conta Anthropic (é necessário um plano <strong>Claude
+                    Pro ou Max</strong> para o Claude Code funcionar).</li>
+                <li>Se o navegador não abrir sozinho, copie o link que aparecer no terminal e
+                  cole no navegador manualmente.</li>
+                <li>Depois de autorizar, volte para o terminal — ele confirma o login sozinho.</li>
+              </ol>
+
+              <div class="mockup-frame">
+                <div class="mockup-browser-bar">
+                  <div class="mockup-browser-dots"><span></span><span></span><span></span></div>
+                  <div class="mockup-browser-url">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <rect x="2.5" y="5" width="7" height="5.5" rx="1" stroke="currentColor" stroke-width="1.1" />
+                      <path d="M4 5V3.5a2 2 0 0 1 4 0V5" stroke="currentColor" stroke-width="1.1" />
+                    </svg>
+                    claude.ai/oauth/authorize
+                  </div>
+                </div>
+                <div class="mockup-browser-body">
+                  <h4>Autorizar o Claude Code</h4>
+                  <p>Este aplicativo terá acesso à sua conta Claude Pro/Max nesta máquina.</p>
+                  <button class="mockup-btn mockup-btn-primary" style="padding:8px 22px;">Autorizar acesso</button>
+                </div>
+              </div>
+              <p class="mockup-caption">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+                Simulação da tela de autorização que abre no navegador — troque pelo print real quando tiver.
+              </p>
+
+              <div class="mockup-frame">
+                <div class="mockup-titlebar-mac">
+                  <div class="mockup-mac-dots"><span></span><span></span><span></span></div>
+                  <span>terminal — zsh — 80×24</span>
+                </div>
+                <pre class="mockup-term-body"><span class="t-ok">✔ Login successful. Welcome back!</span>
+
+voce@MacBook-Pro ~ % claude
+&gt; <span class="t-cursor"></span></pre>
+              </div>
+              <p class="mockup-caption">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+                Simulação de como a tela aparece — troque pelo print real quando tiver.
+              </p>
+
+              <div class="callout callout-success">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                    <path d="M7.3 11.3L9.8 13.8L14.7 8.7" stroke="currentColor" stroke-width="1.4"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Esperado</strong>
+                  Uma mensagem de <code>Login successful</code> seguida do prompt do Claude
+                  Code pronto pra receber comandos.
+                </div>
+              </div>
+
+              <p class="text-body" style="margin-top: var(--space-2);"><strong>🆘 Se deu erro no
+                  Mac:</strong></p>
+
+              <div class="code-block">
+                <div class="code-block-head">
+                  <span class="code-block-label">Terminal — verificar instalação</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="cmd-diag-mac">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
+                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
+                    </svg>
+                    <span data-copy-label>Copiar</span>
+                  </button>
+                </div>
+                <pre><code id="cmd-diag-mac">test -f ~/.local/bin/claude && echo "INSTALADO" || echo "NAO INSTALADO"</code></pre>
+              </div>
+
+              <div class="callout callout-warning">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <path d="M11 3L20 18H2L11 3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" />
+                    <path d="M11 9V13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                    <path d="M11 15.6V15.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Leia o resultado</strong>
+                  Se aparecer <code>INSTALADO</code>, o problema é só o PATH — repita o Passo 3
+                  e reinicie o terminal de novo (Passo 4). Se aparecer
+                  <code>NAO INSTALADO</code>, volte pro Passo 2 e rode o comando de instalação
+                  outra vez.
+                </div>
+              </div>
+
+              <div class="callout callout-info">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                    <path d="M11 9.8V15.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                    <path d="M11 7.2V7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Usa Mac mais antigo, com bash em vez de zsh?</strong>
+                  Troque o comando do Passo 3 por este:
+                  <div class="code-block" style="margin-top: var(--space-3);">
+                    <div class="code-block-head">
+                      <span class="code-block-label">Terminal — bash</span>
+                      <button class="code-copy-btn" type="button" data-copy-target="cmd-path-bash-mac">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                          <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
+                        </svg>
+                        <span data-copy-label>Copiar</span>
+                      </button>
+                    </div>
+                    <pre><code id="cmd-path-bash-mac">echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bash_profile && source ~/.bash_profile</code></pre>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <div class="callout callout-success" style="max-width: 100%; margin-top: var(--space-8);">
+            <span class="callout-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                <path d="M7.3 11.3L9.8 13.8L14.7 8.7" stroke="currentColor" stroke-width="1.4"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <div class="callout-body">
+              <strong>Setup concluído</strong>
+              Claude Code instalado, PATH configurado e login feito. Você já pode abrir o Claude
+              Code em qualquer pasta de projeto digitando <code>claude</code> — é isso que vamos
+              usar na próxima lição.
+            </div>
+          </div>
+
+          <div class="guide-complete-bar">
+            <button type="button" class="guide-complete-btn" data-mark-complete data-completed="false">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.4" />
+                <path class="guide-complete-check" d="M5.5 9.3L7.8 11.6L12.5 6.5" stroke="currentColor"
+                  stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span data-complete-label>Marcar esta lição como concluída</span>
+            </button>
+            <span class="guide-complete-note">Isso libera a próxima lição na trilha — sem marcar, ela fica
+              travada.</span>
+          </div>
+
+          <nav class="guide-pagination" aria-label="Navegação entre lições">
+            <a class="guide-pagination-link" href="instalacao-windows.html">
+              <span class="guide-pagination-label">← Anterior</span>
+              <span class="guide-pagination-title">Instalação no Windows</span>
+            </a>
+            <a class="guide-pagination-link guide-pagination-next is-disabled" href="#" aria-disabled="true">
+              <span class="guide-pagination-label">Próxima · Em breve</span>
+              <span class="guide-pagination-title">Claude Code no VS Code</span>
+            </a>
+          </nav>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 IA na Prática. Todos os direitos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="assets/js/tutorial.js"></script>
+</body>
+
+</html>

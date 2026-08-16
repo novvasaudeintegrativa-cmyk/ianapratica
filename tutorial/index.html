@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tutorial Guiado — IA na Prática</title>
+  <meta name="description"
+    content="Guia passo a passo da Imersão IA na Prática: instalação, configuração e primeiros comandos do Claude Code, direto ao ponto." />
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/tutorial.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header nav-header" data-site-header>
+    <div class="container">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">IA </span>na Prática
+      </a>
+
+      <ul class="nav-list">
+        <li><a href="index.html">Trilha do curso</a></li>
+        <li><a href="../index.html#investimento">Garantir minha vaga</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" type="button" data-theme-cycle
+          aria-label="Tema: sistema. Clique para alternar.">
+          <svg class="theme-icon theme-icon-system" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <rect x="2" y="3.5" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4" />
+            <path d="M6.5 15.5H11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <svg class="theme-icon theme-icon-light" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <circle cx="9" cy="9" r="3.4" stroke="currentColor" stroke-width="1.4" />
+            <path
+              d="M9 1.6V3.4M9 14.6V16.4M16.4 9H14.6M3.4 9H1.6M14.1 3.9L12.8 5.2M5.2 12.8L3.9 14.1M14.1 14.1L12.8 12.8M5.2 5.2L3.9 3.9"
+              stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <svg class="theme-icon theme-icon-dark" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <path d="M15.5 10.4A6.5 6.5 0 0 1 7.6 2.5a6.5 6.5 0 1 0 7.9 7.9Z" stroke="currentColor" stroke-width="1.4"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+        <button class="mobile-nav-toggle" type="button" data-nav-toggle aria-expanded="false"
+          aria-controls="mobile-nav" aria-label="Abrir menu">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M2 5H16M2 9H16M2 13H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+          <span>MENU</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Menu principal">
+      <a href="index.html">Trilha do curso</a>
+      <a href="../index.html#investimento">Garantir minha vaga</a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <section class="guide-shell">
+      <div class="container">
+
+        <aside class="guide-sidebar">
+          <div class="guide-sidebar-card">
+            <div class="guide-sidebar-brand">
+              <span class="guide-sidebar-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
+                  <path d="M3 5c1.8-.9 3.6-.9 5 0v9c-1.4-.9-3.2-.9-5 0V5Z" stroke="currentColor" stroke-width="1.4"
+                    stroke-linejoin="round" />
+                  <path d="M17 5c-1.8-.9-3.6-.9-5 0v9c1.4-.9 3.2-.9 5 0V5Z" stroke="currentColor" stroke-width="1.4"
+                    stroke-linejoin="round" />
+                </svg>
+              </span>
+              <div>
+                <strong>Tutorial IA na Prática</strong>
+                <span>Do Claude ao Instagram Automatizado</span>
+              </div>
+            </div>
+
+            <div class="guide-sidebar-progress">
+              <div class="guide-progress-top">
+                <span class="guide-progress-label" data-progress-label>0 lições concluídas</span>
+                <span class="guide-progress-percent" data-progress-percent>0%</span>
+              </div>
+              <div class="guide-progress-bar-track">
+                <div class="guide-progress-bar-fill" data-progress-bar></div>
+              </div>
+            </div>
+
+            <nav class="guide-sidebar-nav" aria-label="Trilha do curso">
+              <div class="guide-nav-section">
+                <p class="guide-nav-section-label">Dia 1 · Setup e primeiros passos</p>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path
+                          d="M9.8 3.2a2.6 2.6 0 0 0-3.4 3.1L2.8 9.9a1 1 0 0 0 0 1.4l.9.9a1 1 0 0 0 1.4 0l3.6-3.6a2.6 2.6 0 0 0 3.1-3.4l-1.6 1.6-1.4-.1-.1-1.4 1.6-1.6Z"
+                          stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">O Setup Perfeito</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><a class="guide-nav-item" href="instalar-git.html">Instalar o Git</a></li>
+                    <li><a class="guide-nav-item" href="criar-conta-github.html">Criar Conta no GitHub</a></li>
+                    <li><a class="guide-nav-item" href="instalacao-windows.html">Instalação no Windows</a></li>
+                    <li><a class="guide-nav-item" href="instalacao-mac.html">Instalação no Mac</a></li>
+                    <li><span class="guide-nav-item is-locked">Instalação no Linux</span></li>
+                    <li><span class="guide-nav-item is-locked">Cowork (opcional)</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M5.5 4L2 8l3.5 4M10.5 4L14 8l-3.5 4" stroke="currentColor" stroke-width="1.3"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Claude Code no VS Code</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="1.5" y="2.5" width="13" height="11" rx="1.3" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M4 6l2.5 2L4 10M8 10.5h4" stroke="currentColor" stroke-width="1.2"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Domine os comandos</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M4 2h5l3 3v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z" stroke="currentColor"
+                          stroke-width="1.2" stroke-linejoin="round" />
+                        <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                        <path d="M4.5 8.5h7M4.5 11h5" stroke="currentColor" stroke-width="1.1"
+                          stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">CLAUDE.md</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="guide-nav-section">
+                <p class="guide-nav-section-label">Dia 2 · Orquestração e Instagram</p>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="2" y="2" width="12" height="12" rx="3.5" stroke="currentColor" stroke-width="1.2" />
+                        <circle cx="8" cy="8" r="2.6" stroke="currentColor" stroke-width="1.2" />
+                        <circle cx="11.3" cy="4.7" r="0.7" fill="currentColor" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Conectar ao Instagram</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><a class="guide-nav-item" href="conta-facebook.html">Criar Conta do Facebook</a></li>
+                    <li><a class="guide-nav-item" href="proteger-conta.html">Proteger a Conta (2FA)</a></li>
+                    <li><a class="guide-nav-item" href="criar-pagina-facebook.html">Criar a Página do Facebook</a>
+                    </li>
+                    <li><a class="guide-nav-item" href="criar-business-manager.html">Gerenciador de Negócios</a></li>
+                    <li><a class="guide-nav-item" href="vincular-pagina.html">Vincular a Página</a></li>
+                    <li><a class="guide-nav-item" href="criar-app-meta.html">Criar o App no Meta</a></li>
+                    <li><a class="guide-nav-item" href="gerar-token-acesso.html">Gerar o Token de Acesso</a></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="5.5" cy="5.5" r="2.2" stroke="currentColor" stroke-width="1.2" />
+                        <circle cx="11" cy="7" r="2" stroke="currentColor" stroke-width="1.2" />
+                        <path d="M2 13.5c0-2.2 1.6-3.6 3.6-3.6s3.6 1.4 3.6 3.6M9.2 13.5c0-1.8 1.3-3 3-3s3 1.2 3 3"
+                          stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Orquestração de Agentes</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="1.5" y="2.5" width="13" height="10" rx="1.2" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <circle cx="5" cy="6" r="1.1" stroke="currentColor" stroke-width="1" />
+                        <path d="M2 11l3.2-3 2.3 2.2L10 8l3.5 3" stroke="currentColor" stroke-width="1.2"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Produção de conteúdo</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="1.8" y="5" width="12.4" height="8.5" rx="1.2" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M5.5 5V3.8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V5" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M1.8 9h12.4" stroke="currentColor" stroke-width="1.2" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Pronto pra vender</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+
+                <div class="guide-nav-category">
+                  <div class="guide-nav-category-head">
+                    <span class="guide-nav-cat-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="2" y="3" width="12" height="10.5" rx="1.3" stroke="currentColor"
+                          stroke-width="1.2" />
+                        <path d="M2 6.5h12" stroke="currentColor" stroke-width="1.2" />
+                        <path d="M5 1.8v3M11 1.8v3" stroke="currentColor" stroke-width="1.2"
+                          stroke-linecap="round" />
+                      </svg>
+                    </span>
+                    <span class="guide-nav-cat-name">Seu plano de 30 dias</span>
+                  </div>
+                  <ul class="guide-nav-items">
+                    <li><span class="guide-nav-item is-locked">Em breve</span></li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+
+            <div class="guide-sidebar-cta">
+              <p>Quer o acesso completo, com todas as lições e a gravação da imersão?</p>
+              <a class="btn btn-primary btn-sm" href="../index.html#investimento"
+                style="width:100%;">Garantir minha vaga</a>
+            </div>
+          </div>
+        </aside>
+
+        <div class="guide-content">
+          <span class="guide-lesson-eyebrow"><span class="dot"></span> Início</span>
+          <h1 class="text-heading" style="margin: 0 0 var(--space-4);">Sua trilha <span
+              class="text-accent">IA na Prática</span>, passo a passo</h1>
+          <p class="text-body" style="max-width: var(--reading-column); margin: 0 0 var(--space-12);">
+            O mesmo conteúdo da Imersão, organizado em lições curtas — pra você seguir no seu
+            ritmo, revisar quando precisar e nunca ficar travado numa etapa. Comece pelo Dia 1,
+            na lição <strong>Instalação no Windows</strong>.
+          </p>
+
+          <div class="guide-days-grid">
+
+            <div class="guide-day-card is-active-day">
+              <h3 class="guide-day-title">Dia 1 · Do zero ao seu primeiro projeto com o Claude Code</h3>
+              <ul class="guide-day-list">
+                <li><a class="guide-day-item" href="instalar-git.html"><span><span
+                        class="guide-day-item-num">01.0</span>Instalar o Git</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li><a class="guide-day-item" href="criar-conta-github.html"><span><span
+                        class="guide-day-item-num">01.0</span>Criar Conta no GitHub</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li><a class="guide-day-item" href="instalacao-windows.html"><span><span
+                        class="guide-day-item-num">01.1</span>Instalação no Windows</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li><a class="guide-day-item" href="instalacao-mac.html"><span><span
+                        class="guide-day-item-num">01.2</span>Instalação no Mac</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">01.3</span>Instalação no
+                    Linux</span><span class="guide-day-item-status soon">Em breve</span></li>
+                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">01.4</span>Cowork
+                    (opcional)</span><span class="guide-day-item-status soon">Em breve</span></li>
+                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">02</span>Claude Code no
+                    VS Code</span><span class="guide-day-item-status soon">Em breve</span></li>
+                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">03</span>Domine os
+                    comandos</span><span class="guide-day-item-status soon">Em breve</span></li>
+                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">04</span>CLAUDE.md</span><span
+                      class="guide-day-item-status soon">Em breve</span></li>
+              </ul>
+            </div>
+
+            <div class="guide-day-card">
+              <h3 class="guide-day-title">Dia 2 · Da orquestração de agentes ao seu Agente de IA no Instagram</h3>
+              <ul class="guide-day-list">
+                <li><a class="guide-day-item" href="conta-facebook.html"><span><span
+                        class="guide-day-item-num">05.1</span>Criar Conta do Facebook</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li><a class="guide-day-item" href="proteger-conta.html"><span><span
+                        class="guide-day-item-num">05.2</span>Proteger a Conta (2FA)</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li><a class="guide-day-item" href="criar-pagina-facebook.html"><span><span
+                        class="guide-day-item-num">05.3</span>Criar a Página do Facebook</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li><a class="guide-day-item" href="criar-business-manager.html"><span><span
+                        class="guide-day-item-num">05.4</span>Gerenciador de Negócios</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li><a class="guide-day-item" href="vincular-pagina.html"><span><span
+                        class="guide-day-item-num">05.5</span>Vincular a Página</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li><a class="guide-day-item" href="criar-app-meta.html"><span><span
+                        class="guide-day-item-num">05.6</span>Criar o App no Meta</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li><a class="guide-day-item" href="gerar-token-acesso.html"><span><span
+                        class="guide-day-item-num">05.7</span>Gerar o Token de Acesso</span><span
+                      class="guide-day-item-status available">Disponível</span></a></li>
+                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">06</span>Orquestração de
+                    Agentes de IA</span><span class="guide-day-item-status soon">Em breve</span></li>
+                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">07</span>Produção de
+                    conteúdo</span><span class="guide-day-item-status soon">Em breve</span></li>
+                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">08</span>Pronto pra
+                    vender</span><span class="guide-day-item-status soon">Em breve</span></li>
+                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">09</span>Seu plano de 30
+                    dias</span><span class="guide-day-item-status soon">Em breve</span></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 IA na Prática. Todos os direitos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+  <script src="assets/js/tutorial.js"></script>
+</body>
+
+</html>
