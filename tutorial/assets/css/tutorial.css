@@ -1510,8 +1510,8 @@ a.guide-nav-item:hover {
 }
 
 .guide-day-card {
-  /* Variáveis locais — trocar só estas no estado "ativo" (laranja) evita
-     duplicar regra por regra pros dois estados. */
+  /* Variáveis locais — funcional, sem cor de marca: fundo neutro fixo,
+     não muda mais no hover nem alterna entre os dois cards. */
   --day-bg: var(--color-card);
   --day-fg: var(--color-card-foreground);
   --day-border: var(--color-border);
@@ -1521,7 +1521,9 @@ a.guide-nav-item:hover {
   --day-badge-fg: var(--color-success);
   --day-badge-soon-bg: var(--color-muted);
   --day-badge-soon-fg: var(--color-muted-foreground);
-  --day-link-hover: var(--clay-vivid);
+  --day-link-hover: var(--color-foreground);
+  --day-item-bg: rgba(20, 20, 19, 0.03);
+  --day-item-bg-hover: rgba(20, 20, 19, 0.06);
 
   background: var(--day-bg);
   color: var(--day-fg);
@@ -1529,34 +1531,6 @@ a.guide-nav-item:hover {
   border-radius: var(--radius-xl);
   padding: var(--space-6);
   box-shadow: var(--elevation-raised);
-  transition: transform var(--duration-gentle) var(--ease-out),
-    background-color var(--duration-gentle) var(--ease-out),
-    color var(--duration-gentle) var(--ease-out),
-    border-color var(--duration-gentle) var(--ease-out),
-    box-shadow var(--duration-gentle) var(--ease-out);
-}
-
-.guide-day-card:hover {
-  transform: scale(1.05);
-  box-shadow: var(--elevation-floating);
-  position: relative;
-  z-index: 2;
-}
-
-/* Estado ativo — laranja com letras brancas. Por padrão é o card do
-   Dia 1; passar o mouse no outro card transfere esse estado pra ele
-   (ver tutorial.js), e o Dia 1 volta a ficar branco. */
-.guide-day-card.is-active-day {
-  --day-bg: var(--clay-vivid);
-  --day-fg: #ffffff;
-  --day-border: transparent;
-  --day-item-border: rgba(255, 255, 255, 0.2);
-  --day-item-muted: rgba(255, 255, 255, 0.65);
-  --day-badge-bg: rgba(255, 255, 255, 0.22);
-  --day-badge-fg: #ffffff;
-  --day-badge-soon-bg: rgba(255, 255, 255, 0.14);
-  --day-badge-soon-fg: rgba(255, 255, 255, 0.78);
-  --day-link-hover: #ffffff;
 }
 
 .guide-day-title {
@@ -1572,42 +1546,90 @@ a.guide-nav-item:hover {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .guide-day-item {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: 11px 0;
-  border-bottom: 1px solid var(--day-item-border);
-  text-decoration: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--day-item-border);
+  border-radius: var(--radius-md);
+  background: var(--day-item-bg);
   color: var(--day-fg);
   font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  transition: color var(--duration-fast) var(--ease-out), border-color var(--duration-gentle) var(--ease-out);
-}
-
-.guide-day-list li:last-child .guide-day-item,
-.guide-day-list > li:last-child {
-  border-bottom: none;
-}
-
-a.guide-day-item:hover {
-  color: var(--day-link-hover);
-  text-decoration: underline;
+  transition: border-color var(--duration-gentle) var(--ease-out);
 }
 
 .guide-day-item.is-locked {
   color: var(--day-item-muted);
+  border-style: dashed;
 }
 
-.guide-day-item-num {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+.guide-day-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+/* Só o link (número + título) é clicável — o botão de status fica fora
+   dele, senão vira botão dentro de link (inválido/confuso). */
+.guide-day-item-link {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+a.guide-day-item-link:hover {
+  color: var(--day-link-hover);
+}
+
+.guide-day-item-title {
+  flex: 1;
+  min-width: 0;
+}
+
+.guide-day-item-desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  line-height: 1.4;
   color: var(--day-item-muted);
-  margin-right: 10px;
+}
+
+/* Numerozinho — só ele ganha fundo laranja, e só no hover do link */
+.guide-day-item-num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--day-item-muted);
+  background: transparent;
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+a.guide-day-item-link:hover .guide-day-item-num {
+  background: var(--clay-vivid);
+  color: #ffffff;
 }
 
 .guide-day-item-status {
@@ -1619,10 +1641,30 @@ a.guide-day-item:hover {
   text-transform: uppercase;
   padding: 3px 9px;
   border-radius: var(--radius-full);
-  transition: background-color var(--duration-gentle) var(--ease-out), color var(--duration-gentle) var(--ease-out);
+  border: 1px solid transparent;
+  background: none;
+  cursor: default;
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
 }
 
-.guide-day-item-status.available {
+button.guide-day-item-status {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.guide-day-item-status.not-done {
+  background: var(--day-badge-soon-bg);
+  color: var(--day-badge-soon-fg);
+  border-color: var(--day-item-border);
+}
+
+button.guide-day-item-status.not-done:hover {
+  border-color: var(--day-link-hover);
+  color: var(--day-fg);
+}
+
+.guide-day-item-status.done {
   background: var(--day-badge-bg);
   color: var(--day-badge-fg);
 }

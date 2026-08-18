@@ -295,66 +295,226 @@
 
           <div class="guide-days-grid">
 
-            <div class="guide-day-card is-active-day">
+            <div class="guide-day-card">
               <h3 class="guide-day-title">Dia 1 · Do zero ao seu primeiro projeto com o Claude Code</h3>
               <ul class="guide-day-list">
-                <li><a class="guide-day-item" href="instalar-git.html"><span><span
-                        class="guide-day-item-num">01.0</span>Instalar o Git</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="criar-conta-github.html"><span><span
-                        class="guide-day-item-num">01.0</span>Criar Conta no GitHub</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="instalacao-windows.html"><span><span
-                        class="guide-day-item-num">01.1</span>Instalação no Windows</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="instalacao-mac.html"><span><span
-                        class="guide-day-item-num">01.2</span>Instalação no Mac</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="instalacao-linux.html"><span><span
-                        class="guide-day-item-num">01.3</span>Instalação no Linux</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">02</span>Claude Code no
-                    VS Code</span><span class="guide-day-item-status soon">Em breve</span></li>
-                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">03</span>Domine os
-                    comandos</span><span class="guide-day-item-status soon">Em breve</span></li>
-                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">04</span>CLAUDE.md</span><span
-                      class="guide-day-item-status soon">Em breve</span></li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="instalar-git.html">
+                      <span class="guide-day-item-num">1</span>
+                      <span class="guide-day-item-title">Instalar o Git</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="instalar-git.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">Base de controle de versão — guarda o histórico de tudo que você e
+                    o Claude mudam no projeto.</p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="criar-conta-github.html">
+                      <span class="guide-day-item-num">2</span>
+                      <span class="guide-day-item-title">Criar Conta no GitHub</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="criar-conta-github.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">Onde os seus projetos ficam guardados na nuvem, com backup
+                    automático.</p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="instalacao-windows.html">
+                      <span class="guide-day-item-num">3</span>
+                      <span class="guide-day-item-title">Instalação no Windows</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="instalacao-windows.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">Node, PowerShell e o Claude Code instalado, configurado e pronto
+                    pra usar.</p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="instalacao-mac.html">
+                      <span class="guide-day-item-num">4</span>
+                      <span class="guide-day-item-title">Instalação no Mac</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="instalacao-mac.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">O mesmo Setup Perfeito, no passo a passo do macOS.</p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="instalacao-linux.html">
+                      <span class="guide-day-item-num">5</span>
+                      <span class="guide-day-item-title">Instalação no Linux</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="instalacao-linux.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">O mesmo Setup Perfeito, no passo a passo do Linux.</p>
+                </li>
+                <li class="guide-day-item is-locked">
+                  <div class="guide-day-item-top">
+                    <span class="guide-day-item-link">
+                      <span class="guide-day-item-num">6</span>
+                      <span class="guide-day-item-title">Claude Code no VS Code</span>
+                    </span>
+                    <span class="guide-day-item-status soon">Em breve</span>
+                  </div>
+                  <p class="guide-day-item-desc">Seu primeiro acesso dentro do editor, com a conta Pro ou Max
+                    conectada.</p>
+                </li>
+                <li class="guide-day-item is-locked">
+                  <div class="guide-day-item-top">
+                    <span class="guide-day-item-link">
+                      <span class="guide-day-item-num">7</span>
+                      <span class="guide-day-item-title">Domine os comandos</span>
+                    </span>
+                    <span class="guide-day-item-status soon">Em breve</span>
+                  </div>
+                  <p class="guide-day-item-desc">Comandos essenciais, atalhos e segurança contra prompt injection.
+                  </p>
+                </li>
+                <li class="guide-day-item is-locked">
+                  <div class="guide-day-item-top">
+                    <span class="guide-day-item-link">
+                      <span class="guide-day-item-num">8</span>
+                      <span class="guide-day-item-title">CLAUDE.md</span>
+                    </span>
+                    <span class="guide-day-item-status soon">Em breve</span>
+                  </div>
+                  <p class="guide-day-item-desc">A documentação que fecha o seu projeto com chave de ouro.</p>
+                </li>
               </ul>
             </div>
 
             <div class="guide-day-card">
               <h3 class="guide-day-title">Dia 2 · Da orquestração de agentes ao seu Agente de IA no Instagram</h3>
               <ul class="guide-day-list">
-                <li><a class="guide-day-item" href="conta-facebook.html"><span><span
-                        class="guide-day-item-num">05.1</span>Criar Conta do Facebook</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="proteger-conta.html"><span><span
-                        class="guide-day-item-num">05.2</span>Proteger a Conta (2FA)</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="criar-pagina-facebook.html"><span><span
-                        class="guide-day-item-num">05.3</span>Criar a Página do Facebook</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="criar-business-manager.html"><span><span
-                        class="guide-day-item-num">05.4</span>Gerenciador de Negócios</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="vincular-pagina.html"><span><span
-                        class="guide-day-item-num">05.5</span>Vincular a Página</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="criar-app-meta.html"><span><span
-                        class="guide-day-item-num">05.6</span>Criar o App no Meta</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="gerar-token-acesso.html"><span><span
-                        class="guide-day-item-num">05.7</span>Gerar o Token de Acesso</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li><a class="guide-day-item" href="setup-instagram-skill.html"><span><span
-                        class="guide-day-item-num">06</span>Skill: Setup Instagram</span><span
-                      class="guide-day-item-status available">Disponível</span></a></li>
-                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">07</span>Produção de
-                    conteúdo</span><span class="guide-day-item-status soon">Em breve</span></li>
-                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">08</span>Pronto pra
-                    vender</span><span class="guide-day-item-status soon">Em breve</span></li>
-                <li class="guide-day-item is-locked"><span><span class="guide-day-item-num">09</span>Seu plano de 30
-                    dias</span><span class="guide-day-item-status soon">Em breve</span></li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="conta-facebook.html">
+                      <span class="guide-day-item-num">9</span>
+                      <span class="guide-day-item-title">Criar Conta do Facebook</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="conta-facebook.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">A identidade pessoal por trás de toda a estrutura da Meta.</p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="proteger-conta.html">
+                      <span class="guide-day-item-num">10</span>
+                      <span class="guide-day-item-title">Proteger a Conta (2FA)</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="proteger-conta.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">A fechadura dupla, antes de conectar qualquer coisa a essa conta.
+                  </p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="criar-pagina-facebook.html">
+                      <span class="guide-day-item-num">11</span>
+                      <span class="guide-day-item-title">Criar a Página do Facebook</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="criar-pagina-facebook.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">O "CNPJ" do seu negócio dentro da Meta.</p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="criar-business-manager.html">
+                      <span class="guide-day-item-num">12</span>
+                      <span class="guide-day-item-title">Gerenciador de Negócios</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="criar-business-manager.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">A sede onde a Página, o App e o Token vão morar juntos.</p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="vincular-pagina.html">
+                      <span class="guide-day-item-num">13</span>
+                      <span class="guide-day-item-title">Vincular a Página</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="vincular-pagina.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">Colocar a sua Página formalmente pra dentro do Gerenciador.</p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="criar-app-meta.html">
+                      <span class="guide-day-item-num">14</span>
+                      <span class="guide-day-item-title">Criar o App no Meta</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="criar-app-meta.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">A credencial que o Claude vai usar pra falar com o Instagram.</p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="gerar-token-acesso.html">
+                      <span class="guide-day-item-num">15</span>
+                      <span class="guide-day-item-title">Gerar o Token de Acesso</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="gerar-token-acesso.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">A chave que libera a publicação automática no Instagram.</p>
+                </li>
+                <li class="guide-day-item">
+                  <div class="guide-day-item-top">
+                    <a class="guide-day-item-link" href="setup-instagram-skill.html">
+                      <span class="guide-day-item-num">16</span>
+                      <span class="guide-day-item-title">Skill: Setup Instagram</span>
+                    </a>
+                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
+                      data-href="setup-instagram-skill.html">Não concluído</button>
+                  </div>
+                  <p class="guide-day-item-desc">Atalho automatizado: o Claude conduz as etapas de App e Token por
+                    chat.</p>
+                </li>
+                <li class="guide-day-item is-locked">
+                  <div class="guide-day-item-top">
+                    <span class="guide-day-item-link">
+                      <span class="guide-day-item-num">17</span>
+                      <span class="guide-day-item-title">Produção de conteúdo</span>
+                    </span>
+                    <span class="guide-day-item-status soon">Em breve</span>
+                  </div>
+                  <p class="guide-day-item-desc">Textos, propostas e apresentações prontos pra usar em projetos
+                    reais.</p>
+                </li>
+                <li class="guide-day-item is-locked">
+                  <div class="guide-day-item-top">
+                    <span class="guide-day-item-link">
+                      <span class="guide-day-item-num">18</span>
+                      <span class="guide-day-item-title">Pronto pra vender</span>
+                    </span>
+                    <span class="guide-day-item-status soon">Em breve</span>
+                  </div>
+                  <p class="guide-day-item-desc">Portfólio, proposta comercial e seu posicionamento no mercado.</p>
+                </li>
+                <li class="guide-day-item is-locked">
+                  <div class="guide-day-item-top">
+                    <span class="guide-day-item-link">
+                      <span class="guide-day-item-num">19</span>
+                      <span class="guide-day-item-title">Seu plano de 30 dias</span>
+                    </span>
+                    <span class="guide-day-item-status soon">Em breve</span>
+                  </div>
+                  <p class="guide-day-item-desc">Prioridades e próximos passos organizados para o seu contexto.</p>
+                </li>
               </ul>
             </div>
 

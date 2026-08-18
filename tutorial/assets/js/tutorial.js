@@ -1,24 +1,6 @@
 (function () {
   "use strict";
 
-  /* Cards Dia 1 / Dia 2 no hub — só um fica laranja por vez. Dia 1 é o
-     padrão; passar o mouse no outro card transfere o estado pra ele, e
-     tirar o mouse dos dois volta pro padrão (Dia 1 laranja). */
-  var dayGrid = document.querySelector(".guide-days-grid");
-  var dayCards = document.querySelectorAll(".guide-days-grid .guide-day-card");
-  if (dayGrid && dayCards.length) {
-    dayCards.forEach(function (card) {
-      card.addEventListener("mouseenter", function () {
-        dayCards.forEach(function (c) { c.classList.remove("is-active-day"); });
-        card.classList.add("is-active-day");
-      });
-    });
-    dayGrid.addEventListener("mouseleave", function () {
-      dayCards.forEach(function (c) { c.classList.remove("is-active-day"); });
-      dayCards[0].classList.add("is-active-day");
-    });
-  }
-
   /* Copiar comando — cada bloco de código tem seu próprio botão e seu
      próprio <code>-fonte; nada de estado global. */
   var copyButtons = document.querySelectorAll("[data-copy-target]");
@@ -218,6 +200,51 @@
   if (navItems.length) {
     renderTrail();
   }
+
+  /* Mini cards do hub (Dia 1 / Dia 2) — numeração "Passo N" sequencial
+     (mesma ordem em que os itens aparecem no HTML) e um botão de
+     Concluído/Não concluído por lição. Esse botão é só um registro
+     pessoal: marca no mesmo localStorage que o resto do site usa, mas
+     nunca trava o link de nenhuma lição — todas continuam clicáveis
+     independente do estado. */
+  function renderDayCards() {
+    var items = document.querySelectorAll(".guide-days-grid .guide-day-item");
+    if (!items.length) return;
+    var completed = readCompleted();
+
+    items.forEach(function (item, i) {
+      var numEl = item.querySelector(".guide-day-item-num");
+      if (numEl) {
+        numEl.textContent = String(i + 1);
+        numEl.title = "Passo " + (i + 1);
+      }
+
+      var toggle = item.querySelector("[data-toggle-complete]");
+      if (!toggle) return;
+      var href = toggle.getAttribute("data-href");
+
+      var applyState = function (isDone) {
+        toggle.classList.toggle("done", isDone);
+        toggle.classList.toggle("not-done", !isDone);
+        toggle.textContent = isDone ? "Concluído" : "Não concluído";
+      };
+      applyState(completed.indexOf(href) !== -1);
+
+      toggle.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var list = readCompleted();
+        var idx = list.indexOf(href);
+        var nowDone = idx === -1;
+        if (nowDone) list.push(href);
+        else list.splice(idx, 1);
+        writeCompleted(list);
+        applyState(nowDone);
+        if (navItems.length) renderTrail();
+      });
+    });
+  }
+  renderDayCards();
 
   /* Botão "Marcar como concluída" — único jeito de avançar na trilha.
      Também libera o link "Próxima" da paginação, que começa travado
