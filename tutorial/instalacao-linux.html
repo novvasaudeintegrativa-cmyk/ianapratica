@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Instalação no Windows — Tutorial Guiado IA na Prática</title>
+  <title>Instalação no Linux — Tutorial Guiado IA na Prática</title>
   <meta name="description"
-    content="Passo a passo completo para instalar o Claude Code no Windows: Node.js, PowerShell, instalação, PATH e primeiro login." />
+    content="Passo a passo completo para instalar o Claude Code no Linux: Terminal, instalação, PATH e primeiro login." />
   <link rel="stylesheet" href="../assets/css/tokens.css" />
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/tutorial.css" />
@@ -70,9 +70,9 @@
         <span aria-hidden="true">/</span>
         <span>O Setup Perfeito</span>
         <span aria-hidden="true">/</span>
-        <span class="is-current">Instalação no Windows</span>
+        <span class="is-current">Instalação no Linux</span>
       </div>
-      <span class="guide-context-badge"><span class="dot"></span> Dia 1 · Lição 01.1</span>
+      <span class="guide-context-badge"><span class="dot"></span> Dia 1 · Lição 01.3</span>
     </div>
   </div>
 
@@ -294,12 +294,12 @@
 
           <div class="guide-lesson-header">
             <span class="guide-lesson-eyebrow"><span class="dot"></span> O Setup Perfeito</span>
-            <h1 class="text-heading">Instalação no Windows</h1>
+            <h1 class="text-heading">Instalação no Linux</h1>
             <p class="guide-lesson-lead text-body">
-              Antes de criar qualquer projeto, o Claude Code precisa estar instalado e
-              funcionando direito na sua máquina. Esse é o passo mais importante — e o mais
-              pulado por quem quer ir rápido demais. Siga na ordem, sem pular etapa, e você
-              não vai ter dor de cabeça depois.
+              Igual ao Mac, o instalador do Claude Code no Linux usa as ferramentas que já vêm
+              com o sistema — sem precisar instalar Node.js à parte. A diferença fica só no
+              arquivo de configuração do terminal, que muda conforme a distribuição e o shell
+              padrão.
             </p>
 
             <div class="guide-meta-row">
@@ -309,14 +309,14 @@
                   <path d="M9 5.5V9L11.5 10.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
                     stroke-linejoin="round" />
                 </svg>
-                <span>~15 minutos</span>
+                <span>~5 minutos</span>
               </span>
               <span class="guide-meta-pill">
                 <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
                   <rect x="2.5" y="2.5" width="13" height="10" rx="1.4" stroke="currentColor" stroke-width="1.4" />
                   <path d="M6 15.5H12M9 12.5V15.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
                 </svg>
-                <span>Windows 10 ou 11</span>
+                <span>Ubuntu, Debian, Fedora, Arch...</span>
               </span>
               <span class="guide-meta-pill">
                 <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -330,12 +330,11 @@
           </div>
 
           <nav class="guide-step-nav" data-step-nav aria-label="Passos desta lição">
-            <a href="#passo-1">1. Instalar o Node</a>
-            <a href="#passo-2">2. Liberar o PowerShell</a>
-            <a href="#passo-3">3. Instalar o Claude Code</a>
-            <a href="#passo-4">4. Configurar o PATH</a>
-            <a href="#passo-5">5. Reiniciar o PowerShell</a>
-            <a href="#passo-6">6. Iniciar e autenticar</a>
+            <a href="#passo-1">1. Abrir o terminal</a>
+            <a href="#passo-2">2. Instalar o Claude Code</a>
+            <a href="#passo-3">3. Configurar o PATH</a>
+            <a href="#passo-4">4. Reiniciar o terminal</a>
+            <a href="#passo-5">5. Iniciar e autenticar</a>
           </nav>
 
           <!-- PASSO 1 -->
@@ -343,133 +342,28 @@
             <div class="guide-step-head">
               <span class="guide-step-num">1</span>
               <div class="guide-step-titles">
-                <p class="guide-step-kicker">Pré-requisito</p>
-                <h2>Instalar o Node.js</h2>
+                <p class="guide-step-kicker">Preparar o terminal</p>
+                <h2>Abrir o terminal</h2>
               </div>
             </div>
             <div class="guide-step-body">
               <p class="text-body">
-                O Claude Code é instalado e atualizado usando o <strong>Node.js</strong>, o
-                mecanismo que roda ferramentas de linha de comando modernas por trás dos panos.
-                Se você já tem o Node instalado, pode pular pro Passo 2 — mas confira a versão
-                antes, pra não ter surpresa lá na frente. É só isso aqui:
+                O atalho e o nome do aplicativo variam por distribuição, mas o caminho mais
+                confiável funciona em praticamente todas: aperte <strong>Ctrl + Alt + T</strong>.
+                Se não abrir nada, procure por "Terminal" no menu de aplicativos do seu sistema.
               </p>
 
-              <p class="text-body"><strong>Verifique primeiro</strong> — abra o menu Iniciar,
-                digite "PowerShell", abra e cole o comando abaixo (o Passo 2 explica esse
-                processo com mais calma, se for a primeira vez que você abre um terminal):</p>
-
-              <div class="code-block">
-                <div class="code-block-head">
-                  <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="cmd-node-check">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
-                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
-                    </svg>
-                    <span data-copy-label>Copiar</span>
-                  </button>
-                </div>
-                <pre><code id="cmd-node-check">node -v</code></pre>
-              </div>
-
-              <div class="callout callout-success">
-                <span class="callout-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
-                    <path d="M7.3 11.3L9.8 13.8L14.7 8.7" stroke="currentColor" stroke-width="1.4"
+              <div class="screenshot-slot">
+                <span class="screenshot-slot-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.4" />
+                    <circle cx="8.5" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3" />
+                    <path d="M4 17l4.5-4.2 3.2 3 3.8-3.5L20 16.5" stroke="currentColor" stroke-width="1.4"
                       stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                 </span>
-                <div class="callout-body">
-                  <strong>Se aparecer um número de versão</strong>
-                  Tipo <code>v20.14.0</code> — já está pronto. Qualquer versão a partir da
-                  <code>v18</code> funciona bem. Pode pular direto pro Passo 2.
-                </div>
-              </div>
-
-              <div class="callout callout-warning">
-                <span class="callout-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <path d="M11 3L20 18H2L11 3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" />
-                    <path d="M11 9V13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-                    <path d="M11 15.6V15.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                  </svg>
-                </span>
-                <div class="callout-body">
-                  <strong>Se aparecer "node não é reconhecido..."</strong>
-                  Significa que o Node ainda não está instalado nessa máquina. Sem problema —
-                  é só seguir os passos abaixo.
-                </div>
-              </div>
-
-              <p class="text-body"><strong>Não tem o Node ainda? Instale assim:</strong></p>
-
-              <a class="guide-download-card" href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">
-                <span class="guide-download-card-icon" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M9 2.5V11.5M9 11.5L5.5 8M9 11.5L12.5 8" stroke="currentColor" stroke-width="1.5"
-                      stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M3 13.5V14.5C3 15.05 3.45 15.5 4 15.5H14C14.55 15.5 15 15.05 15 14.5V13.5"
-                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </span>
-                <span class="guide-download-card-body">
-                  <strong>nodejs.org</strong>
-                  <span>Baixar o instalador oficial do Node.js — escolha a versão LTS, para Windows</span>
-                </span>
-                <span class="guide-download-card-arrow" aria-hidden="true">↗</span>
-              </a>
-
-              <ol class="text-body">
-                <li>Clique no link acima e baixe a versão <strong>LTS</strong> (a recomendada,
-                  mais estável) para Windows.</li>
-                <li>Abra o instalador baixado e siga o assistente clicando em "Next" mantendo as
-                  opções padrão — não precisa marcar nada extra.</li>
-                <li>Ao final, reinicie o computador se o instalador pedir.</li>
-              </ol>
-
-              <div class="mockup-frame">
-                <div class="mockup-titlebar-win">
-                  <span>Node.js v20.14.0 Setup</span>
-                  <span class="mockup-win-controls"><span>─</span><span>▢</span><span>✕</span></span>
-                </div>
-                <div class="mockup-installer-body">
-                  <div class="mockup-installer-side"><span class="mockup-installer-hex">node</span></div>
-                  <div class="mockup-installer-main">
-                    <h4>Welcome to the Node.js Setup Wizard</h4>
-                    <p>This wizard will guide you through the installation of Node.js.<br />Click
-                      Next to continue.</p>
-                  </div>
-                </div>
-                <div class="mockup-installer-actions">
-                  <button class="mockup-btn" disabled>&lt; Back</button>
-                  <button class="mockup-btn mockup-btn-primary">Next &gt;</button>
-                  <button class="mockup-btn">Cancel</button>
-                </div>
-              </div>
-              <p class="mockup-caption">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
-                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
-                </svg>
-                Simulação de como a tela aparece — troque pelo print real quando tiver.
-              </p>
-
-              <div class="callout callout-info">
-                <span class="callout-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
-                    <path d="M11 9.8V15.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-                    <path d="M11 7.2V7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                  </svg>
-                </span>
-                <div class="callout-body">
-                  <strong>Depois de instalar</strong>
-                  Abra um terminal novo e rode de novo o comando <code>node -v</code> lá em
-                  cima — se aparecer o número da versão, deu tudo certo e pode seguir pro
-                  Passo 2.
-                </div>
+                <strong>Print sugerido</strong>
+                <span>Terminal recém-aberto na sua distribuição.</span>
               </div>
             </div>
           </article>
@@ -479,106 +373,22 @@
             <div class="guide-step-head">
               <span class="guide-step-num">2</span>
               <div class="guide-step-titles">
-                <p class="guide-step-kicker">Preparar o terminal</p>
-                <h2>Abrir o PowerShell e liberar a execução de scripts</h2>
-              </div>
-            </div>
-            <div class="guide-step-body">
-              <p class="text-body">
-                O Windows tem dois terminais: o antigo <strong>Prompt de Comando (cmd)</strong> e
-                o <strong>PowerShell</strong>, mais moderno — é este que vamos usar daqui pra
-                frente. Abra o menu Iniciar, digite <strong>"PowerShell"</strong> e clique em
-                <strong>Windows PowerShell</strong>.
-              </p>
-
-              <div class="mockup-frame">
-                <div class="mockup-winsearch">
-                  <div class="mockup-searchbar">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                      <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4" />
-                      <path d="M11 11L14.5 14.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-                    </svg>
-                    <span>powershell</span>
-                  </div>
-                  <p class="mockup-result-label">Melhor correspondência</p>
-                  <div class="mockup-result-row">
-                    <span class="mockup-result-icon">PS</span>
-                    <div>
-                      <div class="mockup-result-title">Windows PowerShell</div>
-                      <div class="mockup-result-sub">Aplicativo</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p class="mockup-caption">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
-                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
-                </svg>
-                Simulação de como a tela aparece — troque pelo print real quando tiver.
-              </p>
-
-              <p class="text-body">
-                Por padrão, o Windows bloqueia a execução de scripts <code>.ps1</code> — uma
-                proteção contra scripts maliciosos. Precisamos liberar isso só para o seu
-                usuário, e só para scripts assinados. Cole o comando abaixo e aperte Enter:
-              </p>
-
-              <div class="code-block">
-                <div class="code-block-head">
-                  <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="cmd-execpolicy">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
-                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
-                    </svg>
-                    <span data-copy-label>Copiar</span>
-                  </button>
-                </div>
-                <pre><code id="cmd-execpolicy">Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code></pre>
-              </div>
-
-              <p class="text-body">Se aparecer uma pergunta de confirmação, digite
-                <code>S</code> (Sim) e aperte Enter.</p>
-
-              <div class="callout callout-warning">
-                <span class="callout-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <path d="M11 3L20 18H2L11 3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" />
-                    <path d="M11 9V13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-                    <path d="M11 15.6V15.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                  </svg>
-                </span>
-                <div class="callout-body">
-                  <strong>Atenção</strong>
-                  Use exatamente <code>RemoteSigned</code>, não <code>Unrestricted</code>. O
-                  primeiro libera o necessário mantendo uma camada de segurança; o segundo
-                  desliga a proteção por completo — sem necessidade nenhuma pra esse setup.
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- PASSO 3 -->
-          <article class="guide-step" id="passo-3">
-            <div class="guide-step-head">
-              <span class="guide-step-num">3</span>
-              <div class="guide-step-titles">
                 <p class="guide-step-kicker">Instalação</p>
                 <h2>Instalar o Claude Code</h2>
               </div>
             </div>
             <div class="guide-step-body">
               <p class="text-body">
-                Com o terminal liberado, cole o comando oficial de instalação e aperte Enter.
-                Ele baixa e roda o instalador direto do domínio da Anthropic — a mesma empresa
-                que desenvolve o Claude.
+                Com o terminal aberto, cole o comando abaixo e aperte Enter. Ele baixa e roda o
+                instalador oficial direto do domínio da Anthropic — o mesmo comando usado no Mac,
+                já que os dois sistemas compartilham as mesmas ferramentas de base
+                (<code>curl</code> e <code>bash</code>).
               </p>
 
               <div class="code-block">
                 <div class="code-block-head">
-                  <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="cmd-install-claude">
+                  <span class="code-block-label">Terminal</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="cmd-install-claude-linux">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -586,88 +396,20 @@
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="cmd-install-claude">irm https://claude.ai/install.ps1 | iex</code></pre>
+                <pre><code id="cmd-install-claude-linux">curl -fsSL https://claude.ai/install.sh | bash</code></pre>
               </div>
 
-              <p class="text-body">
-                Esse comando tem duas partes: <code>irm</code> baixa o script de instalação, e
-                <code>iex</code> executa o que foi baixado. Aguarde de 1 a 3 minutos — o
-                terminal fica "trabalhando" enquanto baixa e configura os arquivos.
-              </p>
-
-              <div class="mockup-frame">
-                <div class="mockup-titlebar-win">
-                  <span>Windows PowerShell</span>
-                  <span class="mockup-win-controls"><span>─</span><span>▢</span><span>✕</span></span>
-                </div>
-                <pre class="mockup-term-body"><span class="t-prompt">PS </span><span class="t-path">C:\Users\voce&gt;</span> irm https://claude.ai/install.ps1 | iex
-<span class="t-out">Baixando o instalador...
-Instalando o Claude Code...
-</span>
-<span class="t-ok">✔ Claude Code successfully installed!</span>
-
-<span class="t-prompt">PS </span><span class="t-path">C:\Users\voce&gt;</span> <span class="t-cursor"></span></pre>
-              </div>
-              <p class="mockup-caption">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
-                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
-                </svg>
-                Simulação de como a tela aparece — troque pelo print real quando tiver.
-              </p>
-
-              <div class="callout callout-danger">
-                <span class="callout-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
-                    <path d="M11 7V12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-                    <path d="M11 14.7V14.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              <div class="screenshot-slot">
+                <span class="screenshot-slot-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.4" />
+                    <circle cx="8.5" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3" />
+                    <path d="M4 17l4.5-4.2 3.2 3 3.8-3.5L20 16.5" stroke="currentColor" stroke-width="1.4"
+                      stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                 </span>
-                <div class="callout-body">
-                  <strong>Hábito de segurança</strong>
-                  Só cole e execute comandos <code>irm ... | iex</code> quando você confia
-                  100% na origem — nesse caso, o domínio oficial <code>claude.ai</code>. Esse
-                  padrão de comando baixa e roda código automaticamente, então nunca use com
-                  links que alguém te mandou sem você conferir de onde vêm.
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- PASSO 4 -->
-          <article class="guide-step" id="passo-4">
-            <div class="guide-step-head">
-              <span class="guide-step-num">4</span>
-              <div class="guide-step-titles">
-                <p class="guide-step-kicker">Configuração — o passo mais importante!</p>
-                <h2>Configurar o PATH</h2>
-              </div>
-            </div>
-            <div class="guide-step-body">
-              <p class="text-body">
-                O PATH é a "lista de lugares" onde o Windows procura programas quando você
-                digita um comando. Se o Claude Code não estiver nessa lista, o terminal não vai
-                encontrar o comando <code>claude</code>, mesmo com tudo instalado direitinho.
-              </p>
-              <p class="text-body">
-                Olhe o final da mensagem que apareceu no Passo 3: normalmente o próprio
-                instalador já avisa se precisa desse passo extra, e mostra a pasta exata onde
-                instalou. Na maioria dos casos, o comando abaixo resolve:
-              </p>
-
-              <div class="code-block">
-                <div class="code-block-head">
-                  <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="cmd-path">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
-                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
-                    </svg>
-                    <span data-copy-label>Copiar</span>
-                  </button>
-                </div>
-                <pre><code id="cmd-path">[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path","User") + ";$env:USERPROFILE\.local\bin", "User")</code></pre>
+                <strong>Print sugerido</strong>
+                <span>Terminal mostrando a mensagem final "Claude Code successfully installed!".</span>
               </div>
 
               <div class="callout callout-info">
@@ -680,28 +422,105 @@ Instalando o Claude Code...
                 </span>
                 <div class="callout-body">
                   <strong>Esperado</strong>
-                  O comando roda sem mostrar nenhuma mensagem — silêncio total é sucesso aqui.
-                  Se aparecer um caminho diferente na tela do Passo 3, use aquele caminho no
-                  lugar de <code>$env:USERPROFILE\.local\bin</code>.
+                  Aguarde de 1 a 3 minutos até aparecer a mensagem
+                  <code>Claude Code successfully installed!</code> no terminal.
+                </div>
+              </div>
+
+              <div class="callout callout-danger">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                    <path d="M11 7V12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                    <path d="M11 14.7V14.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Hábito de segurança</strong>
+                  Só cole e execute comandos <code>curl ... | bash</code> quando confia 100% na
+                  origem — nesse caso, o domínio oficial <code>claude.ai</code>. Nunca rode esse
+                  padrão de comando com links que alguém te mandou sem conferir de onde vêm.
                 </div>
               </div>
             </div>
           </article>
 
-          <!-- PASSO 5 -->
-          <article class="guide-step" id="passo-5">
+          <!-- PASSO 3 -->
+          <article class="guide-step" id="passo-3">
             <div class="guide-step-head">
-              <span class="guide-step-num">5</span>
+              <span class="guide-step-num">3</span>
               <div class="guide-step-titles">
-                <p class="guide-step-kicker">Aplicar a configuração</p>
-                <h2>Reiniciar o PowerShell</h2>
+                <p class="guide-step-kicker">Configuração — o passo mais importante!</p>
+                <h2>Configurar o PATH</h2>
               </div>
             </div>
             <div class="guide-step-body">
               <p class="text-body">
-                O Windows só relê o PATH quando um terminal novo é aberto — a janela atual não
-                enxerga a mudança do Passo 4 sozinha. Feche essa janela do PowerShell e abra uma
-                nova, do zero, do mesmo jeito que fez no Passo 2.
+                O PATH é a "lista de lugares" onde o Linux procura programas quando você digita
+                um comando. A maioria das distribuições usa o <strong>bash</strong> como shell
+                padrão — se for o seu caso, cole o comando abaixo e aperte Enter:
+              </p>
+
+              <div class="code-block">
+                <div class="code-block-head">
+                  <span class="code-block-label">Terminal — bash (padrão na maioria das distros)</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="cmd-path-linux-bash">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
+                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
+                    </svg>
+                    <span data-copy-label>Copiar</span>
+                  </button>
+                </div>
+                <pre><code id="cmd-path-linux-bash">echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc</code></pre>
+              </div>
+
+              <div class="callout callout-info">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                    <path d="M11 9.8V15.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+                    <path d="M11 7.2V7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Usa zsh, fish ou outro shell?</strong>
+                  Troque <code>~/.bashrc</code> pelo arquivo de configuração do seu shell —
+                  <code>~/.zshrc</code> pro zsh, ou <code>~/.config/fish/config.fish</code> pro
+                  fish (nesse caso, a sintaxe do comando muda; se não souber qual shell usa, rode
+                  <code>echo $SHELL</code> pra descobrir).
+                </div>
+              </div>
+
+              <div class="callout callout-success">
+                <span class="callout-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
+                    <path d="M7.3 11.3L9.8 13.8L14.7 8.7" stroke="currentColor" stroke-width="1.4"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <div class="callout-body">
+                  <strong>Esperado</strong>
+                  O comando roda sem mostrar nenhuma mensagem — silêncio total é sucesso aqui.
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- PASSO 4 -->
+          <article class="guide-step" id="passo-4">
+            <div class="guide-step-head">
+              <span class="guide-step-num">4</span>
+              <div class="guide-step-titles">
+                <p class="guide-step-kicker">Aplicar a configuração</p>
+                <h2>Reiniciar o terminal</h2>
+              </div>
+            </div>
+            <div class="guide-step-body">
+              <p class="text-body">
+                Feche a janela do terminal por completo e abra uma nova — isso garante que a
+                configuração do Passo 3 seja carregada do zero.
               </p>
 
               <div class="callout callout-warning">
@@ -714,30 +533,30 @@ Instalando o Claude Code...
                 </span>
                 <div class="callout-body">
                   <strong>Erro comum</strong>
-                  Se depois de reabrir o terminal o comando <code>claude</code> continuar
-                  "não reconhecido", reinicie o computador — em alguns casos o Windows demora a
-                  propagar a variável para todos os programas.
+                  Se depois de reabrir o terminal o comando <code>claude</code> continuar "não
+                  encontrado" (<code>command not found</code>), confira se editou o arquivo certo
+                  no Passo 3 — esse é o motivo mais comum de erro nessa etapa.
                 </div>
               </div>
             </div>
           </article>
 
-          <!-- PASSO 6 -->
-          <article class="guide-step" id="passo-6">
+          <!-- PASSO 5 -->
+          <article class="guide-step" id="passo-5">
             <div class="guide-step-head">
-              <span class="guide-step-num">6</span>
+              <span class="guide-step-num">5</span>
               <div class="guide-step-titles">
                 <p class="guide-step-kicker">Primeiro acesso</p>
                 <h2>Iniciar o Claude Code e autenticar</h2>
               </div>
             </div>
             <div class="guide-step-body">
-              <p class="text-body">Com o terminal novo aberto, digite:</p>
+              <p class="text-body">No terminal novo, digite:</p>
 
               <div class="code-block">
                 <div class="code-block-head">
-                  <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="cmd-start-claude">
+                  <span class="code-block-label">Terminal</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="cmd-start-claude-linux">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -745,7 +564,7 @@ Instalando o Claude Code...
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="cmd-start-claude">claude</code></pre>
+                <pre><code id="cmd-start-claude-linux">claude</code></pre>
               </div>
 
               <p class="text-body">Na primeira vez, o Claude Code vai te guiar por uma
@@ -757,79 +576,24 @@ Instalando o Claude Code...
                     navegador"</strong>: o Claude Code abre o navegador automaticamente.</li>
                 <li>Faça login com a sua conta Anthropic (é necessário um plano <strong>Claude
                     Pro ou Max</strong> para o Claude Code funcionar).</li>
-                <li>Se o navegador não abrir sozinho, copie o link que aparecer no terminal e
-                  cole no navegador manualmente.</li>
+                <li>Se o navegador não abrir sozinho (comum em servidores sem interface gráfica),
+                  copie o link que aparecer no terminal e cole manualmente num navegador — pode
+                  ser até no seu celular.</li>
                 <li>Depois de autorizar, volte para o terminal — ele confirma o login sozinho.</li>
               </ol>
 
-              <div class="mockup-frame">
-                <div class="mockup-titlebar-win">
-                  <span>Windows PowerShell</span>
-                  <span class="mockup-win-controls"><span>─</span><span>▢</span><span>✕</span></span>
-                </div>
-                <pre class="mockup-term-body"><span class="t-prompt">PS </span><span class="t-path">C:\Users\voce&gt;</span> claude
-
-  Let's get started.
-
-  Choose the text style that looks best with your terminal:
-  <span class="t-ok">❯ 1. Dark mode</span>
-    2. Light mode
-
-<span class="t-out">Enter to confirm · Esc to skip</span> <span class="t-cursor"></span></pre>
+              <div class="screenshot-slot">
+                <span class="screenshot-slot-icon" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.4" />
+                    <circle cx="8.5" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3" />
+                    <path d="M4 17l4.5-4.2 3.2 3 3.8-3.5L20 16.5" stroke="currentColor" stroke-width="1.4"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+                <strong>Print sugerido</strong>
+                <span>Terminal com a mensagem "Login successful" e "Welcome back".</span>
               </div>
-              <p class="mockup-caption">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
-                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
-                </svg>
-                Simulação de como a tela aparece — troque pelo print real quando tiver.
-              </p>
-
-              <div class="mockup-frame">
-                <div class="mockup-titlebar-win">
-                  <span>Navegador</span>
-                  <span class="mockup-win-controls"><span>─</span><span>▢</span><span>✕</span></span>
-                </div>
-                <div class="mockup-browser-bar">
-                  <div class="mockup-browser-url">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                      <rect x="2.5" y="5" width="7" height="5.5" rx="1" stroke="currentColor" stroke-width="1.1" />
-                      <path d="M4 5V3.5a2 2 0 0 1 4 0V5" stroke="currentColor" stroke-width="1.1" />
-                    </svg>
-                    claude.ai/oauth/authorize
-                  </div>
-                </div>
-                <div class="mockup-browser-body">
-                  <h4>Autorizar o Claude Code</h4>
-                  <p>Este aplicativo terá acesso à sua conta Claude Pro/Max nesta máquina.</p>
-                  <button class="mockup-btn mockup-btn-primary" style="padding:8px 22px;">Autorizar acesso</button>
-                </div>
-              </div>
-              <p class="mockup-caption">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
-                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
-                </svg>
-                Simulação da tela de autorização que abre no navegador — troque pelo print real quando tiver.
-              </p>
-
-              <div class="mockup-frame">
-                <div class="mockup-titlebar-win">
-                  <span>Windows PowerShell</span>
-                  <span class="mockup-win-controls"><span>─</span><span>▢</span><span>✕</span></span>
-                </div>
-                <pre class="mockup-term-body"><span class="t-ok">✔ Login successful. Welcome back!</span>
-
-<span class="t-prompt">PS </span><span class="t-path">C:\Users\voce&gt;</span> claude
-&gt; <span class="t-cursor"></span></pre>
-              </div>
-              <p class="mockup-caption">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
-                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
-                </svg>
-                Simulação de como a tela aparece — troque pelo print real quando tiver.
-              </p>
 
               <div class="callout callout-success">
                 <span class="callout-icon" aria-hidden="true">
@@ -841,9 +605,8 @@ Instalando o Claude Code...
                 </span>
                 <div class="callout-body">
                   <strong>Esperado</strong>
-                  Uma mensagem de <code>Login successful</code> seguida do prompt do Claude
-                  Code pronto pra receber comandos. É esse instante — não antes — que confirma
-                  que a instalação toda funcionou.
+                  Uma mensagem de <code>Login successful</code> seguida do prompt do Claude Code
+                  pronto pra receber comandos.
                 </div>
               </div>
 
@@ -852,8 +615,8 @@ Instalando o Claude Code...
 
               <div class="code-block">
                 <div class="code-block-head">
-                  <span class="code-block-label">PowerShell — verificar instalação</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="cmd-diag">
+                  <span class="code-block-label">Terminal — verificar instalação</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="cmd-diag-linux">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -861,7 +624,7 @@ Instalando o Claude Code...
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="cmd-diag">Get-Command claude</code></pre>
+                <pre><code id="cmd-diag-linux">test -f ~/.local/bin/claude && echo "INSTALADO" || echo "NAO INSTALADO"</code></pre>
               </div>
 
               <div class="callout callout-warning">
@@ -873,10 +636,11 @@ Instalando o Claude Code...
                   </svg>
                 </span>
                 <div class="callout-body">
-                  <strong>Se aparecer "não é reconhecido"</strong>
-                  Volte no Passo 4, confira se o caminho colado está certo, e repita o Passo 5
-                  (fechar e abrir o terminal de novo). Se der certo, o comando acima mostra o
-                  caminho do arquivo <code>claude.exe</code> em vez de erro.
+                  <strong>Leia o resultado</strong>
+                  Se aparecer <code>INSTALADO</code>, o problema é só o PATH — repita o Passo 3
+                  (conferindo o arquivo certo pro seu shell) e reinicie o terminal de novo. Se
+                  aparecer <code>NAO INSTALADO</code>, volte pro Passo 2 e rode o comando de
+                  instalação outra vez.
                 </div>
               </div>
             </div>
@@ -892,9 +656,8 @@ Instalando o Claude Code...
             </span>
             <div class="callout-body">
               <strong>Setup concluído</strong>
-              Node instalado, PowerShell liberado, Claude Code instalado, PATH configurado e
-              login feito. Você já pode abrir o Claude Code em qualquer pasta de projeto
-              digitando <code>claude</code> — é isso que vamos usar na próxima lição.
+              Claude Code instalado, PATH configurado e login feito. Você já pode abrir o Claude
+              Code em qualquer pasta de projeto digitando <code>claude</code>.
             </div>
           </div>
 
@@ -912,13 +675,13 @@ Instalando o Claude Code...
           </div>
 
           <nav class="guide-pagination" aria-label="Navegação entre lições">
-            <a class="guide-pagination-link" href="criar-conta-github.html">
+            <a class="guide-pagination-link" href="instalacao-mac.html">
               <span class="guide-pagination-label">← Anterior</span>
-              <span class="guide-pagination-title">Criar Conta no GitHub</span>
-            </a>
-            <a class="guide-pagination-link guide-pagination-next" href="instalacao-mac.html">
-              <span class="guide-pagination-label">Próxima</span>
               <span class="guide-pagination-title">Instalação no Mac</span>
+            </a>
+            <a class="guide-pagination-link guide-pagination-next is-disabled" href="#" aria-disabled="true">
+              <span class="guide-pagination-label">Próxima · Em breve</span>
+              <span class="guide-pagination-title">Cowork (opcional)</span>
             </a>
           </nav>
 
