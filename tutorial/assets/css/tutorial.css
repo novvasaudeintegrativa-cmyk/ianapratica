@@ -1390,6 +1390,131 @@ a.guide-nav-item:hover {
   max-width: 34ch;
 }
 
+/* Editor de código (VS Code) — sidebar de arquivos + abas + painel de
+   terminal integrado, tudo no tema escuro padrão do editor. */
+.mockup-editor-body {
+  display: flex;
+  height: 230px;
+  background: #1e1e1e;
+  font-family: var(--font-mono);
+}
+
+.mockup-editor-sidebar {
+  width: 148px;
+  flex-shrink: 0;
+  background: #252526;
+  border-right: 1px solid #000000;
+  padding: 10px 6px;
+  font-size: 0.72rem;
+  color: #cccccc;
+}
+
+.mockup-editor-sidebar-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+  padding: 0 6px 8px;
+}
+
+.mockup-editor-file {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mockup-editor-file.is-active {
+  background: #37373d;
+}
+
+.mockup-editor-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mockup-editor-tabs {
+  display: flex;
+  background: #252526;
+  border-bottom: 1px solid #000000;
+  flex-shrink: 0;
+}
+
+.mockup-editor-tab {
+  padding: 6px 16px;
+  font-size: 0.72rem;
+  color: #969696;
+  border-right: 1px solid #1e1e1e;
+}
+
+.mockup-editor-tab.is-active {
+  background: #1e1e1e;
+  color: #ffffff;
+  border-top: 2px solid var(--clay-vivid);
+}
+
+.mockup-editor-code {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 0.76rem;
+  line-height: 1.75;
+  color: #d4d4d4;
+  overflow: hidden;
+}
+
+.mockup-editor-code div {
+  padding: 0 14px;
+}
+
+.mockup-editor-code .ln-add {
+  background: rgba(46, 160, 67, 0.18);
+  color: #7ee787;
+  border-left: 2px solid #2ea043;
+  padding-left: 12px;
+}
+
+.mockup-editor-code .ln-del {
+  background: rgba(248, 81, 73, 0.14);
+  color: #ff9492;
+  border-left: 2px solid #f85149;
+  padding-left: 12px;
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.mockup-editor-panel {
+  flex-shrink: 0;
+  border-top: 1px solid #000000;
+  background: #181818;
+}
+
+.mockup-editor-panel-head {
+  display: flex;
+  gap: 16px;
+  padding: 5px 14px;
+  font-size: 0.66rem;
+  color: #8a8a8a;
+  border-bottom: 1px solid #000000;
+}
+
+.mockup-editor-panel-head span.is-active {
+  color: #ffffff;
+}
+
+.mockup-editor-terminal {
+  padding: 8px 14px;
+  font-size: 0.74rem;
+  line-height: 1.7;
+  color: #d4d4d4;
+  white-space: pre-wrap;
+}
+
 /* ==========================================================================
    8. PAGINAÇÃO — navegação entre lições no rodapé do conteúdo
    ========================================================================== */
@@ -1714,8 +1839,8 @@ a.guide-nav-item:hover {
 .guide-day-progress-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 8px;
+  gap: 6px;
+  margin-bottom: 14px;
 }
 
 .day-progress-chip {
@@ -1895,9 +2020,9 @@ a.guide-nav-item:hover {
 .guide-day-congrats {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: var(--space-5);
-  padding: var(--space-4) var(--space-5);
+  gap: 10px;
+  margin-bottom: var(--space-6);
+  padding: var(--space-5) var(--space-5);
   border-radius: var(--radius-lg);
   background: rgba(47, 118, 19, 0.08);
   border: 1px solid rgba(47, 118, 19, 0.3);
