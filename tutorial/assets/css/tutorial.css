@@ -1819,36 +1819,66 @@ a.guide-nav-item:hover {
   color: var(--color-ink-soft);
 }
 
-.guide-evolution-split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-6);
+/* Uma trilha só, do primeiro ao último passo — o curso é sequencial,
+   então nunca mostramos Dia 1 e Dia 2 como duas barras/metas separadas.
+   O traço (seam) só marca visualmente onde um dia termina e o outro
+   começa dentro do mesmo trajeto contínuo. */
+.guide-evolution-days {
+  margin-top: var(--space-3);
 }
 
-.guide-evolution-split-top {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
+.guide-evolution-days-track {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 90, 31, 0.14);
+  overflow: hidden;
+}
+
+.guide-evolution-days-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  background: var(--clay-vivid);
+  border-radius: 999px;
+  transition: width var(--duration-base) var(--ease-out);
+}
+
+.guide-evolution-days-seam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: var(--color-card);
+  z-index: 2;
+}
+
+.guide-evolution-days-labels {
+  position: relative;
+  height: 18px;
+  margin-top: var(--space-2);
+}
+
+.guide-evolution-days-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
   color: var(--color-muted-foreground);
+  white-space: nowrap;
+  transition: left var(--duration-base) var(--ease-out);
 }
 
-.guide-evolution-split-top span:last-child {
+.guide-evolution-days-label strong {
   color: var(--color-foreground);
-  text-transform: none;
-  letter-spacing: normal;
-  font-weight: 700;
-}
-
-@media (max-width: 560px) {
-  .guide-evolution-split {
-    grid-template-columns: 1fr;
-    gap: var(--space-3);
-  }
 }
 
 /* ==========================================================================

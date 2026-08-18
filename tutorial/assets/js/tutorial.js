@@ -315,15 +315,15 @@
     var sections = document.querySelectorAll(".guide-nav-section");
     if (!sections.length) return;
     var completed = readCompleted();
+    var dayTotals = [];
 
     sections.forEach(function (section, dayIndex) {
       var dayNum = dayIndex + 1;
       var track = document.querySelector('[data-day-progress-chips="' + dayNum + '"]');
       var percentLabel = document.querySelector('[data-day-progress-percent="' + dayNum + '"]');
-      if (!track) return;
 
       var items = section.querySelectorAll(".guide-nav-item");
-      track.innerHTML = "";
+      if (track) track.innerHTML = "";
       var doneCount = 0;
 
       items.forEach(function (item, i) {
@@ -331,6 +331,7 @@
         var isDone = href && completed.indexOf(href) !== -1;
         if (isDone) doneCount++;
 
+        if (!track) return;
         var chip = document.createElement(href ? "a" : "span");
         chip.className = "day-progress-chip";
         chip.textContent = "P" + (i + 1);
@@ -344,15 +345,12 @@
         track.appendChild(chip);
       });
 
+      dayTotals.push({ done: doneCount, total: items.length });
+
       var percent = items.length ? Math.round((doneCount / items.length) * 100) : 0;
       if (percentLabel) {
         percentLabel.textContent = percent + "% concluído (" + doneCount + " de " + items.length + ")";
       }
-
-      var evoLabel = document.querySelector("[data-evolution-day" + dayNum + "-label]");
-      var evoMeter = document.querySelector("[data-evolution-day" + dayNum + "-meter]");
-      if (evoLabel) evoLabel.textContent = percent + "%";
-      if (evoMeter) evoMeter.style.width = percent + "%";
 
       /* Parabéns: só considera as lições que já existem de verdade (com
          link), ignorando os módulos "Em breve" — senão a mensagem nunca
@@ -367,6 +365,31 @@
         congrats.hidden = !(realItems.length > 0 && realDone === realItems.length);
       }
     });
+
+    /* Uma trilha só: Dia 1 e Dia 2 não são metas separadas, são dois
+       trechos do mesmo caminho sequencial. Uma única barra representa
+       o curso inteiro; a única "separação" é um traço fino marcando
+       onde o Dia 1 termina e o Dia 2 começa. */
+    var daysFill = document.querySelector("[data-evolution-days-fill]");
+    var daysSeam = document.querySelector("[data-evolution-days-seam]");
+    if (daysFill && dayTotals.length >= 2) {
+      var grandDone = dayTotals[0].done + dayTotals[1].done;
+      var grandTotal = dayTotals[0].total + dayTotals[1].total;
+      var grandPercent = grandTotal ? Math.round((grandDone / grandTotal) * 100) : 0;
+      var seamPercent = grandTotal ? (dayTotals[0].total / grandTotal) * 100 : 50;
+
+      daysFill.style.width = grandPercent + "%";
+      if (daysSeam) daysSeam.style.left = seamPercent + "%";
+
+      var day1Label = document.querySelector('[data-evolution-day-label="1"]');
+      var day2Label = document.querySelector('[data-evolution-day-label="2"]');
+      var day1Count = document.querySelector("[data-evolution-day1-count]");
+      var day2Count = document.querySelector("[data-evolution-day2-count]");
+      if (day1Count) day1Count.textContent = dayTotals[0].done + "/" + dayTotals[0].total;
+      if (day2Count) day2Count.textContent = dayTotals[1].done + "/" + dayTotals[1].total;
+      if (day2Label) day2Label.style.left = "calc(" + seamPercent + "% + 8px)";
+      if (day1Label) day1Label.style.left = "0%";
+    }
   }
   renderDayProgress();
 
