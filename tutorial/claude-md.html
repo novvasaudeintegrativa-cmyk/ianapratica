@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Skill: Setup Instagram Automático — Tutorial Guiado IA na Prática</title>
+  <title>CLAUDE.md — Tutorial Guiado IA na Prática</title>
   <meta name="description"
-    content="Um atalho avançado: uma Skill do Claude Code que conduz por chat toda a conexão com o Instagram, testando e salvando as credenciais sozinha." />
+    content="O que é o arquivo CLAUDE.md, como gerar um com /init e o que colocar nele para o Claude Code lembrar do seu projeto." />
   <link rel="stylesheet" href="../assets/css/tokens.css" />
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/tutorial.css" />
@@ -75,11 +75,9 @@
       <div class="guide-breadcrumb">
         <a href="index.html">Trilha do curso</a>
         <span aria-hidden="true">/</span>
-        <span>Orquestração de Agentes</span>
-        <span aria-hidden="true">/</span>
-        <span class="is-current">Skill: Setup Instagram</span>
+        <span class="is-current">CLAUDE.md</span>
       </div>
-      <span class="guide-context-badge"><span class="dot"></span> Dia 2 · Atalho avançado</span>
+      <span class="guide-context-badge"><span class="dot"></span> Dia 1 · CLAUDE.md</span>
     </div>
   </div>
 
@@ -297,22 +295,13 @@
         <div class="guide-content">
 
           <div class="guide-lesson-header">
-            <span class="guide-lesson-eyebrow"><span class="dot"></span> Orquestração de Agentes · Atalho
-              avançado</span>
-            <h1 class="text-heading">Skill: Setup Instagram Automático</h1>
+            <span class="guide-lesson-eyebrow"><span class="dot"></span> CLAUDE.md</span>
+            <h1 class="text-heading">CLAUDE.md</h1>
             <p class="guide-lesson-lead text-body">
-              Você já fez o caminho manual em "Conectar ao Instagram" até vincular a Página ao
-              Gerenciador de Negócios. Essa lição ensina um atalho pro que falta: uma
-              <strong>Skill do Claude Code</strong>, um arquivo de instruções que conduz o
-              restante do processo — criar o App e gerar o Token — <em>numa conversa</em>,
-              testando e salvando tudo sozinho.
-            </p>
-            <p class="guide-lesson-lead text-body">
-              De brinde, a skill também funciona como uma <strong>checagem automática</strong>:
-              antes de seguir, ela pergunta se sua conta é profissional, se a Página está
-              vinculada e se você tem acesso a ela — e avisa pra voltar e corrigir se alguma
-              dessas etapas anteriores não estiver certa. É opcional, mas economiza tempo na
-              próxima vez que precisar repetir esse setup — o seu ou o de um cliente.
+              Toda conversa nova com o Claude Code começa "do zero" — ele não lembra o que vocês
+              conversaram ontem. O <code>CLAUDE.md</code> resolve isso: é um arquivo de texto na
+              raiz do seu projeto que o Claude Code lê sozinho, automaticamente, no início de
+              cada sessão. É onde você guarda o contexto que não quer ficar repetindo.
             </p>
 
             <div class="guide-meta-row">
@@ -322,87 +311,40 @@
                   <path d="M9 5.5V9L11.5 10.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
                     stroke-linejoin="round" />
                 </svg>
-                <span>~10 minutos</span>
-              </span>
-              <span class="guide-meta-pill">
-                <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                  <circle cx="9" cy="6" r="2.6" stroke="currentColor" stroke-width="1.4" />
-                  <path d="M3.2 15c0-2.9 2.6-4.8 5.8-4.8s5.8 1.9 5.8 4.8" stroke="currentColor" stroke-width="1.4"
-                    stroke-linecap="round" />
-                </svg>
-                <span>Nível: intermediário</span>
+                <span>~8 minutos</span>
               </span>
             </div>
           </div>
 
           <nav class="guide-pagination guide-pagination-top" aria-label="Navegação entre lições">
-            <a class="guide-pagination-link" href="vincular-pagina.html">
+            <a class="guide-pagination-link" href="comandos-essenciais.html">
               <span class="guide-pagination-label">← Anterior</span>
-              <span class="guide-pagination-title">Vincular a Página</span>
+              <span class="guide-pagination-title">Domine os comandos</span>
             </a>
-            <a class="guide-pagination-link guide-pagination-next is-disabled" href="#" aria-disabled="true">
-              <span class="guide-pagination-label">Próxima · Em breve</span>
-              <span class="guide-pagination-title">Produção de conteúdo</span>
+            <a class="guide-pagination-link guide-pagination-next" href="conta-facebook.html">
+              <span class="guide-pagination-label">Próxima · Dia 2</span>
+              <span class="guide-pagination-title">Criar Conta do Facebook</span>
             </a>
           </nav>
-
-          <div class="callout callout-info" style="max-width: 100%; margin-bottom: var(--space-8);">
-            <span class="callout-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
-                <path d="M11 9.8V15.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-                <path d="M11 7.2V7.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-              </svg>
-            </span>
-            <div class="callout-body">
-              <strong>O que é uma Skill?</strong>
-              É um arquivo de texto (<code>SKILL.md</code>) com instruções escritas em português
-              simples, que ensina o Claude Code a executar uma tarefa específica e complexa
-              sempre do mesmo jeito — passo a passo, com as perguntas certas na ordem certa.
-              Você não precisa saber programar pra criar uma: é basicamente um roteiro.
-            </div>
-          </div>
 
           <article class="guide-step" style="border-top: none; padding-top: 0;">
             <div class="guide-step-head">
               <span class="guide-step-num">1</span>
               <div class="guide-step-titles">
-                <p class="guide-step-kicker">Pré-requisitos</p>
-                <h2>Antes de começar</h2>
-              </div>
-            </div>
-            <div class="guide-step-body">
-              <ul class="text-body">
-                <li>Claude Code já instalado (categoria "O Setup Perfeito", no Dia 1).</li>
-                <li>Sua conta do Instagram já é <strong>Profissional</strong> (Business ou
-                  Creator) — se não for, o próprio Claude te avisa como converter durante a
-                  skill.</li>
-                <li>Você tem uma <strong>Página do Facebook</strong> e acesso ao e-mail/senha
-                  dela — se ainda não tiver, faça a lição "Criar a Página do Facebook" primeiro.
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="guide-step">
-            <div class="guide-step-head">
-              <span class="guide-step-num">2</span>
-              <div class="guide-step-titles">
-                <p class="guide-step-kicker">Instalação</p>
-                <h2>Colocar a skill no lugar certo</h2>
+                <p class="guide-step-kicker">Gerando automaticamente</p>
+                <h2>Criar o seu com o comando /init</h2>
               </div>
             </div>
             <div class="guide-step-body">
               <p class="text-body">
-                As skills do Claude Code ficam guardadas numa pasta <code>.claude/skills/</code>,
-                dentro do projeto onde você quer usá-las. Crie a pasta com o nome da skill e
-                salve o arquivo como <code>SKILL.md</code> lá dentro:
+                Você não precisa escrever esse arquivo do zero. Dentro da pasta do seu projeto,
+                com o Claude Code aberto, rode:
               </p>
 
               <div class="code-block">
                 <div class="code-block-head">
-                  <span class="code-block-label">Terminal — dentro do seu projeto</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="cmd-skill-folder">
+                  <span class="code-block-label">No terminal, dentro do Claude Code</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="cmd-init">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -410,13 +352,80 @@
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="cmd-skill-folder">mkdir -p .claude/skills/setup-instagram</code></pre>
+                <pre><code id="cmd-init">/init</code></pre>
               </div>
 
               <p class="text-body">
-                Depois, mova ou cole o conteúdo do arquivo da skill dentro dessa pasta, salvando
-                como <code>.claude/skills/setup-instagram/SKILL.md</code>.
+                O Claude Code vai examinar os arquivos do projeto — do que se trata, quais
+                ferramentas usa, como está organizado — e escrever um <code>CLAUDE.md</code>
+                inicial sozinho, na raiz da pasta.
               </p>
+
+              <div class="mockup-frame">
+                <div class="mockup-titlebar-win">
+                  <span>Windows PowerShell</span>
+                  <span class="mockup-win-controls"><span>─</span><span>▢</span><span>✕</span></span>
+                </div>
+                <pre class="mockup-term-body">&gt; /init
+<span class="t-out">Analisando a estrutura do projeto...</span>
+<span class="t-ok">✔ CLAUDE.md criado na raiz do projeto.</span>
+&gt; <span class="t-cursor"></span></pre>
+              </div>
+              <p class="mockup-caption">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
+                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                </svg>
+                Simulação de como a tela aparece — troque pelo print real quando tiver.
+              </p>
+            </div>
+          </article>
+
+          <article class="guide-step">
+            <div class="guide-step-head">
+              <span class="guide-step-num">2</span>
+              <div class="guide-step-titles">
+                <p class="guide-step-kicker">Conteúdo</p>
+                <h2>O que costuma valer a pena guardar ali</h2>
+              </div>
+            </div>
+            <div class="guide-step-body">
+              <p class="text-body">
+                Depois que o <code>/init</code> gera a base, você pode (e deve) editar o arquivo
+                à mão como qualquer texto — abra ele no VS Code ou peça pro próprio Claude Code
+                editar pra você. Um bom <code>CLAUDE.md</code> costuma ter:
+              </p>
+              <ul class="text-body">
+                <li>Uma frase curta sobre o que é o projeto.</li>
+                <li>Comandos importantes (como rodar, testar, publicar).</li>
+                <li>Convenções que você quer que sejam sempre seguidas (nome de arquivos, estilo
+                  de código, idioma dos comentários).</li>
+                <li>Coisas que o Claude <strong>nunca</strong> deve fazer sem perguntar antes
+                  (apagar uma pasta específica, mexer num arquivo de configuração sensível).</li>
+              </ul>
+
+              <div class="code-block">
+                <div class="code-block-head">
+                  <span class="code-block-label">CLAUDE.md — exemplo simples</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="cmd-example">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
+                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
+                    </svg>
+                    <span data-copy-label>Copiar</span>
+                  </button>
+                </div>
+                <pre><code id="cmd-example"># Meu Projeto
+
+Site pessoal com galeria de fotos, feito em HTML/CSS puro.
+
+## Comandos
+- Abrir localmente: abrir index.html direto no navegador.
+
+## Convenções
+- Comentários e nomes de arquivo sempre em português.
+- Nunca mexer na pasta /backup sem perguntar antes.</code></pre>
+              </div>
 
               <div class="callout callout-info">
                 <span class="callout-icon" aria-hidden="true">
@@ -427,10 +436,10 @@
                   </svg>
                 </span>
                 <div class="callout-body">
-                  <strong>Mais fácil ainda: peça pro próprio Claude</strong>
-                  Cole o conteúdo da skill na conversa e diga: <em>"Salve isso como uma skill
-                    chamada setup-instagram."</em> O Claude Code cria a pasta e o arquivo certo
-                  sozinho.
+                  <strong>Curto e vivo, não um manual</strong>
+                  O <code>CLAUDE.md</code> funciona melhor pequeno e atualizado do que grande e
+                  esquecido. Vá adicionando uma linha sempre que perceber que está repetindo a
+                  mesma instrução em conversas diferentes.
                 </div>
               </div>
             </div>
@@ -440,57 +449,16 @@
             <div class="guide-step-head">
               <span class="guide-step-num">3</span>
               <div class="guide-step-titles">
-                <p class="guide-step-kicker">Uso</p>
-                <h2>Invocar a skill</h2>
+                <p class="guide-step-kicker">Segurança</p>
+                <h2>O que nunca colocar nesse arquivo</h2>
               </div>
             </div>
             <div class="guide-step-body">
               <p class="text-body">
-                Com o Claude Code aberto no seu projeto, é só dizer o que você quer — não precisa
-                decorar comando nenhum. Qualquer uma dessas frases já dispara a skill:
+                O <code>CLAUDE.md</code> normalmente é versionado junto com o resto do projeto no
+                Git — ou seja, se você mandar ele pro GitHub, qualquer pessoa com acesso ao
+                repositório consegue ler o conteúdo.
               </p>
-
-              <div class="mockup-frame">
-                <div class="mockup-titlebar-mac">
-                  <div class="mockup-mac-dots"><span></span><span></span><span></span></div>
-                  <span>claude</span>
-                </div>
-                <pre class="mockup-term-body">&gt; quero configurar o instagram
-
-<span class="t-out">Ola! Vou configurar tudo para voce publicar no Instagram
-automaticamente pelo Claude Code. Preciso de uns 10 minutos
-do seu tempo e de algumas informacoes que so voce tem acesso.
-
-Antes de comecar, confirma pra mim:
-1. Sua conta do Instagram e Profissional (Business ou Creator)?</span> <span class="t-cursor"></span></pre>
-              </div>
-              <p class="mockup-caption">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.2" />
-                  <path d="M7 6.2V10M7 4.2V4.3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
-                </svg>
-                Simulação de como a conversa começa — troque pelo print real quando tiver.
-              </p>
-
-              <p class="text-body">A partir daí, o Claude conduz sozinho cada etapa:</p>
-              <ol class="text-body">
-                <li>Confirma os pré-requisitos (conta profissional, Página vinculada, acesso ao
-                  Facebook).</li>
-                <li>Leva você até <code>developers.facebook.com</code> pra criar a conta de
-                  desenvolvedor, se ainda não tiver.</li>
-                <li>Leva você até o <strong>Graph API Explorer</strong>, ajuda a escolher (ou
-                  criar) o App e selecionar sua Página.</li>
-                <li>Ajuda a adicionar as 3 permissões necessárias (<code>instagram_basic</code>,
-                  <code>instagram_content_publish</code>, <code>pages_read_engagement</code>) e
-                  gerar o token.</li>
-                <li>Você cola o token de volta na conversa — o Claude testa na hora e já
-                  descobre o ID da sua conta do Instagram.</li>
-                <li>Salva tudo automaticamente num arquivo <code>.env</code> local (esse sim é o
-                  lugar certo pra esse token — é um segredo que o script de publicação usa em
-                  tempo de execução).</li>
-                <li>Instala o script de publicação e testa a conexão ao vivo.</li>
-                <li>Confirma com um resumo do que foi configurado e como usar dali em diante.</li>
-              </ol>
 
               <div class="callout callout-danger">
                 <span class="callout-icon" aria-hidden="true">
@@ -501,47 +469,18 @@ Antes de comecar, confirma pra mim:
                   </svg>
                 </span>
                 <div class="callout-body">
-                  <strong>O token continua sendo uma senha</strong>
-                  Mesmo o Claude testando e salvando por você, a regra não muda: nunca
-                  compartilhe esse token com ninguém, e confirme que o arquivo <code>.env</code>
-                  está listado no <code>.gitignore</code> do projeto antes de continuar — assim
-                  ele nunca vai parar sem querer num repositório no GitHub.
+                  <strong>Nunca coloque senhas, tokens ou chaves de API aqui</strong>
+                  Isso vale pro Personal Access Token do GitHub que você gerou lá atrás, pro token
+                  do Instagram que vem mais na frente, e pra qualquer credencial em geral. Esse
+                  tipo de segredo tem seu próprio lugar (um arquivo <code>.env</code>, um
+                  gerenciador de senhas) — nunca dentro de um arquivo pensado pra explicar o
+                  projeto pra uma IA.
                 </div>
-              </div>
-
-              <div class="callout callout-warning">
-                <span class="callout-icon" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-                    <path d="M11 3L20 18H2L11 3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" />
-                    <path d="M11 9V13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-                    <path d="M11 15.6V15.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                  </svg>
-                </span>
-                <div class="callout-body">
-                  <strong>Esse token expira em 1 hora</strong>
-                  Ótimo pra testar agora, mas insuficiente pra automação de verdade. Quando
-                  precisar de um token que dure mais, é só avisar o Claude — ele troca por um
-                  token de longa duração em menos de um minuto.
-                </div>
-              </div>
-
-              <div class="screenshot-slot">
-                <span class="screenshot-slot-icon" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.4" />
-                    <circle cx="8.5" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3" />
-                    <path d="M4 17l4.5-4.2 3.2 3 3.8-3.5L20 16.5" stroke="currentColor" stroke-width="1.4"
-                      stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                </span>
-                <strong>Print sugerido</strong>
-                <span>Mensagem final da skill confirmando "Conexão testada com sucesso!" e o
-                  resumo do que foi configurado.</span>
               </div>
             </div>
           </article>
 
-          <div class="callout callout-success" style="max-width: 100%; margin-top: var(--space-8);">
+          <div class="callout callout-success" style="max-width: 100%;">
             <span class="callout-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
                 <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.4" />
@@ -550,11 +489,10 @@ Antes de comecar, confirma pra mim:
               </svg>
             </span>
             <div class="callout-body">
-              <strong>Dois caminhos, o mesmo destino</strong>
-              Manual (clicando você mesmo, lição por lição) ou por skill (o Claude conduzindo a
-              conversa) — os dois terminam no mesmo lugar: sua conta do Instagram conectada e
-              pronta pra receber posts automáticos. Use o manual pra entender o processo por
-              dentro na primeira vez; use a skill quando quiser repetir isso rápido.
+              <strong>Fim do Dia 1</strong>
+              Git, GitHub, Claude Code instalado (terminal e VS Code), os comandos essenciais e
+              agora o CLAUDE.md — a base técnica está pronta. O Dia 2 muda de assunto: é onde
+              você conecta tudo isso ao Instagram.
             </div>
           </div>
 
@@ -572,13 +510,13 @@ Antes de comecar, confirma pra mim:
           </div>
 
           <nav class="guide-pagination" aria-label="Navegação entre lições">
-            <a class="guide-pagination-link" href="vincular-pagina.html">
+            <a class="guide-pagination-link" href="comandos-essenciais.html">
               <span class="guide-pagination-label">← Anterior</span>
-              <span class="guide-pagination-title">Vincular a Página</span>
+              <span class="guide-pagination-title">Domine os comandos</span>
             </a>
-            <a class="guide-pagination-link guide-pagination-next is-disabled" href="#" aria-disabled="true">
-              <span class="guide-pagination-label">Próxima · Em breve</span>
-              <span class="guide-pagination-title">Produção de conteúdo</span>
+            <a class="guide-pagination-link guide-pagination-next" href="conta-facebook.html">
+              <span class="guide-pagination-label">Próxima · Dia 2</span>
+              <span class="guide-pagination-title">Criar Conta do Facebook</span>
             </a>
           </nav>
 
