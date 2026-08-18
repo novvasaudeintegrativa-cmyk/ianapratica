@@ -8,6 +8,97 @@
 */
 
 /* ==========================================================================
+   0. TRILHA FIXA — barra de progresso sticky, numeração única (Passo 1, 2,
+   3...) por toda a trilha, não mais por categoria. Funcional antes de
+   bonito: mostra onde a pessoa está sem precisar abrir a sidebar. Os
+   chips são montados por JS a partir da própria sidebar (uma fonte só de
+   verdade), então crescer a trilha nunca exige mexer aqui.
+   ========================================================================== */
+.guide-progress-rail {
+  position: sticky;
+  top: 64px;
+  z-index: 39;
+  background: var(--color-card);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.guide-progress-rail-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: 10px;
+}
+
+.guide-progress-rail-label {
+  flex-shrink: 0;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-muted-foreground);
+  white-space: nowrap;
+}
+
+.guide-progress-rail-label strong {
+  color: var(--color-foreground);
+}
+
+.guide-progress-rail-track {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding-bottom: 2px;
+}
+
+.rail-step {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 26px;
+  padding: 0 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+a.rail-step:hover {
+  border-color: var(--color-foreground);
+  color: var(--color-foreground);
+}
+
+.rail-step.is-done {
+  border-color: var(--color-success);
+  color: var(--color-success);
+  background: rgba(47, 118, 19, 0.08);
+}
+
+.rail-step.is-current {
+  background: var(--color-foreground);
+  border-color: var(--color-foreground);
+  color: var(--color-background);
+  font-weight: 700;
+}
+
+.rail-step.is-locked {
+  color: var(--surface-dim);
+  border-style: dashed;
+  cursor: default;
+}
+
+/* ==========================================================================
    1. SHELL — cabeçalho de contexto + grid sidebar/conteúdo
    ========================================================================== */
 .guide-context-bar {

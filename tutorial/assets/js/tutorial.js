@@ -158,7 +158,61 @@
     if (percentLabel) percentLabel.textContent = percent + "%";
     if (stepsLabel) stepsLabel.textContent = doneCount + " de " + total + " lições concluídas";
 
+    renderRail();
+
     return completed;
+  }
+
+  /* Barra fixa "Passo N de M" — numeração única por toda a trilha (não
+     mais por categoria). Montada a partir de TODOS os .guide-nav-item da
+     sidebar, na ordem em que aparecem — inclusive os "Em breve" sem
+     link, que contam pro total mas nunca ficam clicáveis. Lê o estado
+     (ativo/concluído/travado) que o loop acima já calculou pros itens
+     com link, então não duplica lógica de desbloqueio aqui. */
+  function renderRail() {
+    var track = document.querySelector("[data-progress-rail-track]");
+    var railLabel = document.querySelector("[data-progress-rail-label]");
+    if (!track) return;
+
+    var allItems = document.querySelectorAll(".guide-nav-item");
+    track.innerHTML = "";
+
+    var currentPosition = 0;
+    allItems.forEach(function (item, i) {
+      var position = i + 1;
+      var label = item.textContent.trim();
+      var href = item.getAttribute("href");
+      var isCurrent = item.classList.contains("is-active");
+      if (isCurrent) currentPosition = position;
+
+      var chip = document.createElement(href ? "a" : "span");
+      chip.className = "rail-step";
+      chip.textContent = "P" + position;
+      chip.title = label;
+      if (href) {
+        chip.href = href;
+        if (item.classList.contains("is-locked")) chip.classList.add("is-locked");
+      } else {
+        chip.classList.add("is-locked");
+      }
+      if (isCurrent) chip.classList.add("is-current");
+      else if (item.classList.contains("is-done")) chip.classList.add("is-done");
+
+      track.appendChild(chip);
+    });
+
+    if (railLabel) {
+      railLabel.innerHTML = currentPosition
+        ? "Você está no <strong>Passo " + currentPosition + "</strong> de " + allItems.length
+        : "<strong>" + allItems.length + " passos</strong> na trilha completa";
+    }
+
+    var activeChip = track.querySelector(".rail-step.is-current");
+    if (activeChip) {
+      var trackRect = track.getBoundingClientRect();
+      var chipRect = activeChip.getBoundingClientRect();
+      track.scrollLeft += (chipRect.left - trackRect.left) - trackRect.width / 2 + chipRect.width / 2;
+    }
   }
 
   if (navItems.length) {
