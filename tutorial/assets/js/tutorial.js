@@ -1,6 +1,50 @@
 (function () {
   "use strict";
 
+  /* Seletor de sistema operacional — Windows/Mac/Linux lado a lado.
+     Detecta o SO automaticamente na primeira visita (navigator), depois
+     lembra a escolha da pessoa (localStorage), e fica sempre clicável
+     pra trocar de sistema a qualquer momento — nunca esconde os outros
+     de vez, só troca qual painel de passos aparece. */
+  var osButtons = document.querySelectorAll("[data-os-select]");
+  var osPanels = document.querySelectorAll("[data-os-panel]");
+  var osNote = document.querySelector("[data-os-note]");
+  var OS_KEY = "ia-na-pratica-os-choice";
+  var OS_NAMES = { windows: "Windows", mac: "Mac", linux: "Linux" };
+
+  function detectOS() {
+    var ua = (navigator.userAgent || "") + (navigator.platform || "");
+    if (/Mac/i.test(ua)) return "mac";
+    if (/Linux/i.test(ua) && !/Android/i.test(ua)) return "linux";
+    return "windows";
+  }
+
+  function setOS(os) {
+    if (!OS_NAMES[os]) return;
+    osButtons.forEach(function (btn) {
+      btn.setAttribute("data-os-active", String(btn.getAttribute("data-os-select") === os));
+    });
+    osPanels.forEach(function (panel) {
+      panel.hidden = panel.getAttribute("data-os-panel") !== os;
+    });
+    if (osNote) {
+      osNote.innerHTML = "Mostrando o passo a passo para <strong>" + OS_NAMES[os] +
+        "</strong>. Pode trocar a qualquer momento clicando em outro sistema acima.";
+    }
+    try { window.localStorage.setItem(OS_KEY, os); } catch (e) { /* segue sem persistir */ }
+  }
+
+  if (osButtons.length && osPanels.length) {
+    osButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setOS(btn.getAttribute("data-os-select"));
+      });
+    });
+    var storedOS = null;
+    try { storedOS = window.localStorage.getItem(OS_KEY); } catch (e) { /* sem storage */ }
+    setOS(storedOS && OS_NAMES[storedOS] ? storedOS : detectOS());
+  }
+
   /* Copiar comando — cada bloco de código tem seu próprio botão e seu
      próprio <code>-fonte; nada de estado global. */
   var copyButtons = document.querySelectorAll("[data-copy-target]");

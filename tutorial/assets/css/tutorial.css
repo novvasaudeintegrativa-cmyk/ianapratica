@@ -329,6 +329,86 @@ a.rail-step:hover {
   transition: color var(--duration-fast) var(--ease-out);
 }
 
+/* ==========================================================================
+   0b. SELETOR DE SISTEMA — Windows / Mac / Linux lado a lado, com ícone.
+   Troca qual painel de passos aparece; fica sempre visível (não só na
+   primeira escolha) pra trocar de sistema a qualquer momento.
+   ========================================================================== */
+.os-picker-wrap {
+  margin: 0 0 var(--space-10);
+  padding: var(--space-5);
+  background: var(--color-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.os-picker-label {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-foreground);
+}
+
+.os-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+@media (max-width: 560px) {
+  .os-picker {
+    grid-template-columns: 1fr;
+  }
+}
+
+.os-picker-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+
+.os-picker-btn svg {
+  flex-shrink: 0;
+  color: var(--color-muted-foreground);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.os-picker-btn:hover {
+  border-color: var(--clay-vivid);
+}
+
+.os-picker-btn[data-os-active="true"] {
+  border-color: var(--clay-vivid);
+  background: rgba(255, 90, 31, 0.08);
+}
+
+.os-picker-btn[data-os-active="true"] svg {
+  color: var(--clay-vivid);
+}
+
+.os-picker-note {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+}
+
+.os-picker-note strong {
+  color: var(--color-foreground);
+}
+
 /* Categoria que contém a lição atual — ícone e nome ganham a cor de marca,
    igual ao destaque do módulo ativo no menu de referência. */
 .guide-nav-category.is-active-category .guide-nav-cat-icon,
@@ -1787,6 +1867,32 @@ a.guide-day-item-link:hover {
   font-family: var(--font-body);
   font-size: 0.8125rem;
   line-height: 1.4;
+  color: var(--day-item-muted);
+}
+
+/* Ícone do assunto (Git, GitHub, Facebook, chave do token...) — só pra
+   deixar a lista mais fácil de reconhecer de relance, ao lado do título. */
+.guide-day-item-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  color: var(--day-item-muted);
+}
+
+/* Linha de ícones de sistema (Windows/Mac/Linux) — só no card que junta
+   os 3 sistemas numa lição só. */
+.guide-day-item-os-row {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: 6px;
+}
+
+.guide-day-item-os-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
   color: var(--day-item-muted);
 }
 

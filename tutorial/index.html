@@ -119,9 +119,7 @@
                   <ul class="guide-nav-items">
                     <li><a class="guide-nav-item" href="instalar-git.html">Instalar o Git</a></li>
                     <li><a class="guide-nav-item" href="criar-conta-github.html">Criar Conta no GitHub</a></li>
-                    <li><a class="guide-nav-item" href="instalacao-windows.html">Instalação no Windows</a></li>
-                    <li><a class="guide-nav-item" href="instalacao-mac.html">Instalação no Mac</a></li>
-                    <li><a class="guide-nav-item" href="instalacao-linux.html">Instalação no Linux</a></li>
+                    <li><a class="guide-nav-item" href="instalacao-claude-code.html">Instalar o Claude Code</a></li>
                   </ul>
                 </div>
 
@@ -290,7 +288,7 @@
           <p class="text-body" style="max-width: var(--reading-column); margin: 0 0 var(--space-8);">
             O mesmo conteúdo da Imersão, organizado em lições curtas — pra você seguir no seu
             ritmo, revisar quando precisar e nunca ficar travado numa etapa. Comece pelo Dia 1,
-            na lição <strong>Instalação no Windows</strong>.
+            na lição <strong>Instalar o Claude Code</strong>.
           </p>
 
           <div class="guide-evolution" data-evolution>
@@ -333,6 +331,11 @@
           <div class="guide-days-grid">
 
             <div class="guide-day-card">
+              <div class="guide-day-congrats" data-day-congrats="1" hidden>
+                <strong>Parabéns! Você completou o Dia 1.</strong>
+                <p>Todas as lições de hoje estão marcadas como concluídas. Quando quiser, siga
+                  pro Dia 2 — o progresso continua salvo neste navegador.</p>
+              </div>
               <div class="guide-day-progress">
                 <div class="guide-day-progress-chips" data-day-progress-chips="1"></div>
                 <span class="guide-day-progress-percent" data-day-progress-percent="1">Carregando...</span>
@@ -343,6 +346,15 @@
                   <div class="guide-day-item-top">
                     <a class="guide-day-item-link" href="instalar-git.html">
                       <span class="guide-day-item-num">1</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <circle cx="4" cy="4" r="1.6" stroke="currentColor" stroke-width="1.3" />
+                          <circle cx="4" cy="12" r="1.6" stroke="currentColor" stroke-width="1.3" />
+                          <circle cx="11.5" cy="8" r="1.6" stroke="currentColor" stroke-width="1.3" />
+                          <path d="M4 5.6V10.4M5.5 8H10" stroke="currentColor" stroke-width="1.3"
+                            stroke-linecap="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Instalar o Git</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
@@ -355,6 +367,17 @@
                   <div class="guide-day-item-top">
                     <a class="guide-day-item-link" href="criar-conta-github.html">
                       <span class="guide-day-item-num">2</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <circle cx="8" cy="7" r="4.3" stroke="currentColor" stroke-width="1.3" />
+                          <path d="M4.5 10.8c-.5.9-.3 1.9.4 2.4" stroke="currentColor" stroke-width="1.1"
+                            stroke-linecap="round" />
+                          <path d="M11.5 10.8c.5.9.3 1.9-.4 2.4" stroke="currentColor" stroke-width="1.1"
+                            stroke-linecap="round" />
+                          <path d="M5.3 5c.5-.9 1.4-1.4 2.7-1.4S10.2 4.1 10.7 5" stroke="currentColor"
+                            stroke-width="1.1" stroke-linecap="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Criar Conta no GitHub</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
@@ -365,42 +388,61 @@
                 </li>
                 <li class="guide-day-item">
                   <div class="guide-day-item-top">
-                    <a class="guide-day-item-link" href="instalacao-windows.html">
+                    <a class="guide-day-item-link" href="instalacao-claude-code.html">
                       <span class="guide-day-item-num">3</span>
-                      <span class="guide-day-item-title">Instalação no Windows</span>
+                      <span class="guide-day-item-title">Instalar o Claude Code</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
-                      data-href="instalacao-windows.html">Não concluído</button>
+                      data-href="instalacao-claude-code.html">Não concluído</button>
                   </div>
-                  <p class="guide-day-item-desc">Node, PowerShell e o Claude Code instalado, configurado e pronto
-                    pra usar.</p>
-                </li>
-                <li class="guide-day-item">
-                  <div class="guide-day-item-top">
-                    <a class="guide-day-item-link" href="instalacao-mac.html">
-                      <span class="guide-day-item-num">4</span>
-                      <span class="guide-day-item-title">Instalação no Mac</span>
-                    </a>
-                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
-                      data-href="instalacao-mac.html">Não concluído</button>
+                  <p class="guide-day-item-desc">Escolha Windows, Mac ou Linux — Node (se precisar), o Claude Code
+                    instalado e pronto pra usar.</p>
+                  <div class="guide-day-item-os-row">
+                    <span class="guide-day-item-os-chip">
+                      <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                        <rect x="2" y="2" width="6.2" height="6.2" stroke="currentColor" stroke-width="1.5" />
+                        <rect x="9.8" y="2" width="6.2" height="6.2" stroke="currentColor" stroke-width="1.5" />
+                        <rect x="2" y="9.8" width="6.2" height="6.2" stroke="currentColor" stroke-width="1.5" />
+                        <rect x="9.8" y="9.8" width="6.2" height="6.2" stroke="currentColor" stroke-width="1.5" />
+                      </svg>
+                      Windows
+                    </span>
+                    <span class="guide-day-item-os-chip">
+                      <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                        <path
+                          d="M12.6 9.4c0-2 1.6-3 1.7-3.1-.9-1.3-2.3-1.5-2.8-1.5-1.2-.1-2.3.7-2.9.7-.6 0-1.5-.7-2.5-.7-1.3 0-2.5.8-3.1 1.9-1.3 2.3-.3 5.8 1 7.7.6.9 1.3 2 2.3 1.9.9 0 1.3-.6 2.4-.6s1.4.6 2.4.6c1 0 1.6-.9 2.2-1.8.7-1 1-2 1-2-.1 0-1.9-.7-1.9-2.9Z"
+                          stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                        <path
+                          d="M10.4 3.8c.4-.5.7-1.2.6-1.9-.7 0-1.5.4-1.9.9-.4.4-.7 1.1-.6 1.8.7.1 1.5-.3 1.9-.8Z"
+                          stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                      </svg>
+                      Mac
+                    </span>
+                    <span class="guide-day-item-os-chip">
+                      <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                        <circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.3" />
+                        <circle cx="7.7" cy="5.6" r="0.55" fill="currentColor" />
+                        <circle cx="10.3" cy="5.6" r="0.55" fill="currentColor" />
+                        <path d="M8.1 7 L9 8 L9.9 7" stroke="currentColor" stroke-width="1.1"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                          d="M5.6 15.5c-.4-2.8.6-5 1.4-5.8.6-.6 1.3-.8 2-.8s1.4.2 2 .8c.8.8 1.8 3 1.4 5.8-1 .5-2.2.8-3.4.8s-2.4-.3-3.4-.8Z"
+                          stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" />
+                      </svg>
+                      Linux
+                    </span>
                   </div>
-                  <p class="guide-day-item-desc">O mesmo Setup Perfeito, no passo a passo do macOS.</p>
-                </li>
-                <li class="guide-day-item">
-                  <div class="guide-day-item-top">
-                    <a class="guide-day-item-link" href="instalacao-linux.html">
-                      <span class="guide-day-item-num">5</span>
-                      <span class="guide-day-item-title">Instalação no Linux</span>
-                    </a>
-                    <button type="button" class="guide-day-item-status not-done" data-toggle-complete
-                      data-href="instalacao-linux.html">Não concluído</button>
-                  </div>
-                  <p class="guide-day-item-desc">O mesmo Setup Perfeito, no passo a passo do Linux.</p>
                 </li>
                 <li class="guide-day-item is-locked">
                   <div class="guide-day-item-top">
                     <span class="guide-day-item-link">
-                      <span class="guide-day-item-num">6</span>
+                      <span class="guide-day-item-num">4</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M5.5 4L2 8l3.5 4M10.5 4L14 8l-3.5 4" stroke="currentColor" stroke-width="1.3"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Claude Code no VS Code</span>
                     </span>
                     <span class="guide-day-item-status soon">Em breve</span>
@@ -411,7 +453,15 @@
                 <li class="guide-day-item is-locked">
                   <div class="guide-day-item-top">
                     <span class="guide-day-item-link">
-                      <span class="guide-day-item-num">7</span>
+                      <span class="guide-day-item-num">5</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <rect x="1.5" y="2.5" width="13" height="11" rx="1.3" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <path d="M4 6l2.5 2L4 10M8 10.5h4" stroke="currentColor" stroke-width="1.2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Domine os comandos</span>
                     </span>
                     <span class="guide-day-item-status soon">Em breve</span>
@@ -422,7 +472,16 @@
                 <li class="guide-day-item is-locked">
                   <div class="guide-day-item-top">
                     <span class="guide-day-item-link">
-                      <span class="guide-day-item-num">8</span>
+                      <span class="guide-day-item-num">6</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M4 2h5l3 3v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z" stroke="currentColor"
+                            stroke-width="1.2" stroke-linejoin="round" />
+                          <path d="M9 2v3h3" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                          <path d="M4.5 8.5h7M4.5 11h5" stroke="currentColor" stroke-width="1.1"
+                            stroke-linecap="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">CLAUDE.md</span>
                     </span>
                     <span class="guide-day-item-status soon">Em breve</span>
@@ -442,7 +501,16 @@
                 <li class="guide-day-item">
                   <div class="guide-day-item-top">
                     <a class="guide-day-item-link" href="conta-facebook.html">
-                      <span class="guide-day-item-num">9</span>
+                      <span class="guide-day-item-num">7</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <rect x="2" y="2" width="12" height="12" rx="2.2" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <path
+                            d="M9.3 13V8.6h1.3l.2-1.7H9.3V5.8c0-.5.1-.8.8-.8h.9V3.4c-.2 0-.7-.1-1.3-.1-1.3 0-2.2.8-2.2 2.3v1.3H6.1v1.7h1.4V13"
+                            stroke="currentColor" stroke-width="1" stroke-linejoin="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Criar Conta do Facebook</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
@@ -453,7 +521,15 @@
                 <li class="guide-day-item">
                   <div class="guide-day-item-top">
                     <a class="guide-day-item-link" href="proteger-conta.html">
-                      <span class="guide-day-item-num">10</span>
+                      <span class="guide-day-item-num">8</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M8 1.5L14 4V8.5C14 12 11.4 14.9 8 15.5C4.6 14.9 2 12 2 8.5V4L8 1.5Z"
+                            stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+                          <path d="M5.5 8L7.2 9.7L10.5 6" stroke="currentColor" stroke-width="1.2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Proteger a Conta (2FA)</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
@@ -465,7 +541,13 @@
                 <li class="guide-day-item">
                   <div class="guide-day-item-top">
                     <a class="guide-day-item-link" href="criar-pagina-facebook.html">
-                      <span class="guide-day-item-num">11</span>
+                      <span class="guide-day-item-num">9</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M3.5 2v12M3.5 2.8h8.2l-1.6 2.6 1.6 2.6H3.5" stroke="currentColor"
+                            stroke-width="1.2" stroke-linejoin="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Criar a Página do Facebook</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
@@ -476,7 +558,16 @@
                 <li class="guide-day-item">
                   <div class="guide-day-item-top">
                     <a class="guide-day-item-link" href="criar-business-manager.html">
-                      <span class="guide-day-item-num">12</span>
+                      <span class="guide-day-item-num">10</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <rect x="1.8" y="5" width="12.4" height="8.5" rx="1.2" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <path d="M5.5 5V3.8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V5" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <path d="M1.8 9h12.4" stroke="currentColor" stroke-width="1.2" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Gerenciador de Negócios</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
@@ -487,7 +578,17 @@
                 <li class="guide-day-item">
                   <div class="guide-day-item-top">
                     <a class="guide-day-item-link" href="vincular-pagina.html">
-                      <span class="guide-day-item-num">13</span>
+                      <span class="guide-day-item-num">11</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <path d="M6 12L3.5 9.5L6 7" stroke="currentColor" stroke-width="1.3"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M12 6L14.5 8.5L12 11" stroke="currentColor" stroke-width="1.3"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M10.5 4.5L7.5 13.5" stroke="currentColor" stroke-width="1.3"
+                            stroke-linecap="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Vincular a Página</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
@@ -498,7 +599,19 @@
                 <li class="guide-day-item">
                   <div class="guide-day-item-top">
                     <a class="guide-day-item-link" href="criar-app-meta.html">
-                      <span class="guide-day-item-num">14</span>
+                      <span class="guide-day-item-num">12</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <rect x="2.5" y="2.5" width="4.5" height="4.5" rx="1" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <rect x="9" y="2.5" width="4.5" height="4.5" rx="1" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <rect x="2.5" y="9" width="4.5" height="4.5" rx="1" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <rect x="9" y="9" width="4.5" height="4.5" rx="1" stroke="currentColor"
+                            stroke-width="1.2" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Criar o App no Meta</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
@@ -509,7 +622,14 @@
                 <li class="guide-day-item">
                   <div class="guide-day-item-top">
                     <a class="guide-day-item-link" href="gerar-token-acesso.html">
-                      <span class="guide-day-item-num">15</span>
+                      <span class="guide-day-item-num">13</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <circle cx="5.5" cy="5.5" r="3" stroke="currentColor" stroke-width="1.3" />
+                          <path d="M7.7 7.7L13.5 13.5M10.8 10.8l1.4-1.4M12.7 12.7l1.4-1.4" stroke="currentColor"
+                            stroke-width="1.3" stroke-linecap="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Gerar o Token de Acesso</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
@@ -520,7 +640,15 @@
                 <li class="guide-day-item">
                   <div class="guide-day-item-top">
                     <a class="guide-day-item-link" href="setup-instagram-skill.html">
-                      <span class="guide-day-item-num">16</span>
+                      <span class="guide-day-item-num">14</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <rect x="2" y="2" width="12" height="12" rx="3.5" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <circle cx="8" cy="8" r="2.6" stroke="currentColor" stroke-width="1.2" />
+                          <circle cx="11.3" cy="4.7" r="0.7" fill="currentColor" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Skill: Setup Instagram</span>
                     </a>
                     <button type="button" class="guide-day-item-status not-done" data-toggle-complete
@@ -532,7 +660,16 @@
                 <li class="guide-day-item is-locked">
                   <div class="guide-day-item-top">
                     <span class="guide-day-item-link">
-                      <span class="guide-day-item-num">17</span>
+                      <span class="guide-day-item-num">15</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <rect x="1.5" y="2.5" width="13" height="10" rx="1.2" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <circle cx="5" cy="6" r="1.1" stroke="currentColor" stroke-width="1" />
+                          <path d="M2 11l3.2-3 2.3 2.2L10 8l3.5 3" stroke="currentColor" stroke-width="1.2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Produção de conteúdo</span>
                     </span>
                     <span class="guide-day-item-status soon">Em breve</span>
@@ -543,7 +680,16 @@
                 <li class="guide-day-item is-locked">
                   <div class="guide-day-item-top">
                     <span class="guide-day-item-link">
-                      <span class="guide-day-item-num">18</span>
+                      <span class="guide-day-item-num">16</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <rect x="1.8" y="5" width="12.4" height="8.5" rx="1.2" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <path d="M5.5 5V3.8a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1V5" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <path d="M1.8 9h12.4" stroke="currentColor" stroke-width="1.2" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Pronto pra vender</span>
                     </span>
                     <span class="guide-day-item-status soon">Em breve</span>
@@ -553,7 +699,16 @@
                 <li class="guide-day-item is-locked">
                   <div class="guide-day-item-top">
                     <span class="guide-day-item-link">
-                      <span class="guide-day-item-num">19</span>
+                      <span class="guide-day-item-num">17</span>
+                      <span class="guide-day-item-icon" aria-hidden="true">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                          <rect x="2" y="3" width="12" height="10.5" rx="1.3" stroke="currentColor"
+                            stroke-width="1.2" />
+                          <path d="M2 6.5h12" stroke="currentColor" stroke-width="1.2" />
+                          <path d="M5 1.8v3M11 1.8v3" stroke="currentColor" stroke-width="1.2"
+                            stroke-linecap="round" />
+                        </svg>
+                      </span>
                       <span class="guide-day-item-title">Seu plano de 30 dias</span>
                     </span>
                     <span class="guide-day-item-status soon">Em breve</span>
