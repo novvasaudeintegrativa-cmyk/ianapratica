@@ -1763,6 +1763,98 @@ a.guide-nav-item:hover {
   }
 }
 
+/* Zerar progresso — Dia 1 / Dia 2 / trilha inteira, sempre com
+   confirmação e uma janela de "Desfazer" que guarda o estado anterior
+   até a pessoa decidir descartar (sobrevive até a um recarregamento de
+   página, pra não sumir sem querer). */
+.guide-reset-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.guide-reset-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.guide-reset-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-muted-foreground);
+  margin-right: 2px;
+}
+
+.guide-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-muted-foreground);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.guide-reset-btn:hover {
+  border-color: var(--color-foreground);
+  color: var(--color-foreground);
+}
+
+.guide-reset-btn-danger:hover {
+  border-color: var(--color-destructive);
+  color: var(--color-destructive);
+}
+
+.guide-reset-undo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(134, 90, 7, 0.08);
+  border: 1px solid rgba(134, 90, 7, 0.3);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-warning);
+}
+
+.guide-reset-undo[hidden] {
+  display: none;
+}
+
+.guide-reset-undo-btn {
+  flex-shrink: 0;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-warning);
+  background: transparent;
+  color: var(--color-warning);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+.guide-reset-undo-btn:hover {
+  background: var(--color-warning);
+  color: #ffffff;
+}
+
 .guide-day-card {
   /* Variáveis locais — funcional, sem cor de marca: fundo neutro fixo,
      não muda mais no hover nem alterna entre os dois cards. */
@@ -1793,6 +1885,39 @@ a.guide-nav-item:hover {
   font-size: 1.0625rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  color: var(--day-fg);
+}
+
+/* Mensagem de parabéns quando todas as lições já disponíveis daquele dia
+   foram concluídas. Não conta os módulos "Em breve" ainda não lançados
+   no cálculo — senão nunca apareceria enquanto o curso continua
+   crescendo com novo conteúdo. */
+.guide-day-congrats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: rgba(47, 118, 19, 0.08);
+  border: 1px solid rgba(47, 118, 19, 0.3);
+}
+
+.guide-day-congrats[hidden] {
+  display: none;
+}
+
+.guide-day-congrats strong {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-success);
+}
+
+.guide-day-congrats p {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  line-height: 1.5;
   color: var(--day-fg);
 }
 

@@ -353,9 +353,115 @@
       var evoMeter = document.querySelector("[data-evolution-day" + dayNum + "-meter]");
       if (evoLabel) evoLabel.textContent = percent + "%";
       if (evoMeter) evoMeter.style.width = percent + "%";
+
+      /* Parabéns: só considera as lições que já existem de verdade (com
+         link), ignorando os módulos "Em breve" — senão a mensagem nunca
+         apareceria enquanto o curso continua crescendo. */
+      var congrats = document.querySelector('[data-day-congrats="' + dayNum + '"]');
+      if (congrats) {
+        var realItems = section.querySelectorAll(".guide-nav-item[href]");
+        var realDone = 0;
+        realItems.forEach(function (item) {
+          if (completed.indexOf(item.getAttribute("href")) !== -1) realDone++;
+        });
+        congrats.hidden = !(realItems.length > 0 && realDone === realItems.length);
+      }
     });
   }
   renderDayProgress();
+
+  /* Zerar progresso — Dia 1, Dia 2 ou a trilha inteira, sempre com
+     confirmação antes de mexer em qualquer coisa. Guarda o estado
+     anterior (localStorage) pra pessoa poder "Desfazer" e voltar
+     exatamente pra onde estava — inclusive depois de recarregar a
+     página, já que o aviso de desfazer é restaurado a partir do que
+     ficou salvo. */
+  var RESET_UNDO_KEY = "ia-na-pratica-tutorial-progress-v2-undo";
+  var resetButtons = document.querySelectorAll("[data-reset-scope]");
+  var undoBar = document.querySelector("[data-reset-undo]");
+  var undoMessage = document.querySelector("[data-reset-undo-message]");
+  var undoBtn = document.querySelector("[data-reset-undo-btn]");
+
+  function getDaySectionHrefs(dayNum) {
+    var sections = document.querySelectorAll(".guide-nav-section");
+    var section = sections[dayNum - 1];
+    if (!section) return [];
+    var hrefs = [];
+    section.querySelectorAll(".guide-nav-item[href]").forEach(function (item) {
+      hrefs.push(item.getAttribute("href").split("/").pop());
+    });
+    return hrefs;
+  }
+
+  function refreshAllViews() {
+    if (navItems.length) renderTrail();
+    renderDayCards();
+    renderDayProgress();
+  }
+
+  function showUndo(label) {
+    if (!undoBar) return;
+    if (undoMessage) undoMessage.textContent = label + " zerado.";
+    undoBar.hidden = false;
+  }
+
+  function hideUndo() {
+    if (undoBar) undoBar.hidden = true;
+    try { window.localStorage.removeItem(RESET_UNDO_KEY); } catch (e) { /* segue sem persistir */ }
+  }
+
+  if (resetButtons.length) {
+    resetButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var scope = btn.getAttribute("data-reset-scope");
+        var scopeLabel = scope === "all" ? "Trilha inteira" : "Dia " + scope;
+        var confirmMsg = scope === "all"
+          ? "Tem certeza que quer zerar a trilha inteira? Todas as lições concluídas do Dia 1 e do Dia 2 vão voltar a não concluídas."
+          : "Tem certeza que quer zerar o " + scopeLabel + "? As lições concluídas desse dia vão voltar a não concluídas.";
+        if (!window.confirm(confirmMsg)) return;
+
+        var current = readCompleted();
+        var snapshot = { list: current.slice(), label: scopeLabel };
+        try { window.localStorage.setItem(RESET_UNDO_KEY, JSON.stringify(snapshot)); } catch (e) { /* segue */ }
+
+        var next;
+        if (scope === "all") {
+          next = [];
+        } else {
+          var toRemove = getDaySectionHrefs(Number(scope));
+          next = current.filter(function (href) { return toRemove.indexOf(href) === -1; });
+        }
+        writeCompleted(next);
+        refreshAllViews();
+        showUndo(scopeLabel);
+      });
+    });
+  }
+
+  if (undoBtn) {
+    undoBtn.addEventListener("click", function () {
+      var raw = null;
+      try { raw = window.localStorage.getItem(RESET_UNDO_KEY); } catch (e) { /* sem storage */ }
+      if (!raw) return;
+      var snapshot;
+      try { snapshot = JSON.parse(raw); } catch (e) { return; }
+      writeCompleted(snapshot.list || []);
+      hideUndo();
+      refreshAllViews();
+    });
+  }
+
+  if (undoBar) {
+    var storedUndo = null;
+    try { storedUndo = window.localStorage.getItem(RESET_UNDO_KEY); } catch (e) { /* sem storage */ }
+    if (storedUndo) {
+      try {
+        showUndo(JSON.parse(storedUndo).label);
+      } catch (e) {
+        hideUndo();
+      }
+    }
+  }
 
   /* Botão "Marcar como concluída" — único jeito de avançar na trilha.
      Também libera o link "Próxima" da paginação, que começa travado

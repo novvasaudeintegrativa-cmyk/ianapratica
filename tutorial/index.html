@@ -63,13 +63,6 @@
     </nav>
   </header>
 
-  <div class="guide-progress-rail">
-    <div class="container guide-progress-rail-inner">
-      <span class="guide-progress-rail-label" data-progress-rail-label>Carregando trilha...</span>
-      <div class="guide-progress-rail-track" data-progress-rail-track></div>
-    </div>
-  </div>
-
   <main id="conteudo">
     <section class="guide-shell">
       <div class="container">
@@ -328,6 +321,20 @@
             </div>
           </div>
 
+          <div class="guide-reset-bar">
+            <div class="guide-reset-actions">
+              <span class="guide-reset-label">Gerenciar progresso:</span>
+              <button type="button" class="guide-reset-btn" data-reset-scope="1">Zerar Dia 1</button>
+              <button type="button" class="guide-reset-btn" data-reset-scope="2">Zerar Dia 2</button>
+              <button type="button" class="guide-reset-btn guide-reset-btn-danger" data-reset-scope="all">Zerar
+                trilha inteira</button>
+            </div>
+            <div class="guide-reset-undo" data-reset-undo hidden>
+              <span data-reset-undo-message></span>
+              <button type="button" class="guide-reset-undo-btn" data-reset-undo-btn>Desfazer</button>
+            </div>
+          </div>
+
           <div class="guide-days-grid">
 
             <div class="guide-day-card">
@@ -492,6 +499,11 @@
             </div>
 
             <div class="guide-day-card">
+              <div class="guide-day-congrats" data-day-congrats="2" hidden>
+                <strong>Parabéns! Você completou o Dia 2.</strong>
+                <p>Todas as lições disponíveis de hoje estão marcadas como concluídas. Os próximos
+                  módulos (Produção de conteúdo, Pronto pra vender, Plano de 30 dias) chegam em breve.</p>
+              </div>
               <div class="guide-day-progress">
                 <div class="guide-day-progress-chips" data-day-progress-chips="2"></div>
                 <span class="guide-day-progress-percent" data-day-progress-percent="2">Carregando...</span>
