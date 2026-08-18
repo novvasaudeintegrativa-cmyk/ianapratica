@@ -1515,6 +1515,41 @@ a.guide-nav-item:hover {
   white-space: pre-wrap;
 }
 
+/* Menu do app Desktop (ex.: dropdown "Adicionar" na tela de Habilidades) —
+   fundo claro, lista de opções com ícone, igual ao resto do app Claude. */
+.mockup-menu {
+  max-width: var(--reading-column);
+  border: 1px solid rgba(20, 20, 19, 0.12);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--elevation-floating);
+  background: #ffffff;
+}
+
+.mockup-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: #1a1a1a;
+  border-bottom: 1px solid rgba(20, 20, 19, 0.08);
+}
+
+.mockup-menu-item:last-child {
+  border-bottom: none;
+}
+
+.mockup-menu-item.is-highlighted {
+  background: rgba(255, 90, 31, 0.07);
+}
+
+.mockup-menu-icon {
+  flex-shrink: 0;
+  color: #6e6e73;
+}
+
 /* ==========================================================================
    8. PAGINAÇÃO — navegação entre lições no rodapé do conteúdo
    ========================================================================== */
