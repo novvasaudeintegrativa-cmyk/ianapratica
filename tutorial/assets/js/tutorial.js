@@ -140,6 +140,23 @@
     if (percentLabel) percentLabel.textContent = percent + "%";
     if (stepsLabel) stepsLabel.textContent = doneCount + " de " + total + " lições concluídas";
 
+    var evoValue = document.querySelector("[data-evolution-value]");
+    var evoMeter = document.querySelector("[data-evolution-meter]");
+    var evoMessage = document.querySelector("[data-evolution-message]");
+    if (evoValue) evoValue.textContent = percent + "%";
+    if (evoMeter) evoMeter.style.width = percent + "%";
+    if (evoMessage) {
+      var remaining = total - doneCount;
+      if (doneCount === 0) {
+        evoMessage.textContent = "Comece agora — o primeiro passo leva só uns minutos.";
+      } else if (remaining === 0) {
+        evoMessage.textContent = "Trilha completa! Você terminou todos os " + total + " passos.";
+      } else {
+        evoMessage.textContent = "Você já concluiu " + doneCount + " de " + total +
+          " passos — faltam só " + remaining + " pra terminar a trilha inteira.";
+      }
+    }
+
     renderRail();
 
     return completed;
@@ -215,8 +232,7 @@
     items.forEach(function (item, i) {
       var numEl = item.querySelector(".guide-day-item-num");
       if (numEl) {
-        numEl.textContent = String(i + 1);
-        numEl.title = "Passo " + (i + 1);
+        numEl.textContent = "Passo " + (i + 1);
       }
 
       var toggle = item.querySelector("[data-toggle-complete]");
@@ -241,10 +257,61 @@
         writeCompleted(list);
         applyState(nowDone);
         if (navItems.length) renderTrail();
+        renderDayProgress();
       });
     });
   }
   renderDayCards();
+
+  /* Mini-trilha por dia, no topo de cada card do hub — P1, P2... só dos
+     passos daquele dia (a seção .guide-nav-section correspondente na
+     sidebar já separa isso), com percentual concluído daquele dia
+     específico. A cor muda pra laranja conforme avança. */
+  function renderDayProgress() {
+    var sections = document.querySelectorAll(".guide-nav-section");
+    if (!sections.length) return;
+    var completed = readCompleted();
+
+    sections.forEach(function (section, dayIndex) {
+      var dayNum = dayIndex + 1;
+      var track = document.querySelector('[data-day-progress-chips="' + dayNum + '"]');
+      var percentLabel = document.querySelector('[data-day-progress-percent="' + dayNum + '"]');
+      if (!track) return;
+
+      var items = section.querySelectorAll(".guide-nav-item");
+      track.innerHTML = "";
+      var doneCount = 0;
+
+      items.forEach(function (item, i) {
+        var href = item.getAttribute("href");
+        var isDone = href && completed.indexOf(href) !== -1;
+        if (isDone) doneCount++;
+
+        var chip = document.createElement(href ? "a" : "span");
+        chip.className = "day-progress-chip";
+        chip.textContent = "P" + (i + 1);
+        chip.title = item.textContent.trim();
+        if (href) {
+          chip.href = href;
+          if (isDone) chip.classList.add("is-done");
+        } else {
+          chip.classList.add("is-locked");
+        }
+        track.appendChild(chip);
+      });
+
+      var percent = items.length ? Math.round((doneCount / items.length) * 100) : 0;
+      if (percentLabel) {
+        percentLabel.textContent = percent + "% concluído (" + doneCount + " de " + items.length + ")";
+      }
+
+      var evoLabel = document.querySelector("[data-evolution-day" + dayNum + "-label]");
+      var evoMeter = document.querySelector("[data-evolution-day" + dayNum + "-meter]");
+      if (evoLabel) evoLabel.textContent = percent + "%";
+      if (evoMeter) evoMeter.style.width = percent + "%";
+    });
+  }
+  renderDayProgress();
 
   /* Botão "Marcar como concluída" — único jeito de avançar na trilha.
      Também libera o link "Próxima" da paginação, que começa travado

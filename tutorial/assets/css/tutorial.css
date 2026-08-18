@@ -1322,6 +1322,15 @@ a.guide-nav-item:hover {
   border-top: 1px solid var(--color-border);
 }
 
+/* Mesma navegação, repetida no topo da lição — sem a borda/respiro de
+   quem vem depois de um bloco de conteúdo. */
+.guide-pagination-top {
+  margin-top: 0;
+  margin-bottom: var(--space-10);
+  padding-top: 0;
+  border-top: none;
+}
+
 .guide-pagination-link {
   display: flex;
   flex-direction: column;
@@ -1492,6 +1501,117 @@ a.guide-nav-item:hover {
 }
 
 /* ==========================================================================
+   9b. EVOLUÇÃO — meter (barra + trilho na mesma cor, mais claro) e uma
+   figura de destaque com a % geral. Segue o guia de dataviz do projeto:
+   "uma proporção contra um limite" pede Meter, não pizza nem linha do
+   tempo (não guardamos quando cada passo foi concluído, só se foi).
+   ========================================================================== */
+.guide-evolution {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  flex-wrap: wrap;
+  padding: var(--space-6);
+  margin-bottom: var(--space-10);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--elevation-raised);
+}
+
+.guide-evolution-figure {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.guide-evolution-value {
+  font-family: var(--font-sans);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-foreground);
+  font-variant-numeric: proportional-nums;
+}
+
+.guide-evolution-label {
+  margin-top: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+}
+
+.guide-evolution-main {
+  flex: 1;
+  min-width: 240px;
+}
+
+/* Meter — trilho num tom claro do mesmo laranja da marca, não cinza */
+.guide-meter-track {
+  width: 100%;
+  border-radius: var(--radius-full);
+  background: rgba(255, 90, 31, 0.14);
+  overflow: hidden;
+}
+
+.guide-meter-lg .guide-meter-track {
+  height: 14px;
+}
+
+.guide-meter-sm .guide-meter-track {
+  height: 8px;
+}
+
+.guide-meter-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--radius-full);
+  background: var(--clay-vivid);
+  transition: width var(--duration-gentle) var(--ease-out);
+}
+
+.guide-evolution-message {
+  margin: var(--space-3) 0 var(--space-4);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-ink-soft);
+}
+
+.guide-evolution-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+
+.guide-evolution-split-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+.guide-evolution-split-top span:last-child {
+  color: var(--color-foreground);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 700;
+}
+
+@media (max-width: 560px) {
+  .guide-evolution-split {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+}
+
+/* ==========================================================================
    10. DIAS — dois cards (Dia 1 / Dia 2), lições em sequência dentro de
    cada um em vez de um card por lição. O efeito de hover é no card do
    dia inteiro: amplia 5% e esquenta levemente a cor de fundo.
@@ -1500,6 +1620,60 @@ a.guide-nav-item:hover {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-6);
+}
+
+/* Mini-trilha no topo de cada card — P1, P2... só daquele dia, mais o
+   percentual concluído daquele dia especificamente (diferente da barra
+   fixa do topo da página, que soma os dois dias). */
+.guide-day-progress {
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--day-item-border);
+}
+
+.guide-day-progress-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+
+.day-progress-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--day-item-border);
+  background: transparent;
+  color: var(--day-item-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.day-progress-chip.is-done {
+  background: var(--clay-vivid);
+  border-color: var(--clay-vivid);
+  color: #ffffff;
+}
+
+.day-progress-chip.is-locked {
+  border-style: dashed;
+  opacity: 0.6;
+}
+
+.guide-day-progress-percent {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--day-fg);
 }
 
 @media (min-width: 780px) {
@@ -1561,7 +1735,15 @@ a.guide-nav-item:hover {
   background: var(--day-item-bg);
   color: var(--day-fg);
   font-family: var(--font-sans);
-  transition: border-color var(--duration-gentle) var(--ease-out);
+  transition: border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+
+/* Igual ao card de link "nodejs.org/download": borda e fundo viram
+   laranja quando o mouse passa em cima, deixando claro que é clicável —
+   no card inteiro, não só no numerozinho. */
+.guide-day-item:has(.guide-day-item-link:hover) {
+  border-color: var(--clay-vivid);
+  background: rgba(255, 90, 31, 0.06);
 }
 
 .guide-day-item.is-locked {
@@ -1608,28 +1790,37 @@ a.guide-day-item-link:hover {
   color: var(--day-item-muted);
 }
 
-/* Numerozinho — só ele ganha fundo laranja, e só no hover do link */
+/* "Passo N" — pílula laranja sempre em destaque, com o texto por
+   extenso (não só o número solto). */
 .guide-day-item-num {
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 22px;
-  height: 22px;
-  padding: 0 6px;
+  height: 26px;
+  padding: 0 12px;
   border-radius: var(--radius-full);
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--day-item-muted);
-  background: transparent;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  background: var(--clay-vivid);
+  box-shadow: 0 2px 6px -1px rgba(255, 90, 31, 0.5);
   white-space: nowrap;
-  transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.guide-day-item-link.is-locked .guide-day-item-num,
+.guide-day-item.is-locked .guide-day-item-num {
+  background: var(--color-border);
+  color: var(--day-item-muted);
+  box-shadow: none;
 }
 
 a.guide-day-item-link:hover .guide-day-item-num {
-  background: var(--clay-vivid);
-  color: #ffffff;
+  transform: scale(1.1);
+  box-shadow: 0 3px 10px -1px rgba(255, 90, 31, 0.65);
 }
 
 .guide-day-item-status {
