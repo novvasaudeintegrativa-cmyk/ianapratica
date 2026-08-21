@@ -10,11 +10,12 @@ description: >
   prévias reais nos 5 frameworks de persuasão pra escolher, e aciona o
   subagente `copywriter` pra escrever de verdade. Use quando o usuário
   pedir "contrate sua agência de marketing", "agência de marketing IA
-  na Prática", "monte meu time de marketing", "monte minha agência de
-  IA", "criar squad", "instalar o maestro", "instalar os agentes",
-  "preparar o time", copy, legenda, caption, texto do post, roteiro de
-  carrossel, roteiro de reels, criativo, gancho, hook, ideia de post,
-  briefing de post, "entrevista", ou "quero fazer uma entrevista" — sem
+  na Prática", "agência", "monte meu time de marketing", "monte minha
+  agência de IA", "criar squad", "instalar o maestro", "instalar os
+  agentes", "preparar o time", copy, legenda, caption, texto do post,
+  roteiro de carrossel, roteiro de reels, criativo, gancho, hook, ideia
+  de post, briefing de post, "entrevista", "nova postagem", "criar
+  post", ou "quero fazer uma entrevista" — sem
   precisar de calendário nem de visual, só o texto de uma peça. Pra
   planejar várias peças de uma vez ou já sair com o visual pronto, use
   `/maestro-ia-na-pratica` em vez desta.
