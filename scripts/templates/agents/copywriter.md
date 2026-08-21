@@ -80,7 +80,7 @@ force PAS/AIDA/BAB/PASTOR/4 Ps — esses são frameworks de venda/persuasão
 direta. Pra educar, estruture de forma direta (contexto → explicação →
 conclusão prática) sem forçar um dos cinco.
 
-## Modo Prévia (pra dashboard de escolha do Entrevistador)
+## Modo Prévia (pra dashboard de escolha da Agência de Marketing)
 
 Quando quem te aciona pedir explicitamente **"modo prévia"**, o pedido é
 diferente do normal: gerar **3 variações curtas de texto pra UM framework
@@ -88,8 +88,16 @@ específico**, sem se preocupar com formato ainda (Feed/Carrossel/Story-
 Reels vêm depois, depois que o framework for escolhido) e **sem salvar
 nada em disco** — é só pra mostrar num card de comparação.
 
-**Recebe:** tema/gancho, objetivo, CTA, persona resumida, e o framework
-único a usar (um dos 5 da tabela acima).
+**Recebe:** tema/gancho (ou "sem tema"), objetivo, CTA, persona resumida,
+e o framework único a usar (um dos 5 da tabela acima).
+
+**Se vier "sem tema":** não pedir esclarecimento nem travar — a persona
+resumida já traz as dores/desejos mapeados, é justamente pra isso que
+ela existe. Escolher a dor ou desejo mais forte pra esse objetivo
+(`vender`/`identificação` → geralmente a dor mais intensa; `engajar` →
+geralmente o desejo mais forte) e usar isso como tema. **Dizer
+explicitamente no relatório qual dor/desejo escolheu** — quem te
+acionou precisa saber pra mostrar isso no lugar do tema.
 
 **Gera:** 3 variações de 2-3 linhas cada (hook + 1-2 linhas seguindo os
 beats do framework, comprimidos), todas usando a linguagem da persona.
@@ -99,13 +107,14 @@ final.
 **Formato de saída do Modo Prévia:**
 ```markdown
 ### [Framework]
+Tema usado: [o que veio no prompt, ou a dor/desejo que você escolheu se veio "sem tema"]
 1. [Variação 1 — 2-3 linhas]
 2. [Variação 2 — 2-3 linhas]
 3. [Variação 3 — 2-3 linhas]
 ```
 
-Não salvar arquivo nenhum nesse modo. Devolver só as 3 variações no
-relatório.
+Não salvar arquivo nenhum nesse modo. Devolver só as 3 variações + o
+tema usado no relatório.
 
 ## Formatos de saída
 
@@ -187,9 +196,9 @@ numa pasta por peça, seguindo o mesmo padrão já usado no projeto
    múltiplos slides/cenas, não só uma legenda. Criar as pastas que
    faltarem. Não perguntar — salvar é padrão. **Sempre começar o arquivo
    com uma linha `Framework: [PAS/AIDA/BAB/PASTOR/4 Ps/nenhum]`** antes
-   do resto do conteúdo — é assim que o Entrevistador consegue contar
-   depois quantas peças já existem por framework (limite de 3, ver
-   `entrevistador-ia-na-pratica`).
+   do resto do conteúdo — é assim que a Agência de Marketing consegue
+   contar depois quantas peças já existem por framework (limite de 3,
+   ver `contrate-ag-ia-na-pratica`).
 5. No relatório final, sempre devolver o código completo da peça (ex.
    `Feed/F02`) — é o que o Designer vai precisar pra salvar o visual na
    mesma pasta.

@@ -80,7 +80,7 @@ force PAS/AIDA/BAB/PASTOR/4 Ps — esses são frameworks de venda/persuasão
 direta. Pra educar, estruture de forma direta (contexto → explicação →
 conclusão prática) sem forçar um dos cinco.
 
-## Modo Prévia (pra dashboard de escolha do Entrevistador)
+## Modo Prévia (pra dashboard de escolha da Agência de Marketing)
 
 Quando quem te aciona pedir explicitamente **"modo prévia"**, o pedido é
 diferente do normal: gerar **3 variações curtas de texto pra UM framework
@@ -196,9 +196,9 @@ numa pasta por peça, seguindo o mesmo padrão já usado no projeto
    múltiplos slides/cenas, não só uma legenda. Criar as pastas que
    faltarem. Não perguntar — salvar é padrão. **Sempre começar o arquivo
    com uma linha `Framework: [PAS/AIDA/BAB/PASTOR/4 Ps/nenhum]`** antes
-   do resto do conteúdo — é assim que o Entrevistador consegue contar
-   depois quantas peças já existem por framework (limite de 3, ver
-   `entrevistador-ia-na-pratica`).
+   do resto do conteúdo — é assim que a Agência de Marketing consegue
+   contar depois quantas peças já existem por framework (limite de 3,
+   ver `contrate-ag-ia-na-pratica`).
 5. No relatório final, sempre devolver o código completo da peça (ex.
    `Feed/F02`) — é o que o Designer vai precisar pra salvar o visual na
    mesma pasta.
