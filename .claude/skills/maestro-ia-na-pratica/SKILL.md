@@ -18,31 +18,19 @@ carregar a persona, decidir quem do squad entra em ação e em que ordem,
 acionar cada um via a ferramenta `Agent` com um briefing completo, e
 consolidar o resultado final pro usuário.
 
-## Pré-requisito: Instalar o Squad (automático)
+## Pré-requisito
 
-Este fluxo depende de três subagentes em `.claude/agents/`: `social-
-media.md`, `copywriter.md` e `designer.md`. Você é responsável por
-instalá-los, não só checar:
+Este fluxo depende de três subagentes já instalados em `.claude/agents/`:
+`social-media.md`, `copywriter.md` e `designer.md`. Quem instala isso é
+a Skill `/contrate-sua-agencia-de-marketing`, não o Maestro — não
+duplicar essa lógica aqui.
 
-1. Verificar quais dos três já existem em `.claude/agents/`.
-2. **Para cada um que faltar**, copiar o conteúdo de
-   `scripts/templates/agents/[nome].md` (material de apoio do curso, vem
-   junto do projeto) pra `.claude/agents/[nome].md` — criar a pasta
-   `.claude/agents/` se não existir. Não perguntar antes, instalar é
-   padrão (mesma lógica de auto-persistência das outras Skills).
-3. **Se o arquivo de origem não existir** em `scripts/templates/agents/`
-   (projeto sem esse material de apoio), aí sim avisar o usuário e parar
-   — não simular o papel do especialista você mesmo nem inventar o
-   conteúdo do subagente na hora.
-4. Avisar rapidamente quais foram instalados agora, se algum: "Preparei
-   seu squad: [lista]." Se todos já existiam, seguir direto sem
-   mencionar.
+**Se algum dos três não existir**, avisar o usuário:
+> "Ainda não encontrei seu squad completo instalado. Rode
+> `/contrate-sua-agencia-de-marketing` primeiro — ela prepara o Maestro
+> e os três especialistas de uma vez — e depois volte aqui."
 
-**Isso faz o Maestro ser o ponto de entrada que prepara o squad pra
-todo o resto do projeto** — inclusive pro Entrevistador, que só escreve
-depois que o `copywriter` existir. Se o Entrevistador rodar primeiro e
-não achar o `copywriter`, ele orienta o usuário a rodar `/maestro-ia-
-na-pratica` uma vez (nem que seja só pra isso) antes de tentar de novo.
+Parar e não simular o papel do especialista você mesmo.
 
 ## Passo 0: Carregar a Persona (OBRIGATÓRIO)
 
