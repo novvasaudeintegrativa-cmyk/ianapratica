@@ -306,7 +306,7 @@ criar outra.</p>` antes dos chips.
 
 ## Passo D: Interpretar o retorno do usuário
 
-Três respostas possíveis (o usuário cola o que copiou do dashboard, ou
+Quatro respostas possíveis (o usuário cola o que copiou do dashboard, ou
 escreve em português livre — interpretar a intenção, não exigir o texto
 exato):
 
@@ -341,6 +341,14 @@ mesmo que em palavras soltas): seguir pro Passo Z com essas informações.
 5. Avisar: "Apaguei [Formato] [Número]. Já pode criar outra peça com
    [Framework] se quiser — é só voltar no dashboard (F5) e usar a mesma
    escolha de antes, ou pedir uma prévia nova."
+
+**(d) Pedido de calendário** (ex. "Quero um calendário semanal de
+conteúdo", "Quero um calendário mensal de conteúdo"): isso não é mais
+peça única, é campanha — não seguir pro Passo Z. Perguntar só a meta do
+período ("Qual a meta desse período? Ex: 'vender a turma de outubro',
+'aquecer lançamento', 'crescer seguidores'") e então acionar `Maestro`
+(Fluxo 4: Só Calendário) com a persona resumida (Passo A1), o período
+(semanal/mensal, conforme o botão clicado) e essa meta.
 
 ## Passo Z: Acionar o subagente pra escrita final
 

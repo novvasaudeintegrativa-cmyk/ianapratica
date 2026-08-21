@@ -78,6 +78,9 @@
   .meta-banner strong{display:block;font-size:14px;margin-bottom:2px;color:#fff;}
   .meta-banner a{color:#fff;background:var(--accent-deep);text-decoration:none;padding:8px 16px;border-radius:999px;font-weight:700;font-size:12px;white-space:nowrap;}
   .meta-banner a:hover{background:var(--accent);color:#fff;}
+  .calendar-btns{display:flex;gap:8px;flex-wrap:wrap;}
+  .calendar-btn{background:none;border:1.5px solid var(--accent);color:var(--accent-bright);padding:8px 14px;border-radius:999px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;}
+  .calendar-btn:hover{background:var(--accent);color:#fff;}
 </style>
 </head>
 <body>
@@ -111,6 +114,17 @@
       Isso exige conectar sua conta Meta (app, token) primeiro — essa peça você aprova e publica na mão até lá.
     </div>
     <a href="{{META_SETUP_LINK}}">🔗 Conectar Meta →</a>
+  </div>
+
+  <div class="meta-banner">
+    <div>
+      <strong>📅 Quer planejar um período inteiro em vez de só essa peça?</strong>
+      O Maestro monta um calendário misturando Feed, Carrossel, Stories e Reels ao longo do período. Texto e imagem saem prontos pra Feed/Carrossel/Stories; Reels sai com roteiro pronto (o vídeo em si ainda não é gerado automaticamente).
+    </div>
+    <div class="calendar-btns">
+      <button class="calendar-btn" data-periodo="semanal">📅 Calendário semanal</button>
+      <button class="calendar-btn" data-periodo="mensal">📅 Calendário mensal</button>
+    </div>
   </div>
 
   <p class="section-label">👉 Escolha um card abaixo:</p>
@@ -211,6 +225,15 @@
     catch(e) { return false; }
     finally { document.body.removeChild(ta); }
   }
+
+  document.querySelectorAll('.calendar-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const periodo = btn.dataset.periodo;
+      const phrase = 'Quero um calendário ' + periodo + ' de conteúdo';
+      const ok = copyToClipboard(phrase);
+      toast(ok ? 'Copiado — cole no chat com o Claude: "' + phrase + '"' : 'Copie manualmente: ' + phrase);
+    });
+  });
 
   document.querySelectorAll('.piece-del').forEach(btn => {
     btn.addEventListener('click', () => {
