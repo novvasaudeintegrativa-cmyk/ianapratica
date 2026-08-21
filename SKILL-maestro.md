@@ -1,5 +1,5 @@
 ---
-name: maestro-ia-na-pratica
+name: maestro
 description: >
   Orquestra o squad de marketing (Social Media, Copywriter, Designer) pra
   transformar a persona do negócio em conteúdo pronto pro Instagram —
@@ -31,8 +31,8 @@ instalado.
 
 Igual às outras Skills do projeto: procurar `docs/persona.md` e, se não
 achar, a seção `## Persona do meu negócio` no `CLAUDE.md`. Se nenhum
-existir, parar e orientar o usuário a rodar a Skill Persona Profunda
-primeiro — nenhum agente do squad trabalha sem persona real.
+existir, parar e orientar o usuário a rodar `/persona` primeiro — nenhum
+agente do squad trabalha sem persona real.
 
 ## Árvore de Decisão
 

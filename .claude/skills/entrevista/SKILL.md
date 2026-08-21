@@ -12,7 +12,7 @@ description: >
   post, "entrevista", "entrevistador", ou "quero fazer uma entrevista" —
   sem precisar de calendário nem de visual, só o texto de uma peça. Pra
   planejar várias peças de uma vez ou já sair com o visual pronto, use
-  `/maestro-ia-na-pratica` em vez desta.
+  `/maestro` em vez desta.
 ---
 
 # Entrevistador IA na Prática — Front-end Interativo do Subagente Copywriter
@@ -57,7 +57,7 @@ Pedido do Usuário
 |   --> formato pré-conhecido = Reels
 |
 |-- "semana" / "pacote" / "calendário" / "vários posts" / "quero o visual também"
-|   --> isso é campanha, não peça única — redirecionar pro `/maestro-ia-na-pratica`
+|   --> isso é campanha, não peça única — redirecionar pro `/maestro`
 ```
 
 "Formato pré-conhecido" só pré-seleciona o botão certo no dashboard (Passo
@@ -79,7 +79,7 @@ sem frameworks nem dashboard.
    `CLAUDE.md`.
 3. **Se nenhum dos dois existir:** parar aqui. Avisar o usuário:
    > "Ainda não encontrei a persona do seu negócio salva neste projeto.
-   > Antes de escrever copy, preciso que você rode a Skill Persona Profunda
+   > Antes de escrever copy, preciso que você rode o `/persona`
    > primeiro — copy sem persona vira texto genérico, e isso não converte.
    > Quer rodar ela agora?"
    Não inventar persona nem seguir em frente sem esse passo.
@@ -114,7 +114,7 @@ calendário no Passo 2):
 **Regra:** um post = um objetivo só. Se o pedido misturar vender + educar +
 engajar na mesma peça, avisar que isso dilui a mensagem e sugerir separar
 em peças distintas (o que já significa que virou campanha — redirecionar
-pro `/maestro-ia-na-pratica`).
+pro `/maestro`).
 
 **Se o objetivo for "educar" ou o formato for "legenda avulsa":** pular os
 Passos 4-6 (frameworks e dashboard não se aplicam — ver regra em
@@ -294,7 +294,7 @@ representação visual estática — o Designer não cobre nenhum dos dois):
 > Designer) ou prefere revisar o texto primeiro?"
 
 Se o usuário quiser o visual, é o momento de sugerir rodar
-`/maestro-ia-na-pratica` com essa mesma peça (ele coordena Copywriter →
+`/maestro` com essa mesma peça (ele coordena Copywriter →
 Designer) em vez de tentar acionar o Designer direto por aqui —
 repassando o código da peça (ex. `Feed/F02`) e a referência de
 calendário, se houver.
