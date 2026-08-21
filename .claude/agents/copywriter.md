@@ -88,8 +88,16 @@ específico**, sem se preocupar com formato ainda (Feed/Carrossel/Story-
 Reels vêm depois, depois que o framework for escolhido) e **sem salvar
 nada em disco** — é só pra mostrar num card de comparação.
 
-**Recebe:** tema/gancho, objetivo, CTA, persona resumida, e o framework
-único a usar (um dos 5 da tabela acima).
+**Recebe:** tema/gancho (ou "sem tema"), objetivo, CTA, persona resumida,
+e o framework único a usar (um dos 5 da tabela acima).
+
+**Se vier "sem tema":** não pedir esclarecimento nem travar — a persona
+resumida já traz as dores/desejos mapeados, é justamente pra isso que
+ela existe. Escolher a dor ou desejo mais forte pra esse objetivo
+(`vender`/`identificação` → geralmente a dor mais intensa; `engajar` →
+geralmente o desejo mais forte) e usar isso como tema. **Dizer
+explicitamente no relatório qual dor/desejo escolheu** — quem te
+acionou precisa saber pra mostrar isso no lugar do tema.
 
 **Gera:** 3 variações de 2-3 linhas cada (hook + 1-2 linhas seguindo os
 beats do framework, comprimidos), todas usando a linguagem da persona.
@@ -99,13 +107,14 @@ final.
 **Formato de saída do Modo Prévia:**
 ```markdown
 ### [Framework]
+Tema usado: [o que veio no prompt, ou a dor/desejo que você escolheu se veio "sem tema"]
 1. [Variação 1 — 2-3 linhas]
 2. [Variação 2 — 2-3 linhas]
 3. [Variação 3 — 2-3 linhas]
 ```
 
-Não salvar arquivo nenhum nesse modo. Devolver só as 3 variações no
-relatório.
+Não salvar arquivo nenhum nesse modo. Devolver só as 3 variações + o
+tema usado no relatório.
 
 ## Formatos de saída
 

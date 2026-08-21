@@ -114,8 +114,14 @@ calendário no Passo 2):
 | Campo | Pergunta | Exemplo |
 |-------|----------|---------|
 | **Objetivo** | Esse conteúdo é pra educar, vender, gerar identificação ou só engajar? | "Vender vaga da próxima turma" |
-| **Tema/gancho** | Sobre o que é esse post especificamente? | "A objeção de que 'IA é complicado'" |
+| **Tema/gancho** (opcional) | Sobre o que é esse post especificamente? Se não tiver algo em mente, tudo bem — a persona já tem dores e desejos mapeados, posso partir de um deles. | "A objeção de que 'IA é complicado'" |
 | **CTA desejado** | O que a pessoa deve fazer ao final? | "Comentar QUERO" |
+
+**Se o usuário não der um tema:** não insistir nem forçar escolha de uma
+lista — seguir sem tema definido. É o `copywriter` (Passo 4) quem escolhe
+a dor/desejo/gatilho mais relevante da persona pra esse objetivo, já que
+ele recebe a persona inteira de qualquer forma — pedir a pessoa escolher
+antes disso seria repetir um trabalho que a Persona Profunda já fez.
 
 **Regra:** um post = um objetivo só. Se o pedido misturar vender + educar +
 engajar na mesma peça, avisar que isso dilui a mensagem e sugerir separar
@@ -137,10 +143,15 @@ Gerar todos os 5 de uma vez é caro (5 chamadas) e a maioria fica sem uso
    pré-recomendados (são mais situacionais).
 2. Acionar a ferramenta `Agent` com `subagent_type: copywriter`, **uma
    única vez**, só pro framework recomendado: "modo prévia" + esse
-   framework + tema + objetivo + CTA + persona resumida.
-3. Guardar as 3 variações devolvidas (ver `copywriter.md` → "Modo
-   Prévia") pro Passo 5. Os outros 4 frameworks ficam sem prévia
-   gerada — o dashboard mostra eles como "ainda não gerado", com botão
+   framework + tema (**ou "sem tema — escolha a dor/desejo mais
+   relevante da persona pra esse objetivo" se o usuário não deu um**) +
+   objetivo + CTA + persona resumida.
+3. Guardar as 3 variações devolvidas, e **se o tema veio em branco,
+   guardar também qual dor/desejo o `copywriter` escolheu** (ele informa
+   isso no relatório — ver `copywriter.md` → "Modo Prévia") — é esse
+   texto que vai substituir `{{TEMA}}` no dashboard (Passo 5), não deixar
+   em branco lá. Os outros 4 frameworks ficam sem prévia gerada — o
+   dashboard mostra eles como "ainda não gerado", com botão
    pro aluno pedir quando quiser (ver Passo 6).
 
 ## Passo 5: Montar e abrir o Dashboard de Escolha
@@ -290,8 +301,12 @@ mesmo que em palavras soltas): seguir pro Passo 7 com essas informações.
 
 2. Chamar a ferramenta `Agent` com `subagent_type: copywriter` (modo
    normal, não prévia), passando: o resumo da persona (Passo 1) + o
-   briefing fechado (Passo 3: objetivo, tema, CTA) + formato + framework
-   escolhidos (Passo 6) + o texto-base aprovado no dashboard como
+   briefing fechado (Passo 3: objetivo, CTA, e o **tema já resolvido** —
+   o que o usuário deu, ou a dor/desejo que o `copywriter` escolheu
+   sozinho no Passo 4 se ficou em branco; nunca deixar escolher de novo
+   aqui, senão diverge do que a pessoa já aprovou no dashboard) +
+   formato + framework escolhidos (Passo 6) + o texto-base aprovado no
+   dashboard como
    direção/inspiração (o Copywriter não precisa reescrever do zero — pode
    refinar essa variação já validada) + a referência de calendário, se
    achou uma no Passo 2. O subagente escreve a peça completa, salva
