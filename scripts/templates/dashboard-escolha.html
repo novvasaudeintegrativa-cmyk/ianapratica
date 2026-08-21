@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Escolha o jeito de convencer</title>
+<style>
+  :root{
+    --bg:#141413; --bg-glow:radial-gradient(circle at 15% 0%, rgba(255,90,31,.16), transparent 45%),
+      radial-gradient(circle at 100% 30%, rgba(217,119,87,.12), transparent 50%);
+    --surface:#242322; --surface-raised:#2c2b29; --ink:#faf9f5; --ink-muted:#a8a6a0;
+    --border:#3d3d3a; --border-soft:#333230;
+    --accent:#ff5a1f; --accent-bright:#ffb35c; --accent-soft:rgba(255,90,31,.16); --accent-deep:#c6613f;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,"Segoe UI",Arial,sans-serif;background-color:var(--bg);background-image:var(--bg-glow);color:var(--ink);padding:40px 24px 80px;}
+  .wrap{max-width:1040px;margin:0 auto;}
+  .brand{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-bright);background:var(--accent-soft);border:1px solid rgba(255,90,31,.35);padding:6px 14px;border-radius:999px;margin-bottom:16px;}
+  h1{font-size:30px;margin:0 0 6px;color:#fff;letter-spacing:-.01em;}
+  .sub{color:var(--ink-muted);margin:0 0 28px;font-size:14px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:32px;}
+  .card{border:1px solid var(--border);border-radius:16px;padding:18px;background:var(--surface);}
+  .card:has(.badge:not(.hidden)){border-color:var(--accent);box-shadow:0 0 0 1px var(--accent), 0 12px 32px rgba(255,90,31,.15);}
+  .card h3{margin:0 0 6px;font-size:17px;display:flex;align-items:center;gap:8px;color:#fff;}
+  .badge{font-size:10px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:var(--accent);color:#fff;padding:3px 9px;border-radius:999px;}
+  .badge.hidden{display:none;}
+  .desc{margin:0 0 12px;font-size:12px;color:var(--ink-muted);line-height:1.45;}
+  .variations{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+  .variation{border:1.5px solid var(--border-soft);background:var(--surface-raised);color:var(--ink);border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.45;cursor:pointer;transition:border-color .15s,background .15s;}
+  .variation:hover{border-color:var(--accent-bright);}
+  .variation.selected{border-color:var(--accent);background:var(--accent-soft);}
+  .regen{width:100%;background:none;border:1px dashed var(--border);color:var(--ink-muted);padding:8px;border-radius:8px;font-size:12px;cursor:pointer;}
+  .regen:hover{border-color:var(--accent-bright);color:var(--accent-bright);}
+  .regen.primary{border-style:solid;border-color:var(--accent);color:#fff;background:var(--accent-soft);font-weight:700;padding:12px;}
+  .placeholder{font-size:12px;color:var(--ink-muted);margin:0 0 10px;font-style:italic;}
+  .formats{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap;}
+  .fmt{flex:1;min-width:140px;border:1.5px solid var(--border);border-radius:12px;padding:14px;text-align:center;cursor:pointer;background:var(--surface);color:var(--ink);font-weight:700;font-size:14px;transition:border-color .15s,background .15s,color .15s;}
+  .fmt:hover{border-color:var(--accent-bright);}
+  .fmt.selected{border-color:var(--accent);background:var(--accent);color:#fff;}
+  .result{border-radius:16px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);color:#fff;padding:26px;font-size:14px;line-height:1.6;box-shadow:0 16px 40px rgba(255,90,31,.25);}
+  .result strong{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5);}
+  .result-text{background:rgba(0,0,0,.22);border-radius:10px;padding:12px;margin:12px 0;font-family:ui-monospace,Consolas,monospace;font-size:13px;white-space:pre-wrap;}
+  button.copy{background:#141413;color:#fff;border:none;padding:12px 24px;border-radius:999px;cursor:pointer;font-weight:700;font-size:13px;}
+  button.copy:hover{background:#000;}
+  .hint{color:var(--ink-muted);font-size:12px;margin-top:20px;}
+  .links{margin-top:28px;padding-top:20px;border-top:1px solid var(--border);}
+  .links h2{font-size:15px;margin:0 0 10px;color:#fff;}
+  .links a{display:inline-block;margin:0 12px 8px 0;font-size:13px;color:var(--accent-bright);text-decoration:underline;}
+  .links.hidden{display:none;}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#fff;color:var(--ink);padding:10px 18px;border-radius:999px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .meta-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 18px;margin-bottom:28px;font-size:13px;color:var(--ink-muted);}
+  .meta-banner strong{display:block;font-size:14px;margin-bottom:2px;color:#fff;}
+  .meta-banner a{color:var(--ink);background:var(--accent-bright);text-decoration:none;padding:8px 16px;border-radius:999px;font-weight:700;font-size:12px;white-space:nowrap;}
+  .meta-banner a:hover{background:#fff;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="brand">✨ {{NEGOCIO}}</span>
+  <h1>🧠 Escolha o jeito de convencer</h1>
+  <p class="sub">Peça: {{TEMA}} · Objetivo: {{OBJETIVO}}</p>
+
+  <div class="meta-banner">
+    <div>
+      <strong>📸 Quer publicar direto no Instagram depois de aprovar?</strong>
+      Isso exige conectar sua conta Meta (app, token) primeiro — essa peça você aprova e publica na mão até lá.
+    </div>
+    <a href="{{META_SETUP_LINK}}">🔗 Conectar Meta →</a>
+  </div>
+
+  <div class="cards">
+    <div class="card" data-fw="PAS">
+      <h3>🎯 PAS <span class="badge {{REC_PAS}}">⭐ Recomendado</span></h3>
+      <p class="desc">Problema → Agitação → Solução. Mostra a dor, aumenta a dor, entrega a solução — direto e rápido.</p>
+      {{PAS_BODY}}
+    </div>
+
+    <div class="card" data-fw="AIDA">
+      <h3>👀 AIDA <span class="badge {{REC_AIDA}}">⭐ Recomendado</span></h3>
+      <p class="desc">Atenção → Interesse → Desejo → Ação. O clássico: chama atenção, gera interesse, cria desejo, pede a ação.</p>
+      {{AIDA_BODY}}
+    </div>
+
+    <div class="card" data-fw="BAB">
+      <h3>🔁 BAB <span class="badge {{REC_BAB}}">⭐ Recomendado</span></h3>
+      <p class="desc">Antes → Depois → Ponte. Mostra o antes e o depois, com a virada no meio.</p>
+      {{BAB_BODY}}
+    </div>
+
+    <div class="card" data-fw="PASTOR">
+      <h3>📖 PASTOR <span class="badge {{REC_PASTOR}}">⭐ Recomendado</span></h3>
+      <p class="desc">Problema, Amplificação, Solução/Story, Transformação, Oferta, Resposta. Mais completo, com história no meio.</p>
+      {{PASTOR_BODY}}
+    </div>
+
+    <div class="card" data-fw="4 Ps">
+      <h3>🖼️ 4 Ps <span class="badge {{REC_4PS}}">⭐ Recomendado</span></h3>
+      <p class="desc">Picture → Promise → Proof → Push. Pinta o cenário, promete o resultado, mostra prova, empurra pra ação.</p>
+      {{4PS_BODY}}
+    </div>
+  </div>
+
+  <div class="formats">
+    <div class="fmt {{SEL_FEED}}" data-fmt="Feed">📱 Feed</div>
+    <div class="fmt {{SEL_CARROSSEL}}" data-fmt="Carrossel">🎠 Carrossel</div>
+    <div class="fmt {{SEL_STORYREELS}}" data-fmt="Story/Reels">🎬 Story / Reels</div>
+  </div>
+
+  <div class="result">
+    <div id="resultText">👉 Escolha uma variação de texto (dentro de um dos cards) e um formato acima.</div>
+    <div class="result-text" id="resultBox" style="display:none"></div>
+    <button class="copy" id="copyBtn" style="display:none">📋 Copiar escolha pro chat</button>
+  </div>
+
+  <p class="hint">💡 Depois de copiar, volte pra conversa com o Claude e cole — ele aciona o Copywriter (e o Designer, se houver visual) de verdade com essa escolha.</p>
+
+  <div class="links hidden" id="resultLinks">
+    <h2>✅ Resultado gerado</h2>
+    {{RESULT_LINKS}}
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  let selectedFw = null, selectedText = null, selectedFmt = null;
+
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  function copyToClipboard(text){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); return true; }
+    catch(e) { return false; }
+    finally { document.body.removeChild(ta); }
+  }
+
+  document.querySelectorAll('.variation').forEach(v => {
+    v.addEventListener('click', () => {
+      document.querySelectorAll('.variation').forEach(x => x.classList.remove('selected'));
+      v.classList.add('selected');
+      selectedFw = v.closest('.card').dataset.fw;
+      selectedText = v.dataset.text;
+      updateResult();
+    });
+  });
+
+  document.querySelectorAll('.fmt').forEach(f => {
+    if (f.classList.contains('selected')) selectedFmt = f.dataset.fmt;
+    f.addEventListener('click', () => {
+      document.querySelectorAll('.fmt').forEach(x => x.classList.remove('selected'));
+      f.classList.add('selected');
+      selectedFmt = f.dataset.fmt;
+      updateResult();
+    });
+  });
+
+  document.querySelectorAll('.regen').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const fw = btn.dataset.fwName;
+      const phrase = 'Gerar prévia do card ' + fw;
+      const ok = copyToClipboard(phrase);
+      toast(ok ? 'Copiado — cole no chat com o Claude: "' + phrase + '"' : 'Copie manualmente: ' + phrase);
+    });
+  });
+
+  function updateResult(){
+    const box = document.getElementById('resultText');
+    const resultBox = document.getElementById('resultBox');
+    const btn = document.getElementById('copyBtn');
+    if (selectedFw && selectedFmt && selectedText){
+      const finalText = 'Quero gerar: Formato = ' + selectedFmt + ' | Framework = ' + selectedFw + ' | Texto base: "' + selectedText + '"';
+      box.innerHTML = 'Sua escolha: <strong>' + selectedFw + '</strong> + <strong>' + selectedFmt + '</strong>. Copie abaixo e cole no chat com o Claude:';
+      resultBox.textContent = finalText;
+      resultBox.style.display = 'block';
+      btn.style.display = 'inline-block';
+      btn.onclick = () => {
+        const ok = copyToClipboard(finalText);
+        toast(ok ? 'Copiado!' : 'Selecione o texto acima e copie manualmente');
+      };
+    } else {
+      box.textContent = 'Escolha uma variação de texto (dentro de um dos cards) e um formato acima.';
+      resultBox.style.display = 'none';
+      btn.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>

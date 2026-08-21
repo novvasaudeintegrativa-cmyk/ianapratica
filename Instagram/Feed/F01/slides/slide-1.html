@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>F01 — Antes x Agora</title>
+<style>
+  :root{
+    --ink:#141413;
+    --ink-soft:#3d3d3a;
+    --cloud-light:#d1cfc5;
+    --cloud-dark:#87867f;
+    --ivory:#faf9f5;
+    --clay:#ff5a1f;
+    --clay-bright:#ffb35c;
+    --clay-deep:#c6613f;
+    --font-sans:"Anthropic Sans", Arial, sans-serif;
+    --font-serif:"Anthropic Serif", Georgia, serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    width:1080px;height:1440px;
+    display:flex;flex-direction:column;
+    font-family:var(--font-sans);
+    overflow:hidden;
+  }
+
+  /* ===== Secção ANTES (topo) ===== */
+  .antes{
+    height:600px;
+    background:var(--ink);
+    color:var(--cloud-light);
+    display:flex;flex-direction:column;
+    justify-content:center;
+    gap:22px;
+    padding:64px 90px 40px;
+  }
+  .eyebrow{
+    font-family:var(--font-sans);
+    font-size:26px;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:rgba(240,238,230,0.45);
+  }
+  .icon-row{display:flex;align-items:center;color:var(--cloud-dark);}
+  .icon-row svg{display:block;}
+  .tag-antes{
+    display:block;
+    font-size:42px;
+    font-weight:600;
+    letter-spacing:0.01em;
+    color:var(--cloud-dark);
+    margin-bottom:10px;
+  }
+  .headline-antes{
+    font-size:96px;
+    font-weight:800;
+    line-height:1.03;
+    letter-spacing:-0.02em;
+    color:var(--cloud-light);
+    margin:0;
+  }
+  .support-antes{
+    font-family:var(--font-serif);
+    font-size:30px;
+    line-height:1.4;
+    color:var(--cloud-dark);
+    max-width:820px;
+    margin:0;
+  }
+
+  /* ===== Divisor ===== */
+  .divider{
+    height:140px;
+    background:linear-gradient(180deg, var(--ink) 0%, var(--clay) 100%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .divider-badge{
+    width:96px;height:96px;border-radius:50%;
+    background:var(--ivory);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 14px 34px rgba(0,0,0,0.35);
+  }
+
+  /* ===== Secção AGORA (base) ===== */
+  .agora{
+    flex:1;
+    background:linear-gradient(160deg, var(--clay) 0%, var(--clay-deep) 100%);
+    color:var(--ivory);
+    display:flex;flex-direction:column;
+    padding:56px 90px 64px;
+  }
+  .agora-content{
+    display:flex;flex-direction:column;
+    gap:22px;
+    justify-content:center;
+    flex:1;
+  }
+  .eyebrow-agora{
+    font-size:26px;
+    font-weight:600;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.65);
+  }
+  .icon-row-agora{display:flex;align-items:center;color:var(--clay-bright);}
+  .tag-agora{
+    display:block;
+    font-size:44px;
+    font-weight:600;
+    letter-spacing:0.01em;
+    color:rgba(255,255,255,0.8);
+    margin-bottom:10px;
+  }
+  .headline-agora{
+    font-size:118px;
+    font-weight:900;
+    line-height:1.0;
+    letter-spacing:-0.02em;
+    color:var(--ivory);
+    margin:0;
+    text-shadow:0 6px 24px rgba(0,0,0,0.18);
+  }
+  .support-agora{
+    font-family:var(--font-serif);
+    font-size:32px;
+    line-height:1.4;
+    color:rgba(255,255,255,0.92);
+    max-width:820px;
+    margin:0;
+  }
+
+  .cta-row{display:flex;justify-content:flex-start;margin-top:8px;}
+  .cta-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    font-weight:700;
+    font-size:28px;
+    letter-spacing:-0.005em;
+    padding:22px 40px;
+    border-radius:9999px;
+    box-shadow:0 16px 34px rgba(0,0,0,0.22);
+  }
+  .cta-pill svg{display:block;}
+
+  .brand-footer{
+    margin-top:auto;
+    padding-top:36px;
+    text-align:center;
+    font-size:24px;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:rgba(255,255,255,0.6);
+  }
+</style>
+</head>
+<body>
+
+  <!-- ANTES -->
+  <section class="antes">
+    <span class="eyebrow">Como era</span>
+    <div class="icon-row" aria-hidden="true">
+      <svg width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3.3 1.9"/>
+      </svg>
+    </div>
+    <div>
+      <span class="tag-antes">ANTES:</span>
+      <h1 class="headline-antes">3 horas<br>por post.</h1>
+    </div>
+    <p class="support-antes">Travando na legenda, procurando imagem, editando tudo de novo — um post por vez.</p>
+  </section>
+
+  <!-- DIVISOR -->
+  <div class="divider" aria-hidden="true">
+    <div class="divider-badge">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4v14M6 13l6 6 6-6"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- AGORA -->
+  <section class="agora">
+    <div class="agora-content">
+      <span class="eyebrow-agora">Como fica</span>
+      <div class="icon-row-agora" aria-hidden="true">
+        <svg width="62" height="62" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M13 2 3 14h7l-1 8 11-14h-8l1-6z"/>
+        </svg>
+      </div>
+      <div>
+        <span class="tag-agora">AGORA:</span>
+        <h1 class="headline-agora">3 minutos.</h1>
+      </div>
+      <p class="support-agora">Legenda escrita, imagem gerada e post agendado — sozinho, com o Claude Code.</p>
+
+      <div class="cta-row">
+        <span class="cta-pill">
+          Garanta sua vaga — link na bio
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#141413" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="brand-footer">IA na Prática</div>
+  </section>
+
+</body>
+</html>

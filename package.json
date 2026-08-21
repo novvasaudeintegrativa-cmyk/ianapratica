@@ -1,0 +1,27 @@
+{
+  "name": "ianapratica",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novvasaudeintegrativa-cmyk/ianapratica.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/novvasaudeintegrativa-cmyk/ianapratica/issues"
+  },
+  "homepage": "https://github.com/novvasaudeintegrativa-cmyk/ianapratica#readme",
+  "devDependencies": {
+    "playwright": "^1.62.1"
+  }
+}
