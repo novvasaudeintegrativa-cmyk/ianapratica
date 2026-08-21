@@ -293,19 +293,27 @@ criar outra.</p>` antes dos chips.
    <p class="placeholder">Ainda não gerado — clique abaixo pra ver 3 prévias reais nesse framework.</p>
    <button class="regen primary" data-fw-name="[Framework]">✨ Gerar prévia desse framework</button>
    ```
-4. Salvar o resultado em `Instagram/dashboard-escolha.html`.
-5. **Mostrar o popup primeiro, e só abrir o navegador quando a pessoa
+4. **Calcular o nome do arquivo desta entrevista (uma vez só, aqui) e
+   guardar pro resto do fluxo** (Passo D e Passo F usam esse mesmo
+   nome): listar `Instagram/dashboard-escolha*.html` já existentes. Se
+   não existir nenhum, usar `dashboard-escolha.html`. Se já existir,
+   usar o próximo número livre: `dashboard-escolha-2.html`,
+   `dashboard-escolha-3.html`, etc. **Nunca sobrescrever** um dashboard
+   de uma entrevista anterior — cada entrevista tem o próprio arquivo,
+   funciona como histórico.
+5. Salvar o resultado em `Instagram/[nome-calculado].html`.
+6. **Mostrar o popup primeiro, e só abrir o navegador quando a pessoa
    clicar OK** — nessa ordem, num único comando `PowerShell` (o
    `MessageBox` é bloqueante, então o `Start-Process` só roda depois do
    clique):
    ```powershell
    Add-Type -AssemblyName System.Windows.Forms
    [System.Windows.Forms.MessageBox]::Show("Seu dashboard está pronto! Clique OK pra abrir no navegador.", "IA na Prática", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
-   Start-Process 'Instagram/dashboard-escolha.html'
+   Start-Process 'Instagram/[nome-calculado].html'
    ```
    Isso faz o clique em OK literalmente disparar a abertura do link — não
    é só um aviso solto, é o gatilho.
-6. Avisar o usuário no chat também: "Abri o dashboard com uma prévia
+7. Avisar o usuário no chat também: "Abri o dashboard com uma prévia
    real no framework recomendado ([Framework]). Quer ver os outros?
    Clique em 'Gerar prévia desse framework' no card que quiser. Quando
    escolher uma variação + um formato, copie a escolha (botão no final
@@ -320,7 +328,8 @@ exato):
 **(a) Pedido de gerar/regenerar um card específico** (ex. "Gerar prévia
 do card PASTOR", "Regenerar o card PAS" — é a mesma ação nos dois casos):
 acionar `copywriter` em modo prévia só pra esse framework, e atualizar
-`Instagram/dashboard-escolha.html`: reler o arquivo, achar o card daquele
+`Instagram/[nome-calculado].html` (o arquivo desta entrevista, do Passo
+C.4): reler o arquivo, achar o card daquele
 framework e trocar o corpo dele pelo bloco "Framework já gerado" (ver
 Passo C.3) com as 3 variações novas — não importa se ele já tinha
 variações antes (regenerar) ou não (primeira vez), o resultado é o
@@ -340,7 +349,8 @@ mesmo que em palavras soltas): seguir pro Passo Z com essas informações.
    `Instagram/calendario-*.md` com esse Código), limpar a coluna Código
    de volta pra `—` e Status pra `Planejado` — a linha volta a ficar
    disponível pro `social-media`/`copywriter` reaproveitarem.
-4. Atualizar `Instagram/dashboard-escolha.html`: reler o arquivo, achar
+4. Atualizar `Instagram/[nome-calculado].html` (o arquivo desta
+   entrevista): reler o arquivo, achar
    `{{X_PIECES}}` (a lista já renderizada) do framework daquela peça,
    remover o chip correspondente, e atualizar a contagem (`N/3`) — se
    estava em "Limite atingido" (3/3), volta a mostrar o botão normal de
@@ -407,7 +417,8 @@ calendário, se houver.
 
 Depois que a peça final (e o visual, se houver) estiverem prontos:
 
-1. Reabrir `Instagram/dashboard-escolha.html`.
+1. Reabrir `Instagram/[nome-calculado].html` (o arquivo desta
+   entrevista, do Passo C.4).
 2. Preencher a seção `{{RESULT_LINKS}}` (dentro de `<div class="links">`)
    com links reais pro que foi gerado — remover a classe `hidden` dessa
    div. Exemplos de link, conforme o que existir:
@@ -429,5 +440,5 @@ Depois que a peça final (e o visual, se houver) estiverem prontos:
    ```powershell
    Add-Type -AssemblyName System.Windows.Forms
    [System.Windows.Forms.MessageBox]::Show("Sua peça está pronta! [Formato] [Número] — clique OK pra ver no dashboard.", "IA na Prática", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
-   Start-Process 'Instagram/dashboard-escolha.html'
+   Start-Process 'Instagram/[nome-calculado].html'
    ```
