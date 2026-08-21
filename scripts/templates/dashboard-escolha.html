@@ -57,6 +57,9 @@
   .fmt.selected{border-color:var(--accent);background:var(--accent);color:#fff;}
   .fmt-rec{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;margin-top:2px;opacity:.9;}
   .fmt-rec.hidden{display:none;}
+  .preselect-note{font-size:12.5px;color:var(--ink-muted);margin:10px 0 0;}
+  .preselect-note strong{color:var(--accent-bright);}
+  .preselect-note.hidden{display:none;}
   .result{border-radius:16px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);color:#fff;padding:26px;font-size:14px;line-height:1.6;box-shadow:0 16px 40px rgba(255,90,31,.25);}
   .result strong{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5);}
   .result-text{background:rgba(0,0,0,.22);border-radius:10px;padding:12px;margin:12px 0;font-family:ui-monospace,Consolas,monospace;font-size:13px;white-space:pre-wrap;}
@@ -162,6 +165,7 @@
     <div class="fmt {{SEL_CARROSSEL}}" data-fmt="Carrossel">🎠 Carrossel <span class="fmt-rec hidden" data-fmt-rec="Carrossel">(Recomendado)</span></div>
     <div class="fmt {{SEL_STORYREELS}}" data-fmt="Story/Reels">🎬 Story / Reels <span class="fmt-rec hidden" data-fmt-rec="Story/Reels">(Recomendado)</span></div>
   </div>
+  <p class="preselect-note hidden" id="preselectNote">✅ Já marcamos <strong>{{FMT_PRESELECT}}</strong> porque foi o que você pediu — pode trocar pra outro formato a qualquer momento, é só clicar.</p>
 
   <div class="result">
     <div id="resultText">👉 Escolha uma variação de texto (dentro de um dos cards) e um formato acima.</div>

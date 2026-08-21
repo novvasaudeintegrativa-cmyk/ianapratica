@@ -161,6 +161,15 @@ Gerar todos os 5 de uma vez é caro (5 chamadas) e a maioria fica sem uso
      class="fmt-rec hidden" data-fmt-rec="[Formato]">` correspondente
      (mesmo padrão do badge de framework — mostra "(Recomendado)" só
      nesse botão).
+   - `{{FMT_PRESELECT}}` **e a nota de pré-seleção:** só quando um
+     formato veio pré-conhecido da árvore de decisão. Substituir
+     `{{FMT_PRESELECT}}` pelo nome do formato (ex. "Carrossel") e
+     remover `hidden` de `<p class="preselect-note hidden"
+     id="preselectNote">` — isso deixa explícito PRA PESSOA por que
+     aquele botão já veio marcado (evita o impacto de "por que já
+     escolheram por mim?"). **Se nenhum formato veio pré-conhecido**,
+     deixar a nota escondida e não se preocupar em substituir
+     `{{FMT_PRESELECT}}` (ela nunca vai aparecer de qualquer forma).
    - `{{META_SETUP_LINK}}` — caminho relativo (ou `file://` absoluto) pra
      `tutorial/setup-instagram-skill.html`.
    - `{{RESULT_LINKS}}` — deixar vazio na primeira geração (é preenchido
