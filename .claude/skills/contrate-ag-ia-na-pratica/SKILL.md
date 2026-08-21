@@ -294,22 +294,18 @@ criar outra.</p>` antes dos chips.
    <button class="regen primary" data-fw-name="[Framework]">✨ Gerar prévia desse framework</button>
    ```
 4. Salvar o resultado em `Instagram/dashboard-escolha.html`.
-5. **Abrir automaticamente no navegador padrão**, via `Bash` ou
-   `PowerShell`:
-   ```
-   powershell -Command "Start-Process 'Instagram/dashboard-escolha.html'"
-   ```
-6. **Mostrar um popup nativo do Windows** avisando que o dashboard está
-   pronto — a aba do navegador pode abrir sem chamar atenção (atrás de
-   outras janelas), então esse popup é o aviso que a pessoa realmente vê.
-   Via `PowerShell`:
+5. **Mostrar o popup primeiro, e só abrir o navegador quando a pessoa
+   clicar OK** — nessa ordem, num único comando `PowerShell` (o
+   `MessageBox` é bloqueante, então o `Start-Process` só roda depois do
+   clique):
    ```powershell
    Add-Type -AssemblyName System.Windows.Forms
-   [System.Windows.Forms.MessageBox]::Show("Seu dashboard está pronto! Já abri no navegador.", "IA na Prática", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+   [System.Windows.Forms.MessageBox]::Show("Seu dashboard está pronto! Clique OK pra abrir no navegador.", "IA na Prática", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+   Start-Process 'Instagram/dashboard-escolha.html'
    ```
-   Isso é bloqueante (a pessoa precisa clicar OK) — de propósito, é o que
-   garante que ela realmente viu o aviso antes de continuar.
-7. Avisar o usuário no chat também: "Abri o dashboard com uma prévia
+   Isso faz o clique em OK literalmente disparar a abertura do link — não
+   é só um aviso solto, é o gatilho.
+6. Avisar o usuário no chat também: "Abri o dashboard com uma prévia
    real no framework recomendado ([Framework]). Quer ver os outros?
    Clique em 'Gerar prévia desse framework' no card que quiser. Quando
    escolher uma variação + um formato, copie a escolha (botão no final
@@ -426,9 +422,12 @@ Depois que a peça final (e o visual, se houver) estiverem prontos:
    e a peça já aparece na lista do card daquele framework (não precisa
    reabrir o navegador de novo — se a aba já estava aberta, um refresh
    mostra tudo novo).
-5. **Mostrar o mesmo popup nativo do Windows** do Passo C.6, agora
-   avisando que a peça final está pronta:
+5. **Mostrar o mesmo popup nativo do Windows** do Passo C.5, agora
+   avisando que a peça final está pronta — e, quando a pessoa clicar OK,
+   abrir (ou reabrir) o dashboard direto no link atualizado, mesma lógica
+   de ordem (popup bloqueia, `Start-Process` só roda depois do clique):
    ```powershell
    Add-Type -AssemblyName System.Windows.Forms
-   [System.Windows.Forms.MessageBox]::Show("Sua peça está pronta! [Formato] [Número] — dá um refresh no dashboard pra ver.", "IA na Prática", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+   [System.Windows.Forms.MessageBox]::Show("Sua peça está pronta! [Formato] [Número] — clique OK pra ver no dashboard.", "IA na Prática", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+   Start-Process 'Instagram/dashboard-escolha.html'
    ```
