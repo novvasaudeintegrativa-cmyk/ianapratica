@@ -1,5 +1,21 @@
 # CLAUDE.md
 
+## Convenção de Skills deste projeto
+
+Toda Skill (Claude Code) precisa morar em `.claude/skills/[nome]/SKILL.md`
+— é o único lugar que o Claude Code reconhece pra virar comando `/nome`.
+Nunca criar ou deixar cópias soltas de Skill na raiz do projeto (ex.
+`SKILL-alguma-coisa.md`) — isso já causou trabalho duplicado de
+sincronizar edição em dois lugares. Se precisar criar uma Skill nova,
+criar direto em `.claude/skills/[nome]/SKILL.md` desde o início.
+
+Exceção: os arquivos em `scripts/templates/` (ex.
+`scripts/templates/maestro-ia-na-pratica.md`,
+`scripts/templates/agents/*.md`) não são Skills em si — são material de
+apoio/origem que a Skill `contrate-ag-ia-na-pratica` copia pra
+`.claude/` quando instala o squad. Esses continuam fora de
+`.claude/skills/` de propósito.
+
 ## Persona do meu negócio
 
 **Produto:** Imersão "IA na Prática" — 2 dias ao vivo via Zoom, ensina a configurar o Claude Code conectado ao Instagram para criar, gerar imagem e agendar posts sozinho, sem programar.
