@@ -185,7 +185,11 @@ numa pasta por peça, seguindo o mesmo padrão já usado no projeto
    `[arquivo]` é `legenda` pra Feed (post único/legenda avulsa) e
    `roteiro` pra Carrossel, Stories e Reels — esses guardam um roteiro de
    múltiplos slides/cenas, não só uma legenda. Criar as pastas que
-   faltarem. Não perguntar — salvar é padrão.
+   faltarem. Não perguntar — salvar é padrão. **Sempre começar o arquivo
+   com uma linha `Framework: [PAS/AIDA/BAB/PASTOR/4 Ps/nenhum]`** antes
+   do resto do conteúdo — é assim que o Entrevistador consegue contar
+   depois quantas peças já existem por framework (limite de 3, ver
+   `entrevistador-ia-na-pratica`).
 5. No relatório final, sempre devolver o código completo da peça (ex.
    `Feed/F02`) — é o que o Designer vai precisar pra salvar o visual na
    mesma pasta.

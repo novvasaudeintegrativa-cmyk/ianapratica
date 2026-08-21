@@ -15,14 +15,24 @@
   body{margin:0;font-family:-apple-system,"Segoe UI",Arial,sans-serif;background-color:var(--bg);background-image:var(--bg-glow);color:var(--ink);padding:40px 24px 80px;}
   .wrap{max-width:1040px;margin:0 auto;}
   .brand{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-bright);background:var(--accent-soft);border:1px solid rgba(255,90,31,.35);padding:6px 14px;border-radius:999px;margin-bottom:16px;}
-  h1{font-size:30px;margin:0 0 6px;color:#fff;letter-spacing:-.01em;}
-  .sub{color:var(--ink-muted);margin:0 0 28px;font-size:14px;}
+  h1{font-size:28px;margin:0 0 10px;color:#fff;letter-spacing:-.01em;line-height:1.2;max-width:760px;}
+  .sub{color:var(--ink-muted);margin:0 0 24px;font-size:14px;line-height:1.5;max-width:720px;}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:28px;}
+  .step{display:flex;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;}
+  .step-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .step strong{display:block;color:#fff;font-size:14px;margin-bottom:4px;}
+  .step p{margin:0;color:var(--ink-muted);font-size:12.5px;line-height:1.5;}
+  .step b{color:var(--accent-bright);}
+  .section-label{font-size:13px;font-weight:800;color:#fff;margin:0 0 12px;}
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:32px;}
   .card{border:1px solid var(--border);border-radius:16px;padding:18px;background:var(--surface);}
   .card:has(.badge:not(.hidden)){border-color:var(--accent);box-shadow:0 0 0 1px var(--accent), 0 12px 32px rgba(255,90,31,.15);}
   .card h3{margin:0 0 6px;font-size:17px;display:flex;align-items:center;gap:8px;color:#fff;}
   .badge{font-size:10px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:var(--accent);color:#fff;padding:3px 9px;border-radius:999px;}
   .badge.hidden{display:none;}
+  .role{margin:0 0 8px;font-size:11px;color:var(--accent-bright);font-weight:700;text-transform:uppercase;letter-spacing:.02em;}
+  .rec-reason{margin:0 0 10px;font-size:12px;color:#fff;background:var(--accent-soft);border:1px solid rgba(255,90,31,.35);border-radius:10px;padding:9px 11px;line-height:1.45;}
+  .rec-reason.hidden{display:none;}
   .desc{margin:0 0 12px;font-size:12px;color:var(--ink-muted);line-height:1.45;}
   .variations{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
   .variation{border:1.5px solid var(--border-soft);background:var(--surface-raised);color:var(--ink);border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.45;cursor:pointer;transition:border-color .15s,background .15s;}
@@ -32,10 +42,21 @@
   .regen:hover{border-color:var(--accent-bright);color:var(--accent-bright);}
   .regen.primary{border-style:solid;border-color:var(--accent);color:#fff;background:var(--accent-soft);font-weight:700;padding:12px;}
   .placeholder{font-size:12px;color:var(--ink-muted);margin:0 0 10px;font-style:italic;}
+  .pieces{margin-top:12px;padding-top:12px;border-top:1px dashed var(--border);}
+  .pieces:empty{display:none;}
+  .pieces-count{font-size:11px;color:var(--ink-muted);margin:0 0 8px;text-transform:uppercase;letter-spacing:.02em;font-weight:700;}
+  .piece-chip{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--surface-raised);border:1px solid var(--border-soft);border-radius:8px;padding:7px 10px;font-size:12px;margin-bottom:6px;}
+  .piece-chip a{color:var(--ink);text-decoration:none;font-weight:600;}
+  .piece-chip a:hover{color:var(--accent-bright);}
+  .piece-del{background:none;border:none;color:var(--ink-muted);cursor:pointer;font-size:14px;padding:2px 6px;border-radius:6px;line-height:1;}
+  .piece-del:hover{color:#ff6b6b;background:rgba(255,107,107,.12);}
+  .pieces-full{font-size:11.5px;color:var(--accent-bright);margin:0 0 8px;}
   .formats{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap;}
   .fmt{flex:1;min-width:140px;border:1.5px solid var(--border);border-radius:12px;padding:14px;text-align:center;cursor:pointer;background:var(--surface);color:var(--ink);font-weight:700;font-size:14px;transition:border-color .15s,background .15s,color .15s;}
   .fmt:hover{border-color:var(--accent-bright);}
   .fmt.selected{border-color:var(--accent);background:var(--accent);color:#fff;}
+  .fmt-rec{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;margin-top:2px;opacity:.9;}
+  .fmt-rec.hidden{display:none;}
   .result{border-radius:16px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);color:#fff;padding:26px;font-size:14px;line-height:1.6;box-shadow:0 16px 40px rgba(255,90,31,.25);}
   .result strong{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5);}
   .result-text{background:rgba(0,0,0,.22);border-radius:10px;padding:12px;margin:12px 0;font-family:ui-monospace,Consolas,monospace;font-size:13px;white-space:pre-wrap;}
@@ -57,8 +78,27 @@
 <body>
 <div class="wrap">
   <span class="brand">✨ {{NEGOCIO}}</span>
-  <h1>🧠 Escolha o jeito de convencer</h1>
-  <p class="sub">Peça: {{TEMA}} · Objetivo: {{OBJETIVO}}</p>
+  <h1>🏆 Monte seu time de marketing mundial</h1>
+  <p class="sub">Você está prestes a colocar 5 estrategistas de persuasão pra trabalhar na sua peça — as mesmas técnicas usadas por gigantes americanas como a Apple (Steve Jobs) e por referências atuais de marketing direto como Alex Hormozi pra vender bilhões. Não é achismo nem teoria de curso: é validado, comprovado, e agora está no seu time.</p>
+
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">1</span>
+      <div>
+        <strong>Escolha quem lidera essa peça</strong>
+        <p>Cada card abaixo é um estrategista diferente, com uma técnica validada — nenhum deles é "menos bom". A estrelinha ⭐ mostra quem a gente recomenda pro seu objetivo agora, mas os 5 já provaram que funcionam. Escolha quem combina mais com você.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <div>
+        <strong>Escolha onde isso vai aparecer</strong>
+        <p>📱 <b>Feed</b> = uma imagem só, com legenda. 🎠 <b>Carrossel</b> = várias telinhas pra deslizar. 🎬 <b>Story/Reels</b> = um vídeo curto.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="sub" style="margin-top:0;">Peça: {{TEMA}} · Objetivo: {{OBJETIVO}}</p>
 
   <div class="meta-banner">
     <div>
@@ -68,42 +108,59 @@
     <a href="{{META_SETUP_LINK}}">🔗 Conectar Meta →</a>
   </div>
 
+  <p class="section-label">👉 Escolha um card abaixo:</p>
   <div class="cards">
     <div class="card" data-fw="PAS">
-      <h3>🎯 PAS <span class="badge {{REC_PAS}}">⭐ Recomendado</span></h3>
+      <h3>🎯 PAS <span class="badge hidden" data-fw-badge="PAS">⭐ Recomendado</span></h3>
+      <p class="role">Especialista em dor direta — o estilo de ofertas de Alex Hormozi</p>
+      <p class="rec-reason hidden" data-fw-reason="PAS">🏆 Recomendado pra vender agora: é a mesma estrutura que Alex Hormozi usa nas ofertas dele — nomear a dor, mostrar o custo de não resolver, entregar a solução — testada em bilhões de dólares em vendas.</p>
       <p class="desc">Problema → Agitação → Solução. Mostra a dor, aumenta a dor, entrega a solução — direto e rápido.</p>
       {{PAS_BODY}}
+      <div class="pieces">{{PAS_PIECES}}</div>
     </div>
 
     <div class="card" data-fw="AIDA">
-      <h3>👀 AIDA <span class="badge {{REC_AIDA}}">⭐ Recomendado</span></h3>
+      <h3>👀 AIDA <span class="badge hidden" data-fw-badge="AIDA">⭐ Recomendado</span></h3>
+      <p class="role">Especialista em atenção — o clássico da publicidade americana</p>
+      <p class="rec-reason hidden" data-fw-reason="AIDA">🏆 Recomendado pra engajar: é o framework publicitário mais usado do mundo há mais de 100 anos, feito pra prender atenção logo na primeira linha.</p>
       <p class="desc">Atenção → Interesse → Desejo → Ação. O clássico: chama atenção, gera interesse, cria desejo, pede a ação.</p>
       {{AIDA_BODY}}
+      <div class="pieces">{{AIDA_PIECES}}</div>
     </div>
 
     <div class="card" data-fw="BAB">
-      <h3>🔁 BAB <span class="badge {{REC_BAB}}">⭐ Recomendado</span></h3>
+      <h3>🔁 BAB <span class="badge hidden" data-fw-badge="BAB">⭐ Recomendado</span></h3>
+      <p class="role">Especialista em transformação — contraste que gera identificação</p>
+      <p class="rec-reason hidden" data-fw-reason="BAB">🏆 Recomendado pra gerar identificação: o contraste antes/depois é o que mais faz a pessoa se ver na peça e comentar/compartilhar.</p>
       <p class="desc">Antes → Depois → Ponte. Mostra o antes e o depois, com a virada no meio.</p>
       {{BAB_BODY}}
+      <div class="pieces">{{BAB_PIECES}}</div>
     </div>
 
     <div class="card" data-fw="PASTOR">
-      <h3>📖 PASTOR <span class="badge {{REC_PASTOR}}">⭐ Recomendado</span></h3>
+      <h3>📖 PASTOR <span class="badge hidden" data-fw-badge="PASTOR">⭐ Recomendado</span></h3>
+      <p class="role">Especialista em história — pra peças mais longas e envolventes</p>
+      <p class="rec-reason hidden" data-fw-reason="PASTOR">🏆 Recomendado quando a peça pede mais contexto: junta história com oferta, bom pra Carrossel ou Reels mais longos.</p>
       <p class="desc">Problema, Amplificação, Solução/Story, Transformação, Oferta, Resposta. Mais completo, com história no meio.</p>
       {{PASTOR_BODY}}
+      <div class="pieces">{{PASTOR_PIECES}}</div>
     </div>
 
     <div class="card" data-fw="4 Ps">
-      <h3>🖼️ 4 Ps <span class="badge {{REC_4PS}}">⭐ Recomendado</span></h3>
+      <h3>🖼️ 4 Ps <span class="badge hidden" data-fw-badge="4 Ps">⭐ Recomendado</span></h3>
+      <p class="role">Especialista em prova — pra quando você tem resultado real pra mostrar</p>
+      <p class="rec-reason hidden" data-fw-reason="4 Ps">🏆 Recomendado quando você já tem prova real (depoimento, número, resultado) pra mostrar — sem prova, os outros 4 funcionam melhor.</p>
       <p class="desc">Picture → Promise → Proof → Push. Pinta o cenário, promete o resultado, mostra prova, empurra pra ação.</p>
       {{4PS_BODY}}
+      <div class="pieces">{{4PS_PIECES}}</div>
     </div>
   </div>
 
+  <p class="section-label">👉 Agora escolha onde essa peça vai aparecer:</p>
   <div class="formats">
-    <div class="fmt {{SEL_FEED}}" data-fmt="Feed">📱 Feed</div>
-    <div class="fmt {{SEL_CARROSSEL}}" data-fmt="Carrossel">🎠 Carrossel</div>
-    <div class="fmt {{SEL_STORYREELS}}" data-fmt="Story/Reels">🎬 Story / Reels</div>
+    <div class="fmt {{SEL_FEED}}" data-fmt="Feed">📱 Feed <span class="fmt-rec hidden" data-fmt-rec="Feed">(Recomendado)</span></div>
+    <div class="fmt {{SEL_CARROSSEL}}" data-fmt="Carrossel">🎠 Carrossel <span class="fmt-rec hidden" data-fmt-rec="Carrossel">(Recomendado)</span></div>
+    <div class="fmt {{SEL_STORYREELS}}" data-fmt="Story/Reels">🎬 Story / Reels <span class="fmt-rec hidden" data-fmt-rec="Story/Reels">(Recomendado)</span></div>
   </div>
 
   <div class="result">
@@ -143,6 +200,15 @@
     catch(e) { return false; }
     finally { document.body.removeChild(ta); }
   }
+
+  document.querySelectorAll('.piece-del').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const codigo = btn.dataset.piece;
+      const phrase = 'Apagar a peça ' + codigo;
+      const ok = copyToClipboard(phrase);
+      toast(ok ? 'Copiado — cole no chat com o Claude: "' + phrase + '"' : 'Copie manualmente: ' + phrase);
+    });
+  });
 
   document.querySelectorAll('.variation').forEach(v => {
     v.addEventListener('click', () => {

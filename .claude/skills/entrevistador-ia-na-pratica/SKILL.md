@@ -144,16 +144,49 @@ Gerar todos os 5 de uma vez é caro (5 chamadas) e a maioria fica sem uso
    - `{{NEGOCIO}}` — nome do produto/negócio. Ler a primeira linha
      (`# Persona Master — [Nome]`) de `docs/persona.md` e usar o que vem
      depois do "—". Se não conseguir extrair, usar "Sua Marca".
-   - `{{REC_PAS}}`, `{{REC_AIDA}}`, `{{REC_BAB}}`, `{{REC_PASTOR}}`,
-     `{{REC_4PS}}` — o framework recomendado no Passo 4 recebe `""`
-     (badge visível), os outros quatro recebem `"hidden"`.
+   - **Badge de recomendado e motivo:** o template já nasce com os 5
+     badges (`data-fw-badge="[Framework]"`) e os 5 parágrafos de motivo
+     (`data-fw-reason="[Framework]"`, já com o texto persuasivo pronto,
+     ex. o card do PAS cita o Alex Hormozi) escondidos com `class="...
+     hidden"` — proposital, pra nunca aparecer mais de um "Recomendado"
+     por engano. Achar o framework recomendado no Passo 4 e remover a
+     palavra `hidden` de **ambos** elementos daquele framework (o badge
+     E o motivo) — os outros quatro ficam como estão, com os dois
+     escondidos.
    - `{{SEL_FEED}}`, `{{SEL_CARROSSEL}}`, `{{SEL_STORYREELS}}` — se a
      árvore de decisão já sabia o formato, esse recebe `"selected"` e os
-     outros dois `""`; se não sabia nenhum, todos `""`.
+     outros dois `""`; se não sabia nenhum, todos `""`. Quando um deles
+     receber `"selected"`, também remover `hidden` do `<span
+     class="fmt-rec hidden" data-fmt-rec="[Formato]">` correspondente
+     (mesmo padrão do badge de framework — mostra "(Recomendado)" só
+     nesse botão).
    - `{{META_SETUP_LINK}}` — caminho relativo (ou `file://` absoluto) pra
      `tutorial/setup-instagram-skill.html`.
    - `{{RESULT_LINKS}}` — deixar vazio na primeira geração (é preenchido
      só no Passo 9, depois da peça final existir).
+   - `{{PAS_PIECES}}`, `{{AIDA_PIECES}}`, `{{BAB_PIECES}}`,
+     `{{PASTOR_PIECES}}`, `{{4PS_PIECES}}` — a lista de peças finais já
+     criadas com cada framework (ver "Contar peças por framework"
+     abaixo). Numa entrevista nova, quase sempre vazio (`""`) — só vem
+     preenchido se já existirem peças de entrevistas anteriores.
+
+**Contar peças por framework (usado aqui e nos Passos 6 e 7):** procurar
+todos os arquivos `Instagram/*/*/legenda.md` e `Instagram/*/*/roteiro.md`,
+ler a primeira linha de cada um (`Framework: [X]`) e agrupar por
+framework. Limite: **3 peças por framework**. Pra cada peça encontrada,
+renderizar um chip:
+```html
+<div class="piece-chip">
+  <a href="[Formato]/[Código]/[arquivo].md">📄 [Formato] [Número]</a>
+  <button class="piece-del" data-piece="[Formato]/[Código]">🗑️</button>
+</div>
+```
+("[Formato] [Número]" = ex. "Feed 01", tirado do código `Feed/F01`.) Se o
+formato tiver visual já gerado, o link pode apontar pro PNG em vez do
+`.md`. Antes dos chips, uma linha de contagem:
+`<p class="pieces-count">📦 Peças criadas: [N]/3</p>`. Se `N` for 3,
+trocar por `<p class="pieces-full">⚠️ Limite atingido — apague uma pra
+criar outra.</p>` antes dos chips.
 3. Substituir o corpo de cada card (`{{PAS_BODY}}`, `{{AIDA_BODY}}`,
    `{{BAB_BODY}}`, `{{PASTOR_BODY}}`, `{{4PS_BODY}}`) por um dos dois
    blocos:
@@ -187,7 +220,7 @@ Gerar todos os 5 de uma vez é caro (5 chamadas) e a maioria fica sem uso
 
 ## Passo 6: Interpretar o retorno do usuário
 
-Duas respostas possíveis (o usuário cola o que copiou do dashboard, ou
+Três respostas possíveis (o usuário cola o que copiou do dashboard, ou
 escreve em português livre — interpretar a intenção, não exigir o texto
 exato):
 
@@ -205,8 +238,31 @@ navegador.
 **(b) Confirmação de escolha** (formato + framework + texto-base,
 mesmo que em palavras soltas): seguir pro Passo 7 com essas informações.
 
+**(c) Pedido de apagar uma peça** (ex. "Apagar a peça Feed/F01"):
+
+1. Confirmar rapidinho se o pedido não veio com o código exato ("Apagar
+   qual? Feed 01 ou Feed 02?").
+2. Apagar a pasta `Instagram/[Formato]/[Código]/` inteira.
+3. Se essa peça tinha referência de calendário (procurar a linha em
+   `Instagram/calendario-*.md` com esse Código), limpar a coluna Código
+   de volta pra `—` e Status pra `Planejado` — a linha volta a ficar
+   disponível pro `social-media`/`copywriter` reaproveitarem.
+4. Atualizar `Instagram/dashboard-escolha.html`: reler o arquivo, achar
+   `{{X_PIECES}}` (a lista já renderizada) do framework daquela peça,
+   remover o chip correspondente, e atualizar a contagem (`N/3`) — se
+   estava em "Limite atingido" (3/3), volta a mostrar o botão normal de
+   gerar mais uma.
+5. Avisar: "Apaguei [Formato] [Número]. Já pode criar outra peça com
+   [Framework] se quiser — é só voltar no dashboard (F5) e usar a mesma
+   escolha de antes, ou pedir uma prévia nova."
+
 ## Passo 7: Acionar o subagente pra escrita final
 
+0. **Checar o limite de 3 por framework** (ver "Contar peças por
+   framework" no Passo 5): se o framework escolhido já tem 3 peças
+   ativas, **não gerar** — avisar: "Você já tem 3 peças com [Framework]
+   ([Formato] 01, 02, 03). Apague uma antes de criar outra — é só clicar
+   no 🗑️ ao lado dela no dashboard." e parar aqui.
 1. **Se o formato escolhido for Reels** e ainda não souber duração/áudio,
    perguntar agora (não antes — só faz sentido perguntar depois que o
    formato foi confirmado):
@@ -254,6 +310,10 @@ Depois que a peça final (e o visual, se houver) estiverem prontos:
    - `<a href="Carrossel/C02/slides/">Ver as imagens do Carrossel</a>`
    - `<a href="Reels/R01/roteiro.md">Ver o roteiro do Reels</a>` (sem
      vídeo ainda — Remotion entra numa etapa futura)
-3. Salvar e avisar o usuário que o dashboard foi atualizado com os links
-   (não precisa reabrir o navegador de novo — se a aba já estava aberta,
-   um refresh mostra os links novos).
+3. **Adicionar o novo chip** na lista `{{[Framework]_PIECES}}` do
+   framework que acabou de ser usado (ver o formato do chip no Passo 5)
+   e atualizar a contagem `N/3` — sem apagar os chips que já estavam lá.
+4. Salvar e avisar o usuário que o dashboard foi atualizado com os links
+   e a peça já aparece na lista do card daquele framework (não precisa
+   reabrir o navegador de novo — se a aba já estava aberta, um refresh
+   mostra tudo novo).
