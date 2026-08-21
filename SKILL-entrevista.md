@@ -1,5 +1,5 @@
 ---
-name: entrevistador-ia-na-pratica
+name: entrevista
 description: >
   Porta de entrada rápida pra escrever UMA peça de copy pro Instagram
   (carrossel, post único, legenda avulsa, Stories ou Reels) a partir da
