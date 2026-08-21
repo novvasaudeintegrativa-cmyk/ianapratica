@@ -55,9 +55,9 @@ completa), avisar o usuário exatamente qual peça faltou e parar. Nunca
 inventar o conteúdo de um subagente ou do Maestro na hora — eles são
 peças cuidadosamente calibradas, não algo pra gerar de improviso.
 
-## Passo 3: Relatório final
+## Passo 3: Relatório rápido
 
-Terminar sempre com um resumo direto, tipo:
+Mostrar um resumo curto do que foi instalado, tipo:
 
 ```
 Contratando sua Agência de Marketing...
@@ -65,11 +65,23 @@ Contratando sua Agência de Marketing...
 ✓ Social Media — instalado agora
 ✓ Copywriter — instalado agora
 ✓ Designer — instalado agora
-
-Sua agência está pronta. Quer já criar sua primeira peça
-(/entrevistador-ia-na-pratica) ou planejar um período inteiro de
-conteúdo (/maestro-ia-na-pratica)?
 ```
 
 Se todos os 4 já existiam, encurtar pra uma frase: "Sua agência já
 estava toda montada — nada pra instalar." Sem enrolação.
+
+## Passo 4: Emendar direto na Entrevista (automático)
+
+**Não perguntar se a pessoa quer criar uma peça agora — só seguir.** O
+objetivo desta Skill é chegar ao dashboard de verdade, não só deixar
+arquivos instalados e parar. Continuar imediatamente pelo fluxo de
+`/entrevistador-ia-na-pratica`, começando pelo Passo 1 dele (carregar
+persona), como se o usuário tivesse acabado de rodar aquela Skill. Isso
+**não elimina nem duplica** a lógica da Entrevista — ela continua sendo
+a dona de todo aquele fluxo (persona → calendário → objetivo/CTA →
+prévia → dashboard); esta Skill só emenda nele em vez de forçar a
+pessoa a digitar `/entrevistador-ia-na-pratica` de novo.
+
+**Exceção:** se a Entrevista, no Passo 1 dela, não achar
+`docs/persona.md`, parar aí e seguir a orientação normal dela (rodar
+`/persona` primeiro) — não insistir em continuar sem persona real.
