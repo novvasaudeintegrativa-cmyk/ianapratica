@@ -150,22 +150,15 @@ Qual delas é a que você quer usar para publicar?
 
 ## ETAPA 6 — Salvar as credenciais
 
-Determine onde salvar com base no que existe no computador do usuário:
+Salvar direto na raiz **deste projeto** (mesma pasta de `package.json` e
+`CLAUDE.md`) — nada de procurar outro projeto ou pasta externa, o squad
+inteiro (Maestro, subagentes, conteúdo gerado em `Instagram/`) já vive
+aqui, as credenciais ficam junto.
 
-**Verificação automática (use Glob/Bash):**
-```bash
-# Verificar se existe projeto AIOS
-ls "C:/Users/*/meu-projeto-aios/squads" 2>/dev/null
-ls "C:/Users/*/SynkraAI" 2>/dev/null
-```
+**Se já existir um `.env` na raiz**, adicionar/atualizar só as linhas
+abaixo, sem apagar outras variáveis que já estejam lá.
 
-**Cenário A — Usuário tem o projeto AIOS:**
-Salvar em: `[pasta-encontrada]/squads/time-de-mkt-opes/.env`
-
-**Cenário B — Usuário não tem projeto AIOS:**
-Criar pasta e salvar em: `C:/Users/[usuario]/claude-instagram/.env`
-
-**Conteúdo do .env:**
+**Conteúdo do `.env`:**
 ```
 # Instagram / Meta — Gerado pelo setup-instagram
 INSTAGRAM_BUSINESS_ID=[ID encontrado]
@@ -174,36 +167,33 @@ INSTAGRAM_ACCESS_TOKEN=[token do usuário]
 META_API_VERSION=v19.0
 ```
 
-Confirme: **"Credenciais salvas em [caminho]. Anotou esse caminho? É importante!"**
+Confirme: **"Credenciais salvas em `.env`, na raiz do projeto."** (Já
+está no `.gitignore` — nunca vai parar no GitHub.)
 
 ---
 
 ## ETAPA 7 — Instalar o script de publicação
 
-Verifique se `publish_instagram.py` já existe no sistema:
+Verifique se já existe em `scripts/publish_instagram.py`, na raiz deste
+projeto (mesma pasta de `scripts/export-png.js`).
 
-```bash
-find "C:/Users" -name "publish_instagram.py" 2>/dev/null | head -5
-```
-
-**Se não existir**, criar em `[mesma pasta do .env]/scripts/publish_instagram.py`:
+**Se não existir**, criar em `scripts/publish_instagram.py`:
 
 ```python
 """
 publish_instagram.py — Publicação automática no Instagram via Meta Graph API
 Gerado pelo setup-instagram skill do Claude Code
+
+Uso:
+  python scripts/publish_instagram.py --images Instagram/Feed/F01/slides/slide-1.png --caption "..."
+  python scripts/publish_instagram.py --images Instagram/Carrossel/C01/slides/*.png --caption "..."
 """
 import argparse, os, sys, time, requests
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Encontra o .env automaticamente (sobe até 3 níveis)
-script_dir = Path(__file__).parent
-for i in range(4):
-    env_file = script_dir / (".." * i).rstrip("/") / ".env" if i > 0 else script_dir.parent / ".env"
-    if env_file.exists():
-        load_dotenv(env_file)
-        break
+# .env sempre na raiz do projeto (um nível acima de scripts/)
+load_dotenv(Path(__file__).parent.parent / ".env")
 
 IG_ID      = os.getenv("INSTAGRAM_BUSINESS_ID")
 PAGE_TOKEN = os.getenv("INSTAGRAM_ACCESS_TOKEN")
@@ -226,12 +216,14 @@ def host_image(image_path: str) -> str:
     return url
 
 
-def create_media_container(image_path: str) -> str:
-    resp = requests.post(f"{BASE_URL}/{IG_ID}/media", data={
+def create_media_container(image_path: str, as_carousel_item: bool) -> str:
+    data = {
         "access_token": PAGE_TOKEN,
         "image_url": host_image(image_path),
-        "is_carousel_item": "true",
-    }, timeout=60)
+    }
+    if as_carousel_item:
+        data["is_carousel_item"] = "true"
+    resp = requests.post(f"{BASE_URL}/{IG_ID}/media", data=data, timeout=60)
     result = resp.json()
     if "id" not in result:
         raise RuntimeError(f"Erro container: {result}")
@@ -282,30 +274,47 @@ def run(images: list, caption: str, dry_run: bool = False):
     if not IG_ID or not PAGE_TOKEN:
         print("ERRO: Credenciais nao encontradas. Rode /setup-instagram primeiro.")
         sys.exit(1)
-    if len(images) < 2:
-        print("ERRO: Minimo 2 imagens para carrossel.")
-        sys.exit(1)
     if len(images) > 10:
         print("ERRO: Maximo 10 imagens.")
         sys.exit(1)
 
-    print(f"\nPublicando {len(images)} slides no Instagram...")
+    is_feed = len(images) == 1
+    print(f"\nPublicando {'post único (Feed)' if is_feed else f'{len(images)} slides'} no Instagram...")
     if dry_run:
         print("[DRY RUN] Tudo OK. Remova --dry-run para publicar.")
         return
 
-    print("\nPasso 1/3 - Criando containers...")
-    ids = [create_media_container(img) for img in images]
+    if is_feed:
+        # Post único: um container só, já com a legenda, sem passar por carrossel
+        print("\nPasso 1/2 - Criando o post...")
+        resp = requests.post(f"{BASE_URL}/{IG_ID}/media", data={
+            "access_token": PAGE_TOKEN,
+            "image_url": host_image(images[0]),
+            "caption": caption,
+        }, timeout=60)
+        result = resp.json()
+        if "id" not in result:
+            raise RuntimeError(f"Erro container: {result}")
+        container_id = result["id"]
+        print("\nPasso 2/2 - Publicando...")
+        if not wait_ready(container_id):
+            print("ERRO: Timeout no processamento.")
+            sys.exit(1)
+        post_id = publish(container_id)
+    else:
+        # Carrossel: um container por imagem, depois agrupa
+        print("\nPasso 1/3 - Criando containers...")
+        ids = [create_media_container(img, as_carousel_item=True) for img in images]
 
-    print("\nPasso 2/3 - Montando carrossel...")
-    carousel_id = create_carousel(ids, caption)
+        print("\nPasso 2/3 - Montando carrossel...")
+        carousel_id = create_carousel(ids, caption)
 
-    print("\nPasso 3/3 - Publicando...")
-    if not wait_ready(carousel_id):
-        print("ERRO: Timeout no processamento.")
-        sys.exit(1)
+        print("\nPasso 3/3 - Publicando...")
+        if not wait_ready(carousel_id):
+            print("ERRO: Timeout no processamento.")
+            sys.exit(1)
+        post_id = publish(carousel_id)
 
-    post_id = publish(carousel_id)
     print(f"\nPublicado com sucesso!")
     print(f"Post ID: {post_id}")
 
@@ -368,14 +377,15 @@ O que foi configurado:
 
 Como usar agora:
 
-1. Criar carrossel:
-   /instagram-carousel
+1. Criar a peça (texto + visual):
+   /contrate-ag-ia-na-pratica
 
-2. Exportar os slides:
-   python export_slides.py
+2. Exportar os slides pra PNG (o Designer já faz isso sozinho, mas se
+   precisar rodar de novo):
+   node scripts/export-png.js "Instagram/[Formato]/[Código]/slides"
 
 3. Publicar no Instagram:
-   python publish_instagram.py --images slides/*.png --caption "sua legenda"
+   python scripts/publish_instagram.py --images Instagram/[Formato]/[Código]/slides/*.png --caption "sua legenda"
 
 Ou peça tudo de uma vez:
    "Crie um carrossel sobre [tema] e publique no meu Instagram"
