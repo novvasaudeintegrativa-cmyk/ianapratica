@@ -35,9 +35,9 @@ este arquivo.
 **Pré-requisito:** precisa do subagente `copywriter` instalado em
 `.claude/agents/copywriter.md`. **Se não existir, não instalar por
 conta própria aqui** — quem instala o squad é a Skill
-`/contrate-sua-agencia-de-marketing`. Avisar o usuário:
+`/contrate-ag-ia-na-pratica`. Avisar o usuário:
 > "Ainda não encontrei seu redator (`copywriter`) instalado neste
-> projeto. Rode `/contrate-sua-agencia-de-marketing` uma vez — ela
+> projeto. Rode `/contrate-ag-ia-na-pratica` uma vez — ela
 > prepara o Maestro e todo o squad de uma vez — e depois volte aqui
 > pra gente continuar."
 Parar e não assumir o papel de escrever a copy você mesmo.

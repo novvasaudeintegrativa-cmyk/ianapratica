@@ -1,5 +1,5 @@
 ---
-name: contrate-sua-agencia-de-marketing
+name: contrate-ag-ia-na-pratica
 description: >
   Instala de uma vez só o squad completo de marketing no projeto: o
   `Maestro` (orquestrador) e os três subagentes que ele coordena —
