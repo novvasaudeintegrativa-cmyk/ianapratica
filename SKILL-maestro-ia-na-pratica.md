@@ -1,5 +1,5 @@
 ---
-name: maestro
+name: maestro-ia-na-pratica
 description: >
   Orquestra o squad de marketing (Social Media, Copywriter, Designer) pra
   transformar a persona do negócio em conteúdo pronto pro Instagram —

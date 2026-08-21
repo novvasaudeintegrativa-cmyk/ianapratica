@@ -1,5 +1,5 @@
 ---
-name: persona
+name: skill-persona-profunda
 description: Gera personas completas com 30 dimensoes psicologicas profundas + Buyer Persona + ICP (Ideal Customer Profile) + Mapa de Empatia + Anti-Persona. Produz perfis ultradetalhados com 10 elementos por dimensao para uso em copy, lancamentos, anuncios e estrategia de produto. Use quando o usuario pedir persona, buyer persona, avatar, perfil do cliente ideal, ICP, mapa de empatia, dores do cliente, analise psicografica, persona profunda, perfil psicologico, anti-persona, publico-alvo, quem e meu cliente, entender meu publico, analise de audiencia, persona para copy, persona para anuncios, ou avatar do comprador.
 ---
 

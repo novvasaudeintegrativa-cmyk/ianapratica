@@ -1,5 +1,5 @@
 ---
-name: entrevista
+name: entrevistador-ia-na-pratica
 description: >
   Porta de entrada rápida pra escrever UMA peça de copy pro Instagram
   (carrossel, post único, legenda avulsa, Stories ou Reels) a partir da
@@ -12,7 +12,7 @@ description: >
   post, "entrevista", "entrevistador", ou "quero fazer uma entrevista" —
   sem precisar de calendário nem de visual, só o texto de uma peça. Pra
   planejar várias peças de uma vez ou já sair com o visual pronto, use
-  `/maestro` em vez desta.
+  `/maestro-ia-na-pratica` em vez desta.
 ---
 
 # Entrevistador IA na Prática — Front-end Interativo do Subagente Copywriter
@@ -57,7 +57,7 @@ Pedido do Usuário
 |   --> formato pré-conhecido = Reels
 |
 |-- "semana" / "pacote" / "calendário" / "vários posts" / "quero o visual também"
-|   --> isso é campanha, não peça única — redirecionar pro `/maestro`
+|   --> isso é campanha, não peça única — redirecionar pro `/maestro-ia-na-pratica`
 ```
 
 "Formato pré-conhecido" só pré-seleciona o botão certo no dashboard (Passo
@@ -114,7 +114,7 @@ calendário no Passo 2):
 **Regra:** um post = um objetivo só. Se o pedido misturar vender + educar +
 engajar na mesma peça, avisar que isso dilui a mensagem e sugerir separar
 em peças distintas (o que já significa que virou campanha — redirecionar
-pro `/maestro`).
+pro `/maestro-ia-na-pratica`).
 
 **Se o objetivo for "educar" ou o formato for "legenda avulsa":** pular os
 Passos 4-6 (frameworks e dashboard não se aplicam — ver regra em
@@ -294,7 +294,7 @@ representação visual estática — o Designer não cobre nenhum dos dois):
 > Designer) ou prefere revisar o texto primeiro?"
 
 Se o usuário quiser o visual, é o momento de sugerir rodar
-`/maestro` com essa mesma peça (ele coordena Copywriter →
+`/maestro-ia-na-pratica` com essa mesma peça (ele coordena Copywriter →
 Designer) em vez de tentar acionar o Designer direto por aqui —
 repassando o código da peça (ex. `Feed/F02`) e a referência de
 calendário, se houver.
