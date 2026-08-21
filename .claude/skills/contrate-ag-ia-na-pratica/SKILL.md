@@ -299,11 +299,21 @@ criar outra.</p>` antes dos chips.
    ```
    powershell -Command "Start-Process 'Instagram/dashboard-escolha.html'"
    ```
-6. Avisar o usuário: "Abri o dashboard com uma prévia real no framework
-   recomendado ([Framework]). Quer ver os outros? Clique em 'Gerar
-   prévia desse framework' no card que quiser. Quando escolher uma
-   variação + um formato, copie a escolha (botão no final da página) e
-   cole aqui pra eu gerar a peça de verdade."
+6. **Mostrar um popup nativo do Windows** avisando que o dashboard está
+   pronto — a aba do navegador pode abrir sem chamar atenção (atrás de
+   outras janelas), então esse popup é o aviso que a pessoa realmente vê.
+   Via `PowerShell`:
+   ```powershell
+   Add-Type -AssemblyName System.Windows.Forms
+   [System.Windows.Forms.MessageBox]::Show("Seu dashboard está pronto! Já abri no navegador.", "IA na Prática", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+   ```
+   Isso é bloqueante (a pessoa precisa clicar OK) — de propósito, é o que
+   garante que ela realmente viu o aviso antes de continuar.
+7. Avisar o usuário no chat também: "Abri o dashboard com uma prévia
+   real no framework recomendado ([Framework]). Quer ver os outros?
+   Clique em 'Gerar prévia desse framework' no card que quiser. Quando
+   escolher uma variação + um formato, copie a escolha (botão no final
+   da página) e cole aqui pra eu gerar a peça de verdade."
 
 ## Passo D: Interpretar o retorno do usuário
 
@@ -416,3 +426,9 @@ Depois que a peça final (e o visual, se houver) estiverem prontos:
    e a peça já aparece na lista do card daquele framework (não precisa
    reabrir o navegador de novo — se a aba já estava aberta, um refresh
    mostra tudo novo).
+5. **Mostrar o mesmo popup nativo do Windows** do Passo C.6, agora
+   avisando que a peça final está pronta:
+   ```powershell
+   Add-Type -AssemblyName System.Windows.Forms
+   [System.Windows.Forms.MessageBox]::Show("Sua peça está pronta! [Formato] [Número] — dá um refresh no dashboard pra ver.", "IA na Prática", [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+   ```
