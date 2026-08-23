@@ -40,7 +40,7 @@ este arquivo.
 
 ## O que instalar
 
-Quatro arquivos, cada um copiado do material de apoio do curso (pasta
+Cinco arquivos, cada um copiado do material de apoio do curso (pasta
 `scripts/templates/`) pra dentro de `.claude/`, **só se ainda não
 existir** no destino:
 
@@ -50,10 +50,16 @@ existir** no destino:
 | Social Media | `scripts/templates/agents/social-media.md` | `.claude/agents/social-media.md` |
 | Copywriter | `scripts/templates/agents/copywriter.md` | `.claude/agents/copywriter.md` |
 | Designer | `scripts/templates/agents/designer.md` | `.claude/agents/designer.md` |
+| Setup Geração de Mídia | `scripts/templates/setup-geracao-midia.md` | `.claude/skills/setup-geracao-midia/SKILL.md` |
+
+**Nota:** o `setup-instagram` fica de fora dessa lista de propósito — é
+ensinado como lição própria no tutorial, pra o aluno instalar manualmente
+naquele momento e aprender o que é uma Skill na prática. Não duplicar essa
+lógica aqui.
 
 ## Passo 1: Verificar o que já existe
 
-Checar cada um dos 4 destinos da tabela acima. Não reinstalar o que já
+Checar cada um dos 5 destinos da tabela acima. Não reinstalar o que já
 existir — nunca sobrescrever um arquivo que o usuário (ou uma sessão
 anterior) já tenha customizado.
 
@@ -61,15 +67,17 @@ anterior) já tenha customizado.
 
 Para cada arquivo que faltar: ler o conteúdo do arquivo de origem
 correspondente e escrever no destino, criando as pastas necessárias
-(`.claude/skills/maestro-ia-na-pratica/` e/ou `.claude/agents/`) se não
-existirem. Não perguntar antes — instalar é o comportamento padrão,
-igual à auto-persistência das outras Skills do projeto.
+(`.claude/skills/maestro-ia-na-pratica/`, `.claude/skills/setup-geracao-
+midia/` e/ou `.claude/agents/`) se não existirem. Não perguntar antes —
+instalar é o comportamento padrão, igual à auto-persistência das outras
+Skills do projeto.
 
 **Se algum arquivo de origem não existir** em `scripts/templates/`
 (projeto sem esse material de apoio — ex. copiado sem a pasta
 completa), avisar o usuário exatamente qual peça faltou e parar. Nunca
-inventar o conteúdo de um subagente ou do Maestro na hora — eles são
-peças cuidadosamente calibradas, não algo pra gerar de improviso.
+inventar o conteúdo de um subagente, do Maestro ou da Skill de geração de
+mídia na hora — eles são peças cuidadosamente calibradas, não algo pra
+gerar de improviso.
 
 ## Passo 3: Relatório rápido
 
@@ -81,9 +89,10 @@ Contratando sua Agência de Marketing...
 ✓ Social Media — instalado agora
 ✓ Copywriter — instalado agora
 ✓ Designer — instalado agora
+✓ Setup Geração de Mídia — instalado agora (opcional, /setup-geracao-midia quando quiser configurar)
 ```
 
-Se todos os 4 já existiam, encurtar pra uma frase: "Sua agência já
+Se todos os 5 já existiam, encurtar pra uma frase: "Sua agência já
 estava toda montada — nada pra instalar." Sem enrolação.
 
 **Não perguntar se a pessoa quer continuar — só seguir direto pra Parte
@@ -216,7 +225,18 @@ uso — só gerar sob demanda quando o aluno pedir.
 ## Passo C: Montar e abrir o Dashboard de Escolha
 
 1. Ler o template em `scripts/templates/dashboard-escolha.html`.
-2. Substituir os placeholders de topo:
+2. **Checar o status de conexão com o Instagram** (checagem barata, sem chamada
+   de rede — só presença de arquivo): existe `.env` na raiz do projeto com
+   `INSTAGRAM_ACCESS_TOKEN` e `INSTAGRAM_BUSINESS_ID` preenchidos (não vazios)?
+   - **Sim** → `{{CONN_STATUS}}` = `connected`, `{{CONN_LABEL}}` = "Conectado ao
+     Instagram".
+   - **Não** → `{{CONN_STATUS}}` = `disconnected`, `{{CONN_LABEL}}` = "Ainda não
+     conectado".
+   Essa é só uma checagem de presença, não testa se o token ainda é válido de
+   verdade (isso quem faz é o `/setup-instagram`, ao vivo, quando o usuário
+   clicar em conectar/verificar) — é rápido o bastante pra rodar toda vez que o
+   dashboard é gerado, sem travar o fluxo esperando uma chamada de API.
+3. Substituir os placeholders de topo:
    - `{{TEMA}}`, `{{OBJETIVO}}`
    - `{{NEGOCIO}}` — nome do produto/negócio. Ler a primeira linha
      (`# Persona Master — [Nome]`) de `docs/persona.md` e usar o que vem
@@ -250,6 +270,14 @@ uso — só gerar sob demanda quando o aluno pedir.
      `tutorial/setup-instagram-skill.html`.
    - `{{RESULT_LINKS}}` — deixar vazio na primeira geração (é preenchido
      só no Passo F, depois da peça final existir).
+   - `{{CODIGO_PECA}}` — deixar vazio (`""`) na primeira geração; o Passo F
+     preenche com o código real assim que a peça existe. Enquanto vazio, o
+     botão de publicar do template já nasce desativado sozinho (lógica no
+     JS do próprio `dashboard-escolha.html`) — não precisa se preocupar
+     com isso aqui.
+   - `{{CALENDAR_CONTEXT}}` — deixar vazio (`""`) e a div correspondente
+     escondida (ela já nasce com a classe `hidden` no template); só é
+     preenchida no Passo F, e só se a peça vier de um calendário.
    - `{{PAS_PIECES}}`, `{{AIDA_PIECES}}`, `{{BAB_PIECES}}`,
      `{{PASTOR_PIECES}}`, `{{4PS_PIECES}}` — a lista de peças finais já
      criadas com cada framework (ver "Contar peças por framework"
@@ -274,7 +302,7 @@ formato tiver visual já gerado, o link pode apontar pro PNG em vez do
 trocar por `<p class="pieces-full">⚠️ Limite atingido — apague uma pra
 criar outra.</p>` antes dos chips.
 
-3. Substituir o corpo de cada card (`{{PAS_BODY}}`, `{{AIDA_BODY}}`,
+4. Substituir o corpo de cada card (`{{PAS_BODY}}`, `{{AIDA_BODY}}`,
    `{{BAB_BODY}}`, `{{PASTOR_BODY}}`, `{{4PS_BODY}}`) por um dos dois
    blocos:
 
@@ -293,7 +321,7 @@ criar outra.</p>` antes dos chips.
    <p class="placeholder">Ainda não gerado — clique abaixo pra ver 3 prévias reais nesse framework.</p>
    <button class="regen primary" data-fw-name="[Framework]">✨ Gerar prévia desse framework</button>
    ```
-4. **Calcular o nome do arquivo desta entrevista (uma vez só, aqui) e
+5. **Calcular o nome do arquivo desta entrevista (uma vez só, aqui) e
    guardar pro resto do fluxo** (Passo D e Passo F usam esse mesmo
    nome): listar `Instagram/dashboard-escolha*.html` já existentes. Se
    não existir nenhum, usar `dashboard-escolha.html`. Se já existir,
@@ -301,8 +329,8 @@ criar outra.</p>` antes dos chips.
    `dashboard-escolha-3.html`, etc. **Nunca sobrescrever** um dashboard
    de uma entrevista anterior — cada entrevista tem o próprio arquivo,
    funciona como histórico.
-5. Salvar o resultado em `Instagram/[nome-calculado].html`.
-6. **Mostrar o popup primeiro, e só abrir o navegador quando a pessoa
+6. Salvar o resultado em `Instagram/[nome-calculado].html`.
+7. **Mostrar o popup primeiro, e só abrir o navegador quando a pessoa
    clicar OK** — nessa ordem, num único comando `PowerShell` (o
    `MessageBox` é bloqueante, então o `Start-Process` só roda depois do
    clique):
@@ -313,7 +341,7 @@ criar outra.</p>` antes dos chips.
    ```
    Isso faz o clique em OK literalmente disparar a abertura do link — não
    é só um aviso solto, é o gatilho.
-7. Avisar o usuário no chat também: "Abri o dashboard com uma prévia
+8. Avisar o usuário no chat também: "Abri o dashboard com uma prévia
    real no framework recomendado ([Framework]). Quer ver os outros?
    Clique em 'Gerar prévia desse framework' no card que quiser. Quando
    escolher uma variação + um formato, copie a escolha (botão no final
@@ -329,7 +357,7 @@ exato):
 do card PASTOR", "Regenerar o card PAS" — é a mesma ação nos dois casos):
 acionar `copywriter` em modo prévia só pra esse framework, e atualizar
 `Instagram/[nome-calculado].html` (o arquivo desta entrevista, do Passo
-C.4): reler o arquivo, achar o card daquele
+C.5): reler o arquivo, achar o card daquele
 framework e trocar o corpo dele pelo bloco "Framework já gerado" (ver
 Passo C.3) com as 3 variações novas — não importa se ele já tinha
 variações antes (regenerar) ou não (primeira vez), o resultado é o
@@ -399,41 +427,120 @@ período ("Qual a meta desse período? Ex: 'vender a turma de outubro',
    aplicável, e devolve o resultado — apresentar esse resultado ao
    usuário como veio, sem reescrever por cima.
 
-## Passo E: Visual (se o formato tiver)
+## Passo E: Visual (se o formato tiver) — aciona o Designer direto
 
-Ao final, sempre oferecer (exceto pra Reels e legenda avulsa, que não têm
-representação visual estática — o Designer não cobre nenhum dos dois):
+Ao final, sempre oferecer (exceto legenda avulsa, que não tem
+representação visual — nem imagem nem vídeo, é só texto):
 
 > "Copy pronta! Quer que eu já monte a prévia visual dessa peça (aciono o
 > Designer) ou prefere revisar o texto primeiro?"
 
-Se o usuário quiser o visual, é o momento de sugerir rodar
-`/maestro-ia-na-pratica` com essa mesma peça (ele coordena Copywriter →
-Designer) em vez de tentar acionar o Designer direto por aqui —
-repassando o código da peça (ex. `Feed/F02`) e a referência de
-calendário, se houver.
+Se o usuário quiser o visual, **acionar o `designer` diretamente aqui** (não
+redirecionar mais pro `/maestro-ia-na-pratica` — o dashboard desta entrevista
+evolui sozinho, Copy → Design → Calendário, sem trocar de skill no meio).
+**Feed, Carrossel e Stories** seguem o passo 1 abaixo (imagem); **Reels**
+pula direto pro passo 2 (vídeo) — são perguntas diferentes.
 
-## Passo F: Atualizar o dashboard com os links do resultado
+### 1. Se for Feed, Carrossel ou Stories — escolher o fundo
 
-Depois que a peça final (e o visual, se houver) estiverem prontos:
+Sempre as 3 opções, grátis em destaque, paga por último e só se já
+configurada:
+
+> "Pra essa peça, como você quer o fundo?
+> 1. **Uma imagem sua** (print, foto, arquivo que já tem) — grátis, me diz
+>    o caminho do arquivo.
+> 2. **Card padrão** (cor sólida, sem imagem) — grátis, é o que já
+>    funciona hoje.
+> [Só mostrar a opção 3 abaixo se `.env` tiver `FAL_API_KEY` preenchido —
+> ver checagem barata igual ao Passo C.2]
+> 3. **Gerar uma imagem nova por IA** (fal.ai/Flux) — paga, ~$0,003–$0,01
+>    sem referência, ~$0,04 se você também tiver uma imagem de referência
+>    (Feed/Carrossel) pra guiar o estilo."
+
+- Se escolher **1** → pedir o caminho do arquivo. Guardar como escolha de
+  fundo `imagem-propria` + o caminho.
+- Se escolher **2** (ou não responder) → escolha de fundo `padrao`.
+- Se escolher **3** → confirmar que o usuário viu o preço, perguntar se tem
+  uma imagem de referência pra guiar (Feed/Carrossel only — se tiver, o
+  preço sobe pra ~$0,04, avisar antes de confirmar). Guardar como escolha
+  de fundo `gerar-por-ia` + o caminho da referência, se houver.
+
+Acionar `designer` via `Agent`, passando: o texto final gerado pelo
+`copywriter` (Passo Z), o formato, o código da peça (ex. `Feed/F02`), a
+referência de calendário (se achou uma no Passo A2), e a escolha de fundo
+decidida acima (com o caminho do arquivo, própria ou de referência,
+conforme o caso).
+
+### 2. Se for Reels — escolher o motor de vídeo
+
+> "Pro vídeo desse Reels:
+> 1. **ffmpeg** (grátis) — monta o vídeo a partir do roteiro, aceita
+>    qualquer duração.
+> [Só mostrar a opção 2 se `.env` tiver `FAL_API_KEY` preenchido]
+> 2. **Kling, por IA** (fal.ai) — paga, ~$0,07/s, só em blocos de 5 ou 10
+>    segundos (se o roteiro pedir 15/30/60s, o ffmpeg é o caminho certo)."
+
+- Se escolher **1** (ou não responder) → motor de vídeo `ffmpeg`.
+- Se escolher **2** → confirmar que o usuário viu o preço **daquele vídeo
+  específico** (ex. "um Reels de 10s vai custar ~$0,70 — confirma?") antes
+  de seguir. Motor de vídeo `fal-kling`.
+
+Acionar `designer` via `Agent`, passando: o roteiro completo do
+`copywriter`, o código da peça, a referência de calendário se houver, e o
+motor de vídeo decidido acima.
+
+### Depois de acionar o Designer (qualquer um dos dois casos)
+
+O Designer salva o resultado (imagem ou vídeo) na mesma pasta da peça e
+devolve o relatório — seguir pro Passo F com esse resultado.
+
+## Passo F: Fechar a evolução do dashboard — Copy → Design → Calendário
+
+Depois que a peça final (e o visual, se houver) estiverem prontos, essa é a
+etapa que fecha o ciclo: o dashboard desta entrevista, que nasceu no Passo C
+só com prévias de texto, agora ganha o resultado real, o preview visual e o
+contexto de calendário — nessa ordem.
 
 1. Reabrir `Instagram/[nome-calculado].html` (o arquivo desta
-   entrevista, do Passo C.4).
+   entrevista, do Passo C.5).
 2. Preencher a seção `{{RESULT_LINKS}}` (dentro de `<div class="links">`)
    com links reais pro que foi gerado — remover a classe `hidden` dessa
    div. Exemplos de link, conforme o que existir:
    - `<a href="Feed/F02/slides/slide-1.png">Ver a imagem do Feed</a>`
    - `<a href="Carrossel/C02/slides/">Ver as imagens do Carrossel</a>`
-   - `<a href="Reels/R01/roteiro.md">Ver o roteiro do Reels</a>` (sem
-     vídeo ainda — Remotion entra numa etapa futura)
-3. **Adicionar o novo chip** na lista `{{[Framework]_PIECES}}` do
+   - `<a href="Reels/R01/reels.mp4">Ver o vídeo do Reels</a>` (se o
+     Designer conseguiu montar o vídeo) ou `<a
+     href="Reels/R01/roteiro.md">Ver o roteiro do Reels</a>` (se a
+     montagem do vídeo falhou/foi pulada — ver relatório do Designer)
+   Se o visual já foi exportado pra PNG (Designer, Passo 3), **embutir o
+   preview inline**, não só linkar: adicionar `<img class="piece-preview"
+   src="[Formato]/[Código]/slides/slide-1.png">` dentro de
+   `{{RESULT_LINKS}}` antes dos links (uma imagem só, mesmo pra carrossel —
+   é só a capa/preview, o link completo já leva pra pasta inteira).
+3. **Se a peça veio de uma referência de calendário** (Passo A2), preencher
+   a seção `{{CALENDAR_CONTEXT}}` (dentro de `<div class="calendar-context">`,
+   remover a classe `hidden`) com o dia/objetivo daquela linha do
+   calendário, ex: "📅 Parte do calendário de [período] — [Dia], objetivo
+   [Objetivo]." Se a peça é avulsa, sem calendário, deixar essa seção
+   escondida (não remover a classe `hidden`).
+4. **Recalcular o status de conexão** com a mesma checagem barata do Passo
+   C.2 (o `.env` pode ter mudado entre o início da entrevista e agora, ex.
+   se o usuário rodou `/setup-instagram` no meio do caminho): trocar `is-
+   connected`/`is-disconnected` em **ambos** `<div class="conn-banner ...">`
+   e `<button class="conn-action ..." id="connBtn">`, e atualizar o texto
+   dentro de `<strong>{{CONN_LABEL}}</strong>`. Além disso, **agora que a
+   peça existe**, preencher `data-piece-code="[Código]"` no mesmo
+   `#connBtn` (ex. `Feed/F02`) — é isso que liga o botão "Publicar" à peça
+   certa (antes deste passo, o botão fica sem código e por isso desativado,
+   ver JS do template).
+5. **Adicionar o novo chip** na lista `{{[Framework]_PIECES}}` do
    framework que acabou de ser usado (ver o formato do chip no Passo C)
    e atualizar a contagem `N/3` — sem apagar os chips que já estavam lá.
-4. Salvar e avisar o usuário que o dashboard foi atualizado com os links
+6. Salvar e avisar o usuário que o dashboard foi atualizado com os links
    e a peça já aparece na lista do card daquele framework (não precisa
    reabrir o navegador de novo — se a aba já estava aberta, um refresh
    mostra tudo novo).
-5. **Mostrar o mesmo popup nativo do Windows** do Passo C.5, agora
+7. **Mostrar o mesmo popup nativo do Windows** do Passo C.7, agora
    avisando que a peça final está pronta — e, quando a pessoa clicar OK,
    abrir (ou reabrir) o dashboard direto no link atualizado, mesma lógica
    de ordem (popup bloqueia, `Start-Process` só roda depois do clique):

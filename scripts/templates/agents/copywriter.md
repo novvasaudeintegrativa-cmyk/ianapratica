@@ -205,9 +205,9 @@ numa pasta por peça, seguindo o mesmo padrão já usado no projeto
 6. **Se veio uma referência de calendário no prompt**, abrir esse arquivo
    e atualizar a linha correspondente: preencher a coluna **Código** com
    o código da peça (ex. `Feed/F02`) e a coluna **Status** com
-   `Copy pronta` (ou `Completo`, se o formato não tiver visual — legenda
-   avulsa e Reels não passam pelo Designer). Não reescrever o resto da
-   linha, só essas duas colunas.
+   `Copy pronta` (ou `Completo`, se o formato não tiver visual — só a
+   legenda avulsa não passa pelo Designer; Reels passa, vira vídeo). Não
+   reescrever o resto da linha, só essas duas colunas.
 
 ## Regras de Ouro
 
