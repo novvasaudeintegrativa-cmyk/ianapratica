@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>TikTok — Código de autorização</title>
+<style>
+  :root{
+    --bg:#141413; --surface:#242322; --border:#3d3d3a; --ink:#faf9f5; --ink-muted:#a8a6a0;
+    --accent:#E94F00;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
+    font-family:-apple-system,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);padding:24px;}
+  .card{max-width:560px;width:100%;border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:32px;}
+  h1{font-size:18px;margin:0 0 8px;color:#fff;}
+  p{color:var(--ink-muted);font-size:14px;line-height:1.5;margin:0 0 20px;}
+  .box{background:rgba(0,0,0,.35);border:1px solid var(--border);border-radius:10px;padding:16px;
+    font-family:ui-monospace,Consolas,monospace;font-size:13px;word-break:break-all;color:var(--accent);
+    margin-bottom:12px;}
+  .label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-muted);margin-bottom:6px;}
+  .empty{color:var(--ink-muted);font-style:italic;}
+  button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 18px;
+    font-size:13px;font-weight:700;cursor:pointer;}
+  button:active{opacity:.8;}
+  .copied{color:#34c759;font-size:12px;margin-left:10px;display:none;}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>✳ Código de autorização recebido</h1>
+    <p>Copie o valor abaixo e cole de volta na conversa com o Claude pra continuar a conexão do TikTok.</p>
+
+    <div class="label">code</div>
+    <div class="box" id="code">—</div>
+    <button onclick="copiar()">Copiar código</button>
+    <span class="copied" id="copiedMsg">Copiado!</span>
+
+    <div id="errorBlock" style="display:none;margin-top:20px;">
+      <div class="label">error</div>
+      <div class="box" id="error" style="color:#ff6b6b;">—</div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    const error = params.get('error');
+    const errorDesc = params.get('error_description');
+
+    document.getElementById('code').textContent = code || '(nenhum código na URL)';
+    if (!code) document.getElementById('code').classList.add('empty');
+
+    if (error) {
+      document.getElementById('errorBlock').style.display = 'block';
+      document.getElementById('error').textContent = error + (errorDesc ? ' — ' + errorDesc : '');
+    }
+
+    function copiar() {
+      if (!code) return;
+      navigator.clipboard.writeText(code).then(() => {
+        const msg = document.getElementById('copiedMsg');
+        msg.style.display = 'inline';
+        setTimeout(() => msg.style.display = 'none', 2000);
+      });
+    }
+  </script>
+</body>
+</html>
