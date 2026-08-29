@@ -12,7 +12,7 @@ deixe seu comentário", vídeo com no mínimo 20s, áudio de `TikTok/Audio/Audio
 
 | Data | Hora | Headline (pergunta de busca) | Código | Status |
 |------|------|-------------------------------|--------|--------|
-| Seg, 31/08/2026 | 09h | O que é o Claude Code? | TikTok/V05 | **Já publicado (teste Sandbox) — não republicar dia 31/08** |
+| Sáb, 29/08/2026 | 09h | O que é o Claude Code? | TikTok/V05 | **Já publicado (teste Sandbox) — não republicar dia 29/08** |
 | Ter, 01/09/2026 | 13h | Vale a pena usar o Claude Code? | TikTok/V08 | Pronto |
 | Qui, 03/09/2026 | 13h | Dá pra conectar o Claude no Instagram? | TikTok/V09 | Pronto |
 | Seg, 07/09/2026 | 13h | O Claude consegue criar post pro Instagram sozinho? | TikTok/V10 | Pronto |
