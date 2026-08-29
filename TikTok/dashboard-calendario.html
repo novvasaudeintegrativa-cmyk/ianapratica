@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Calendário TikTok — 31/08 a 14/09</title>
+<style>
+  :root{
+    --bg:#141413; --bg-glow:radial-gradient(circle at 15% 0%, rgba(233,79,0,.16), transparent 45%),
+      radial-gradient(circle at 100% 30%, rgba(233,79,0,.10), transparent 50%);
+    --surface:#242322; --border:#3d3d3a; --border-soft:#333230;
+    --ink:#faf9f5; --ink-muted:#a8a6a0;
+    --accent:#E94F00; --accent-bright:#ff8a4c; --accent-soft:rgba(233,79,0,.15);
+    --ok:#34c759; --ok-soft:rgba(52,199,89,.1); --ok-border:rgba(52,199,89,.35);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,"Segoe UI",Arial,sans-serif;background-color:var(--bg);background-image:var(--bg-glow);color:var(--ink);padding:40px 24px 80px;}
+  .wrap{max-width:1180px;margin:0 auto;}
+  .brand{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-bright);background:var(--accent-soft);border:1px solid rgba(233,79,0,.35);padding:6px 14px;border-radius:999px;margin-bottom:16px;}
+  h1{font-size:26px;margin:0 0 8px;color:#fff;letter-spacing:-.01em;}
+  .sub{color:var(--ink-muted);margin:0 0 8px;font-size:14px;line-height:1.55;max-width:760px;}
+  .meta{color:var(--ink-muted);font-size:13px;margin:0 0 28px;}
+  .meta code{color:var(--accent-bright);}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+  .card{border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;display:flex;flex-direction:column;}
+  .card.pending{opacity:.72;}
+  video, .placeholder{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;background:#0a0a09;border-bottom:1px solid var(--border);}
+  .placeholder{display:flex;align-items:center;justify-content:center;color:var(--ink-muted);font-size:13px;text-align:center;padding:20px;}
+  .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .date{font-size:13px;font-weight:700;color:#fff;}
+  .code{font-size:11px;color:var(--ink-muted);font-family:ui-monospace,Consolas,monospace;}
+  .badge{align-self:flex-start;font-size:10px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:4px 9px;border-radius:999px;}
+  .badge-pronto{background:var(--ok-soft);color:var(--ok);border:1px solid var(--ok-border);}
+  .badge-planejado{background:rgba(255,255,255,.06);color:var(--ink-muted);border:1px solid var(--border);}
+  .headline{font-size:15px;color:var(--ink);line-height:1.4;font-weight:600;}
+
+  .hint{color:var(--ink-muted);font-size:12px;margin-top:28px;line-height:1.6;}
+  .publish-cmd{background:rgba(0,0,0,.3);border-radius:10px;padding:12px 14px;font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--accent-bright);overflow-x:auto;margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="brand">✳ Claude Code + Instagram — TikTok</span>
+  <h1>🗓️ Calendário TikTok — 31/08 a 14/09</h1>
+  <p class="sub">7 posts, 3x por semana (seg/qua/sex) — uma pergunta real de busca (<code>RAG/termos_pesquisa_claude.md</code>) por vídeo, cada um com 5 slides (pergunta → desenvolvimento → CTA), fundo alternando dark/claro, sempre laranja <code>#E94F00</code>.</p>
+  <p class="meta">Calendário completo: <code>TikTok/calendario-set-2026.md</code>. Publicação via <code>scripts/publish_tiktok.py</code> (Sandbox / <code>SELF_ONLY</code> por enquanto).</p>
+
+  <div class="grid">
+
+    <div class="card">
+      <video src="V05/Tiktok002.mp4" poster="V05/frames/frame-01.png" controls muted playsinline></video>
+      <div class="card-body">
+        <div class="card-top"><span class="date">Seg, 31/08</span><span class="code">TikTok/V05</span></div>
+        <span class="badge badge-pronto">✓ Pronto</span>
+        <div class="headline">O que é o Claude Code?</div>
+      </div>
+    </div>
+
+    <div class="card pending">
+      <div class="placeholder">Ainda não gerado</div>
+      <div class="card-body">
+        <div class="card-top"><span class="date">Qua, 02/09</span><span class="code">TikTok/V06</span></div>
+        <span class="badge badge-planejado">Planejado</span>
+        <div class="headline">O Claude Code é gratuito?</div>
+      </div>
+    </div>
+
+    <div class="card pending">
+      <div class="placeholder">Ainda não gerado</div>
+      <div class="card-body">
+        <div class="card-top"><span class="date">Sex, 04/09</span><span class="code">TikTok/V07</span></div>
+        <span class="badge badge-planejado">Planejado</span>
+        <div class="headline">Quanto custa o Claude Code?</div>
+      </div>
+    </div>
+
+    <div class="card pending">
+      <div class="placeholder">Ainda não gerado</div>
+      <div class="card-body">
+        <div class="card-top"><span class="date">Seg, 07/09</span><span class="code">TikTok/V08</span></div>
+        <span class="badge badge-planejado">Planejado</span>
+        <div class="headline">Vale a pena usar o Claude Code?</div>
+      </div>
+    </div>
+
+    <div class="card pending">
+      <div class="placeholder">Ainda não gerado</div>
+      <div class="card-body">
+        <div class="card-top"><span class="date">Qua, 09/09</span><span class="code">TikTok/V09</span></div>
+        <span class="badge badge-planejado">Planejado</span>
+        <div class="headline">Dá pra conectar o Claude no Instagram?</div>
+      </div>
+    </div>
+
+    <div class="card pending">
+      <div class="placeholder">Ainda não gerado</div>
+      <div class="card-body">
+        <div class="card-top"><span class="date">Sex, 11/09</span><span class="code">TikTok/V10</span></div>
+        <span class="badge badge-planejado">Planejado</span>
+        <div class="headline">O Claude consegue criar post pro Instagram sozinho?</div>
+      </div>
+    </div>
+
+    <div class="card pending">
+      <div class="placeholder">Ainda não gerado</div>
+      <div class="card-body">
+        <div class="card-top"><span class="date">Seg, 14/09</span><span class="code">TikTok/V11</span></div>
+        <span class="badge badge-planejado">Planejado</span>
+        <div class="headline">Dá pra fazer Reels com IA?</div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="hint">👉 Pra gerar o próximo vídeo (V06), é só pedir aqui no chat — sigo o mesmo padrão do V05 (dark/claro alternado, laranja #E94F00, poster decorativo, CTA fixo, 20s+, áudio incluso).</p>
+  <p class="hint">Publicar um vídeo já pronto (modo teste, só você vê):</p>
+  <div class="publish-cmd">python scripts/publish_tiktok.py --video "TikTok/V05/Tiktok002.mp4" --caption "..."</div>
+</div>
+</body>
+</html>
