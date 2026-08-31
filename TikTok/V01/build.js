@@ -1,5 +1,12 @@
-// TikTok/V10 — headline 6 ("O Claude consegue criar post pro Instagram
-// sozinho?") em 5 slides. Mesmo padrão fixo do V05.
+// TikTok/V05 — headline 1 ("O que é o Claude Code?") desenvolvida em 5 slides.
+// Regras fixas (a partir de agora, padrão pra todo vídeo de TikTok deste tipo):
+//   - Fundo alterna dark/claro por slide (ímpar=escuro, par=claro — claro é a
+//     cor de marca real do Claude, creme/off-white).
+//   - Cor de abóbora (laranja) sempre que o texto disser "Claude Code" ou
+//     "Instagram", além do uso normal de destaque.
+//   - Vídeo com no mínimo 20s; cada slide pode durar até 7s.
+//   - Áudio de TikTok/Audio/AudioIA.mp3 sempre incluso.
+// Rota grátis (sem IA nenhuma). Fica dentro de TikTok/ de propósito.
 const fs = require("fs");
 const path = require("path");
 const { chromium } = require("playwright");
@@ -12,32 +19,47 @@ const FRAMES_DIR = path.join(OUT_DIR, "frames");
 const AUDIO_PATH = path.join(ROOT, "TikTok", "Audio", "AudioIA.mp3");
 const W = 1080, H = 1920;
 
+// theme: "dark" (ímpar: 1,3,5) ou "light" (par: 2,4) — soma das durações >= 20s.
 const SLIDES = [
-  { idx: "01", theme: "dark",  duration: 4.6, cta: false, text: "O <span class=\"accent\">Claude</span> cria post pro<br><span class=\"accent\">Instagram</span> sozinho?" },
-  { idx: "02", theme: "light", duration: 4.6, cta: false, text: "Ele escreve a legenda<br>com a voz do seu negócio" },
-  { idx: "03", theme: "dark",  duration: 4.6, cta: false, text: "Gera a imagem e já<br>publica, sem parar" },
-  { idx: "04", theme: "light", duration: 4.6, cta: false, text: "Do zero até o post no<br>ar, em poucos minutos" },
+  { idx: "01", theme: "dark",  duration: 4.6, cta: false, text: "O que é o<br><span class=\"accent\">Claude Code</span>?" },
+  { idx: "02", theme: "light", duration: 4.6, cta: false, text: "É uma <span class=\"accent\">IA</span> que roda<br>no seu computador" },
+  { idx: "03", theme: "dark",  duration: 4.6, cta: false, text: "Ela cria arquivo,<br>escreve texto, gera<br><span class=\"accent\">imagem</span> — tudo sozinha" },
+  { idx: "04", theme: "light", duration: 4.6, cta: false, text: "No meu negócio, ela<br>cuida do <span class=\"accent\">Instagram</span><br>inteiro" },
   { idx: "05", theme: "dark",  duration: 5.0, cta: true,  text: "<span class=\"accent\">Segue</span> esse perfil e<br>deixe seu comentário" },
 ];
 const TOTAL_SLIDES = SLIDES.length;
 
+// Laranja fixo do projeto — sempre esta cor, em qualquer tema.
 const ORANGE = "#E94F00";
 const ORANGE_RGB = "233,79,0";
 
 const THEMES = {
   dark: {
-    bg: "#0e1613", gridColor: "rgba(255,255,255,.035)", ink: "#ffffff",
-    brandColor: "rgba(255,255,255,.75)", idxColor: "rgba(255,255,255,.35)",
-    accent: ORANGE, bar: ORANGE, sparkColor: ORANGE,
+    bg: "#0e1613",
+    gridColor: "rgba(255,255,255,.035)",
+    ink: "#ffffff",
+    brandColor: "rgba(255,255,255,.75)",
+    idxColor: "rgba(255,255,255,.35)",
+    accent: ORANGE,
+    bar: ORANGE,
+    sparkColor: ORANGE,
   },
   light: {
-    bg: "#F0EBE1", gridColor: "rgba(30,28,25,.05)", ink: "#211f1c",
-    brandColor: "rgba(33,31,28,.6)", idxColor: "rgba(33,31,28,.35)",
-    accent: ORANGE, bar: ORANGE, sparkColor: ORANGE,
+    bg: "#F0EBE1",
+    gridColor: "rgba(30,28,25,.05)",
+    ink: "#211f1c",
+    brandColor: "rgba(33,31,28,.6)",
+    idxColor: "rgba(33,31,28,.35)",
+    accent: ORANGE,
+    bar: ORANGE,
+    sparkColor: ORANGE,
   },
 };
 
-const GLOW_POS = ["20% 15%", "85% 10%", "15% 85%", "90% 80%", "50% 85%"];
+// Glow radial: sutil e quente nos dois temas, posição varia por slide.
+const GLOW_POS = [
+  "20% 15%", "85% 10%", "15% 85%", "90% 80%", "50% 85%",
+];
 
 function frameHtml(slide) {
   const t = THEMES[slide.theme];
@@ -47,6 +69,9 @@ function frameHtml(slide) {
   const headlineShadow = slide.theme === "dark"
     ? `text-shadow:0 0 50px rgba(${ORANGE_RGB},.65), 0 0 110px rgba(${ORANGE_RGB},.35);`
     : "";
+  // Elementos decorativos estilo "poster" (pontos + listras diagonais) —
+  // só no tema escuro, cantos alternados por slide pra não repetir sempre
+  // no mesmo lugar. Referência: poster laranja/preto que o usuário mandou.
   const decorCorner = SLIDES.indexOf(slide) % 2 === 0 ? "left" : "right";
   const decor = slide.theme === "dark" ? `
     <div class="dots" style="${decorCorner}:0;"></div>
