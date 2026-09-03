@@ -4,46 +4,112 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Termos de Serviço — IA na Prática</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-  body{margin:0;font-family:-apple-system,"Segoe UI",Arial,sans-serif;background:#141413;color:#faf9f5;
-    padding:48px 24px 80px;line-height:1.65;}
-  .wrap{max-width:720px;margin:0 auto;}
-  h1{font-size:26px;margin:0 0 8px;color:#fff;}
-  .updated{color:#a8a6a0;font-size:13px;margin:0 0 32px;}
-  h2{font-size:18px;color:#fff;margin:32px 0 10px;}
-  p,li{color:#c9c7c2;font-size:15px;}
-  a{color:#ffb35c;}
-  ul{padding-left:22px;}
+  *{box-sizing:border-box;margin:0}
+  :root{
+    --bg:#f6f5f2; --surface:#fffdfa;
+    --ink:#242120; --ink-soft:#4d4642; --ink-muted:#6f6862;
+    --rule:#e4e0d9; --accent:#c2410c; --code-bg:#f0ebe3;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#17150f; --surface:#201d16;
+      --ink:#f1eee7; --ink-soft:#c8c2b6; --ink-muted:#a49e93;
+      --rule:#35302a; --accent:#f0854c; --code-bg:#2b2720;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17150f; --surface:#201d16;
+    --ink:#f1eee7; --ink-soft:#c8c2b6; --ink-muted:#a49e93;
+    --rule:#35302a; --accent:#f0854c; --code-bg:#2b2720;
+  }
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"IBM Plex Sans",-apple-system,"Segoe UI",Arial,sans-serif;
+    line-height:1.7; font-size:15.5px;
+    padding:clamp(28px,6vw,72px) 22px 96px;
+  }
+  .wrap{max-width:640px;margin:0 auto}
+  header{margin-bottom:2.75rem}
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+    font-size:12px;font-weight:500;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--accent);
+  }
+  h1{
+    font-size:clamp(25px,5vw,31px);font-weight:600;
+    letter-spacing:-.02em;line-height:1.2;text-wrap:balance;
+    margin:.7rem 0 1rem;
+  }
+  .rule{width:44px;height:2px;background:var(--accent);margin-bottom:.9rem}
+  .stamp{
+    font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+    font-size:12.5px;color:var(--ink-muted);
+  }
+  main{display:flex;flex-direction:column;gap:2.4rem}
+  section>h2{font-size:16.5px;font-weight:600;letter-spacing:-.01em;margin-bottom:.5rem}
+  section>*+*{margin-top:.7rem}
+  p{color:var(--ink-soft)}
+  ul{padding-left:1.15rem;display:flex;flex-direction:column;gap:.45rem}
+  li{color:var(--ink-soft)}
+  strong{color:var(--ink);font-weight:600}
+  code{
+    font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+    font-size:.86em;background:var(--code-bg);
+    padding:1px 5px;border-radius:4px;word-break:break-word;
+  }
+  a{color:var(--accent);text-underline-offset:2px}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:2px}
+  footer{
+    margin-top:3rem;padding-top:1.1rem;border-top:1px solid var(--rule);
+    font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+    font-size:12.5px;color:var(--ink-muted);line-height:1.7;
+  }
+  footer a{color:var(--ink-muted)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Termos de Serviço</h1>
-  <p class="updated">Última atualização: agosto de 2026</p>
+  <header>
+    <div class="eyebrow">IA na Prática — Automação</div>
+    <h1>Termos de Serviço</h1>
+    <div class="rule"></div>
+    <div class="stamp">Última atualização: setembro de 2026</div>
+  </header>
 
-  <p>Estes termos regem o uso do app <strong>"IA na Prática — Automação"</strong>, uma ferramenta pessoal
-  que conecta, via OAuth, à conta de Instagram e/ou TikTok do próprio usuário que autoriza a conexão.</p>
+  <main>
+    <p>Estes termos regem o uso do app <strong>"IA na Prática — Automação"</strong>, uma ferramenta pessoal que conecta, via OAuth, às contas de Instagram e/ou TikTok do próprio usuário que autoriza a conexão.</p>
 
-  <h2>Natureza do app</h2>
-  <p>Este é um app de uso pessoal/próprio — não é um serviço comercial oferecido a terceiros. Ele existe
-  pra automatizar a criação e publicação de conteúdo (legenda, imagem, vídeo) na própria conta do usuário
-  que o configurou, com autorização explícita dele via login OAuth de cada plataforma.</p>
+    <section>
+      <h2>Natureza do app</h2>
+      <p>É um app de uso pessoal/próprio — não é um serviço comercial oferecido a terceiros. Ele automatiza a criação e a publicação de conteúdo (legenda, imagem, vídeo) na própria conta do usuário que o configurou, com autorização explícita dele via login OAuth de cada plataforma.</p>
+    </section>
 
-  <h2>Responsabilidades do usuário</h2>
-  <ul>
-    <li>O usuário é responsável pelo conteúdo que decide publicar através do app.</li>
-    <li>O usuário pode revogar o acesso do app à sua conta a qualquer momento, diretamente nas
-      configurações de aplicativos conectados do Instagram/TikTok.</li>
-    <li>O uso do app deve respeitar os Termos de Uso e as Políticas da Comunidade de cada plataforma
-      conectada (Meta/Instagram e TikTok).</li>
-  </ul>
+    <section>
+      <h2>Responsabilidades do usuário</h2>
+      <ul>
+        <li>O usuário é responsável pelo conteúdo que decide publicar através do app.</li>
+        <li>O usuário pode revogar o acesso do app à sua conta a qualquer momento, nas configurações de aplicativos conectados do Instagram ou do TikTok.</li>
+        <li>O uso deve respeitar os Termos de Uso e as Políticas da Comunidade de cada plataforma conectada (Meta/Instagram e TikTok).</li>
+      </ul>
+    </section>
 
-  <h2>Sem garantias</h2>
-  <p>O app é fornecido "como está", sem garantia de disponibilidade contínua. Mudanças nas APIs das
-  plataformas conectadas (Meta, TikTok) podem exigir ajustes no funcionamento do app a qualquer momento.</p>
+    <section>
+      <h2>Sem garantias</h2>
+      <p>O app é fornecido "como está", sem garantia de disponibilidade contínua. Mudanças nas APIs das plataformas conectadas (Meta, TikTok) podem exigir ajustes no funcionamento a qualquer momento.</p>
+    </section>
 
-  <h2>Contato</h2>
-  <p>Dúvidas sobre estes termos: <a href="mailto:imersaoianapratica2026@gmail.com">imersaoianapratica2026@gmail.com</a></p>
+    <section>
+      <h2>Limitação de responsabilidade</h2>
+      <p>Por ser uma ferramenta pessoal sem fins comerciais, o app é usado por conta e risco do próprio usuário. O autor não se responsabiliza por suspensões de conta, conteúdo publicado indevidamente ou indisponibilidade das plataformas conectadas.</p>
+    </section>
+  </main>
+
+  <footer>
+    Dúvidas sobre estes termos: <a href="mailto:imersaoianapratica2026@gmail.com">imersaoianapratica2026@gmail.com</a>
+  </footer>
 </div>
 </body>
 </html>
