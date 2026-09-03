@@ -1,0 +1,9 @@
+**Legenda:**
+
+Claude Code + Instagram = Automação de verdade. 🤖📲
+
+Ele cria a arte, escreve a legenda e publica sozinho — você só aprova, ele executa. Sem Canva, sem agência, sem perder tempo. ⏰
+
+Segue esse perfil e deixa nos comentários se você quer aprender a configurar isso no seu.
+
+#claudecode #automacaoinstagram #iaparaempreendedores

@@ -1,0 +1,9 @@
+**Legenda:**
+
+O Claude consegue criar o post inteiro pro Instagram sozinho? Sim — ele escreve a legenda com a voz do meu negócio, gera a imagem e já publica, sem parar. ✍️
+
+Do zero até o post no ar, em poucos minutos. ⏱️
+
+Segue esse perfil e comenta se você quer aprender a fazer isso no seu.
+
+#criarpostcomia #claudecode #instagramautomatico

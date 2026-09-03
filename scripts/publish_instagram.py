@@ -268,7 +268,20 @@ def run(images: list, caption: str, dry_run: bool = False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--images", nargs="+", required=True)
-    parser.add_argument("--caption", required=True)
+    parser.add_argument("--caption")
+    parser.add_argument("--caption-file",
+                         help="Le a legenda de um arquivo .txt (UTF-8) em vez de passar direto na "
+                              "linha de comando -- mais seguro pra emoji/acento/aspas em tarefas "
+                              "agendadas (Task Scheduler), onde escapar tudo na CLI e' fragil.")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
-    run(args.images, args.caption, args.dry_run)
+
+    if args.caption_file:
+        caption_text = Path(args.caption_file).read_text(encoding="utf-8").strip()
+    elif args.caption:
+        caption_text = args.caption
+    else:
+        print("ERRO: passe --caption ou --caption-file.")
+        sys.exit(1)
+
+    run(args.images, caption_text, args.dry_run)
