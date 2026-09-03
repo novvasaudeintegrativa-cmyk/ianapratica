@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<title>Calendário 27/08 – 22/10 — Revisão antes de publicar</title>
+<title>Calendário 27/08 – 20/10 — Revisão antes de publicar</title>
 <style>
   :root{
     --bg:#141413; --bg-glow:radial-gradient(circle at 15% 0%, rgba(255,90,31,.16), transparent 45%),
@@ -36,6 +36,7 @@
   .card{border:1px solid var(--border);border-radius:16px;background:var(--surface);overflow:hidden;display:flex;flex-direction:column;}
   .card img, .card video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-bottom:1px solid var(--border);background:#0a0a09;}
   .card.reels video{aspect-ratio:9/16;}
+  .card.today{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);}
   .card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1;}
   .card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;}
   .date{font-size:13px;font-weight:700;color:#fff;}
@@ -62,8 +63,8 @@
 <body>
 <div class="wrap">
   <span class="brand">✨ Imersão "IA na Prática"</span>
-  <h1>🗓️ Calendário 27/08 – 22/10 — Revisão antes de publicar</h1>
-  <p class="sub"><strong>Terça = Feed</strong> (imagem, pasta <code>Refs/</code>), <strong>quinta = Reels</strong> (vídeo reaproveitado de <code>TikTok/V01</code>–<code>V07</code>). Confira cada peça abaixo — nenhuma vai ao ar sem aprovação, e nada aqui posta sozinho ainda (ver aviso abaixo).</p>
+  <h1>🗓️ Calendário 27/08 – 20/10 — Revisão antes de publicar</h1>
+  <p class="sub"><strong>Quinta = Reels</strong> (vídeo reaproveitado de <code>TikTok/V01</code>–<code>V07</code>), <strong>terça = Feed</strong> (imagem, pasta <code>Refs/</code>). Confira cada peça abaixo — nenhuma vai ao ar sem aprovação, e nada aqui posta sozinho ainda (ver aviso abaixo).</p>
   <p class="meta">Meta do período: <strong>aquecer audiência e gerar interesse pela próxima turma da Imersão "IA na Prática"</strong>, preparando terreno pra venda de vaga. Calendário completo: <code>Instagram/calendario-set-2026.md</code>.</p>
 
   <div class="conn-banner">
@@ -71,17 +72,17 @@
       <span class="conn-dot"></span>
       <div class="conn-label">
         <strong>Conectado ao Instagram</strong>
-        <span>@imersaoianapratica — publicação testada e funcionando pra Feed.</span>
+        <span>@imersaoianapratica — Feed testado e funcionando; suporte a Reels acabou de ser adicionado ao script (ainda não testado publicando de verdade).</span>
       </div>
     </div>
   </div>
 
   <div class="status-banner">
-    ⚠️ <strong>Isso ainda é só o plano.</strong> Depois de aprovado: (1) testo o
-    <code>publish_instagram.py</code> publicando Reels de verdade pela primeira vez,
-    (2) crio uma tarefa por post no Windows Task Scheduler pra cada um sair sozinho
-    na data certa, sem precisar pedir de novo. As legendas dos Reels (R01-R07)
-    ainda estão pendentes — só o vídeo está pronto.
+    ⚠️ <strong>Isso ainda é só o plano.</strong> Depois de aprovado: (1) publico
+    o R01 de verdade (primeiro Reels real dessa conta), (2) crio uma tarefa por
+    post no Windows Task Scheduler pra cada um sair sozinho na data certa, sem
+    precisar pedir de novo. As legendas de R02-R07 ainda estão pendentes — só
+    o vídeo está pronto nesses.
   </div>
 
   <div class="grid">
@@ -95,10 +96,28 @@
       </div>
     </div>
 
+    <div class="card reels today">
+      <video src="Reels/R01/reels.mp4" poster="Reels/R01/poster.png" controls muted playsinline></video>
+      <div class="card-body">
+        <div class="card-top"><span class="date">Qui, 03/09 (hoje)</span><span class="code">Reels/R01</span></div>
+        <div class="badges"><span class="badge badge-reels">Reels</span><span class="badge" style="background:var(--accent-soft);color:var(--accent-bright);border:1px solid rgba(255,90,31,.4);">Hoje</span></div>
+        <div class="tema">"O que é o Claude Code?" — reaproveitado de <code>TikTok/V01</code>.</div>
+        <div class="legenda" id="leg-r01">Toda hora alguém me pergunta "o que é esse tal de Claude Code". 🤖 É uma IA que roda direto do seu computador e faz tarefa de verdade — não é só um chat que só responde pergunta.
+
+No meu negócio, configurei ela pra cuidar do Instagram inteiro: cria legenda, gera imagem e publica sozinha. 📲
+
+Segue esse perfil e deixa nos comentários se você já tinha ouvido falar do Claude Code.
+
+#claudecode #oqueeclaudecode #iaparainstagram #dicasdeia</div>
+        <button class="toggle" onclick="toggle('leg-r01', this)">ver legenda completa ▾</button>
+        <div class="cta-row"><strong>CTA:</strong> "Segue esse perfil e deixa nos comentários se você já tinha ouvido falar."</div>
+      </div>
+    </div>
+
     <div class="card">
       <img src="Feed/F02/slides/slide-1.jpeg" alt="Feed F02">
       <div class="card-body">
-        <div class="card-top"><span class="date">Qui, 03/09 (hoje)</span><span class="code">Feed/F02</span></div>
+        <div class="card-top"><span class="date">Ter, 08/09</span><span class="code">Feed/F02</span></div>
         <div class="badges"><span class="badge badge-educar">Educar</span><span class="badge">Framework: nenhum</span></div>
         <div class="tema">"Segredo: o Claude conserta seu Instagram inteiro, como um social media." — gancho de topo, curioso.</div>
         <div class="legenda" id="leg-f02">Existe uma coisa que pouca gente sabe ainda: dá pra "consertar" um Instagram parado sem contratar ninguém. 👀
@@ -118,10 +137,20 @@ Salva esse post e me conta: seu Instagram também tá parado? Comenta aqui embai
       </div>
     </div>
 
+    <div class="card reels">
+      <video src="Reels/R02/reels.mp4" poster="Reels/R02/poster.png" controls muted playsinline></video>
+      <div class="card-body">
+        <div class="card-top"><span class="date">Qui, 10/09</span><span class="code">Reels/R02</span></div>
+        <div class="badges"><span class="badge badge-reels">Reels</span></div>
+        <div class="tema">"O Claude consegue gerenciar meu Instagram?" — reaproveitado de <code>TikTok/V02</code>.</div>
+        <div class="flag">⚠️ Legenda ainda não escrita — só o vídeo está pronto.</div>
+      </div>
+    </div>
+
     <div class="card">
       <img src="Feed/F03/slides/slide-1.jpeg" alt="Feed F03">
       <div class="card-body">
-        <div class="card-top"><span class="date">Ter, 08/09</span><span class="code">Feed/F03</span></div>
+        <div class="card-top"><span class="date">Ter, 15/09</span><span class="code">Feed/F03</span></div>
         <div class="badges"><span class="badge badge-identificacao">Identificação</span><span class="badge">Framework: BAB</span></div>
         <div class="tema">"Tenha um time de agentes de IA trabalhando 24/7 — sem contratar mais ninguém." Metáfora do letreiro do Vale do Silício.</div>
         <div class="legenda" id="leg-f03">ANTES: contratando freelancer que some no meio do projeto, ou virando você mesma a agência de madrugada. 😮‍💨
@@ -142,11 +171,11 @@ Comenta aqui se você já sonhou com isso pro seu negócio.
     </div>
 
     <div class="card reels">
-      <video src="Reels/R01/reels.mp4" poster="Reels/R01/poster.png" controls muted playsinline></video>
+      <video src="Reels/R03/reels.mp4" poster="Reels/R03/poster.png" controls muted playsinline></video>
       <div class="card-body">
-        <div class="card-top"><span class="date">Qui, 10/09</span><span class="code">Reels/R01</span></div>
+        <div class="card-top"><span class="date">Qui, 17/09</span><span class="code">Reels/R03</span></div>
         <div class="badges"><span class="badge badge-reels">Reels</span></div>
-        <div class="tema">"O que é o Claude Code?" — reaproveitado de <code>TikTok/V01</code>.</div>
+        <div class="tema">"Vale a pena usar o Claude Code?" — reaproveitado de <code>TikTok/V03</code>.</div>
         <div class="flag">⚠️ Legenda ainda não escrita — só o vídeo está pronto.</div>
       </div>
     </div>
@@ -154,7 +183,7 @@ Comenta aqui se você já sonhou com isso pro seu negócio.
     <div class="card">
       <img src="Feed/F04/slides/slide-1.jpeg" alt="Feed F04">
       <div class="card-body">
-        <div class="card-top"><span class="date">Ter, 15/09</span><span class="code">Feed/F04</span></div>
+        <div class="card-top"><span class="date">Ter, 22/09</span><span class="code">Feed/F04</span></div>
         <div class="badges"><span class="badge badge-educar">Educar</span><span class="badge">Framework: nenhum</span></div>
         <div class="tema">"Por trás do Claude tem a Anthropic — não é modismo." Constrói autoridade/prova.</div>
         <div class="legenda" id="leg-f04">Claude não é "mais uma IA da moda" que vai sumir em três meses. 🧠
@@ -175,11 +204,11 @@ Comenta "quero saber mais" que te explico como isso funciona na prática.
     </div>
 
     <div class="card reels">
-      <video src="Reels/R02/reels.mp4" poster="Reels/R02/poster.png" controls muted playsinline></video>
+      <video src="Reels/R04/reels.mp4" poster="Reels/R04/poster.png" controls muted playsinline></video>
       <div class="card-body">
-        <div class="card-top"><span class="date">Qui, 17/09</span><span class="code">Reels/R02</span></div>
+        <div class="card-top"><span class="date">Qui, 24/09</span><span class="code">Reels/R04</span></div>
         <div class="badges"><span class="badge badge-reels">Reels</span></div>
-        <div class="tema">"O Claude consegue gerenciar meu Instagram?" — reaproveitado de <code>TikTok/V02</code>.</div>
+        <div class="tema">"Dá pra conectar o Claude no Instagram?" — reaproveitado de <code>TikTok/V04</code>.</div>
         <div class="flag">⚠️ Legenda ainda não escrita — só o vídeo está pronto.</div>
       </div>
     </div>
@@ -187,7 +216,7 @@ Comenta "quero saber mais" que te explico como isso funciona na prática.
     <div class="card">
       <img src="Feed/F05/slides/slide-1.jpeg" alt="Feed F05">
       <div class="card-body">
-        <div class="card-top"><span class="date">Ter, 22/09</span><span class="code">Feed/F05</span></div>
+        <div class="card-top"><span class="date">Ter, 29/09</span><span class="code">Feed/F05</span></div>
         <div class="badges"><span class="badge badge-engajar">Engajar</span><span class="badge">Framework: AIDA</span></div>
         <div class="tema">"Você confiaria a rotina do seu Instagram a uma IA?" Pergunta direta, ataca o medo de perder autenticidade.</div>
         <div class="legenda" id="leg-f05">Pergunta direta: você confiaria a rotina do seu Instagram a uma IA? 🤔
@@ -208,11 +237,11 @@ Responde SIM ou NÃO aqui nos comentários — quero ler todas as respostas.
     </div>
 
     <div class="card reels">
-      <video src="Reels/R03/reels.mp4" poster="Reels/R03/poster.png" controls muted playsinline></video>
+      <video src="Reels/R05/reels.mp4" poster="Reels/R05/poster.png" controls muted playsinline></video>
       <div class="card-body">
-        <div class="card-top"><span class="date">Qui, 24/09</span><span class="code">Reels/R03</span></div>
+        <div class="card-top"><span class="date">Qui, 01/10</span><span class="code">Reels/R05</span></div>
         <div class="badges"><span class="badge badge-reels">Reels</span></div>
-        <div class="tema">"Vale a pena usar o Claude Code?" — reaproveitado de <code>TikTok/V03</code>.</div>
+        <div class="tema">"O Claude consegue criar post pro Instagram sozinho?" — reaproveitado de <code>TikTok/V05</code>.</div>
         <div class="flag">⚠️ Legenda ainda não escrita — só o vídeo está pronto.</div>
       </div>
     </div>
@@ -220,7 +249,7 @@ Responde SIM ou NÃO aqui nos comentários — quero ler todas as respostas.
     <div class="card">
       <img src="Feed/F06/slides/slide-1.jpeg" alt="Feed F06">
       <div class="card-body">
-        <div class="card-top"><span class="date">Ter, 29/09</span><span class="code">Feed/F06</span></div>
+        <div class="card-top"><span class="date">Ter, 06/10</span><span class="code">Feed/F06</span></div>
         <div class="badges"><span class="badge badge-engajar">Engajar</span><span class="badge">Framework: AIDA</span></div>
         <div class="tema">"Quantas vezes você já tentou IA e não virou rotina?" Identificação com a frustração de ferramenta abandonada.</div>
         <div class="legenda" id="leg-f06">Levanta a mão (mentalmente) quem já abriu o ChatGPT, pediu uma legenda boa... e nunca chegou a postar. 🙋‍♀️
@@ -241,11 +270,11 @@ Conta aqui embaixo quantas vezes você já tentou — eu quero saber.
     </div>
 
     <div class="card reels">
-      <video src="Reels/R04/reels.mp4" poster="Reels/R04/poster.png" controls muted playsinline></video>
+      <video src="Reels/R06/reels.mp4" poster="Reels/R06/poster.png" controls muted playsinline></video>
       <div class="card-body">
-        <div class="card-top"><span class="date">Qui, 01/10</span><span class="code">Reels/R04</span></div>
+        <div class="card-top"><span class="date">Qui, 08/10</span><span class="code">Reels/R06</span></div>
         <div class="badges"><span class="badge badge-reels">Reels</span></div>
-        <div class="tema">"Dá pra conectar o Claude no Instagram?" — reaproveitado de <code>TikTok/V04</code>.</div>
+        <div class="tema">"Dá pra fazer Reels com IA?" — reaproveitado de <code>TikTok/V06</code>.</div>
         <div class="flag">⚠️ Legenda ainda não escrita — só o vídeo está pronto.</div>
       </div>
     </div>
@@ -253,7 +282,7 @@ Conta aqui embaixo quantas vezes você já tentou — eu quero saber.
     <div class="card">
       <img src="Feed/F07/slides/slide-1.jpeg" alt="Feed F07">
       <div class="card-body">
-        <div class="card-top"><span class="date">Ter, 06/10</span><span class="code">Feed/F07</span></div>
+        <div class="card-top"><span class="date">Ter, 13/10</span><span class="code">Feed/F07</span></div>
         <div class="badges"><span class="badge badge-vender">Vender</span><span class="badge">Framework: PAS</span></div>
         <div class="tema">"A próxima turma da Imersão IA na Prática está chegando." Primeiro post que nomeia a Imersão — lista de espera.</div>
         <div class="legenda" id="leg-f07">Você já pagou curso de IA, mentoria, e-book... e não aplicou nada disso no seu negócio. 📚
@@ -274,11 +303,11 @@ Clica no link da bio e entra na lista de espera da próxima turma.
     </div>
 
     <div class="card reels">
-      <video src="Reels/R05/reels.mp4" poster="Reels/R05/poster.png" controls muted playsinline></video>
+      <video src="Reels/R07/reels.mp4" poster="Reels/R07/poster.png" controls muted playsinline></video>
       <div class="card-body">
-        <div class="card-top"><span class="date">Qui, 08/10</span><span class="code">Reels/R05</span></div>
+        <div class="card-top"><span class="date">Qui, 15/10</span><span class="code">Reels/R07</span></div>
         <div class="badges"><span class="badge badge-reels">Reels</span></div>
-        <div class="tema">"O Claude consegue criar post pro Instagram sozinho?" — reaproveitado de <code>TikTok/V05</code>.</div>
+        <div class="tema">"Claude Code + Instagram = Automação" — reaproveitado de <code>TikTok/V07</code>. Último Reels reaproveitado do TikTok.</div>
         <div class="flag">⚠️ Legenda ainda não escrita — só o vídeo está pronto.</div>
       </div>
     </div>
@@ -286,7 +315,7 @@ Clica no link da bio e entra na lista de espera da próxima turma.
     <div class="card">
       <img src="Feed/F08/slides/slide-1.jpeg" alt="Feed F08">
       <div class="card-body">
-        <div class="card-top"><span class="date">Ter, 13/10</span><span class="code">Feed/F08</span></div>
+        <div class="card-top"><span class="date">Ter, 20/10</span><span class="code">Feed/F08</span></div>
         <div class="badges"><span class="badge badge-vender">Vender</span><span class="badge">Framework: 4 Ps</span></div>
         <div class="tema">"Time de agentes de IA 24/7 — vagas abertas." Fecha o período com urgência real de vaga limitada.</div>
         <div class="flag">⚠️ Tem um placeholder de prova social pra preencher antes de publicar: <code>[inserir prova real aqui]</code> — sem número real, o Copywriter não inventou (Regra de Ouro nº4).</div>
@@ -307,30 +336,10 @@ Clica no link da bio e garanta sua vaga antes que acabe.
       </div>
     </div>
 
-    <div class="card reels">
-      <video src="Reels/R06/reels.mp4" poster="Reels/R06/poster.png" controls muted playsinline></video>
-      <div class="card-body">
-        <div class="card-top"><span class="date">Qui, 15/10</span><span class="code">Reels/R06</span></div>
-        <div class="badges"><span class="badge badge-reels">Reels</span></div>
-        <div class="tema">"Dá pra fazer Reels com IA?" — reaproveitado de <code>TikTok/V06</code>.</div>
-        <div class="flag">⚠️ Legenda ainda não escrita — só o vídeo está pronto.</div>
-      </div>
-    </div>
-
-    <div class="card reels">
-      <video src="Reels/R07/reels.mp4" poster="Reels/R07/poster.png" controls muted playsinline></video>
-      <div class="card-body">
-        <div class="card-top"><span class="date">Qui, 22/10</span><span class="code">Reels/R07</span></div>
-        <div class="badges"><span class="badge badge-reels">Reels</span></div>
-        <div class="tema">"Claude Code + Instagram = Automação" — reaproveitado de <code>TikTok/V07</code>. Feed acabou em F08; a partir daqui só Reels.</div>
-        <div class="flag">⚠️ Legenda ainda não escrita — só o vídeo está pronto.</div>
-      </div>
-    </div>
-
   </div>
 
-  <p class="hint">👉 Aprovando esse plano, os próximos passos são: escrever as 7 legendas dos Reels, testar publicação de Reels de verdade, e criar as tarefas no Task Scheduler pra cada post sair sozinho na data certa.</p>
-  <div class="publish-cmd">python scripts/publish_instagram.py --images "Instagram/Feed/F0X/slides/slide-1.jpeg" --caption "..."</div>
+  <p class="hint">👉 Aprovando esse plano: publico o R01 (hoje) de verdade, escrevo as 6 legendas de Reels que faltam (R02-R07), e crio as tarefas no Task Scheduler pra cada post sair sozinho na data certa.</p>
+  <div class="publish-cmd">python scripts/publish_instagram.py --images "Instagram/Reels/R0X/reels.mp4" --caption "..."</div>
   <p class="hint">Quer ajustar alguma data, trocar algum vídeo de lugar, ou já aprovar como está? É só falar aqui no chat.</p>
 </div>
 <script>
