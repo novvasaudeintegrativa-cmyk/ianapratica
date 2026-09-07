@@ -1,0 +1,43 @@
+name: Publicar Instagram agendado
+
+# Substitui o Windows Task Scheduler local: roda na nuvem do GitHub, então
+# não depende do computador pessoal estar ligado, acordado ou com internet
+# no horário exato. Ver Instagram/calendario-set-2026.md para a agenda e
+# CLAUDE.md ("Automação de publicação") para o histórico da decisão.
+
+on:
+  schedule:
+    # 12:00 UTC = 09:00 horário de Brasília (sem horário de verão desde
+    # 2019, então o offset -03:00 é fixo o ano inteiro).
+    # Segunda (1) = Feed, Quinta (4) = Reels.
+    - cron: '0 12 * * 1,4'
+  workflow_dispatch: {}   # permite disparar manualmente em Actions > Run workflow
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências
+        run: pip install requests python-dotenv
+
+      - name: Configurar identidade do git (pra commit do status/hospedagem de imagem)
+        run: |
+          git config user.name "IA na Prática (automação)"
+          git config user.email "actions@users.noreply.github.com"
+
+      - name: Publicar a peça agendada pra hoje (se houver)
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_BUSINESS_ID: ${{ secrets.INSTAGRAM_BUSINESS_ID }}
+        run: python scripts/publish_scheduled.py
