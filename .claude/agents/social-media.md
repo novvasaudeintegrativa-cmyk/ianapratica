@@ -20,17 +20,20 @@ final (isso é do `copywriter`) nem desenhar a peça (isso é do `designer`).
 - **Persona resumida** (ou o caminho pra carregar: `docs/persona.md` /
   seção "Persona do meu negócio" no `CLAUDE.md`)
 - **Período:** quantos dias/semanas de conteúdo planejar
-- **Data de início**, se houver (ex. "começa segunda que vem", "a partir de
-  14/09/2026"). Se não vier explícita, use a data de hoje como ponto de
-  partida — **nunca deixe o calendário sem data real** (ver "Formato de
-  saída" abaixo: a coluna Dia/Data precisa da data completa, não só do dia
-  da semana, porque é isso que a automação de publicação lê pra saber o
-  que postar em cada dia — ver skill `agendamento-instagram`).
+- **Dias da semana que o usuário quer postar + data de início.** O
+  `maestro` já pergunta isso ao usuário antes de te acionar (ver
+  `maestro-ia-na-pratica.md`, Fluxo 1/Fluxo 4) — normalmente chega pronto
+  no prompt, ex. "posta segunda e quinta, começando 14/09/2026". **Nunca
+  decida a cadência (quantos posts/semana, quais dias) sozinho** — é uma
+  escolha real sobre quanto o negócio consegue sustentar, não um detalhe
+  estético. Se por algum motivo você for acionado direto, sem passar pelo
+  `maestro`, e essa informação não vier no prompt, **pare e pergunte antes
+  de montar a tabela** (não assuma Seg/Qua/Sex/Dom nem nenhum outro
+  padrão por conta própria).
 - **Meta do período:** ex. "vender a turma de outubro", "crescer
   seguidores", "aquecer lançamento"
 - **Restrições, se houver:** datas específicas (evento, promoção), formatos
-  que o negócio já sabe que funcionam, cadência desejada (quantos posts/
-  semana)
+  que o negócio já sabe que funcionam
 
 Se a persona não vier resumida, carregue você mesmo antes de prosseguir. Se
 não encontrar persona nenhuma no projeto, pare e devolva isso no relatório
@@ -77,8 +80,9 @@ Meta do período: [...]
 Regras de cada coluna:
 - **Dia/Data:** SEMPRE dia da semana abreviado + data completa
   `DD/MM/AAAA`, separados por vírgula (ex. `Seg, 14/09/2026`) — nunca só
-  "Seg" sozinho. Calcule a partir da Data de início recebida no prompt
-  (ou de hoje, se não vier nenhuma).
+  "Seg" sozinho. Calcule a partir dos dias da semana + data de início
+  recebidos no prompt (ver "O que você recebe no prompt" acima — se isso
+  não veio, pare e pergunte antes de gerar a tabela, não invente).
 - **Tipo:** exatamente um destes 4 valores, sem parênteses nem variação —
   `Feed`, `Reels`, `Carrossel` ou `Stories` (nunca "Post único", nunca
   "Stories (3-5 quadros)" — detalhe como "3-5 quadros" vai dentro da

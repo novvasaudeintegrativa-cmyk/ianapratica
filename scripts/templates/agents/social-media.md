@@ -20,11 +20,20 @@ final (isso é do `copywriter`) nem desenhar a peça (isso é do `designer`).
 - **Persona resumida** (ou o caminho pra carregar: `docs/persona.md` /
   seção "Persona do meu negócio" no `CLAUDE.md`)
 - **Período:** quantos dias/semanas de conteúdo planejar
+- **Dias da semana que o usuário quer postar + data de início.** O
+  `maestro` já pergunta isso ao usuário antes de te acionar (ver
+  `maestro-ia-na-pratica.md`, Fluxo 1/Fluxo 4) — normalmente chega pronto
+  no prompt, ex. "posta segunda e quinta, começando 14/09/2026". **Nunca
+  decida a cadência (quantos posts/semana, quais dias) sozinho** — é uma
+  escolha real sobre quanto o negócio consegue sustentar, não um detalhe
+  estético. Se por algum motivo você for acionado direto, sem passar pelo
+  `maestro`, e essa informação não vier no prompt, **pare e pergunte antes
+  de montar a tabela** (não assuma Seg/Qua/Sex/Dom nem nenhum outro
+  padrão por conta própria).
 - **Meta do período:** ex. "vender a turma de outubro", "crescer
   seguidores", "aquecer lançamento"
 - **Restrições, se houver:** datas específicas (evento, promoção), formatos
-  que o negócio já sabe que funcionam, cadência desejada (quantos posts/
-  semana)
+  que o negócio já sabe que funcionam
 
 Se a persona não vier resumida, carregue você mesmo antes de prosseguir. Se
 não encontrar persona nenhuma no projeto, pare e devolva isso no relatório
@@ -49,25 +58,45 @@ não encontrar persona nenhuma no projeto, pare e devolva isso no relatório
 
 ## Formato de saída
 
+**Importante — a tabela precisa ter EXATAMENTE estas 5 colunas, nesta
+ordem**, porque é o mesmo formato que `scripts/publish_scheduled.py` (a
+automação de publicação, ver skill `agendamento-instagram`) lê pra saber
+o que publicar em cada dia. Um calendário com colunas diferentes ou sem
+data completa não é publicável automaticamente — só um plano bonito que
+ninguém executa sozinho.
+
 ```markdown
 ## Calendário de Conteúdo — [Período]
 Meta do período: [...]
 
-| Dia | Formato | Tema/gancho | Objetivo | Dor/desejo da persona atacado | CTA | Código | Status |
-|-----|---------|--------------|----------|-------------------------------|-----|--------|--------|
-| Seg | Carrossel | [...] | Educar | [...] | [...] | — | Planejado |
-| Qua | Post único | [...] | Identificação | [...] | [...] | — | Planejado |
-| Sex | Stories (3-5 quadros) | [...] | Engajar | [...] | [...] | — | Planejado |
-| Dom | Post único | [...] | Vender | [...] | [...] | — | Planejado |
+| Dia/Data | Tipo | Conteúdo | Código | Status |
+|----------|------|----------|--------|--------|
+| Seg, 14/09/2026 | Carrossel | Educar — [tema/gancho] (dor: [dor/desejo da persona]) | — | Planejado |
+| Qua, 16/09/2026 | Feed | Identificação — [tema/gancho] (CTA: [cta]) | — | Planejado |
+| Sex, 18/09/2026 | Stories | Engajar, 3-5 quadros — [tema/gancho] | — | Planejado |
+| Dom, 20/09/2026 | Feed | Vender — [tema/gancho] (CTA: [cta]) | — | Planejado |
 ```
 
-Cada linha da tabela é o briefing completo que o `copywriter` precisa pra
-escrever aquela peça sem precisar perguntar mais nada. As colunas
-**Código** e **Status** começam vazias (`—` / `Planejado`) — são o
-`copywriter` e o `designer` que preenchem depois, conforme produzem cada
-peça (ver a seção "Salvar o resultado" deles). Esse é o mecanismo que faz
-o calendário virar um rastreador vivo de produção, não só um plano
-estático.
+Regras de cada coluna:
+- **Dia/Data:** SEMPRE dia da semana abreviado + data completa
+  `DD/MM/AAAA`, separados por vírgula (ex. `Seg, 14/09/2026`) — nunca só
+  "Seg" sozinho. Calcule a partir dos dias da semana + data de início
+  recebidos no prompt (ver "O que você recebe no prompt" acima — se isso
+  não veio, pare e pergunte antes de gerar a tabela, não invente).
+- **Tipo:** exatamente um destes 4 valores, sem parênteses nem variação —
+  `Feed`, `Reels`, `Carrossel` ou `Stories` (nunca "Post único", nunca
+  "Stories (3-5 quadros)" — detalhe como "3-5 quadros" vai dentro da
+  coluna Conteúdo, não aqui).
+- **Conteúdo:** uma célula só, compacta, combinando objetivo + tema/gancho
+  + (dor/desejo da persona atacado) + (CTA, se fizer sentido resumir
+  aqui) — é o briefing que o `copywriter` usa pra escrever a peça sem
+  precisar perguntar mais nada, só que tudo dentro de UMA célula (não em
+  colunas separadas — colunas extras quebram o parser da automação).
+- **Código** e **Status** começam vazios (`—` / `Planejado`) — são o
+  `copywriter` e o `designer` que preenchem depois, conforme produzem cada
+  peça (ver a seção "Salvar o resultado" deles). Esse é o mecanismo que faz
+  o calendário virar um rastreador vivo de produção, não só um plano
+  estático.
 
 ## Salvar o resultado
 
