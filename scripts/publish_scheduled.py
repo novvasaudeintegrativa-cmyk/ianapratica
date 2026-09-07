@@ -26,8 +26,11 @@ REPO_ROOT = Path(__file__).parent.parent
 CALENDAR_PATH = REPO_ROOT / "Instagram" / "calendario-set-2026.md"
 
 # Linha de tabela markdown: | Dia, DD/MM/AAAA | Tipo | Conteúdo | Código | Status |
+# Nota: "Stories" fica de fora de propósito — publish_instagram.py ainda não
+# implementa media_type=STORIES da API (só Feed único, Carrossel e Reels).
+# Se/quando isso for implementado lá embaixo, adicionar "Stories" aqui também.
 ROW_RE = re.compile(
-    r"^\|\s*[^|]*?(\d{2}/\d{2}/\d{4})\s*\|\s*(Feed|Reels)\s*\|\s*(.*?)\s*\|\s*([\w/]+)\s*\|\s*(.*?)\s*\|\s*$"
+    r"^\|\s*[^|]*?(\d{2}/\d{2}/\d{4})\s*\|\s*(Feed|Reels|Carrossel)\s*\|\s*(.*?)\s*\|\s*([\w/]+)\s*\|\s*(.*?)\s*\|\s*$"
 )
 
 
@@ -45,13 +48,25 @@ def parse_calendar(text: str) -> list[dict]:
 
 
 def media_and_caption(tipo: str, codigo: str) -> tuple[list[str], str]:
-    # codigo já vem como "Feed/F02" ou "Reels/R02" (inclui o tipo) — não duplicar.
+    # codigo já vem como "Feed/F02", "Reels/R02" ou "Carrossel/C02" (inclui o
+    # tipo) — não duplicar.
     base = REPO_ROOT / "Instagram" / codigo
     if tipo == "Feed":
         slides = sorted((base / "slides").glob("slide-*.*"))
         if not slides:
             raise RuntimeError(f"Nenhuma imagem encontrada em {base / 'slides'}")
         images = [str(slides[0])]
+    elif tipo == "Carrossel":
+        # Carrossel de verdade: TODOS os slides, não só o primeiro —
+        # publish_instagram.py detecta carrossel automaticamente quando
+        # recebe mais de uma imagem (media_type=CAROUSEL).
+        slides = sorted((base / "slides").glob("slide-*.*"))
+        if len(slides) < 2:
+            raise RuntimeError(
+                f"Carrossel {codigo} precisa de pelo menos 2 imagens em "
+                f"{base / 'slides'}, achei {len(slides)}."
+            )
+        images = [str(s) for s in slides]
     else:  # Reels
         video = base / "reels.mp4"
         if not video.exists():
