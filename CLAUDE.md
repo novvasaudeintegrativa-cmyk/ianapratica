@@ -59,55 +59,23 @@ Instagram. Se TikTok entrar oficialmente na Imersão algum dia, é decisão
 própria meu, tomada à parte — não estender o squad atual pra cobrir isso
 sem esse combinado.
 
-## Automação de publicação — GitHub Actions é a fonte única de verdade
+## Publicação e agendamento no Instagram — ver skill `agendamento-instagram`
 
-**Desde 07/09/2026, quem publica os posts agendados é o GitHub Actions**
-(`.github/workflows/publish-instagram.yml`, cron `0 12 * * 1,4` = toda
-segunda e quinta às 09h de Brasília), **não o computador local.** O
-workflow roda `scripts/publish_scheduled.py`, que lê
-`Instagram/calendario-set-2026.md`, acha a linha cuja data bate com hoje e
-cujo Status ainda não começa com "Publicado", publica via
-`scripts/publish_instagram.py` e reescreve o Status daquela linha no
-próprio calendário (commit automático do workflow).
+Toda regra sobre publicar ou agendar posts no Instagram (calendário
+regular via GitHub Actions, Task Scheduler local desativado de propósito,
+e sobretudo pedidos pontuais/urgentes fora do calendário) vive em
+`.claude/skills/agendamento-instagram/SKILL.md` — invocar essa skill
+sempre que a tarefa envolver publicar, (re)agendar, adiantar ou checar o
+status de uma peça, mesmo que pareça um pedido simples de "publica isso
+agora".
 
-**Por que migrou do Windows Task Scheduler pra isso:** em 07/09/2026 o
-post do dia (Feed/F02) não saiu no horário porque a tarefa local estava
-desabilitada e ninguém percebeu — só foi notado porque o usuário
-perguntou "qual horário está programado pra hoje". A causa raiz de fundo,
-porém, é estrutural: automação via Task Scheduler só dispara com o PC
-**ligado, logado e com internet** no minuto exato — o usuário pediu
-explicitamente pra eliminar essa dependência ("preciso que não tenha essa
-variável, depender 100% do GitHub"). GitHub Actions roda na nuvem da
-GitHub, indiferente ao estado do computador pessoal.
-
-**Pré-requisito único, manual, que só o dono do repositório pode fazer:**
-os Secrets `INSTAGRAM_ACCESS_TOKEN` e `INSTAGRAM_BUSINESS_ID` precisam
-estar cadastrados em GitHub → Settings → Secrets and variables → Actions
-do repositório `novvasaudeintegrativa-cmyk/ianapratica` (mesmos valores
-já salvos localmente em `.env` — Claude Code não tem como ler `.env` e
-subir isso sozinho por segurança, então esse passo depende do humano
-fazer uma vez).
-
-**Regra fixa:**
-1. As 13 tarefas do Windows Task Scheduler (`IANaPratica-F0X`/`R0X`) foram
-   **desativadas de propósito** em 07/09/2026 — viraram redundantes e, se
-   reativadas, publicariam a mesma peça em dobro (uma vez pelo Actions,
-   outra pelo PC). **Nunca reativar essas tarefas locais** enquanto o
-   workflow do GitHub Actions for a automação vigente.
-2. Toda peça publicada fora do fluxo automático (manualmente, por pedido
-   direto no chat) **precisa ter o Status daquela linha do calendário
-   atualizado pra "Publicado (...)"** — o script `publish_scheduled.py`
-   confia nesse campo pra decidir o que ainda falta postar; uma linha
-   esquecida em "Agendado" é publicada de novo quando a data dela chegar.
-3. Se algum dia o projeto quiser voltar a depender do computador local
-   (ex. Actions ficou caro, ou o repositório virou privado — o workflow
-   exige o repo **público**, mesma exigência que já existia pro Meta
-   buscar a imagem), isso exige decisão explícita do usuário, não uma
-   suposição do Claude.
-4. Isso é adicional à checagem de validade do token (ver memória
-   `instagram_token_expiry.md`), não substitui ela — token vencido
-   quebra a publicação nos dois modelos (local ou GitHub Actions) do
-   mesmo jeito.
+**Resumo de 1 linha, sempre válido mesmo sem abrir a skill:** GitHub
+Actions é a fonte única de verdade pro calendário regular; **nunca**
+reativar o Task Scheduler local; **nunca** usar `ScheduleWakeup`/
+`CronCreate` pra garantir um horário de publicação (são timers de sessão,
+somem se o PC/sessão cair — causaram uma falha real em 07/09/2026) — pra
+pedido pontual/urgente, usar o `workflow_dispatch` do workflow
+(`--code`/`--wait-until-utc`, roda 100% no runner do GitHub).
 
 ## Persona do meu negócio
 
