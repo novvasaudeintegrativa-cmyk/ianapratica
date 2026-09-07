@@ -80,6 +80,14 @@ def main():
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
+    # Diagnóstico sempre impresso (mesmo sem nada agendado hoje) — confirma
+    # nos logs que as credenciais (Secrets no GitHub Actions, .env local)
+    # carregaram, sem revelar o valor.
+    cred_ok = bool(pub.IG_ID) and bool(pub.PAGE_TOKEN)
+    print(f"Credenciais carregadas: {'OK' if cred_ok else 'FALTANDO'} "
+          f"(INSTAGRAM_BUSINESS_ID {'presente' if pub.IG_ID else 'AUSENTE'}, "
+          f"INSTAGRAM_ACCESS_TOKEN {'presente' if pub.PAGE_TOKEN else 'AUSENTE'})")
+
     today = args.date or date.today().strftime("%d/%m/%Y")
     text = CALENDAR_PATH.read_text(encoding="utf-8")
     rows = parse_calendar(text)
