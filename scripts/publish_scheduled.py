@@ -14,6 +14,11 @@ Uso:
 Exige as mesmas variáveis de ambiente que publish_instagram.py
 (INSTAGRAM_ACCESS_TOKEN, INSTAGRAM_BUSINESS_ID) — no GitHub Actions elas
 vêm de Secrets do repositório, não de um .env.
+
+Formatos suportados (lidos da coluna Tipo do calendário): Feed, Reels,
+Carrossel e Stories. Stories publica cada quadro (Instagram/Stories/SXX/
+slides/slide-N.*) como uma Story independente em sequência, sem legenda
+(a API não aceita legenda pra Stories).
 """
 import argparse, re, sys
 from datetime import date, datetime
@@ -26,11 +31,8 @@ REPO_ROOT = Path(__file__).parent.parent
 CALENDAR_PATH = REPO_ROOT / "Instagram" / "calendario-set-2026.md"
 
 # Linha de tabela markdown: | Dia, DD/MM/AAAA | Tipo | Conteúdo | Código | Status |
-# Nota: "Stories" fica de fora de propósito — publish_instagram.py ainda não
-# implementa media_type=STORIES da API (só Feed único, Carrossel e Reels).
-# Se/quando isso for implementado lá embaixo, adicionar "Stories" aqui também.
 ROW_RE = re.compile(
-    r"^\|\s*[^|]*?(\d{2}/\d{2}/\d{4})\s*\|\s*(Feed|Reels|Carrossel)\s*\|\s*(.*?)\s*\|\s*([\w/]+)\s*\|\s*(.*?)\s*\|\s*$"
+    r"^\|\s*[^|]*?(\d{2}/\d{2}/\d{4})\s*\|\s*(Feed|Reels|Carrossel|Stories)\s*\|\s*(.*?)\s*\|\s*([\w/]+)\s*\|\s*(.*?)\s*\|\s*$"
 )
 
 
@@ -48,8 +50,8 @@ def parse_calendar(text: str) -> list[dict]:
 
 
 def media_and_caption(tipo: str, codigo: str) -> tuple[list[str], str]:
-    # codigo já vem como "Feed/F02", "Reels/R02" ou "Carrossel/C02" (inclui o
-    # tipo) — não duplicar.
+    # codigo já vem como "Feed/F02", "Reels/R02", "Carrossel/C02" ou
+    # "Stories/S02" (inclui o tipo) — não duplicar.
     base = REPO_ROOT / "Instagram" / codigo
     if tipo == "Feed":
         slides = sorted((base / "slides").glob("slide-*.*"))
@@ -67,6 +69,14 @@ def media_and_caption(tipo: str, codigo: str) -> tuple[list[str], str]:
                 f"{base / 'slides'}, achei {len(slides)}."
             )
         images = [str(s) for s in slides]
+    elif tipo == "Stories":
+        # Todos os quadros — cada um vira uma Story independente, publicada
+        # em sequência. Stories não usa legenda (a API não aceita), então
+        # não exige caption.txt como os outros tipos.
+        slides = sorted((base / "slides").glob("slide-*.*"))
+        if not slides:
+            raise RuntimeError(f"Nenhum quadro encontrado em {base / 'slides'}")
+        return [str(s) for s in slides], ""
     else:  # Reels
         video = base / "reels.mp4"
         if not video.exists():
@@ -114,11 +124,13 @@ def main():
 
     for row in due:
         print(f"\n=== Publicando {row['codigo']} — {row['conteudo']} ===")
+        is_story = row["tipo"] == "Stories"
         images, caption = media_and_caption(row["tipo"], row["codigo"])
         if args.dry_run:
-            print(f"[DRY RUN] publicaria {images} com legenda de {len(caption)} chars.")
+            legenda_info = "sem legenda (Stories)" if is_story else f"legenda de {len(caption)} chars"
+            print(f"[DRY RUN] publicaria {images} com {legenda_info}.")
             continue
-        post_id = pub.run(images, caption, dry_run=False)
+        post_id = pub.run(images, caption, dry_run=False, story=is_story)
         when = datetime.now().strftime("%d/%m/%Y %H:%M")
         text = update_calendar_status(text, row, post_id, when)
 

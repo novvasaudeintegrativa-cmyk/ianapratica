@@ -6,6 +6,10 @@ Uso:
   python scripts/publish_instagram.py --images Instagram/Feed/F01/slides/slide-1.png --caption "..."
   python scripts/publish_instagram.py --images Instagram/Carrossel/C01/slides/*.png --caption "..."
   python scripts/publish_instagram.py --images Instagram/Reels/R01/reels.mp4 --caption "..."
+  python scripts/publish_instagram.py --images Instagram/Stories/S01/slides/*.png --story
+    (Stories nao usa --caption/--caption-file -- a API nao aceita legenda; cada
+    arquivo em --images vira um quadro publicado como Story independente, em
+    sequencia, ate 10 quadros por vez.)
 
 Sobre limites de publicação:
   A Meta limita quantos posts uma conta pode publicar via API numa janela
@@ -181,6 +185,25 @@ def create_carousel(media_ids: list, caption: str) -> str:
     return result["id"]
 
 
+def create_story_container(media_path: str) -> str:
+    """Stories usa media_type=STORIES + image_url ou video_url (conforme a
+    extensão). Diferente de Feed/Reels/Carrossel, a API de Stories NÃO
+    aceita legenda (caption) — cada quadro é uma Story independente, sem
+    texto de legenda associado (o texto que aparece no Story, se houver,
+    já vem embutido na própria imagem/vídeo, desenhado pelo Designer)."""
+    is_video = media_path.lower().endswith((".mp4", ".mov"))
+    data = {"access_token": PAGE_TOKEN, "media_type": "STORIES"}
+    if is_video:
+        data["video_url"] = host_media(media_path)
+    else:
+        data["image_url"] = host_media(media_path)
+    result = _request_with_backoff("POST", f"{BASE_URL}/{IG_ID}/media", data=data)
+    if "id" not in result:
+        raise RuntimeError(f"Erro container Stories: {result}")
+    print(f"  Container Stories: {result['id']}")
+    return result["id"]
+
+
 def wait_ready(container_id: str, max_tries: int = 12, interval: int = 5) -> bool:
     for i in range(max_tries):
         resp = requests.get(f"{BASE_URL}/{container_id}",
@@ -205,13 +228,44 @@ def publish(container_id: str) -> str:
     return result["id"]
 
 
-def run(images: list, caption: str, dry_run: bool = False):
+def run(images: list, caption: str, dry_run: bool = False, story: bool = False):
     if not IG_ID or not PAGE_TOKEN:
         print("ERRO: Credenciais nao encontradas. Rode /setup-instagram primeiro.")
         sys.exit(1)
     if len(images) > 10:
         print("ERRO: Maximo 10 imagens.")
         sys.exit(1)
+
+    if story:
+        # Stories não é "um post com N mídias" como o Carrossel — são N
+        # Stories INDEPENDENTES, cada quadro com seu próprio container e
+        # publicação, um atrás do outro, sem legenda nenhuma.
+        n = len(images)
+        print(f"\nPublicando Stories ({n} quadro{'s' if n != 1 else ''}) no Instagram...")
+        if dry_run:
+            print("[DRY RUN] Tudo OK. Remova --dry-run para publicar.")
+            return
+        post_ids = []
+        for i, media_path in enumerate(images, start=1):
+            print(f"\nQuadro {i}/{n} - Criando...")
+            container_id = create_story_container(media_path)
+            is_video_frame = media_path.lower().endswith((".mp4", ".mov"))
+            print(f"Quadro {i}/{n} - Publicando"
+                  f"{' (vídeo pode levar mais tempo)' if is_video_frame else ''}...")
+            ready = wait_ready(
+                container_id,
+                max_tries=36 if is_video_frame else 12,
+                interval=10 if is_video_frame else 5,
+            )
+            if not ready:
+                print(f"ERRO: Timeout no processamento do quadro {i}/{n}.")
+                sys.exit(1)
+            frame_id = publish(container_id)
+            print(f"  Quadro {i}/{n} publicado! Story ID: {frame_id}")
+            post_ids.append(frame_id)
+        print(f"\nTodos os {n} quadros publicados com sucesso!")
+        print(f"Story IDs: {', '.join(post_ids)}")
+        return post_ids[-1]
 
     is_video = len(images) == 1 and images[0].lower().endswith((".mp4", ".mov"))
     is_feed = len(images) == 1 and not is_video
@@ -275,9 +329,15 @@ if __name__ == "__main__":
                               "linha de comando -- mais seguro pra emoji/acento/aspas em tarefas "
                               "agendadas (Task Scheduler), onde escapar tudo na CLI e' fragil.")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--story", action="store_true",
+                         help="Publica cada arquivo de --images como um quadro de Stories "
+                              "independente, em sequência (media_type=STORIES). Stories nao "
+                              "aceita legenda -- --caption/--caption-file sao ignorados nesse modo.")
     args = parser.parse_args()
 
-    if args.caption_file:
+    if args.story:
+        caption_text = ""  # Stories nao tem legenda na API -- ignorado de proposito
+    elif args.caption_file:
         caption_text = Path(args.caption_file).read_text(encoding="utf-8").strip()
     elif args.caption:
         caption_text = args.caption
@@ -285,4 +345,4 @@ if __name__ == "__main__":
         print("ERRO: passe --caption ou --caption-file.")
         sys.exit(1)
 
-    run(args.images, caption_text, args.dry_run)
+    run(args.images, caption_text, args.dry_run, story=args.story)
