@@ -263,6 +263,7 @@ def run(images: list, caption: str, dry_run: bool = False):
 
     print(f"\nPublicado com sucesso!")
     print(f"Post ID: {post_id}")
+    return post_id
 
 
 if __name__ == "__main__":
