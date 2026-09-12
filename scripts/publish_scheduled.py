@@ -132,6 +132,59 @@ def update_calendar_status(text: str, row: dict, post_id: str, when: str) -> str
     return text.replace(row["line"], new_line, 1)
 
 
+def commit_calendar(when: str) -> None:
+    """Commita e dá push da atualização do calendário. Necessário porque,
+    rodando em GitHub Actions, o working directory do runner é descartado
+    ao fim do job -- sem isso, `CALENDAR_PATH.write_text(...)` atualiza só
+    o arquivo local do runner, que nunca volta pro repositório de verdade.
+    (host_media() em publish_instagram.py já faz o mesmo pra imagem/vídeo,
+    mas isso não cobre o calendário -- são commits separados de propósito,
+    cada um só com o arquivo que realmente mudou.)"""
+    rel_path = CALENDAR_PATH.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+    branch = pub._run_git("rev-parse", "--abbrev-ref", "HEAD").stdout.strip() or "main"
+    pub._run_git("add", rel_path)
+    commit = pub._run_git("commit", "-m", f"chore: atualiza status do calendário ({when})")
+    _NOOP_MARKERS = ("nothing to commit", "no changes added to commit")
+    if commit.returncode != 0 and not any(m in commit.stdout for m in _NOOP_MARKERS):
+        print(f"AVISO: falha ao commitar o calendário: {commit.stdout}\n{commit.stderr}")
+        return
+    push = pub._run_git("push", "origin", branch)
+    if push.returncode != 0:
+        print(f"AVISO: falha ao dar push do calendário: {push.stderr}")
+    else:
+        print("Calendário commitado e enviado pro GitHub.")
+
+
+def publish_with_retry(images: list[str], caption: str, story: bool,
+                        max_tries: int = 3, backoff_seconds=(60, 180)) -> str:
+    """Tenta publicar até max_tries vezes, com espera crescente entre
+    tentativas -- cobre falha transitória (rede, hiccup pontual da API da
+    Meta) sem exigir ninguém observando em tempo real. Uma falha
+    persistente (token inválido, mídia rejeitada) ainda propaga depois de
+    esgotar as tentativas -- não deve ficar tentando pra sempre.
+
+    Seguro contra duplicar post: só o container criado ANTES do
+    media_publish (a etapa final) pode falhar e ser tentado de novo -- uma
+    vez que pub.run() retorna post_id com sucesso, ele já saiu da função,
+    não tem como isso re-executar por engano."""
+    last_error = None
+    for attempt in range(1, max_tries + 1):
+        try:
+            return pub.run(images, caption, dry_run=False, story=story)
+        except Exception as e:
+            last_error = e
+            print(f"  Tentativa {attempt}/{max_tries} falhou: {e}")
+            if attempt < max_tries:
+                wait = backoff_seconds[min(attempt - 1, len(backoff_seconds) - 1)]
+                print(f"  Aguardando {wait}s antes de tentar de novo (pode ser falha "
+                      f"transitória da rede/API da Meta)...")
+                time.sleep(wait)
+    raise RuntimeError(
+        f"Falhou {max_tries}x seguidas, mesmo com espera entre tentativas -- "
+        f"provavelmente não é falha transitória. Último erro: {last_error}"
+    ) from last_error
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--date", help="Data a simular, formato DD/MM/AAAA (default: hoje)")
@@ -172,13 +225,13 @@ def main():
             legenda_info = "sem legenda (Stories)" if is_story else f"legenda de {len(caption)} chars"
             print(f"[DRY RUN] publicaria {images} com {legenda_info}.")
             return
-        post_id = pub.run(images, caption, dry_run=False, story=is_story)
+        post_id = publish_with_retry(images, caption, is_story)
         when = datetime.now().strftime("%d/%m/%Y %H:%M")
         row = find_by_codigo(rows, args.code)
         if row:
             text = update_calendar_status(text, row, post_id, when)
             CALENDAR_PATH.write_text(text, encoding="utf-8")
-            print("\nCalendário atualizado.")
+            commit_calendar(when)
         else:
             print(f"\nAviso: {args.code} não encontrado no calendário -- Status não "
                   f"atualizado automaticamente (confira/atualize manualmente se precisar).")
@@ -198,13 +251,13 @@ def main():
             legenda_info = "sem legenda (Stories)" if is_story else f"legenda de {len(caption)} chars"
             print(f"[DRY RUN] publicaria {images} com {legenda_info}.")
             continue
-        post_id = pub.run(images, caption, dry_run=False, story=is_story)
+        post_id = publish_with_retry(images, caption, is_story)
         when = datetime.now().strftime("%d/%m/%Y %H:%M")
         text = update_calendar_status(text, row, post_id, when)
 
     if not args.dry_run:
         CALENDAR_PATH.write_text(text, encoding="utf-8")
-        print("\nCalendário atualizado com o(s) status novo(s).")
+        commit_calendar(datetime.now().strftime("%d/%m/%Y %H:%M"))
 
 
 if __name__ == "__main__":
