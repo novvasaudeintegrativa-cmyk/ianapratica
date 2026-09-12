@@ -1,10 +1,18 @@
 """
 publish_scheduled.py — Publica automaticamente a(s) peça(s) agendada(s)
-pra hoje, lendo Instagram/calendario-set-2026.md.
+pra hoje, lendo todo arquivo `Instagram/calendario-*.md` do projeto.
 
 Feito pra rodar via GitHub Actions (cron) em vez de depender do computador
 local estar ligado (Windows Task Scheduler) — a nuvem roda o horário
 independente do PC pessoal ligado, dormindo ou desligado.
+
+Genérico de propósito: não assume nome de repositório nem nome de arquivo
+de calendário fixos -- funciona em qualquer projeto que siga a mesma
+convenção (`Instagram/calendario-[periodo].md`, ver skill `social-media`),
+não só neste. O repositório é sempre descoberto via `git remote get-url
+origin` (mesma técnica de host_media() em publish_instagram.py); o(s)
+calendário(s) via glob em `Instagram/calendario-*.md` -- pode haver mais
+de um ativo ao mesmo tempo (ex. campanhas em paralelo).
 
 Uso:
   python scripts/publish_scheduled.py                     # publica o que estiver agendado pra hoje
@@ -37,7 +45,6 @@ sys.path.insert(0, str(Path(__file__).parent))
 import publish_instagram as pub
 
 REPO_ROOT = Path(__file__).parent.parent
-CALENDAR_PATH = REPO_ROOT / "Instagram" / "calendario-set-2026.md"
 
 # Linha de tabela markdown: | Dia, DD/MM/AAAA | Tipo | Conteúdo | Código | Status |
 ROW_RE = re.compile(
@@ -45,16 +52,32 @@ ROW_RE = re.compile(
 )
 
 
-def parse_calendar(text: str) -> list[dict]:
+def find_calendar_files() -> list[Path]:
+    """Descobre todos os calendários ativos -- o nome exato varia por
+    projeto/período (ex. calendario-set-2026.md, calendario-outubro.md),
+    então nunca é fixo. Pode haver mais de um arquivo se houver campanhas
+    paralelas."""
+    return sorted((REPO_ROOT / "Instagram").glob("calendario-*.md"))
+
+
+def parse_calendar(path: Path) -> list[dict]:
+    text = path.read_text(encoding="utf-8")
     rows = []
     for line in text.splitlines():
         m = ROW_RE.match(line.strip())
         if m:
             data, tipo, conteudo, codigo, status = m.groups()
             rows.append({
-                "line": line, "data": data, "tipo": tipo,
+                "file": path, "line": line, "data": data, "tipo": tipo,
                 "conteudo": conteudo, "codigo": codigo, "status": status,
             })
+    return rows
+
+
+def parse_all_calendars() -> list[dict]:
+    rows = []
+    for path in find_calendar_files():
+        rows.extend(parse_calendar(path))
     return rows
 
 
@@ -123,36 +146,39 @@ def wait_until_utc(hhmm: str) -> None:
     time.sleep(delta)
 
 
-def update_calendar_status(text: str, row: dict, post_id: str, when: str) -> str:
-    """Troca só a última célula (Status) da linha, preservando o resto."""
-    novo_status = f"Publicado (GitHub Actions, {when}, Post ID {post_id})"
-    cells = row["line"].strip().strip("|").split("|")
-    cells[-1] = f" {novo_status} "
-    new_line = "|" + "|".join(cells) + "|"
-    return text.replace(row["line"], new_line, 1)
-
-
-def commit_calendar(when: str) -> None:
-    """Commita e dá push da atualização do calendário. Necessário porque,
-    rodando em GitHub Actions, o working directory do runner é descartado
-    ao fim do job -- sem isso, `CALENDAR_PATH.write_text(...)` atualiza só
-    o arquivo local do runner, que nunca volta pro repositório de verdade.
-    (host_media() em publish_instagram.py já faz o mesmo pra imagem/vídeo,
-    mas isso não cobre o calendário -- são commits separados de propósito,
-    cada um só com o arquivo que realmente mudou.)"""
-    rel_path = CALENDAR_PATH.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
+def commit_calendar(calendar_path: Path, when: str) -> None:
+    """Commita e dá push da atualização de UM calendário específico.
+    Necessário porque, rodando em GitHub Actions, o working directory do
+    runner é descartado ao fim do job -- sem isso, escrever no arquivo
+    local atualiza só a cópia do runner, que nunca volta pro repositório
+    de verdade. (host_media() em publish_instagram.py já faz o mesmo pra
+    imagem/vídeo, mas isso não cobre o calendário -- são commits
+    separados de propósito, cada um só com o arquivo que realmente
+    mudou.)"""
+    rel_path = calendar_path.resolve().relative_to(REPO_ROOT.resolve()).as_posix()
     branch = pub._run_git("rev-parse", "--abbrev-ref", "HEAD").stdout.strip() or "main"
     pub._run_git("add", rel_path)
     commit = pub._run_git("commit", "-m", f"chore: atualiza status do calendário ({when})")
     _NOOP_MARKERS = ("nothing to commit", "no changes added to commit")
     if commit.returncode != 0 and not any(m in commit.stdout for m in _NOOP_MARKERS):
-        print(f"AVISO: falha ao commitar o calendário: {commit.stdout}\n{commit.stderr}")
+        print(f"AVISO: falha ao commitar {rel_path}: {commit.stdout}\n{commit.stderr}")
         return
     push = pub._run_git("push", "origin", branch)
     if push.returncode != 0:
-        print(f"AVISO: falha ao dar push do calendário: {push.stderr}")
+        print(f"AVISO: falha ao dar push de {rel_path}: {push.stderr}")
     else:
-        print("Calendário commitado e enviado pro GitHub.")
+        print(f"{rel_path} commitado e enviado pro GitHub.")
+
+
+def mark_published(row: dict, post_id: str, when: str) -> None:
+    """Reescreve o Status da linha (só na cópia local) -- ver
+    apply_and_commit() pra também persistir isso no repositório."""
+    novo_status = f"Publicado (GitHub Actions, {when}, Post ID {post_id})"
+    text = row["file"].read_text(encoding="utf-8")
+    cells = row["line"].strip().strip("|").split("|")
+    cells[-1] = f" {novo_status} "
+    new_line = "|" + "|".join(cells) + "|"
+    row["file"].write_text(text.replace(row["line"], new_line, 1), encoding="utf-8")
 
 
 def publish_with_retry(images: list[str], caption: str, story: bool,
@@ -207,8 +233,14 @@ def main():
           f"(INSTAGRAM_BUSINESS_ID {'presente' if pub.IG_ID else 'AUSENTE'}, "
           f"INSTAGRAM_ACCESS_TOKEN {'presente' if pub.PAGE_TOKEN else 'AUSENTE'})")
 
-    text = CALENDAR_PATH.read_text(encoding="utf-8")
-    rows = parse_calendar(text)
+    calendar_files = find_calendar_files()
+    if not calendar_files:
+        print("Nenhum arquivo Instagram/calendario-*.md encontrado. Nada a fazer "
+              "(crie um calendário primeiro, ex. via subagente social-media).")
+        return
+    rows = []
+    for p in calendar_files:
+        rows.extend(parse_calendar(p))
 
     if args.code:
         # Modo pontual/urgente: publica uma peça específica, sem olhar a data.
@@ -229,11 +261,10 @@ def main():
         when = datetime.now().strftime("%d/%m/%Y %H:%M")
         row = find_by_codigo(rows, args.code)
         if row:
-            text = update_calendar_status(text, row, post_id, when)
-            CALENDAR_PATH.write_text(text, encoding="utf-8")
-            commit_calendar(when)
+            mark_published(row, post_id, when)
+            commit_calendar(row["file"], when)
         else:
-            print(f"\nAviso: {args.code} não encontrado no calendário -- Status não "
+            print(f"\nAviso: {args.code} não encontrado em nenhum calendário -- Status não "
                   f"atualizado automaticamente (confira/atualize manualmente se precisar).")
         return
 
@@ -243,6 +274,7 @@ def main():
         print(f"Nada agendado pra publicar hoje ({today}). Nenhuma ação.")
         return
 
+    changed_files = set()
     for row in due:
         print(f"\n=== Publicando {row['codigo']} — {row['conteudo']} ===")
         is_story = row["tipo"] == "Stories"
@@ -253,11 +285,13 @@ def main():
             continue
         post_id = publish_with_retry(images, caption, is_story)
         when = datetime.now().strftime("%d/%m/%Y %H:%M")
-        text = update_calendar_status(text, row, post_id, when)
+        mark_published(row, post_id, when)
+        changed_files.add(row["file"])
 
     if not args.dry_run:
-        CALENDAR_PATH.write_text(text, encoding="utf-8")
-        commit_calendar(datetime.now().strftime("%d/%m/%Y %H:%M"))
+        when = datetime.now().strftime("%d/%m/%Y %H:%M")
+        for f in changed_files:
+            commit_calendar(f, when)
 
 
 if __name__ == "__main__":
