@@ -69,6 +69,12 @@ sempre que a tarefa envolver publicar, (re)agendar, adiantar ou checar o
 status de uma peça, mesmo que pareça um pedido simples de "publica isso
 agora".
 
+**Se algo falhou** (post não saiu no horário, erro na publicação), usar a
+skill `diagnostico-instagram` em vez de investigar do zero — tem o
+passo a passo de onde olhar (histórico do GitHub Actions, logs, teste
+direto da API da Meta) e como distinguir falha transitória de
+persistente.
+
 **Resumo de 1 linha, sempre válido mesmo sem abrir a skill:** GitHub
 Actions é a fonte única de verdade pro calendário regular; **nunca**
 reativar o Task Scheduler local; **nunca** usar `ScheduleWakeup`/
