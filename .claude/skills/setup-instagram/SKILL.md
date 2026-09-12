@@ -221,206 +221,49 @@ está no `.gitignore` — nunca vai parar no GitHub.)
 
 ## ETAPA 7 — Instalar o script de publicação
 
+**Antes de tudo, checar se o Python está instalado** (via `Bash`:
+`python --version`). Se não estiver (no Windows costuma devolver algo
+como "Python não foi encontrado" apontando pra Microsoft Store, mesmo
+sem Python de verdade instalado), **parar aqui e avisar**, sem tentar
+criar o script ou instalar dependência nenhuma ainda:
+
+> "Antes de continuar, preciso que você instale o Python — o script que
+> publica no Instagram roda nele, não em JavaScript. Baixe em
+> `python.org/downloads` (botão amarelo 'Download Python') e, na
+> instalação, **marque a caixinha 'Add python.exe to PATH'** antes de
+> clicar em instalar — é o passo que mais gente esquece. Me avisa quando
+> terminar que eu sigo exatamente daqui, sem precisar refazer nada
+> anterior."
+
+Quando o usuário confirmar, checar `python --version` de novo antes de
+prosseguir — só seguir pro resto desta etapa depois de confirmar que
+funciona.
+
 Verifique se já existe em `scripts/publish_instagram.py`, na raiz deste
 projeto (mesma pasta de `scripts/export-png.js`).
 
-**Se não existir**, criar em `scripts/publish_instagram.py`:
-
-```python
-"""
-publish_instagram.py — Publicação automática no Instagram via Meta Graph API
-Gerado pelo setup-instagram skill do Claude Code
-
-Uso:
-  python scripts/publish_instagram.py --images Instagram/Feed/F01/slides/slide-1.png --caption "..."
-  python scripts/publish_instagram.py --images Instagram/Carrossel/C01/slides/*.png --caption "..."
-
-Sobre limites de publicação:
-  A Meta limita quantos posts uma conta pode publicar via API numa janela
-  rolante de 24h (o número exato varia — checar
-  https://developers.facebook.com/docs/instagram-platform/content-publishing
-  antes de assumir um valor fixo). Por isso este script nunca dispara
-  chamadas em rajada: espera o processamento real de cada container
-  (wait_ready) e, se a API responder com erro de limite/throttling, espera
-  com backoff exponencial em vez de tentar de novo na mesma hora. Publicar
-  dezenas de posts de teste na mesma hora é o jeito mais rápido de bater
-  nesse limite ou ser sinalizado como comportamento automatizado abusivo.
-"""
-import argparse, os, sys, time, requests
-from pathlib import Path
-from dotenv import load_dotenv
-
-# .env sempre na raiz do projeto (um nível acima de scripts/)
-load_dotenv(Path(__file__).parent.parent / ".env")
-
-IG_ID      = os.getenv("INSTAGRAM_BUSINESS_ID")
-PAGE_TOKEN = os.getenv("INSTAGRAM_ACCESS_TOKEN")
-BASE_URL   = f"https://graph.facebook.com/{os.getenv('META_API_VERSION', 'v19.0')}"
-
-# Códigos de erro da Graph API que indicam throttling/limite de chamadas
-# (não confundir com erro de token inválido, imagem inválida, etc. — esses
-# nunca devem ser tentados de novo automaticamente).
-THROTTLE_ERROR_CODES = {4, 17, 32, 80004}
-
-
-def _is_throttle_error(result: dict) -> bool:
-    error = result.get("error", {}) if isinstance(result, dict) else {}
-    if error.get("code") in THROTTLE_ERROR_CODES:
-        return True
-    message = (error.get("message") or "").lower()
-    return "limit" in message or "reduzid" in message or "reduce the rate" in message
-
-
-def _request_with_backoff(method: str, url: str, max_tries: int = 3, **kwargs) -> dict:
-    """Chama a API com espera exponencial só quando o erro for de throttling.
-    Qualquer outro erro (token inválido, imagem ruim, etc.) falha na hora —
-    tentar de novo não resolve esse tipo de problema."""
-    wait = 30
-    for attempt in range(1, max_tries + 1):
-        resp = requests.request(method, url, timeout=60, **kwargs)
-        result = resp.json()
-        if not _is_throttle_error(result):
-            return result
-        if attempt == max_tries:
-            raise RuntimeError(
-                f"Limite de chamadas da Meta atingido {max_tries}x seguidas. "
-                f"Pare e tente de novo mais tarde (não insista na mesma hora): {result}"
-            )
-        print(f"  Limite de chamadas da Meta — aguardando {wait}s antes de tentar de novo "
-              f"(tentativa {attempt}/{max_tries})...")
-        time.sleep(wait)
-        wait = min(wait * 2, 300)
-    return {}
-
-
-def host_image(image_path: str) -> str:
-    """Hospeda imagem em URL pública via catbox.moe"""
-    with open(image_path, "rb") as f:
-        resp = requests.post(
-            "https://catbox.moe/user/api.php",
-            data={"reqtype": "fileupload"},
-            files={"fileToUpload": (Path(image_path).name, f, "image/png")},
-            timeout=60,
-        )
-    url = resp.text.strip()
-    if not url.startswith("https://"):
-        raise RuntimeError(f"Falha no upload: {url}")
-    print(f"  Hospedada: {url}")
-    return url
-
-
-def create_media_container(image_path: str, as_carousel_item: bool) -> str:
-    data = {
-        "access_token": PAGE_TOKEN,
-        "image_url": host_image(image_path),
-    }
-    if as_carousel_item:
-        data["is_carousel_item"] = "true"
-    result = _request_with_backoff("POST", f"{BASE_URL}/{IG_ID}/media", data=data)
-    if "id" not in result:
-        raise RuntimeError(f"Erro container: {result}")
-    print(f"  Container: {result['id']}")
-    return result["id"]
-
-
-def create_carousel(media_ids: list, caption: str) -> str:
-    result = _request_with_backoff("POST", f"{BASE_URL}/{IG_ID}/media", data={
-        "access_token": PAGE_TOKEN,
-        "media_type": "CAROUSEL",
-        "children": ",".join(media_ids),
-        "caption": caption,
-    })
-    if "id" not in result:
-        raise RuntimeError(f"Erro carrossel: {result}")
-    print(f"  Carrossel: {result['id']}")
-    return result["id"]
-
-
-def wait_ready(container_id: str) -> bool:
-    for i in range(12):
-        resp = requests.get(f"{BASE_URL}/{container_id}",
-            params={"fields": "status_code", "access_token": PAGE_TOKEN}, timeout=15)
-        status = resp.json().get("status_code", "")
-        if status == "FINISHED":
-            return True
-        if status == "ERROR":
-            raise RuntimeError(f"Container com erro: {resp.json()}")
-        print(f"  Processando... {i*5}s")
-        time.sleep(5)
-    return False
-
-
-def publish(container_id: str) -> str:
-    result = _request_with_backoff("POST", f"{BASE_URL}/{IG_ID}/media_publish", data={
-        "access_token": PAGE_TOKEN,
-        "creation_id": container_id,
-    })
-    if "id" not in result:
-        raise RuntimeError(f"Erro publicar: {result}")
-    return result["id"]
-
-
-def run(images: list, caption: str, dry_run: bool = False):
-    if not IG_ID or not PAGE_TOKEN:
-        print("ERRO: Credenciais nao encontradas. Rode /setup-instagram primeiro.")
-        sys.exit(1)
-    if len(images) > 10:
-        print("ERRO: Maximo 10 imagens.")
-        sys.exit(1)
-
-    is_feed = len(images) == 1
-    print(f"\nPublicando {'post único (Feed)' if is_feed else f'{len(images)} slides'} no Instagram...")
-    if dry_run:
-        print("[DRY RUN] Tudo OK. Remova --dry-run para publicar.")
-        return
-
-    if is_feed:
-        # Post único: um container só, já com a legenda, sem passar por carrossel
-        print("\nPasso 1/2 - Criando o post...")
-        result = _request_with_backoff("POST", f"{BASE_URL}/{IG_ID}/media", data={
-            "access_token": PAGE_TOKEN,
-            "image_url": host_image(images[0]),
-            "caption": caption,
-        })
-        if "id" not in result:
-            raise RuntimeError(f"Erro container: {result}")
-        container_id = result["id"]
-        print("\nPasso 2/2 - Publicando...")
-        if not wait_ready(container_id):
-            print("ERRO: Timeout no processamento.")
-            sys.exit(1)
-        post_id = publish(container_id)
-    else:
-        # Carrossel: um container por imagem, depois agrupa
-        print("\nPasso 1/3 - Criando containers...")
-        ids = [create_media_container(img, as_carousel_item=True) for img in images]
-
-        print("\nPasso 2/3 - Montando carrossel...")
-        carousel_id = create_carousel(ids, caption)
-
-        print("\nPasso 3/3 - Publicando...")
-        if not wait_ready(carousel_id):
-            print("ERRO: Timeout no processamento.")
-            sys.exit(1)
-        post_id = publish(carousel_id)
-
-    print(f"\nPublicado com sucesso!")
-    print(f"Post ID: {post_id}")
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--images", nargs="+", required=True)
-    parser.add_argument("--caption", required=True)
-    parser.add_argument("--dry-run", action="store_true")
-    args = parser.parse_args()
-    run(args.images, args.caption, args.dry_run)
-```
+**Se não existir**, copiar de `scripts/templates/publish_instagram.py`
+pra `scripts/publish_instagram.py` (mesmo diretório, sem alterar o
+conteúdo). Esse arquivo-fonte já cobre Feed, Carrossel, Reels e Stories,
+com retry em erro de limite de chamadas (throttling) e hospedagem da
+mídia via GitHub — não reescrever nem resumir o conteúdo, copiar como
+está.
 
 **Instalar dependências:**
 ```bash
 pip install requests python-dotenv -q
 ```
+
+**Se der erro de SSL (`CERTIFICATE_VERIFY_FAILED`) numa chamada do
+script:** é comum em máquinas com antivírus que intercepta conexões HTTPS
+(ex. Avast) — o Windows já confia nesse certificado, mas o Python (via
+`certifi`) não. Resolve instalando:
+```bash
+pip install pip-system-certs -q
+```
+Isso faz o Python passar a usar o mesmo repositório de certificados
+confiáveis do sistema operacional, sem precisar desativar nada do
+antivírus.
 
 ### Segurança e limites de publicação (por que o script é assim)
 
@@ -510,7 +353,9 @@ Ou peça tudo de uma vez:
 | Erro | Causa | Solução |
 |------|-------|---------|
 | `OAuthException #200` | Permissões faltando | Voltar ao Graph API Explorer e adicionar as 3 permissões |
-| `OAuthException #100 image_url required` | API não aceita arquivo local | O script já resolve via catbox.moe |
+| `OAuthException #100 image_url required` | API não aceita arquivo local | O script já resolve hospedando via GitHub (`raw.githubusercontent.com`) |
+| Imagem commitada mas URL pública não responde (status ≠ 200) | Repositório do GitHub está privado | Deixar o repositório público em Settings > Danger Zone > Change visibility, ou trocar de mecanismo de hospedagem |
+| `CERTIFICATE_VERIFY_FAILED` ao rodar o script | Antivírus (ex. Avast) intercepta HTTPS e o Python não confia nesse certificado | `pip install pip-system-certs -q` |
 | `Invalid OAuth access token` | Token expirado | Gerar novo token no Graph API Explorer |
 | `Instagram account not found` | Conta não é Business/Creator | Converter conta em Configurações → Conta |
 | `Pages not found` | Página não vinculada ao Instagram | Vincular em Configurações do Instagram → Conta → Página vinculada |

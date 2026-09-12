@@ -1,0 +1,71 @@
+name: Publicar Instagram agendado
+
+# Substitui o Windows Task Scheduler local: roda na nuvem do GitHub, então
+# não depende do computador pessoal estar ligado, acordado ou com internet
+# no horário exato. Ver Instagram/calendario-set-2026.md para a agenda e
+# CLAUDE.md ("Automação de publicação") para o histórico da decisão.
+#
+# Também aceita disparo manual (workflow_dispatch) pra pedidos pontuais/
+# urgentes fora do calendário normal -- ver CLAUDE.md ("Agendamento
+# pontual/urgente"). Preencher "code" publica aquela peça específica na
+# hora; preencher também "wait_until_utc" espera até esse horário (UTC,
+# hoje) DENTRO deste runner antes de publicar -- sem depender de nenhuma
+# sessão de chat nem do computador local ficarem ligados.
+
+on:
+  schedule:
+    # 12:00 UTC = 09:00 horário de Brasília (sem horário de verão desde
+    # 2019, então o offset -03:00 é fixo o ano inteiro).
+    # Segunda (1) = Feed, Quinta (4) = Reels.
+    - cron: '0 12 * * 1,4'
+  workflow_dispatch:
+    inputs:
+      code:
+        description: 'Pedido pontual/urgente: código da peça pra publicar agora (ex. Feed/F04). Deixe vazio pro comportamento padrão (o que estiver agendado pra hoje no calendário).'
+        required: false
+        type: string
+      wait_until_utc:
+        description: 'Opcional, só junto com "code": horário UTC (HH:MM, hoje) pra esperar antes de publicar. Deixe vazio pra publicar assim que o workflow disparar.'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependências
+        run: pip install requests python-dotenv
+
+      - name: Configurar identidade do git (pra commit do status/hospedagem de imagem)
+        run: |
+          git config user.name "IA na Prática (automação)"
+          git config user.email "actions@users.noreply.github.com"
+
+      - name: Publicar (calendário de hoje, ou pedido pontual via workflow_dispatch)
+        env:
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          INSTAGRAM_BUSINESS_ID: ${{ secrets.INSTAGRAM_BUSINESS_ID }}
+          CODE: ${{ github.event.inputs.code }}
+          WAIT_UNTIL_UTC: ${{ github.event.inputs.wait_until_utc }}
+        run: |
+          if [ -n "$CODE" ]; then
+            ARGS="--code $CODE"
+            if [ -n "$WAIT_UNTIL_UTC" ]; then
+              ARGS="$ARGS --wait-until-utc $WAIT_UNTIL_UTC"
+            fi
+            python scripts/publish_scheduled.py $ARGS
+          else
+            python scripts/publish_scheduled.py
+          fi
