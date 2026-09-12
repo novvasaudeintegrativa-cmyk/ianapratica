@@ -18,26 +18,50 @@ description: >
 
 # Diagnóstico de Falha de Publicação no Instagram
 
-Playbook criado em 12/09/2026, depois de investigar por que o Reels/R02
-não saiu na quinta (10/09/2026) — o workflow rodou (atrasado ~4h) e
-falhou com "exit code 1", sem detalhe visível na API sem permissão de
-admin do repositório. Retestando manualmente a mesma chamada, funcionou
-de primeira — indicando falha transitória, não bug de configuração.
-Duas correções permanentes saíram dessa investigação (ver `scripts/
-publish_scheduled.py`): retry automático com backoff pra falha
+Playbook criado em 12/09/2026, depois de investigar por que um Reels não
+saiu no horário — o workflow rodou (atrasado ~4h, comum em runner
+compartilhado) e falhou com "exit code 1", sem detalhe visível na API sem
+permissão de admin do repositório. Retestando manualmente a mesma
+chamada, funcionou de primeira — indicando falha transitória, não bug de
+configuração. Duas correções permanentes saíram dessa investigação (ver
+`scripts/publish_scheduled.py`): retry automático com backoff pra falha
 transitória, e um bug separado onde a atualização do calendário nunca
 era commitada de volta ao repositório quando rodando via GitHub Actions.
 
+**Genérico de propósito:** nada aqui assume o repositório nem o nome do
+calendário deste projeto específico — funciona em qualquer projeto que
+siga a mesma convenção (squad `contrate-ag-ia-na-pratica` +
+`agendamento-instagram`), inclusive o repositório de um aluno.
+
+## Passo 0 — Descobrir o repositório e os calendários deste projeto
+
+Nunca assumir um nome de repositório fixo — descobrir sempre a partir do
+remote git local (mesma técnica que `host_media()` já usa em
+`scripts/publish_instagram.py`):
+
+```bash
+REMOTE=$(git remote get-url origin)
+OWNER_REPO=$(echo "$REMOTE" | sed -E 's#.*github\.com[:/]##; s#\.git$##')
+echo "$OWNER_REPO"   # ex. novvasaudeintegrativa-cmyk/ianapratica
+```
+
+Usar `$OWNER_REPO` nos comandos dos próximos passos, em vez de digitar um
+repositório fixo. Pro(s) calendário(s), nunca assumir um nome de arquivo
+fixo — o `publish_scheduled.py` já descobre isso sozinho via
+`find_calendar_files()` (glob em `Instagram/calendario-*.md`), então basta
+rodar `ls Instagram/calendario-*.md` pra ver quais existem no projeto.
+
 ## Passo 1 — Confirmar que realmente falhou
 
-Checar `Instagram/calendario-set-2026.md`: a linha da peça esperada
-ainda está "Agendado" na data que já passou? Se já virou "Publicado",
-não é uma falha — pode ser só demora normal, ou o usuário não viu ainda.
+Checar o(s) arquivo(s) `Instagram/calendario-*.md` encontrados no Passo
+0: a linha da peça esperada ainda está "Agendado" na data que já passou?
+Se já virou "Publicado", não é uma falha — pode ser só demora normal, ou
+o usuário não viu ainda.
 
 ## Passo 2 — Achar a execução no GitHub Actions
 
 ```bash
-curl -s "https://api.github.com/repos/novvasaudeintegrativa-cmyk/ianapratica/actions/workflows/publish-instagram.yml/runs?per_page=20" \
+curl -s "https://api.github.com/repos/$OWNER_REPO/actions/workflows/publish-instagram.yml/runs?per_page=20" \
   -o runs.json -w "HTTP %{http_code}\n"
 python -c "
 import json
@@ -55,7 +79,7 @@ real) e `conclusion: failure`.
 ## Passo 3 — Ver o status de cada step do job
 
 ```bash
-curl -s "https://api.github.com/repos/novvasaudeintegrativa-cmyk/ianapratica/actions/runs/<RUN_ID>/jobs" \
+curl -s "https://api.github.com/repos/$OWNER_REPO/actions/runs/<RUN_ID>/jobs" \
   -o jobs.json -w "HTTP %{http_code}\n"
 python -c "
 import json
@@ -86,14 +110,14 @@ do `curl` pra baixar o log completo de verdade:
 
 ```bash
 curl -sL -H "Authorization: Bearer $GITHUB_TOKEN" \
-  "https://api.github.com/repos/novvasaudeintegrativa-cmyk/ianapratica/actions/jobs/<JOB_ID>/logs" \
+  "https://api.github.com/repos/$OWNER_REPO/actions/jobs/<JOB_ID>/logs" \
   -o job_log.txt
 ```
 
 **Sem token e sem conseguir o log:** dar ao usuário o link direto pra ele
 abrir no navegador (a interface web mostra o log completo pra qualquer
 pessoa em repositório público, sem precisar ser admin):
-`https://github.com/novvasaudeintegrativa-cmyk/ianapratica/actions/runs/<RUN_ID>`
+`https://github.com/$OWNER_REPO/actions/runs/<RUN_ID>`
 
 ## Passo 5 — Testar a API da Meta direto, sem publicar de verdade
 
@@ -130,7 +154,7 @@ corrigir a causa específica antes de tentar publicar de novo.
 ## Passo 6 — Reportar e agir
 
 1. Resumir pro usuário: o que aconteceu, se é transitório ou persistente,
-   e o que already foi corrigido (retry automático já reduz recorrência
+   e o que já foi corrigido (retry automático já reduz recorrência
    de falha transitória).
 2. **Nunca publicar de verdade sem confirmação explícita do usuário** —
    mesmo numa investigação de "por que falhou", publicar é uma ação

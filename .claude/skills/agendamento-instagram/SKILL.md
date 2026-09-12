@@ -2,8 +2,8 @@
 name: agendamento-instagram
 description: >
   Regras e procedimento completo pra qualquer publicação ou agendamento de
-  post no Instagram deste projeto — tanto o calendário regular (segunda/
-  quinta, GitHub Actions) quanto pedidos pontuais/urgentes fora dele
+  post no Instagram — tanto o calendário regular (GitHub Actions) quanto
+  pedidos pontuais/urgentes fora dele
   ("publica isso agora", "publica às 15h hoje", "adianta essa peça",
   "publica amanhã de manhã"). Cobre por que o Windows Task Scheduler local
   foi desativado, por que GitHub Actions é a fonte única de verdade, e —
@@ -28,13 +28,14 @@ o calendário regular e pedidos pontuais/urgentes.
 ## 1. Calendário regular — GitHub Actions é a fonte única de verdade
 
 **Desde 07/09/2026, quem publica os posts agendados é o GitHub Actions**
-(`.github/workflows/publish-instagram.yml`, cron `0 12 * * 1,4` = toda
-segunda e quinta às 09h de Brasília), **não o computador local.** O
-workflow roda `scripts/publish_scheduled.py`, que lê
-`Instagram/calendario-set-2026.md`, acha a linha cuja data bate com hoje e
-cujo Status ainda não começa com "Publicado", publica via
-`scripts/publish_instagram.py` e reescreve o Status daquela linha no
-próprio calendário (commit automático do workflow).
+(`.github/workflows/publish-instagram.yml`, cron configurado pros dias da
+semana escolhidos — ver `Instagram/calendario-*.md`), **não o computador
+local.** O workflow roda `scripts/publish_scheduled.py`, que descobre
+sozinho todo arquivo `Instagram/calendario-*.md` do projeto (pode haver
+mais de um), acha a linha cuja data bate com hoje e cujo Status ainda não
+começa com "Publicado", publica via `scripts/publish_instagram.py` e
+reescreve o Status daquela linha no próprio calendário (commit automático
+do workflow).
 
 **Por que migrou do Windows Task Scheduler pra isso:** em 07/09/2026 o
 post do dia (Feed/F02) não saiu no horário porque a tarefa local estava
@@ -49,8 +50,8 @@ GitHub, indiferente ao estado do computador pessoal.
 **Pré-requisito único, manual, que só o dono do repositório pode fazer:**
 os Secrets `INSTAGRAM_ACCESS_TOKEN` e `INSTAGRAM_BUSINESS_ID` precisam
 estar cadastrados em GitHub → Settings → Secrets and variables → Actions
-do repositório `novvasaudeintegrativa-cmyk/ianapratica` (já feito em
-07/09/2026 — só refazer se o token for rotacionado).
+do repositório do projeto (descobrir qual é com `git remote get-url
+origin`, nunca assumir um fixo).
 
 **Regra fixa:**
 1. As 13 tarefas do Windows Task Scheduler (`IANaPratica-F0X`/`R0X`) foram
@@ -126,7 +127,7 @@ localmente (matemática de espera, com e sem virada de dia) em 07/09/2026.
 minutes: 360` = 6h, configurado no workflow). Serve bem pra "ainda hoje"
 ou "daqui a algumas horas". Pra "daqui a 2 dias" ou mais, não dá pra usar
 `wait_until_utc` — nesse caso, ou espera aparecer mais perto da hora e
-dispara então, ou (only se for algo recorrente de verdade) considera virar
+dispara então, ou (só se for algo recorrente de verdade) considera virar
 uma linha nova no calendário regular.
 
 **Quem pode disparar o `workflow_dispatch`:** hoje, só o usuário via
@@ -138,10 +139,10 @@ atualizar esta nota.
 
 ### Depois de qualquer publicação pontual
 
-1. Sempre atualizar o Status da linha correspondente em
-   `Instagram/calendario-set-2026.md` (o `--code` do
-   `publish_scheduled.py` já faz isso sozinho, se achar a peça no
-   calendário — só confirmar/checar se ela não estava lá).
+1. Sempre atualizar o Status da linha correspondente no calendário (o
+   `--code` do `publish_scheduled.py` já faz isso sozinho, procurando em
+   todo `Instagram/calendario-*.md` do projeto, se achar a peça — só
+   confirmar/checar se ela não estava em nenhum).
 2. Ser transparente com o usuário sobre qual caminho (Caso 1 ou Caso 2)
    foi usado — nunca deixar implícito que "já está agendado" se na
    prática for só um timer de sessão torcendo pra sessão continuar viva.
