@@ -27,7 +27,7 @@ removido da legenda (sem dado real disponível).
 | Seg, 07/09/2026 | Feed | Refs/2.jpeg — "Segredo: o Claude conserta seu Instagram inteiro" | Feed/F02 | Publicado (manual, 07/09/2026, Post ID 17894348835672052) |
 | Qui, 10/09/2026 | Reels | TikTok/V02 — "O Claude consegue gerenciar meu Instagram?" | Reels/R02 | Publicado (GitHub Actions, 12/09/2026 11:30, Post ID 17863018575676081) |
 | Seg, 14/09/2026 | Feed | Refs/3.jpeg — "Tenha um time de agentes de IA trabalhando 24/7" | Feed/F03 | Publicado (manual, adiantado, 07/09/2026 11:30, Post ID 17880522810687521) |
-| Qui, 17/09/2026 | Reels | TikTok/V03 — "Vale a pena usar o Claude Code?" | Reels/R03 | Agendado (GitHub Actions, 17/09 09h) |
+| Qui, 17/09/2026 | Reels | TikTok/V03 — "Vale a pena usar o Claude Code?" | Reels/R03 | Publicado (GitHub Actions, 29/09/2026 14:10, Post ID 18117696157748940) |
 | Seg, 21/09/2026 | Feed | Refs/4.jpeg — "Por trás do Claude tem a Anthropic" | Feed/F04 | Agendado (GitHub Actions, 21/09 09h) |
 | Qui, 24/09/2026 | Reels | TikTok/V04 — "Dá pra conectar o Claude no Instagram?" | Reels/R04 | Agendado (GitHub Actions, 24/09 09h) |
 | Seg, 28/09/2026 | Feed | Refs/6.jpeg — "Você confiaria a rotina do seu Instagram a uma IA?" | Feed/F05 | Agendado (GitHub Actions, 28/09 09h) |
