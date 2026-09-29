@@ -1,14 +1,25 @@
-## Calendário de Conteúdo — 27/08/2026 a 19/10/2026
+## Calendário de Conteúdo — 27/08/2026 a 17/10/2026
 Meta do período: aquecer audiência e gerar interesse pela próxima turma da Imersão "IA na Prática", preparando terreno pra venda de vaga.
 
-Cadência: **quinta = Reels, segunda = Feed**. Reels reaproveita os vídeos já
-criados em `TikTok/V01`–`V07` (mesma peça, republicada como Reels do
-Instagram). 7 Feed + 7 Reels, alternando semana a semana até 19/10.
+Cadência: **terça, quinta e sábado, sempre 09h**. Reels reaproveita os
+vídeos já criados em `TikTok/V01`–`V07` (mesma peça, republicada como
+Reels do Instagram).
 
 **Ajuste de 03/09 (hoje é quinta):** não existe agendador automático
 rodando — toda publicação depende de pedido explícito (por isso F02 tinha
 ficado parado). Decidido começar hoje pelo Reels (R01) em vez do Feed.
 Cadência inicial era terça+quinta, ajustada em seguida pra segunda+quinta.
+
+**Ajuste de 29/09/2026:** achado e corrigido o bug que travou a automação
+de 17/09 a 28/09 (ver commit `597bc08` — `__pycache__` fazia o git usar
+uma frase de "nada a commitar" que o script não reconhecia, virando erro
+fatal por engano). O Reels/R03, mais antigo atrasado, foi publicado na
+hora. As 8 peças restantes (Feed/F04, Reels/R04, Feed/F05, Reels/R05,
+Feed/F06, Reels/R06, Feed/F07, Reels/R07) foram **reagendadas pra
+terça/quinta/sábado, 09h, recomeçando a partir de hoje** (era
+segunda/quinta) — cadência nova, mais frequente. O cron do workflow foi
+atualizado junto (`0 12 * * 2,4,6` = terça/quinta/sábado 09h de
+Brasília).
 
 **Automação real:** 13 tarefas foram criadas no Windows Task Scheduler
 (`IANaPratica-F02` a `IANaPratica-R07`, ver `scripts/setup-tasks-instagram.ps1`)
@@ -28,14 +39,14 @@ removido da legenda (sem dado real disponível).
 | Qui, 10/09/2026 | Reels | TikTok/V02 — "O Claude consegue gerenciar meu Instagram?" | Reels/R02 | Publicado (GitHub Actions, 12/09/2026 11:30, Post ID 17863018575676081) |
 | Seg, 14/09/2026 | Feed | Refs/3.jpeg — "Tenha um time de agentes de IA trabalhando 24/7" | Feed/F03 | Publicado (manual, adiantado, 07/09/2026 11:30, Post ID 17880522810687521) |
 | Qui, 17/09/2026 | Reels | TikTok/V03 — "Vale a pena usar o Claude Code?" | Reels/R03 | Publicado (GitHub Actions, 29/09/2026 14:10, Post ID 18117696157748940) |
-| Seg, 21/09/2026 | Feed | Refs/4.jpeg — "Por trás do Claude tem a Anthropic" | Feed/F04 | Agendado (GitHub Actions, 21/09 09h) |
-| Qui, 24/09/2026 | Reels | TikTok/V04 — "Dá pra conectar o Claude no Instagram?" | Reels/R04 | Agendado (GitHub Actions, 24/09 09h) |
-| Seg, 28/09/2026 | Feed | Refs/6.jpeg — "Você confiaria a rotina do seu Instagram a uma IA?" | Feed/F05 | Agendado (GitHub Actions, 28/09 09h) |
-| Qui, 01/10/2026 | Reels | TikTok/V05 — "O Claude consegue criar post pro Instagram sozinho?" | Reels/R05 | Agendado (GitHub Actions, 01/10 09h) |
-| Seg, 05/10/2026 | Feed | Refs/7.jpeg — "Quantas vezes você já tentou IA e não virou rotina?" | Feed/F06 | Agendado (GitHub Actions, 05/10 09h) |
-| Qui, 08/10/2026 | Reels | TikTok/V06 — "Dá pra fazer Reels com IA?" | Reels/R06 | Agendado (GitHub Actions, 08/10 09h) |
-| Seg, 12/10/2026 | Feed | Refs/8.jpeg — "A próxima turma da Imersão IA na Prática está chegando" | Feed/F07 | Agendado (GitHub Actions, 12/10 09h) |
-| Qui, 15/10/2026 | Reels | TikTok/V07 — "Claude Code + Instagram = Automação" | Reels/R07 | Agendado (GitHub Actions, 15/10 09h) |
+| Qui, 01/10/2026 | Feed | Refs/4.jpeg — "Por trás do Claude tem a Anthropic" | Feed/F04 | Agendado (GitHub Actions, 01/10 09h) |
+| Sáb, 03/10/2026 | Reels | TikTok/V04 — "Dá pra conectar o Claude no Instagram?" | Reels/R04 | Agendado (GitHub Actions, 03/10 09h) |
+| Ter, 06/10/2026 | Feed | Refs/6.jpeg — "Você confiaria a rotina do seu Instagram a uma IA?" | Feed/F05 | Agendado (GitHub Actions, 06/10 09h) |
+| Qui, 08/10/2026 | Reels | TikTok/V05 — "O Claude consegue criar post pro Instagram sozinho?" | Reels/R05 | Agendado (GitHub Actions, 08/10 09h) |
+| Sáb, 10/10/2026 | Feed | Refs/7.jpeg — "Quantas vezes você já tentou IA e não virou rotina?" | Feed/F06 | Agendado (GitHub Actions, 10/10 09h) |
+| Ter, 13/10/2026 | Reels | TikTok/V06 — "Dá pra fazer Reels com IA?" | Reels/R06 | Agendado (GitHub Actions, 13/10 09h) |
+| Qui, 15/10/2026 | Feed | Refs/8.jpeg — "A próxima turma da Imersão IA na Prática está chegando" | Feed/F07 | Agendado (GitHub Actions, 15/10 09h) |
+| Sáb, 17/10/2026 | Reels | TikTok/V07 — "Claude Code + Instagram = Automação" | Reels/R07 | Agendado (GitHub Actions, 17/10 09h) |
 | Seg, 19/10/2026 | Feed | Refs/9.jpeg — "Time de agentes de IA 24/7 — vagas abertas" | Feed/F08 | Publicado (manual, 07/09/2026, Post ID 17944980234300070) |
 
 Vídeos copiados de `TikTok/V0X/video.mp4` pra `Instagram/Reels/R0X/reels.mp4`
