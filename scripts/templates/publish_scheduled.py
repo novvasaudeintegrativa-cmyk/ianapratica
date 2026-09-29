@@ -159,7 +159,11 @@ def commit_calendar(calendar_path: Path, when: str) -> None:
     branch = pub._run_git("rev-parse", "--abbrev-ref", "HEAD").stdout.strip() or "main"
     pub._run_git("add", rel_path)
     commit = pub._run_git("commit", "-m", f"chore: atualiza status do calendário ({when})")
-    _NOOP_MARKERS = ("nothing to commit", "no changes added to commit")
+    # Ver o comentário equivalente em publish_instagram.py::host_media() --
+    # mesmo bug real encontrado em 29/09/2026 (3ª variante de mensagem do
+    # git não reconhecida por causa de scripts/__pycache__/ solto).
+    _NOOP_MARKERS = ("nothing to commit", "no changes added to commit",
+                      "nothing added to commit")
     if commit.returncode != 0 and not any(m in commit.stdout for m in _NOOP_MARKERS):
         print(f"AVISO: falha ao commitar {rel_path}: {commit.stdout}\n{commit.stderr}")
         return

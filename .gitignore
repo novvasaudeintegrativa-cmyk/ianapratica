@@ -2,3 +2,5 @@
 .env
 node_modules/
 docs/Tokens.txt
+__pycache__/
+*.pyc

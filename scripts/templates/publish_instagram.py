@@ -113,13 +113,18 @@ def host_media(image_path: str) -> str:
     commit = _run_git("commit", "-m", f"chore: publica imagem {rel_path} no Instagram")
     # Nenhuma mudança pra commitar não é erro — a imagem já pode estar
     # commitada (sem alteração) de uma tentativa anterior. O git varia a
-    # mensagem conforme haver ou não OUTRAS mudanças soltas no repo: quando
-    # o repo está todo limpo, diz "nothing to commit"; quando há outras
-    # mudanças não-staged em outros arquivos (comuns aqui, fora do escopo
-    # desta publicação), diz "no changes added to commit" — as duas contam
-    # como no-op, só uma falha de commit de verdade (ex. hook, permissão)
-    # é que deve interromper a publicação.
-    _NOOP_COMMIT_MARKERS = ("nothing to commit", "no changes added to commit")
+    # mensagem conforme o que mais existir solto no repo: repo todo limpo
+    # diz "nothing to commit"; mudanças não-staged em arquivos JÁ
+    # rastreados diz "no changes added to commit"; arquivo solto NÃO
+    # rastreado por perto (ex. scripts/__pycache__/, gerado toda vez que
+    # este módulo é importado) diz "nothing added to commit but untracked
+    # files present" -- as três contam como no-op (bug real encontrado em
+    # 29/09/2026: 4 falhas seguidas do agendamento porque essa terceira
+    # variante não era reconhecida e virava erro fatal por engano). Só uma
+    # falha de commit de verdade (ex. hook, permissão) deve interromper a
+    # publicação.
+    _NOOP_COMMIT_MARKERS = ("nothing to commit", "no changes added to commit",
+                             "nothing added to commit")
     if commit.returncode != 0 and not any(marker in commit.stdout for marker in _NOOP_COMMIT_MARKERS):
         raise RuntimeError(f"Falha ao commitar a imagem: {commit.stdout}\n{commit.stderr}")
 
