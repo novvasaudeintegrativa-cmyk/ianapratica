@@ -5,6 +5,15 @@ Cadência: **terça, quinta e sábado, sempre 09h**. Reels reaproveita os
 vídeos já criados em `TikTok/V01`–`V07` (mesma peça, republicada como
 Reels do Instagram).
 
+⚠️ **Vencimento de tokens — checar antes dessas datas:**
+- `INSTAGRAM_ACCESS_TOKEN` vence **26/10/2026** — sem renovar antes, a
+  publicação automática para de funcionar (Feed/F07 de 15/10 e Reels/R07
+  de 17/10 ainda saem antes do vencimento; nada depois disso publica sem
+  renovar).
+- `GITHUB_TOKEN` (o PAT usado pra ler logs/editar workflow direto) vence
+  **29/10/2026** — não afeta a publicação em si, só a capacidade de
+  diagnosticar falha sem pedir print pro usuário.
+
 **Ajuste de 03/09 (hoje é quinta):** não existe agendador automático
 rodando — toda publicação depende de pedido explícito (por isso F02 tinha
 ficado parado). Decidido começar hoje pelo Reels (R01) em vez do Feed.
