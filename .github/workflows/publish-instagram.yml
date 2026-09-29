@@ -16,8 +16,9 @@ on:
   schedule:
     # 12:00 UTC = 09:00 horário de Brasília (sem horário de verão desde
     # 2019, então o offset -03:00 é fixo o ano inteiro).
-    # Segunda (1) = Feed, Quinta (4) = Reels.
-    - cron: '0 12 * * 1,4'
+    # Terça (2), Quinta (4) e Sábado (6) -- atualizado em 29/09/2026,
+    # substitui a cadência anterior de segunda/quinta.
+    - cron: '0 12 * * 2,4,6'
   workflow_dispatch:
     inputs:
       code:
