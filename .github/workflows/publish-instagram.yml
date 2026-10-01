@@ -14,11 +14,14 @@ name: Publicar Instagram agendado
 
 on:
   schedule:
-    # 12:00 UTC = 09:00 horário de Brasília (sem horário de verão desde
-    # 2019, então o offset -03:00 é fixo o ano inteiro).
-    # Terça (2), Quinta (4) e Sábado (6) -- atualizado em 29/09/2026,
-    # substitui a cadência anterior de segunda/quinta.
-    - cron: '0 12 * * 2,4,6'
+    # 12:07 UTC = ~09:07 horário de Brasília (sem horário de verão desde
+    # 2019, então o offset -03:00 é fixo o ano inteiro). Minuto 7 em vez
+    # de 0 de propósito -- atualizado em 01/10/2026, depois de notar que
+    # TODAS as execuções anteriores atrasaram de 2h a 7h. Minuto cheio
+    # (:00) é o pico de congestionamento dos runners compartilhados do
+    # GitHub (o mundo inteiro agenda cron "em ponto"); minuto quebrado
+    # reduz a fila. Terça (2), Quinta (4) e Sábado (6).
+    - cron: '7 12 * * 2,4,6'
   workflow_dispatch:
     inputs:
       code:
