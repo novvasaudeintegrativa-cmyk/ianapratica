@@ -2048,13 +2048,15 @@
 }
 
 .price-card .text-subtitle {
-  font-size: 1.75rem;
+  font-size: 1.875rem;
+  font-weight: 700;
 }
 
 .price-card-head {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
   gap: var(--space-3);
 }
 
@@ -2096,10 +2098,17 @@
 .price-installment {
   margin-top: 6px;
   font-family: var(--font-sans);
-  font-size: 2.5rem;
+  font-size: 3.25rem;
   font-weight: 700;
   color: var(--clay-vivid);
   letter-spacing: -0.02em;
+}
+
+.price-installment small {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: normal;
 }
 
 /* CTA de compra -- texto maior que o padrão do .btn e um pulso contínuo
