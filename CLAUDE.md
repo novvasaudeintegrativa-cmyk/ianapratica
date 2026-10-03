@@ -47,6 +47,17 @@ persistente pra um humano — continuam válidos e podem ser reaproveitados),
 e provavelmente um subagente novo — não é uma extensão natural do squad
 atual, é uma capacidade nova, com escopo e riscos diferentes.
 
+**Status (03/10/2026): esse dia chegou.** Decisão própria minha — vamos
+começar a usar Meta Ads de verdade, a partir de um Pixel/Conjunto de
+Dados criado no Gerenciador de Eventos da Meta (nome: "Pixel IA na
+Pratica"), pra rastrear conversão na landing page. O squad de postagem
+orgânica (Maestro, Social Media, Copywriter, Designer, `setup-instagram`)
+continua sem nenhuma relação com isso — Ads é trilha separada. Nesta fase
+inicial só o snippet de rastreamento (Pixel base code) vai pro site, sem
+token de API nenhum envolvido; criar campanha/conjunto de anúncios/
+anúncio continua exigindo o token com `ads_management` e a revisão de
+segurança própria mencionados acima, ainda não feitos.
+
 ## TikTok fica fora da Imersão, de propósito
 
 Existe uma pasta `TikTok/` na raiz do projeto (ver
