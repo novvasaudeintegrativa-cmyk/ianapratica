@@ -38,8 +38,8 @@
       <ul class="nav-list">
         <li><a href="#programacao">Programação</a></li>
         <li><a href="#para-quem-e">Para quem é</a></li>
-        <li><a href="#instrutores">Instrutores</a></li>
         <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#instrutores">Instrutores</a></li>
         <li><a href="#bonus">Bônus</a></li>
         <li><a href="#investimento">Investimento</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -79,8 +79,8 @@
     <nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Menu principal">
       <a href="#programacao">Programação</a>
       <a href="#para-quem-e">Para quem é</a>
-      <a href="#instrutores">Instrutores</a>
       <a href="#depoimentos">Depoimentos</a>
+      <a href="#instrutores">Instrutores</a>
       <a href="#bonus">Bônus</a>
       <a href="#investimento">Investimento</a>
       <a href="#faq">FAQ</a>
@@ -684,80 +684,28 @@
         </div>
 
         <!-- Prova social institucional — dobrada aqui em vez de seção própria, para não empilhar
-           três blocos consecutivos de conteúdo majoritariamente placeholder (instrutores/empresas/depoimentos) -->
+           três blocos consecutivos de conteúdo majoritariamente placeholder (instrutores/empresas/depoimentos).
+           Logos oficiais (ver assets/brand-kits/README.md pras regras de uso de cada marca) — faixa
+           com rolagem automática contínua (pausa no hover; respeita prefers-reduced-motion via tokens.css). -->
         <div class="trust-strip">
-          <span class="text-caption text-muted pending">[Opcional — incluir apenas com logos e autorização de uso de
-            marca:]</span>
           <div class="logos-row">
-            <span class="logo-chip">[Empresa 1]</span>
-            <span class="logo-chip">[Empresa 2]</span>
-            <span class="logo-chip">[Empresa 3]</span>
-            <span class="logo-chip">[Empresa 4]</span>
-            <span class="logo-chip">[Empresa 5]</span>
+            <div class="logos-track" aria-hidden="false">
+              <img class="logo-chip-img" src="assets/img/trust-logos/anthropic.svg" alt="Anthropic">
+              <img class="logo-chip-img" src="assets/img/trust-logos/claude.svg" alt="Claude">
+              <img class="logo-chip-img" src="assets/img/trust-logos/instagram.svg" alt="Instagram">
+              <img class="logo-chip-img" src="assets/img/trust-logos/meta.svg" alt="Meta">
+              <img class="logo-chip-img" src="assets/img/trust-logos/anthropic.svg" alt="" aria-hidden="true">
+              <img class="logo-chip-img" src="assets/img/trust-logos/claude.svg" alt="" aria-hidden="true">
+              <img class="logo-chip-img" src="assets/img/trust-logos/instagram.svg" alt="" aria-hidden="true">
+              <img class="logo-chip-img" src="assets/img/trust-logos/meta.svg" alt="" aria-hidden="true">
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- INSTRUTORES -->
-    <section class="section" id="instrutores">
-      <div class="container">
-        <div class="section-header">
-          <span class="text-eyebrow">Quem ensina</span>
-          <h2 class="text-heading">Instrutores a confirmar</h2>
-          <p class="text-body">
-            A imersão será conduzida por quem aplica IA na prática, todos os dias, no próprio
-            negócio. Perfis, fotos e bios completas entram aqui assim que confirmados.
-          </p>
-        </div>
-
-        <div class="grid-3">
-          <article class="card instructor-card">
-            <div class="avatar-placeholder" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4" />
-                <path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4"
-                  stroke-linecap="round" />
-              </svg>
-            </div>
-            <h3>Anderson <span class="pending">[sobrenome]</span></h3>
-            <span class="instructor-role">Especialista em Marketing Digital, Automação e Criação de Projetos com
-              IA</span>
-            <p>Há mais de 10 anos trabalhando com design e marketing digital, Anderson aplica IA todos os dias na
-              criação de campanhas, páginas de vendas, vídeos e automações para clientes reais — não é teoria de curso,
-              é o trabalho que ele entrega. É o mesmo processo usado para criar esta própria imersão, do texto ao site
-              no ar.</p>
-          </article>
-          <article class="card card-placeholder instructor-card">
-            <div class="avatar-placeholder" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4" />
-                <path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4"
-                  stroke-linecap="round" />
-              </svg>
-            </div>
-            <h3 class="pending">[Nome do instrutor]</h3>
-            <span class="instructor-role pending">[Cargo / especialidade]</span>
-            <p class="pending">[Bio curta — trajetória e credibilidade em 2–3 linhas]</p>
-          </article>
-          <article class="card card-placeholder instructor-card">
-            <div class="avatar-placeholder" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4" />
-                <path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4"
-                  stroke-linecap="round" />
-              </svg>
-            </div>
-            <h3 class="pending">[Nome do instrutor]</h3>
-            <span class="instructor-role pending">[Cargo / especialidade]</span>
-            <p class="pending">[Bio curta — trajetória e credibilidade em 2–3 linhas]</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <!-- DEPOIMENTOS -->
-    <section class="section section-muted" id="depoimentos">
+    <section class="section" id="depoimentos">
       <div class="container">
         <div class="section-header">
           <span class="text-eyebrow">Quem já viveu isso</span>
@@ -816,6 +764,63 @@
                 <span class="pending">[Profissão]</span>
               </div>
             </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTRUTORES -->
+    <section class="section section-muted" id="instrutores">
+      <div class="container">
+        <div class="section-header">
+          <span class="text-eyebrow">Quem ensina</span>
+          <h2 class="text-heading">Instrutores a confirmar</h2>
+          <p class="text-body">
+            A imersão será conduzida por quem aplica IA na prática, todos os dias, no próprio
+            negócio. Perfis, fotos e bios completas entram aqui assim que confirmados.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card instructor-card">
+            <div class="avatar-placeholder" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4" />
+                <path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4"
+                  stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3>Anderson <span class="pending">[sobrenome]</span></h3>
+            <span class="instructor-role">Especialista em Marketing Digital, Automação e Criação de Projetos com
+              IA</span>
+            <p>Há mais de 10 anos trabalhando com design e marketing digital, Anderson aplica IA todos os dias na
+              criação de campanhas, páginas de vendas, vídeos e automações para clientes reais — não é teoria de curso,
+              é o trabalho que ele entrega. É o mesmo processo usado para criar esta própria imersão, do texto ao site
+              no ar.</p>
+          </article>
+          <article class="card card-placeholder instructor-card">
+            <div class="avatar-placeholder" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4" />
+                <path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4"
+                  stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3 class="pending">[Nome do instrutor]</h3>
+            <span class="instructor-role pending">[Cargo / especialidade]</span>
+            <p class="pending">[Bio curta — trajetória e credibilidade em 2–3 linhas]</p>
+          </article>
+          <article class="card card-placeholder instructor-card">
+            <div class="avatar-placeholder" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="7" r="3.2" stroke="currentColor" stroke-width="1.4" />
+                <path d="M3.5 17c0-3.3 2.9-5.5 6.5-5.5s6.5 2.2 6.5 5.5" stroke="currentColor" stroke-width="1.4"
+                  stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3 class="pending">[Nome do instrutor]</h3>
+            <span class="instructor-role pending">[Cargo / especialidade]</span>
+            <p class="pending">[Bio curta — trajetória e credibilidade em 2–3 linhas]</p>
           </article>
         </div>
       </div>

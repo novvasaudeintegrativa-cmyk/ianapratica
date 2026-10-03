@@ -842,15 +842,6 @@
   border-top-color: rgba(255, 255, 255, 0.14);
 }
 
-.section-muted .trust-strip>.text-caption {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.section-muted .logo-chip {
-  border-color: rgba(255, 255, 255, 0.22);
-  color: rgba(255, 255, 255, 0.55);
-}
-
 .section-muted .card-placeholder {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.18);
@@ -1626,18 +1617,40 @@
 }
 
 .logos-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
-.logo-chip {
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: 10px 18px;
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  color: var(--color-muted-foreground);
+.logos-track {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  width: max-content;
+  animation: logos-scroll 26s linear infinite;
+}
+
+.logos-row:hover .logos-track {
+  animation-play-state: paused;
+}
+
+.logo-chip-img {
+  height: 28px;
+  width: auto;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+@keyframes logos-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    /* -50% porque a faixa duplica o conjunto de logos, pra fechar o loop sem corte visível */
+    transform: translateX(-50%);
+  }
 }
 
 /* ---------- Depoimentos ---------- */
