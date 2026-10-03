@@ -1405,11 +1405,10 @@ body:has(.sticky-cta) {
   font-size: 0.75rem;
   font-weight: 600;
   color: #ffffff;
-  background: linear-gradient(135deg, var(--clay-vivid-bright), var(--clay-vivid));
-  border: 1px solid transparent;
+  background: transparent;
+  border: 1px solid #ffffff;
   border-radius: var(--radius-full);
   padding: 6px 14px;
-  box-shadow: 0 6px 16px -8px rgba(255, 90, 31, 0.6);
 }
 
 /* ---------- Grades (para quem é / transformação / diferenciais) ---------- */
