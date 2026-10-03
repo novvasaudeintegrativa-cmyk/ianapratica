@@ -1667,14 +1667,15 @@
 .logos-row {
   /* Full-bleed: sai do .container (que tem max-width) e ocupa a largura
      inteira da viewport, independente do padding/centralização do resto
-     da página. overflow-x:hidden no body (tokens.css) é o que impede
-     isso de criar barra de rolagem horizontal. */
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+     da página. calc(-50vw + 50%) em vez de só "-50vw" -- 100vw/50vw
+     contam a largura da barra de rolagem, que a largura real do body
+     não tem, e isso deixava uma fresta de um lado. Com +50% (relativo
+     ao próprio elemento/pai, já sem a barra), o full-bleed bate certo
+     dos dois lados. overflow-x:hidden no body (tokens.css) continua
+     sendo o cinto de segurança contra scroll horizontal. */
+  width: auto;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
   overflow: hidden;
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
