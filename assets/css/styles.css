@@ -2018,6 +2018,20 @@
   }
 }
 
+/* Só o card do ingresso -- a gravação virou order bump dentro do checkout
+   da Kiwify, não aparece mais como card próprio aqui. Centraliza em vez
+   de esticar pra metade de um grid de 2 colunas vazio. */
+.pricing-grid-solo {
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+@media (min-width: 860px) {
+  .pricing-grid-solo {
+    grid-template-columns: 1fr;
+  }
+}
+
 .price-card {
   display: flex;
   flex-direction: column;
@@ -2063,6 +2077,15 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-muted-foreground);
+}
+
+.price-installment {
+  display: inline-block;
+  margin-top: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--swatch-clay);
 }
 
 .price-includes {
