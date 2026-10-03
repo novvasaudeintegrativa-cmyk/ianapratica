@@ -36,16 +36,18 @@ anúncio em TV/rádio, mídia externa, ou impresso maior que A4 (8.5×11")
 exige pedir permissão formal à Meta. Nunca sugerir parceria oficial/
 endosso.
 
-## `meta-nao-oficial/` — NÃO oficial
+## `meta/` — oficial
 
-O logo da empresa Meta (texto "Meta" + símbolo infinito) ainda não foi
-baixado do kit oficial — o arquivo aqui veio do Wikimedia Commons (mesmo
-desenho visual, fonte aberta, sem o processo de aceite formal da Meta):
-- `Meta_logo.svg` — colorido, original.
-- `Meta_logo_branco.svg` — versão toda branca (editada a partir do
-  original), pra usar em fundo escuro.
+Baixado pelo usuário direto do Brand Resource Center da Meta
+(`meta.com/brand/resources/meta/company-brand/`, 03/10/2026 — mesmo
+processo do Instagram, aceite de termos na tela). Logo completo ("Meta" +
+símbolo infinito), em quatro variações, cada uma em AI/PNG/SVG:
+- `1 Positive Primary/` — colorido, fundo claro.
+- `2 Negative Primary/` — branco, pra usar em fundo escuro.
+- `3 Mono Black/` — preto sólido.
+- `4 Mono White/` — branco sólido.
 
-**Regra de uso:** mesma lógica do Instagram acima — válido pra menção
-simples, baixo risco. Pra uso maior, baixar o kit oficial de verdade em
-`meta.com/brand/resources/meta/company-brand/` (mesma trava de aceite de
-termos, só uma pessoa consegue clicar).
+**Regra de uso:** mesma do Instagram acima — usar como está, sem
+modificar; menção simples em material pequeno não precisa de aprovação
+prévia; anúncio grande/broadcast exige permissão formal; nunca sugerir
+parceria oficial/endosso.
