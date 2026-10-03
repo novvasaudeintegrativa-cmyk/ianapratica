@@ -2077,37 +2077,28 @@
 
 .price-now {
   font-family: var(--font-sans);
-  font-size: 2.75rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-muted-foreground);
+  letter-spacing: -0.01em;
 }
 
 .price-now small {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-muted-foreground);
 }
 
 /* O parcelamento é o destaque real do preço (o valor que mais convence
-   -- R$ 15,20 "parece" muito mais barato que R$ 147), por isso recebe
-   tratamento de selo/badge, maior que o próprio "R$ 147 à vista". */
+   -- R$ 15,20 "parece" muito mais barato que R$ 147), por isso é o
+   maior texto do card -- cor laranja, sem fundo/pílula de botão. */
 .price-installment {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 10px 20px;
-  border-radius: var(--radius-full);
-  background: var(--clay-vivid);
+  margin-top: 6px;
   font-family: var(--font-sans);
-  font-size: 1.125rem;
-  font-weight: 500;
-  color: #ffffff;
-  letter-spacing: -0.01em;
-}
-
-.price-installment strong {
-  font-size: 1.75rem;
+  font-size: 2.5rem;
   font-weight: 700;
+  color: var(--clay-vivid);
   letter-spacing: -0.02em;
 }
 
