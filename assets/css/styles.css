@@ -848,9 +848,22 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-.section-muted .testimonial-who span:not(.pending),
 .section-muted .instructor-role:not(.pending) {
   color: rgba(255, 255, 255, 0.45);
+}
+
+.section-muted .instructor-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: none;
+}
+
+.section-muted .instructor-card h3 {
+  color: #faf9f5;
+}
+
+.section-muted .instructor-card p {
+  color: rgba(250, 249, 245, 0.62);
 }
 
 /* Bastidores — mesmo fundo escuro do antigo .bastidor-panel, mas na seção
@@ -1591,8 +1604,8 @@
    borda tracejada (tracejado = convenção visual de "ainda pendente" no
    site inteiro). */
 .avatar-photo {
-  width: 56px;
-  height: 56px;
+  width: 150px;
+  height: 150px;
   border-radius: var(--radius-full);
   object-fit: cover;
   margin-bottom: var(--space-4);
@@ -1670,8 +1683,16 @@
   opacity: 0.8;
   width: auto;
   height: auto;
-  max-width: 100px;
-  max-height: 24px;
+  max-width: 150px;
+  max-height: 36px;
+}
+
+/* Lockup do Meta (ícone infinito + "Meta") fica visualmente menor que os
+   outros no mesmo limite -- traço mais fino, bastante espaço vazio entre
+   ícone e texto. Dá um respiro maior só pra ele. */
+.logo-chip-img[src*="meta.svg"] {
+  max-width: 195px;
+  max-height: 51px;
 }
 
 @keyframes logos-scroll {
@@ -1685,35 +1706,280 @@
   }
 }
 
-/* ---------- Depoimentos ---------- */
-.testimonial-card p.quote {
-  margin: 0 0 var(--space-4);
-  font-size: 1.0625rem;
+/* ---------- Depoimentos (mockup de conversa de WhatsApp) ----------
+   Padrão trazido do projeto Christian Vieira (mesma ideia visual,
+   reaproveitada). Conteúdo ainda não existe de verdade -- os campos
+   .pending dentro dos balões (ver index.html) são o mesmo mecanismo de
+   placeholder usado no resto do site, só que dentro do formato de chat
+   em vez de card comum. */
+.wa-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
 }
 
-.testimonial-who {
+@media (min-width: 560px) {
+  .wa-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .wa-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.wa-phone {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .15), 0 8px 16px rgba(0, 0, 0, .2), 0 24px 60px rgba(0, 0, 0, .35), inset 0 0 0 1.5px rgba(255, 255, 255, .08);
+  font-family: -apple-system, "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 9/19.5;
+  background: #000;
+  max-width: 300px;
+  margin-inline: auto;
+}
+
+.wa-statusbar {
+  background: #075E54;
+  padding: 14px 20px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.wa-statusbar-time {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+}
+
+.wa-statusbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.wa-statusbar-icons svg {
+  width: 14px;
+  height: 14px;
+  fill: #fff;
+}
+
+.wa-battery-icon {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.wa-battery-body {
+  width: 22px;
+  height: 11px;
+  border: 1.5px solid #fff;
+  border-radius: 3px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 1.5px;
+}
+
+.wa-battery-body::after {
+  content: '';
+  width: 2px;
+  height: 5px;
+  background: #fff;
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 0 1px 1px 0;
+}
+
+.wa-battery-fill {
+  background: #fff;
+  height: 100%;
+  width: 75%;
+  border-radius: 1px;
+}
+
+.wa-header {
+  background: #128C7E;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
-.testimonial-who .avatar-placeholder {
+.wa-back {
+  color: rgba(255, 255, 255, .8);
+  font-size: 18px;
+  margin-right: -4px;
+}
+
+.wa-av {
   width: 36px;
   height: 36px;
-  margin-bottom: 0;
-  font-size: 0.6875rem;
+  border-radius: 50%;
+  background: var(--color-muted);
+  border: 1px dashed rgba(255, 255, 255, .5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, .7);
 }
 
-.testimonial-who strong {
+.wa-ct {
+  flex: 1;
+  min-width: 0;
+}
+
+.wa-ct-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wa-ct-status {
+  font-size: 11px;
+  color: rgba(255, 255, 255, .7);
+}
+
+.wa-ic {
+  color: rgba(255, 255, 255, .8);
+}
+
+.wa-ic svg {
+  width: 18px;
+  height: 18px;
+}
+
+.wa-body {
+  background: #E5DDD5;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c5bdb5' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+  padding: 10px 10px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.wa-sep {
+  text-align: center;
+  font-size: 11px;
+  color: #667781;
+  background: rgba(255, 255, 255, .65);
+  padding: 2px 10px;
+  border-radius: 8px;
+  align-self: center;
+  margin: 4px 0;
+}
+
+.wa-bub {
+  max-width: 84%;
+  padding: 7px 10px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #111;
+  position: relative;
+  word-break: break-word;
+}
+
+.wa-bub-r {
+  background: #fff;
+  align-self: flex-start;
+  border-top-left-radius: 0;
+  margin-left: 4px;
+}
+
+.wa-bub-s {
+  background: #DCF8C6;
+  align-self: flex-end;
+  border-top-right-radius: 0;
+  margin-right: 4px;
+}
+
+.wa-bub .pending {
+  color: var(--clay-vivid);
+}
+
+.wa-t {
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+  font-size: 10px;
+  color: #667781;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.wa-bub-s .wa-t {
+  color: #4a9fd4;
+}
+
+.wa-inp {
+  background: #F0F0F0;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.wa-inp-f {
+  flex: 1;
+  background: #fff;
+  border-radius: 20px;
+  padding: 7px 14px;
+  font-size: 13px;
+  color: #999;
+}
+
+.wa-mic {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wa-mic svg {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+}
+
+.wa-home-bar {
+  background: #F0F0F0;
+  padding: 6px 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.wa-home-bar span {
   display: block;
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
-}
-
-.testimonial-who span {
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  color: var(--color-muted-foreground);
+  width: 100px;
+  height: 4px;
+  background: #333;
+  border-radius: 4px;
+  opacity: 0.25;
 }
 
 /* ---------- Investimento ---------- */
