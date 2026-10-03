@@ -1586,6 +1586,19 @@
   margin-bottom: var(--space-4);
 }
 
+/* Foto real de instrutor/depoimento (substitui .avatar-placeholder quando
+   a pessoa já está confirmada) -- mesmo tamanho/formato circular, sem a
+   borda tracejada (tracejado = convenção visual de "ainda pendente" no
+   site inteiro). */
+.avatar-photo {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
 .instructor-card h3 {
   margin: 0 0 2px;
   font-family: var(--font-sans);
