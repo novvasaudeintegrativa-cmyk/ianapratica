@@ -1725,6 +1725,15 @@
   max-height: 66px;
 }
 
+/* Kiwify não publica um brand kit com variação branca/mono -- o arquivo
+   baixado é colorido (verde). filter:brightness(0) invert(1) achata
+   qualquer cor pra preto e depois inverte pra branco, preservando a
+   transparência -- mesmo resultado visual de um "mono white" oficial,
+   só que derivado por CSS em vez de ter um arquivo à parte. */
+.logo-chip-img[src*="kiwify"] {
+  filter: brightness(0) invert(1);
+}
+
 @keyframes logos-scroll {
   from {
     transform: translateX(0);
