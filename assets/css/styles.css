@@ -2088,6 +2088,20 @@
   color: var(--swatch-clay);
 }
 
+/* CTA de compra -- texto maior que o padrão do .btn e um pulso contínuo
+   pra chamar mais atenção, já que é o botão de conversão principal da
+   página. prefers-reduced-motion:reduce (tokens.css) já neutraliza a
+   animação pra quem pediu menos movimento. */
+.btn-cta-pulse {
+  font-size: 1.0625rem;
+  animation: btn-cta-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes btn-cta-pulse {
+  0%, 100% { box-shadow: 0 10px 30px -10px rgba(255, 90, 31, 0.5), 0 0 0 0 rgba(255, 90, 31, 0.55); }
+  50% { box-shadow: 0 10px 30px -10px rgba(255, 90, 31, 0.5), 0 0 0 10px rgba(255, 90, 31, 0); }
+}
+
 .price-includes {
   list-style: none;
   margin: 0;
