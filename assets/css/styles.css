@@ -1624,7 +1624,7 @@
    dá um zoom extra só nele pra o rosto ocupar proporção parecida no
    círculo. O wrapper (.avatar-photo-wrap) recorta o excesso. */
 .avatar-photo-zoom {
-  object-position: center 22%;
+  object-position: center 8%;
   transform: scale(1.25);
   transform-origin: center center;
 }
