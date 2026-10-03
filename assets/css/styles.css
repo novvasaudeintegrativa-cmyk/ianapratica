@@ -320,6 +320,13 @@
   display: none;
   flex-direction: column;
   gap: var(--space-1);
+  /* .nav-header (tokens.css) tem height:64px fixo no <header> -- esse
+     menu expandido ultrapassa essa altura e, sem fundo próprio, ficava
+     sem nenhum fundo atrás (via transparente, conteúdo da página
+     aparecendo por baixo). Repete o mesmo fundo/blur do header, já que
+     esse <nav> deixa de estar dentro da caixa de 64px pintada por ele. */
+  background: linear-gradient(180deg, #160f0a 0%, #0c0b0a 100%);
+  box-shadow: var(--elevation-floating);
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   padding: var(--space-4) clamp(1.25rem, 3vw, var(--space-site-margin));
 }
