@@ -1617,8 +1617,17 @@
 }
 
 .logos-row {
+  /* Full-bleed: sai do .container (que tem max-width) e ocupa a largura
+     inteira da viewport, independente do padding/centralização do resto
+     da página. overflow-x:hidden no body (tokens.css) é o que impede
+     isso de criar barra de rolagem horizontal. */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   overflow: hidden;
-  width: 100%;
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
@@ -1626,8 +1635,9 @@
 .logos-track {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-12);
   width: max-content;
+  padding-inline: var(--space-8);
   animation: logos-scroll 26s linear infinite;
 }
 
@@ -1635,11 +1645,26 @@
   animation-play-state: paused;
 }
 
+/* Tamanho "padrão" não pode ser a mesma altura em px pra todas — um
+   glyph quadrado (Instagram) ou um símbolo+wordmark compacto (Meta)
+   parecem menores que uma wordmark larga (Anthropic/Claude) na mesma
+   altura, por causa da proporção/espaço vazio interno de cada desenho.
+   Alturas calibradas visualmente pra peso parecido, não só altura igual. */
 .logo-chip-img {
-  height: 28px;
   width: auto;
   flex-shrink: 0;
   opacity: 0.8;
+  height: 26px;
+}
+
+.logo-chip-img[alt="Instagram"],
+.logo-chip-img[alt=""][src*="instagram"] {
+  height: 40px;
+}
+
+.logo-chip-img[alt="Meta"],
+.logo-chip-img[alt=""][src*="meta"] {
+  height: 34px;
 }
 
 @keyframes logos-scroll {

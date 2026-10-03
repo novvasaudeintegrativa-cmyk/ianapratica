@@ -328,6 +328,10 @@ html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 }
 body {
   margin: 0;
+  /* Necessário pro elemento full-bleed .logos-row (faixa de logos que sai
+     do .container e ocupa a viewport inteira) não criar barra de rolagem
+     horizontal. */
+  overflow-x: hidden;
   background-color: var(--color-background);
   /* Quadriculado sutil: cobre a página inteira, mas só "aparece" nas áreas
      claras (.section) — os blocos escuros (hero, section-muted, inverse-section,
