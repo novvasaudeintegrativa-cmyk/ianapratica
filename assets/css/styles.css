@@ -654,7 +654,8 @@ body:has(.sticky-cta) {
 .hero-impact .btn-primary {
   background: var(--clay-vivid);
   border-color: transparent;
-  color: #1a0d05;
+  color: #ffffff;
+  font-weight: 700;
   box-shadow: 0 10px 34px -8px rgba(255, 90, 31, 0.6), var(--btn-shadow);
 }
 
