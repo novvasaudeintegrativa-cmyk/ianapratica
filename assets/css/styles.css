@@ -1608,6 +1608,7 @@
   height: 150px;
   border-radius: var(--radius-full);
   object-fit: cover;
+  object-position: center top;
   margin-bottom: var(--space-4);
   display: block;
 }
