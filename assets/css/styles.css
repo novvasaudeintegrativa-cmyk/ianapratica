@@ -6,8 +6,12 @@
 
 /* ---------- Teste de copy (index_backup001.html) — strikethrough, comparativo,
    toggle de dia e CTA sticky. Regras "mortas" em qualquer página que não tenha
-   a marcação correspondente, exceto o padding do body via :has() abaixo, que
-   é justamente pra só afetar a página que realmente tem o .sticky-cta. ---------- */
+   a marcação correspondente. ---------- */
+body:has(.sticky-cta) {
+  /* Compensa a altura da barra fixa (abaixo), senão ela cobre o fim do
+     rodapé permanentemente. */
+  padding-bottom: 76px;
+}
 .text-strike {
   text-decoration: line-through;
   text-decoration-thickness: 2px;
@@ -136,6 +140,11 @@
 }
 
 .sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
   background: #141413;
   border-top: 1px solid rgba(255, 90, 31, 0.3);
   padding: 10px clamp(1rem, 3vw, 2rem);
