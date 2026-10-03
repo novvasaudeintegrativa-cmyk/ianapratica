@@ -1603,14 +1603,29 @@
    a pessoa já está confirmada) -- mesmo tamanho/formato circular, sem a
    borda tracejada (tracejado = convenção visual de "ainda pendente" no
    site inteiro). */
-.avatar-photo {
+.avatar-photo-wrap {
+  display: block;
   width: 150px;
   height: 150px;
   border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+}
+
+.avatar-photo {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center top;
-  margin-bottom: var(--space-4);
   display: block;
+}
+
+/* Retrato do Leandro é um enquadramento mais aberto que o do Anderson --
+   dá um zoom extra só nele pra o rosto ocupar proporção parecida no
+   círculo. O wrapper (.avatar-photo-wrap) recorta o excesso. */
+.avatar-photo-zoom {
+  transform: scale(1.6);
+  transform-origin: center top;
 }
 
 .instructor-card h3 {
