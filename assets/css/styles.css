@@ -1792,7 +1792,7 @@ body:has(.sticky-cta) {
 }
 
 .wa-statusbar {
-  background: #075E54;
+  background: #fff;
   padding: 14px 20px 6px;
   display: flex;
   align-items: center;
@@ -1803,7 +1803,7 @@ body:has(.sticky-cta) {
 .wa-statusbar-time {
   font-size: 12px;
   font-weight: 700;
-  color: #fff;
+  color: #111;
   letter-spacing: -0.3px;
 }
 
@@ -1816,7 +1816,7 @@ body:has(.sticky-cta) {
 .wa-statusbar-icons svg {
   width: 14px;
   height: 14px;
-  fill: #fff;
+  fill: #111;
 }
 
 .wa-battery-icon {
@@ -1828,7 +1828,7 @@ body:has(.sticky-cta) {
 .wa-battery-body {
   width: 22px;
   height: 11px;
-  border: 1.5px solid #fff;
+  border: 1.5px solid #111;
   border-radius: 3px;
   position: relative;
   display: flex;
@@ -1840,7 +1840,7 @@ body:has(.sticky-cta) {
   content: '';
   width: 2px;
   height: 5px;
-  background: #fff;
+  background: #111;
   position: absolute;
   right: -4px;
   top: 50%;
@@ -1849,14 +1849,18 @@ body:has(.sticky-cta) {
 }
 
 .wa-battery-fill {
-  background: #fff;
+  background: #111;
   height: 100%;
   width: 75%;
   border-radius: 1px;
 }
 
+/* WhatsApp atual não usa mais o verde/teal clássico no cabeçalho da
+   conversa -- é branco liso, igual ao resto do app (o verde sobrou só
+   no balão enviado e no ícone de áudio/enviar). */
 .wa-header {
-  background: #128C7E;
+  background: #fff;
+  border-bottom: 1px solid #e9e9e9;
   padding: 10px 14px;
   display: flex;
   align-items: center;
@@ -1865,7 +1869,7 @@ body:has(.sticky-cta) {
 }
 
 .wa-back {
-  color: rgba(255, 255, 255, .8);
+  color: #111;
   font-size: 18px;
   margin-right: -4px;
 }
@@ -1875,12 +1879,12 @@ body:has(.sticky-cta) {
   height: 36px;
   border-radius: 50%;
   background: var(--color-muted);
-  border: 1px dashed rgba(255, 255, 255, .5);
+  border: 1px dashed rgba(0, 0, 0, .3);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: rgba(255, 255, 255, .7);
+  color: rgba(0, 0, 0, .4);
 }
 
 .wa-ct {
@@ -1891,7 +1895,7 @@ body:has(.sticky-cta) {
 .wa-ct-name {
   font-size: 13px;
   font-weight: 600;
-  color: #fff;
+  color: #111;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1899,11 +1903,11 @@ body:has(.sticky-cta) {
 
 .wa-ct-status {
   font-size: 11px;
-  color: rgba(255, 255, 255, .7);
+  color: #667781;
 }
 
 .wa-ic {
-  color: rgba(255, 255, 255, .8);
+  color: #333;
 }
 
 .wa-ic svg {
@@ -1999,7 +2003,7 @@ body:has(.sticky-cta) {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #25D366;
+  background: #1F2C34;
   display: flex;
   align-items: center;
   justify-content: center;
