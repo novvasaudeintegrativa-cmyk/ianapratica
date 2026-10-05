@@ -420,8 +420,8 @@ body:has(.sticky-cta) {
 
 .hero-claude-logo {
   display: block;
-  width: 44px;
-  height: 44px;
+  width: auto;
+  height: 34px;
   margin-bottom: var(--space-4);
 }
 
