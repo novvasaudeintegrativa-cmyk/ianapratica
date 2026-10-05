@@ -1446,11 +1446,6 @@ body:has(.sticky-cta) {
 .bonus-grid {
   align-items: center;
   gap: var(--space-8);
-  /* A imagem precisa de mais espaço do que uma coluna de .grid-2 (metade
-     da largura) dá -- empilha em vez de dividir 50/50, senão aumentar o
-     max-width da imagem não tem efeito nenhum (ela já preenche a coluna
-     antes de chegar no limite). */
-  grid-template-columns: 1fr !important;
 }
 
 .bonus-media img {
@@ -1486,7 +1481,7 @@ body:has(.sticky-cta) {
 .bonus-media img {
   display: block;
   width: 100%;
-  max-width: 1080px;
+  max-width: 480px;
   filter: drop-shadow(0 30px 50px rgba(20, 20, 19, 0.28));
 }
 
@@ -2196,7 +2191,7 @@ body:has(.sticky-cta) {
 
 .bump-tag {
   align-self: flex-start;
-  background: #a6390f;
+  background: var(--clay-vivid);
   color: #ffffff;
   font-family: var(--font-sans);
   font-size: 0.75rem;
