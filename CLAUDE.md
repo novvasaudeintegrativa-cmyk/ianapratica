@@ -12,7 +12,7 @@ criar direto em `.claude/skills/[nome]/SKILL.md` desde o início.
 Exceção: os arquivos em `scripts/templates/` (ex.
 `scripts/templates/maestro-ia-na-pratica.md`,
 `scripts/templates/agents/*.md`) não são Skills em si — são material de
-apoio/origem que a Skill `contrate-ag-ia-na-pratica` copia pra
+apoio/origem que a Skill `instalador-ag-ia-na-pratica` copia pra
 `.claude/` quando instala o squad. Esses continuam fora de
 `.claude/skills/` de propósito.
 
@@ -64,7 +64,7 @@ Existe uma pasta `TikTok/` na raiz do projeto (ver
 [TikTok/README.md](TikTok/README.md)) — é conteúdo avulso meu, gerado e
 publicado manualmente. **Nenhum agente/skill do squad da Imersão** (Maestro,
 Social Media, Copywriter, Designer, `setup-instagram`,
-`setup-geracao-midia`, `contrate-ag-ia-na-pratica`) deve ler, escrever ou
+`setup-geracao-midia`, `instalador-ag-ia-na-pratica`) deve ler, escrever ou
 fazer referência a essa pasta — o produto ensinado continua sendo só
 Instagram. Se TikTok entrar oficialmente na Imersão algum dia, é decisão
 própria meu, tomada à parte — não estender o squad atual pra cobrir isso

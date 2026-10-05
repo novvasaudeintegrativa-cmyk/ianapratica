@@ -30,7 +30,7 @@ era commitada de volta ao repositório quando rodando via GitHub Actions.
 
 **Genérico de propósito:** nada aqui assume o repositório nem o nome do
 calendário deste projeto específico — funciona em qualquer projeto que
-siga a mesma convenção (squad `contrate-ag-ia-na-pratica` +
+siga a mesma convenção (squad `instalador-ag-ia-na-pratica` +
 `agendamento-instagram`), inclusive o repositório de um aluno.
 
 ## Passo 0 — Descobrir o repositório e os calendários deste projeto

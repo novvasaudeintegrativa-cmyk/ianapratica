@@ -23,12 +23,12 @@ usuário.
 
 Este fluxo depende de quatro subagentes já instalados em
 `.claude/agents/`: `social-media.md`, `copywriter.md`, `designer.md` e
-`qa-visual.md`. Quem instala isso é a Skill `/contrate-ag-ia-na-pratica`,
+`qa-visual.md`. Quem instala isso é a Skill `/instalador-ag-ia-na-pratica`,
 não o Maestro — não duplicar essa lógica aqui.
 
 **Se algum dos quatro não existir**, avisar o usuário:
 > "Ainda não encontrei seu squad completo instalado. Rode
-> `/contrate-ag-ia-na-pratica` primeiro — ela prepara o Maestro
+> `/instalador-ag-ia-na-pratica` primeiro — ela prepara o Maestro
 > e os quatro especialistas de uma vez — e depois volte aqui."
 
 Parar e não simular o papel do especialista você mesmo.

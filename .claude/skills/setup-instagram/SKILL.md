@@ -60,7 +60,7 @@ existe, antes de apresentar qualquer coisa. Isso evita fazer alguém repetir Pá
    - **Retornou `username`** → já está tudo conectado e funcionando. Avisar e
      parar aqui, sem repetir nenhuma etapa:
      > "Você já está conectado! Conta: @[username]. Não precisa configurar de
-     > novo — pode ir direto pra `/contrate-ag-ia-na-pratica` criar uma peça e
+     > novo — pode ir direto pra `/instalador-ag-ia-na-pratica` criar uma peça e
      > publicar."
    - **Retornou erro** → consultar a tabela "Diagnóstico de erros comuns" (mais
      abaixo neste arquivo), identificar a causa mais provável e propor pular
@@ -333,7 +333,7 @@ O que foi configurado:
 Como usar agora:
 
 1. Criar a peça (texto + visual):
-   /contrate-ag-ia-na-pratica
+   /instalador-ag-ia-na-pratica
 
 2. Exportar os slides pra PNG (o Designer já faz isso sozinho, mas se
    precisar rodar de novo):

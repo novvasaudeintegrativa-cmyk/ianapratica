@@ -1,9 +1,9 @@
 ---
-name: contrate-ag-ia-na-pratica
+name: instalador-ag-ia-na-pratica
 description: >
   Instala o squad completo de marketing no projeto (o `Maestro` e os
-  três subagentes que ele coordena — `social-media`, `copywriter` e
-  `designer`) e, na sequência, conduz a entrevista rápida pra escrever
+  quatro subagentes que ele coordena — `social-media`, `copywriter`,
+  `designer` e `qa-visual`) e, na sequência, conduz a entrevista rápida pra escrever
   UMA peça de copy pro Instagram (carrossel, post único, legenda
   avulsa, Stories ou Reels) a partir da Persona Profunda já salva no
   projeto (docs/persona.md ou CLAUDE.md) — gera um dashboard visual com
@@ -11,7 +11,7 @@ description: >
   subagente `copywriter` pra escrever de verdade. Use quando o usuário
   pedir "contrate sua agência de marketing", "agência de marketing IA
   na Prática", "agência", "monte meu time de marketing", "monte minha
-  agência de IA", "criar squad", "instalar o maestro", "instalar os
+  agência de IA", "instalador squad", "instalar o squad", "criar squad", "instalar o maestro", "instalar os
   agentes", "preparar o time", copy, legenda, caption, texto do post,
   roteiro de carrossel, roteiro de reels, criativo, gancho, hook, ideia
   de post, briefing de post, "entrevista", "nova postagem", "criar
@@ -21,10 +21,10 @@ description: >
   `/maestro-ia-na-pratica` em vez desta.
 ---
 
-# Agência de Marketing IA na Prática — Instala o Squad e Escreve sua Primeira Peça
+# Instalador AG IA na Prática — Instala o Squad e Escreve sua Primeira Peça
 
 Duas responsabilidades numa Skill só, nessa ordem: **instalar** a
-infraestrutura (Maestro + os 3 subagentes) e, na sequência, **conduzir
+infraestrutura (Maestro + os 4 subagentes) e, na sequência, **conduzir
 a entrevista** que termina num dashboard visual com prévias reais nos 5
 frameworks de persuasão, até a peça final ficar pronta. Você não
 escreve copy nem decide estratégia — isso é do subagente `copywriter`,
@@ -34,13 +34,28 @@ moram só nele — não duplicar aqui. Se quiser revisar/ajustar como a
 copy é escrita, o lugar certo é `.claude/agents/copywriter.md`, não
 este arquivo.
 
+**Regra permanente — nenhuma peça publica sem passar por um dashboard
+antes:** isso vale pra qualquer peça, não só as que nascem da entrevista
+completa (Passo C/F abaixo). Se uma peça foi criada de outro jeito — ex.
+o usuário já tinha a imagem pronta e só pediu a legenda, ou pediu um
+ajuste pontual direto no chat, fora da árvore de decisão normal — ainda
+assim, **antes de oferecer publicar no Instagram** (botão do dashboard
+ou `python scripts/publish_instagram.py` direto), gerar ou atualizar um
+dashboard simples mostrando o resultado final (imagem/vídeo + legenda),
+pro usuário revisar visualmente. Não é preciso o aparato inteiro do
+Passo C (cards de framework, seletor de formato) pra esse caso — um
+dashboard mínimo (mesmo CSS do template, só com a peça em si e a
+legenda) já cumpre a regra. Nunca ofereça ou rode publicação sem esse
+passo ter acontecido antes, mesmo que o usuário não peça o dashboard
+explicitamente.
+
 ---
 
 # PARTE 1 — Instalar o Squad
 
 ## O que instalar
 
-Cinco arquivos, cada um copiado do material de apoio do curso (pasta
+Seis arquivos, cada um copiado do material de apoio do curso (pasta
 `scripts/templates/`) pra dentro de `.claude/`, **só se ainda não
 existir** no destino:
 
@@ -50,6 +65,7 @@ existir** no destino:
 | Social Media | `scripts/templates/agents/social-media.md` | `.claude/agents/social-media.md` |
 | Copywriter | `scripts/templates/agents/copywriter.md` | `.claude/agents/copywriter.md` |
 | Designer | `scripts/templates/agents/designer.md` | `.claude/agents/designer.md` |
+| QA Visual | `scripts/templates/agents/qa-visual.md` | `.claude/agents/qa-visual.md` |
 | Setup Geração de Mídia | `scripts/templates/setup-geracao-midia.md` | `.claude/skills/setup-geracao-midia/SKILL.md` |
 
 **Nota:** o `setup-instagram` fica de fora dessa lista de propósito — é
@@ -57,9 +73,21 @@ ensinado como lição própria no tutorial, pra o aluno instalar manualmente
 naquele momento e aprender o que é uma Skill na prática. Não duplicar essa
 lógica aqui.
 
+## Passo 0: Garantir as dependências base do Node
+
+Antes de instalar os arquivos, checar se `node_modules/playwright` existe
+na raiz do projeto (via `Glob` ou `Bash`). **Se não existir e houver um
+`package.json` na raiz**, rodar `npm install` via `Bash` automaticamente,
+sem perguntar (é a mesma lógica de auto-instalação do resto desta etapa)
+— isso já deixa Playwright, dotenv e o SDK do Gemini prontos, sem o aluno
+precisar rodar nada no terminal manualmente. Se não houver `package.json`
+nenhum na raiz, pular este passo em silêncio (projeto sem essa base —
+seguir para o Passo 1 normalmente; o Designer já lida sozinho depois com
+a ausência do Playwright, exportação de PNG vira opcional nesse caso).
+
 ## Passo 1: Verificar o que já existe
 
-Checar cada um dos 5 destinos da tabela acima. Não reinstalar o que já
+Checar cada um dos 6 destinos da tabela acima. Não reinstalar o que já
 existir — nunca sobrescrever um arquivo que o usuário (ou uma sessão
 anterior) já tenha customizado.
 
@@ -84,20 +112,45 @@ gerar de improviso.
 Mostrar um resumo curto do que foi instalado, tipo:
 
 ```
-Contratando sua Agência de Marketing...
+Instalando seu Squad de Marketing...
+✓ Dependências (npm install) — prontas
 ✓ Maestro (já existia)
 ✓ Social Media — instalado agora
 ✓ Copywriter — instalado agora
 ✓ Designer — instalado agora
+✓ QA Visual — instalado agora
 ✓ Setup Geração de Mídia — instalado agora (opcional, /setup-geracao-midia quando quiser configurar)
 ```
 
-Se todos os 5 já existiam, encurtar pra uma frase: "Sua agência já
-estava toda montada — nada pra instalar." Sem enrolação.
+Se todos os 6 já existiam, encurtar pra uma frase: "Seu squad já
+estava todo montado — nada pra instalar." Sem enrolação.
 
 **Não perguntar se a pessoa quer continuar — só seguir direto pra Parte
 2.** O objetivo desta Skill é chegar ao dashboard de verdade, não só
 deixar arquivos instalados e parar.
+
+## Nota importante: agentes recém-instalados podem não aparecer ainda nesta mesma resposta
+
+O Claude Code só atualiza a lista de subagentes personalizados disponíveis
+pro tool `Agent` a cada nova mensagem do usuário — não no meio da mesma
+resposta em que os arquivos `.claude/agents/*.md` acabaram de ser
+escritos. Ou seja: se a Parte 1 acabou de instalar `copywriter`,
+`social-media` ou `designer` **agora**, a primeira tentativa de acioná-los
+via `Agent` **ainda nesta resposta** pode falhar com algo como `Agent type
+'copywriter' not found`. Isso **não é erro de instalação** — os arquivos
+estão corretos, é só o cache da lista de agentes que ainda não recarregou.
+
+**Se isso acontecer:**
+- Não reinstalar nada, não tratar como falha grave nos arquivos.
+- **Nunca orientar o usuário a reiniciar a sessão inteira** — isso não é
+  necessário e é uma informação incorreta a passar pra ele.
+- Avisar algo como: "Squad instalado! Só preciso que você mande qualquer
+  mensagem (ex. 'continua' ou 'pode seguir') pra esses agentes ficarem
+  disponíveis, e sigo com a entrevista." — e parar a Parte 2 nesse ponto.
+- Assim que a próxima mensagem do usuário chegar, a lista de agentes já
+  vem atualizada sozinha (é um `<system-reminder>` informando os novos
+  tipos disponíveis) — retomar a Parte 2 normalmente a partir daí, sem
+  precisar repetir a instalação.
 
 ---
 
@@ -107,6 +160,64 @@ deixar arquivos instalados e parar.
 acabou de garantir que existe em `.claude/agents/copywriter.md`. Se por
 algum motivo ainda não existir (ex. faltou o material de apoio), parar
 aqui — não assumir o papel de escrever a copy você mesmo.
+
+## Passo 0: Perguntar sobre imagem de referência (padrão, antes de tudo)
+
+Antes da árvore de decisão e antes de qualquer pergunta de objetivo/tema/
+CTA, sempre perguntar — pra qualquer entrevista, não só pro modo denso:
+
+> "Antes de começarmos: você tem uma imagem de referência pra essa peça —
+> um post que você gostou, um print, um board do Pinterest? Se tiver, eu
+> uso ela pra guiar tanto quantos blocos de texto vão na peça (e o que cada
+> um carrega) quanto o visual depois — você ainda decide separadamente, lá
+> na hora do visual, se essa mesma imagem vira o fundo real ou só a
+> inspiração. Pode ser um arquivo único ou uma pasta inteira. Se não tiver,
+> sem problema — sigo com o template padrão do formato."
+
+**Se a pessoa não tiver ou não quiser:** seguir sem referência — pular os
+passos 1-3 abaixo, e não repetir essa pergunta de novo no Passo E (lá só se
+confirma se essa MESMA referência, se houver, vira o fundo real da peça).
+
+**Se tiver uma referência (arquivo ou pasta):**
+
+1. Checar primeiro se já existe algo em `Instagram/referencias/` — evita
+   pedir o caminho do zero se o usuário já salvou algo ali antes.
+2. **Mapear a estrutura de slots de texto**, olhando só a estrutura (nunca
+   o conteúdo/palavras) da referência com `Read`: quantos blocos de texto
+   distintos existem, e que tipo é cada um (headline, subheadline, 1 caixa
+   de destaque, múltiplas caixas/cards pequenos, tags/etiquetas curtas,
+   lista numerada, etc.). Resuma em 2-3 frases (ex. "essa referência tem:
+   headline, 1 subheadline, 1 caixa de destaque única, sem cards
+   menores"). **Não é mais necessário salvar um `.style.json`** com
+   paleta/fonte/composição descritas em prosa — o `designer` agora usa a
+   imagem de referência direto como input real da API de geração (Modo de
+   Geração Direta, ver `designer.md`), então descrever o estilo em texto
+   à parte virou um passo redundante que só perdia fidelidade.
+3. **Guardar o resumo da estrutura de slots pro resto da entrevista** —
+   repassar ao `copywriter` no Passo Z **sempre**, não só em modo denso —
+   vale pra qualquer formato (número de slides do Carrossel e o que cada
+   um mostra, campos do Post único, quadros do Stories). O caminho da
+   própria imagem de referência (não um `.style.json`) é o que se repassa
+   ao `designer` no Passo E.
+
+**Regra crítica — a referência é só layout, nunca tema:** a estrutura de
+slots do passo 2 diz APENAS quantos blocos de texto existem e que tipo é
+cada um (ex. "3 itens com dado em destaque + apoio") — ela nunca deve
+influenciar, sugerir ou restringir sobre O QUE a peça vai falar. Mesmo que
+a referência seja, por exemplo, um infográfico de estatísticas, isso não
+significa que a peça final precisa ser sobre estatísticas — o tema
+continua vindo **só** da persona (dores/desejos) + do que o usuário disse
+no Passo A3, exatamente como se não houvesse referência nenhuma. No Passo
+Z, ao montar o prompt do `copywriter`, nunca descreva o tema em termos do
+que a referência mostra (ex. nunca escrever "um tema compatível com esse
+formato de números") — descreva o tema normalmente (ou deixe o
+`copywriter` escolher livremente pela persona) e, à parte, repasse a
+estrutura de slots só como molde de formato pro texto se encaixar depois.
+
+Isso substitui o comportamento antigo de só considerar a referência dentro
+do modo denso e só perguntar sobre ela lá no Passo E — depois que a copy já
+tinha sido escrita sem essa informação. Agora a referência é sempre
+levantada antes da copy ser escrita, pra qualquer peça.
 
 ## Árvore de Decisão
 
@@ -183,6 +294,7 @@ calendário no Passo A2):
 | **Objetivo** | Esse conteúdo é pra educar, vender, gerar identificação ou só engajar? | "Vender vaga da próxima turma" |
 | **Tema/gancho** (opcional) | Sobre o que é esse post especificamente? Se não tiver algo em mente, tudo bem — a persona já tem dores e desejos mapeados, posso partir de um deles. | "A objeção de que 'IA é complicado'" |
 | **CTA desejado** | O que a pessoa deve fazer ao final? | "Comentar QUERO" |
+| **Tráfego** (só se Feed/Carrossel/Stories, define o texto do CTA visual na imagem) | Essa peça vai rodar como anúncio (tráfego pago) ou só orgânico (feed normal)? | "Orgânico" |
 
 **Se o usuário não der um tema:** não insistir nem forçar escolha de
 uma lista — seguir sem tema definido. É o `copywriter` (Passo B) quem
@@ -197,8 +309,20 @@ sugerir separar em peças distintas (o que já significa que virou
 campanha — redirecionar pro `/maestro-ia-na-pratica`).
 
 **Se o objetivo for "educar" ou o formato for "legenda avulsa":** pular
-os Passos B-D (frameworks e dashboard não se aplicam — ver regra em
-`copywriter.md`) e ir direto pro Passo Z.
+os Passos B-D (frameworks e o dashboard DE ESCOLHA não se aplicam — ver
+regra em `copywriter.md`) e ir direto pro Passo Z. Isso não significa
+ficar sem dashboard nenhum — no final (depois do Passo Z e do Passo E, se
+houver visual), rodar o **Passo F-Educar** em vez do Passo C/F normais,
+que gera um dashboard de RESULTADO simplificado (sem cards de framework,
+sem seletor de formato) numa única passada.
+
+**Lembrete se houver referência de imagem do Passo 0:** o tema decidido
+aqui (pelo usuário, ou depois pelo `copywriter` na falta de um) nunca deve
+ser puxado ou limitado pelo que a imagem de referência mostra — mesmo que
+a estrutura de slots extraída dela pareça "combinar" mais com um tipo de
+conteúdo específico (ex. uma referência de estatísticas não significa que
+o post precisa ser sobre estatísticas). Trate o tema exatamente como
+trataria sem nenhuma referência: só persona + o que o usuário disse aqui.
 
 ## Passo B: Gerar prévia só do framework recomendado
 
@@ -419,8 +543,13 @@ período ("Qual a meta desse período? Ex: 'vender a turma de outubro',
    aqui, senão diverge do que a pessoa já aprovou no dashboard) +
    formato + framework escolhidos (Passo D) + o texto-base aprovado no
    dashboard como direção/inspiração (o Copywriter não precisa
-   reescrever do zero — pode refinar essa variação já validada) + a
-   referência de calendário, se achou uma no Passo A2. O subagente
+   reescrever do zero — pode refinar essa variação já validada) + **o
+   Tráfego (pago/orgânico) do Passo A3, se aplicável** (define o texto do
+   CTA visual — ver `copywriter.md`) + **a
+   estrutura de slots do Passo 0, se houver referência** (pedir pra
+   escrever exatamente pra essa estrutura, não pro template fixo do
+   formato — vale pra qualquer formato, denso ou não) + a referência
+   de calendário, se achou uma no Passo A2. O subagente
    escreve a peça completa, salva dentro de
    `Instagram/[Formato]/[Código]/legenda.md` (ou `roteiro.md` pra
    Carrossel/Stories/Reels), atualiza a linha do calendário se
@@ -444,46 +573,94 @@ pula direto pro passo 2 (vídeo) — são perguntas diferentes.
 ### 1. Se for Feed, Carrossel ou Stories — escolher o fundo
 
 Sempre as 3 opções, grátis em destaque, paga por último e só se já
-configurada:
+configurada. **Se o usuário já deu uma referência lá no Passo 0**, avisar
+isso antes de perguntar e reaproveitar o caminho sem pedir de novo — a
+pessoa só informa um caminho novo se quiser trocar especificamente pra
+essa função de fundo:
+
+> "Você já me passou uma referência lá no início (`[caminho do Passo 0]`)
+> — quer usar ela mesmo como fundo, como base pra gerar uma nova por IA, ou
+> prefere um card padrão sem imagem?
+> 1. **Usar essa referência como fundo real** — grátis, direto.
+> 2. **Card padrão** (cor sólida, sem imagem) — grátis, é o que já
+>    funciona hoje.
+> [Só mostrar a(s) opção(ões) 3/4 abaixo conforme o que tiver preenchido
+> no `.env` — ver checagem barata igual ao Passo C.2. Se só um provedor
+> tiver chave, mostrar só ele numerado como "3"; se os dois, mostrar os
+> dois]
+> 3. **Gerar uma imagem nova por IA — Gemini** (Nano Banana), usando essa
+>    referência pra guiar o estilo — paga, ~$0,039/imagem.
+> 4. **Gerar uma imagem nova por IA — GPT** (GPT Image 2), mesmo uso —
+>    paga, ~$0,03–0,05/imagem."
+
+**Se não houver referência do Passo 0**, perguntar do zero, como antes:
 
 > "Pra essa peça, como você quer o fundo?
 > 1. **Uma imagem sua** (print, foto, arquivo que já tem) — grátis, me diz
->    o caminho do arquivo.
+>    o caminho do arquivo (se já salvou em `Instagram/referencias/`, só
+>    me diz o nome do arquivo).
 > 2. **Card padrão** (cor sólida, sem imagem) — grátis, é o que já
 >    funciona hoje.
-> [Só mostrar a opção 3 abaixo se `.env` tiver `FAL_API_KEY` preenchido —
-> ver checagem barata igual ao Passo C.2]
-> 3. **Gerar uma imagem nova por IA** (fal.ai/Flux) — paga, ~$0,003–$0,01
->    sem referência, ~$0,04 se você também tiver uma imagem de referência
->    (Feed/Carrossel) pra guiar o estilo."
+> [mesmas opções 3/4 condicionais acima]
+> 3. **Gerar uma imagem nova por IA — Gemini** (Nano Banana) — paga,
+>    ~$0,039/imagem, com ou sem imagem de referência (Feed/Carrossel) pra
+>    guiar o estilo.
+> 4. **Gerar uma imagem nova por IA — GPT** (GPT Image 2) — paga,
+>    ~$0,03–0,05/imagem, com ou sem imagem de referência, mesmo uso."
 
-- Se escolher **1** → pedir o caminho do arquivo. Guardar como escolha de
-  fundo `imagem-propria` + o caminho.
+- Se escolher **1** → usar o caminho do Passo 0 (ou pedir um novo, se não
+  houver referência prévia ou se o usuário quiser trocar). Guardar como
+  escolha de fundo `imagem-propria` + o caminho.
 - Se escolher **2** (ou não responder) → escolha de fundo `padrao`.
-- Se escolher **3** → confirmar que o usuário viu o preço, perguntar se tem
-  uma imagem de referência pra guiar (Feed/Carrossel only — se tiver, o
-  preço sobe pra ~$0,04, avisar antes de confirmar). Guardar como escolha
-  de fundo `gerar-por-ia` + o caminho da referência, se houver.
+- Se escolher **3 ou 4** → confirmar que o usuário viu o preço do
+  provedor escolhido. Reaproveitar o caminho do Passo 0 automaticamente,
+  se houver — só perguntar por uma imagem (ou **uma pasta com várias
+  imagens**, ex. um board do Pinterest, útil pra Carrossel) do zero se
+  ainda não existir nenhuma referência pra essa peça (checando primeiro
+  `Instagram/referencias/`). Guardar como escolha de fundo `gerar-por-ia`
+  + **provedor** (`gemini` ou `gpt`, conforme a opção escolhida) + o
+  caminho da referência (arquivo único ou pasta), se houver.
 
 Acionar `designer` via `Agent`, passando: o texto final gerado pelo
-`copywriter` (Passo Z), o formato, o código da peça (ex. `Feed/F02`), a
-referência de calendário (se achou uma no Passo A2), e a escolha de fundo
-decidida acima (com o caminho do arquivo, própria ou de referência,
-conforme o caso).
+`copywriter` (Passo Z, já incluindo o CTA da imagem conforme o Tráfego —
+ver `copywriter.md`), o formato, o código da peça (ex. `Feed/F02`), a
+referência de calendário (se achou uma no Passo A2), e a escolha de
+fundo decidida acima (com o caminho do arquivo, própria ou de
+referência, conforme o caso).
+
+**Se a escolha de fundo for `gerar-por-ia`** (Feed/Carrossel/Stories): o
+`designer` usa o **Modo de Geração Direta** (ver `designer.md`) — uma
+chamada só de API que já entrega a peça inteira pronta (headline,
+subheadline, itens e CTA escritos pela própria IA dentro da imagem, no
+estilo da referência), sem passar por HTML/CSS nem por extração de
+`.style.json` — esse passo não existe mais nesse modo, a referência
+entra direto como input real da API a cada chamada. O texto que aparece
+na imagem é sempre o texto final que o `copywriter` escreveu nesta
+entrevista (tema novo), nunca o texto original da referência — o
+`designer` é instruído a especificar o conteúdo final de cada bloco,
+não só o que muda, exatamente pra evitar que sobre texto antigo da
+referência dentro da peça nova. **Duas regras fixas que não dependem da
+referência:** o canvas de Feed/Carrossel é sempre `1088x1456` (nunca
+outra proporção), e o CTA visual é sempre incluído e sempre
+centralizado — mesmo que a imagem de referência não tenha esse
+elemento — com o texto "Saiba Mais na Legenda Abaixo" (tráfego
+orgânico) ou "Toque em Saiba Mais" (tráfego pago); em Carrossel, esse
+CTA só aparece no último slide.
 
 ### 2. Se for Reels — escolher o motor de vídeo
 
 > "Pro vídeo desse Reels:
 > 1. **ffmpeg** (grátis) — monta o vídeo a partir do roteiro, aceita
 >    qualquer duração.
-> [Só mostrar a opção 2 se `.env` tiver `FAL_API_KEY` preenchido]
-> 2. **Kling, por IA** (fal.ai) — paga, ~$0,07/s, só em blocos de 5 ou 10
->    segundos (se o roteiro pedir 15/30/60s, o ffmpeg é o caminho certo)."
+> [Só mostrar a opção 2 se `.env` tiver `GEMINI_API_KEY` preenchido]
+> 2. **Veo 3.1, por IA** (Gemini) — paga, tier Fast ~$0,10–0,12/s, só em
+>    blocos de 4, 6 ou 8 segundos (se o roteiro pedir 15/30/60s, o ffmpeg é
+>    o caminho certo, ou combine vários clipes de Veo)."
 
 - Se escolher **1** (ou não responder) → motor de vídeo `ffmpeg`.
 - Se escolher **2** → confirmar que o usuário viu o preço **daquele vídeo
-  específico** (ex. "um Reels de 10s vai custar ~$0,70 — confirma?") antes
-  de seguir. Motor de vídeo `fal-kling`.
+  específico** (ex. "um clipe de 8s vai custar ~$0,80–$0,96 — confirma?")
+  antes de seguir. Motor de vídeo `gemini-veo`.
 
 Acionar `designer` via `Agent`, passando: o roteiro completo do
 `copywriter`, o código da peça, a referência de calendário se houver, e o
@@ -492,7 +669,34 @@ motor de vídeo decidido acima.
 ### Depois de acionar o Designer (qualquer um dos dois casos)
 
 O Designer salva o resultado (imagem ou vídeo) na mesma pasta da peça e
-devolve o relatório — seguir pro Passo F com esse resultado.
+devolve o relatório.
+
+**Se for Feed, Carrossel ou Stories (peça com PNG exportado)** — antes de
+seguir pro Passo F, acionar o `qa-visual` pra uma segunda revisão
+independente:
+
+1. Acionar `qa-visual` via `Agent`, passando: o caminho do PNG exportado
+   (ex. `Instagram/Feed/F02/slides/slide-1.png` — se for Carrossel/
+   Stories com vários quadros, um por vez ou todos juntos, à sua
+   escolha), o caminho da imagem de referência usada (se houve, do Passo
+   0) e do `.style.json`, o código da peça, e o número da rodada (1ª
+   nesta primeira chamada).
+2. **Se o veredito for "APROVADO"** (ou "APROVADO COM RESSALVAS") → seguir
+   pro Passo F normalmente, incluindo o veredito no relatório final pro
+   usuário.
+3. **Se vier "AJUSTES NECESSÁRIOS"** → acionar o `designer` de novo,
+   passando a lista de ajustes exatamente como o `qa-visual` devolveu
+   (cada item já vem com o valor medido + sugestão concreta — repassar
+   sem reescrever). Depois da correção, acionar `qa-visual` de novo
+   (rodada 2). Esse é o limite — o próprio `qa-visual` já para sozinho na
+   2ª rodada (ver "Limite de rodadas" em `qa-visual.md`), então não
+   iterar uma 3ª vez.
+4. Não pular esse passo silenciosamente achando que "a peça já ficou boa"
+   — é exatamente esse viés de autoaprovação que o `qa-visual` existe pra
+   corrigir.
+
+**Se for Reels (vídeo ou frames)** — não há `qa-visual` pra vídeo ainda,
+seguir direto pro Passo F com o resultado do Designer.
 
 ## Passo F: Fechar a evolução do dashboard — Copy → Design → Calendário
 
@@ -513,10 +717,34 @@ contexto de calendário — nessa ordem.
      href="Reels/R01/roteiro.md">Ver o roteiro do Reels</a>` (se a
      montagem do vídeo falhou/foi pulada — ver relatório do Designer)
    Se o visual já foi exportado pra PNG (Designer, Passo 3), **embutir o
-   preview inline**, não só linkar: adicionar `<img class="piece-preview"
-   src="[Formato]/[Código]/slides/slide-1.png">` dentro de
-   `{{RESULT_LINKS}}` antes dos links (uma imagem só, mesmo pra carrossel —
-   é só a capa/preview, o link completo já leva pra pasta inteira).
+   preview inline**, não só linkar — o jeito muda conforme o formato:
+   - **Feed** (1 imagem só): `<img class="piece-preview"
+     src="Feed/[Código]/slides/slide-1.png">` dentro de `{{RESULT_LINKS}}`
+     antes dos links.
+   - **Carrossel ou Stories** (múltiplos quadros): embutir a **galeria
+     navegável** (`.piece-carousel`, já com CSS/JS prontos no template),
+     listando `<img class="piece-carousel-img">` pra **cada** slide
+     exportado (não só o primeiro) — o aluno passa por todos ali mesmo no
+     dashboard, sem abrir a pasta:
+     ```html
+     <div class="piece-carousel">
+       <div class="piece-carousel-viewport">
+         <img class="piece-carousel-img" src="[Formato]/[Código]/slides/slide-1.png">
+         <img class="piece-carousel-img" src="[Formato]/[Código]/slides/slide-2.png">
+         <!-- repetir pra cada slide/quadro exportado -->
+         <span class="piece-carousel-count"></span>
+         <button class="piece-carousel-arrow prev">‹</button>
+         <button class="piece-carousel-arrow next">›</button>
+       </div>
+       <div class="piece-carousel-dots">
+         <button class="piece-carousel-dot"></button>
+         <!-- 1 dot por slide, mesma quantidade das imagens acima -->
+       </div>
+     </div>
+     ```
+     O JS do template já ativa qualquer `.piece-carousel` que existir na
+     página sozinho — não precisa escrever script novo aqui, só gerar o
+     HTML com o número certo de `<img>`/dots pro total de slides desta peça.
 3. **Se a peça veio de uma referência de calendário** (Passo A2), preencher
    a seção `{{CALENDAR_CONTEXT}}` (dentro de `<div class="calendar-context">`,
    remover a classe `hidden`) com o dia/objetivo daquela linha do
