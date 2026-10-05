@@ -2143,10 +2143,11 @@ body:has(.sticky-cta) {
 }
 
 .price-installment small {
-  display: block;
   font-size: 1.125rem;
   font-weight: 600;
   letter-spacing: normal;
+  color: var(--color-foreground);
+  margin-right: 6px;
 }
 
 /* CTA de compra -- texto maior que o padrão do .btn e um pulso contínuo
