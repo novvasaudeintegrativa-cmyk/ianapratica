@@ -1093,6 +1093,53 @@ body:has(.sticky-cta) {
   color: var(--color-ink-soft);
 }
 
+/* Listas dentro dos blocos da Programação — bullets/numeração em laranja (clay)
+   pra quebrar parágrafos densos em passos escaneáveis */
+.schedule-item .schedule-list {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  counter-reset: sched;
+  display: grid;
+  gap: 8px;
+}
+
+.schedule-item .schedule-list li {
+  position: relative;
+  padding-left: 28px;
+  color: var(--color-ink-soft);
+  line-height: 1.55;
+  counter-increment: sched;
+}
+
+.schedule-item ul.schedule-list li::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clay-vivid);
+}
+
+.schedule-item ol.schedule-list li::before {
+  content: counter(sched);
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--clay-vivid);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+}
+
 .schedule-date {
   font-family: var(--font-sans);
   font-size: 0.8125rem;
