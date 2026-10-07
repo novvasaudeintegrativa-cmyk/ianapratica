@@ -8,6 +8,15 @@
   barra de progresso fixa no topo.
 */
 
+.site-header .brand {
+  font-size: 2.125rem;
+}
+
+.site-footer .footer-bottom {
+  justify-content: center;
+  text-align: center;
+}
+
 /* Rodapé grudado no fim da tela -- a página do quiz tem pouco
    conteúdo (card centralizado), então sem isso o rodapé aparecia
    logo depois do card, no meio da tela em vez de no fim da dobra. */
