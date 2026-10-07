@@ -1938,6 +1938,23 @@ body:has(.sticky-cta) {
   color: rgba(0, 0, 0, .4);
 }
 
+/* Avatar ilustrado -- usado enquanto não há foto real autorizada da
+   pessoa. Diferente de uma foto de banco de imagens, um desenho
+   estilizado não afirma ser a aparência real de ninguém, então não cai
+   no mesmo problema de usar o rosto de um estranho com o nome trocado. */
+.wa-av-illustrated {
+  border-style: solid;
+  border-color: transparent;
+  color: #fff;
+}
+
+.wa-av-1 { background: #4F6EF7; }
+.wa-av-2 { background: #EC4899; }
+.wa-av-3 { background: #14B8A6; }
+.wa-av-4 { background: #8B5CF6; }
+.wa-av-5 { background: #F59E0B; }
+.wa-av-6 { background: #22C55E; }
+
 .wa-ct {
   flex: 1;
   min-width: 0;
