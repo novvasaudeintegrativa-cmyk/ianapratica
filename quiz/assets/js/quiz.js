@@ -288,13 +288,64 @@
     return { titulo: titulo, texto: texto, acoes: acoes, cta: prazoCta };
   }
 
+  function diagnosisEmailContent(diag) {
+    var subject = "Seu diagnóstico gratuito — IA na Prática";
+    var bodyLines = [diag.titulo, "", diag.texto, "", "Próximos passos:"]
+      .concat(diag.acoes.map(function (x) { return "- " + x; }))
+      .concat(["", diag.cta]);
+    return { subject: subject, text: bodyLines.join("\n") };
+  }
+
+  /* Envio real via Vercel Function (/api/send-diagnosis), que guarda a
+     API key do Resend no servidor. Nunca mostra "enviado" sem resposta
+     de sucesso de verdade da API -- em caso de falha, mostra erro e
+     deixa um botão de tentar de novo, sem fingir que funcionou. */
+  function sendDiagnosisEmail(a, diag) {
+    var statusEl = document.querySelector("[data-quiz-email-status]");
+    var retryBtn = document.querySelector("[data-quiz-email-btn]");
+    var content = diagnosisEmailContent(diag);
+
+    if (statusEl) {
+      statusEl.textContent = "Enviando seu resumo por e-mail...";
+      statusEl.setAttribute("data-state", "sending");
+    }
+    if (retryBtn) retryBtn.hidden = true;
+
+    fetch("/api/send-diagnosis", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ to: a.email, subject: content.subject, text: content.text })
+    })
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok && data.ok, data: data };
+        });
+      })
+      .then(function (result) {
+        if (result.ok) {
+          if (statusEl) {
+            statusEl.textContent = "Enviado! Confira a caixa de entrada (e o spam, por garantia).";
+            statusEl.setAttribute("data-state", "sent");
+          }
+        } else {
+          throw new Error((result.data && result.data.error) || "falha_envio");
+        }
+      })
+      .catch(function () {
+        if (statusEl) {
+          statusEl.textContent = "Não consegui enviar o e-mail agora. O resumo acima continua valendo.";
+          statusEl.setAttribute("data-state", "error");
+        }
+        if (retryBtn) retryBtn.hidden = false;
+      });
+  }
+
   function renderDiagnosis(a) {
     var diag = buildDiagnosis(a);
     var titleEl = document.querySelector("[data-quiz-diagnosis-title]");
     var textEl = document.querySelector("[data-quiz-diagnosis-text]");
     var listEl = document.querySelector("[data-quiz-diagnosis-list]");
     var ctaEl = document.querySelector("[data-quiz-diagnosis-cta]");
-    var emailBtn = document.querySelector("[data-quiz-email-btn]");
 
     if (titleEl) titleEl.textContent = diag.titulo;
     if (textEl) textEl.textContent = diag.texto;
@@ -308,19 +359,13 @@
     }
     if (ctaEl) ctaEl.textContent = diag.cta;
 
-    /* "Enviar pro e-mail" via mailto: -- funciona de verdade hoje (abre
-       o cliente de e-mail da própria pessoa, já escrito), sem precisar
-       de nenhum serviço de envio automático configurado. */
-    if (emailBtn) {
-      var subject = "Seu diagnóstico gratuito — IA na Prática";
-      var bodyLines = [diag.titulo, "", diag.texto, "", "Próximos passos:"]
-        .concat(diag.acoes.map(function (x) { return "- " + x; }))
-        .concat(["", diag.cta]);
-      var mailto =
-        "mailto:" + encodeURIComponent(a.email || "") +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(bodyLines.join("\n"));
-      emailBtn.href = mailto;
+    sendDiagnosisEmail(a, diag);
+
+    var retryBtn = document.querySelector("[data-quiz-email-btn]");
+    if (retryBtn) {
+      retryBtn.onclick = function () {
+        sendDiagnosisEmail(a, diag);
+      };
     }
   }
 

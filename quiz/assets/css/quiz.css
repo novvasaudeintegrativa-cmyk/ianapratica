@@ -326,6 +326,33 @@ body {
   margin-top: 4px;
 }
 
+.quiz-diagnosis-email-btn[hidden] {
+  display: none;
+}
+
+.quiz-email-status {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+}
+
+.quiz-email-status:empty {
+  display: none;
+}
+
+.quiz-email-status[data-state="sending"] {
+  color: var(--color-muted-foreground);
+}
+
+.quiz-email-status[data-state="sent"] {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.quiz-email-status[data-state="error"] {
+  color: var(--color-destructive);
+}
+
 @media (max-width: 560px) {
   .quiz-shell {
     padding-block: var(--space-8) var(--space-16);
