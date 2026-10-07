@@ -8,6 +8,19 @@
   barra de progresso fixa no topo.
 */
 
+/* Rodapé grudado no fim da tela -- a página do quiz tem pouco
+   conteúdo (card centralizado), então sem isso o rodapé aparecia
+   logo depois do card, no meio da tela em vez de no fim da dobra. */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#conteudo {
+  flex: 1;
+}
+
 /* ---------- Trilho de progresso fixo ---------- */
 .quiz-progress-rail {
   position: sticky;
