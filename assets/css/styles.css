@@ -1955,6 +1955,14 @@ body:has(.sticky-cta) {
 .wa-av-5 { background: #F59E0B; }
 .wa-av-6 { background: #22C55E; }
 
+.wa-av-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  border-radius: 50%;
+}
+
 .wa-ct {
   flex: 1;
   min-width: 0;
