@@ -323,7 +323,7 @@
      ("Convidar via link" dentro do grupo no WhatsApp). Enquanto for
      "#", o quiz NÃO redireciona sozinho (ia mandar a pessoa pra lugar
      nenhum) -- mostra a tela final com o aviso de link pendente. */
-  var WHATSAPP_GROUP_LINK = "#";
+  var WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/CwqFEIlHEjc6Zfy9IPhv9K";
 
   function goToWhatsAppGroup() {
     var isConfigured = WHATSAPP_GROUP_LINK && WHATSAPP_GROUP_LINK !== "#";
