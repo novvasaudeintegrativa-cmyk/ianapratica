@@ -1811,13 +1811,22 @@ body:has(.sticky-cta) {
    .pending dentro dos balões (ver index.html) são o mesmo mecanismo de
    placeholder usado no resto do site, só que dentro do formato de chat
    em vez de card comum. */
-/* auto-fit em vez de contagem fixa de colunas -- o número de
-   depoimentos cresce aos poucos, isso evita ter que ajustar o
-   breakpoint toda vez que um card novo entra. */
 .wa-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--space-6);
+}
+
+@media (min-width: 560px) {
+  .wa-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .wa-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .wa-phone {
