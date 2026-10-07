@@ -116,6 +116,12 @@ body {
   font-size: 1.75rem;
 }
 
+/* Passo 1 junta a headline de boas-vindas com a primeira pergunta --
+   dá um respiro extra entre as duas, senão parecem uma frase só. */
+.quiz-question-lg + .quiz-question {
+  margin-top: var(--space-4);
+}
+
 .quiz-intro-lead {
   margin: 0;
   font-family: var(--font-sans);
