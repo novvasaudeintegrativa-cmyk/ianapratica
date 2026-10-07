@@ -91,7 +91,9 @@
           <div class="quiz-card quiz-step" data-quiz-step="4" hidden>
             <h2 class="quiz-question">Qual o seu WhatsApp?</h2>
             <input type="tel" class="input quiz-input" data-quiz-field="whatsapp" name="whatsapp" required
-              autocomplete="tel" inputmode="tel" placeholder="(11) 91234-5678" />
+              autocomplete="tel" inputmode="tel" placeholder="(11) 91234-5678" maxlength="15" />
+            <p class="quiz-field-error" data-quiz-error="whatsapp" hidden>Digite um WhatsApp válido, com DDD (ex.:
+              (11) 91234-5678).</p>
             <div class="quiz-nav">
               <button type="button" class="btn btn-ghost" data-quiz-back>Voltar</button>
               <button type="button" class="btn btn-primary" data-quiz-next>Avançar</button>

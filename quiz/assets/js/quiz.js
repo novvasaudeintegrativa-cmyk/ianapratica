@@ -66,8 +66,30 @@
   }
 
   /* ---------- Campos de texto (1-5) ---------- */
+  /* Telefone BR: (DD) DDDD-DDDD ou (DD) DDDDD-DDDD, formatado enquanto
+     digita. Só dígitos contam pra validação -- 10 (fixo) ou 11 (celular,
+     com o 9) dígitos é o único formato aceito. */
+  function maskPhoneBR(value) {
+    var digits = value.replace(/\D/g, "").slice(0, 11);
+    if (digits.length <= 2) return digits.length ? "(" + digits : "";
+    var splitAt = digits.length > 10 ? 7 : 6;
+    var head = "(" + digits.slice(0, 2) + ") " + digits.slice(2, splitAt);
+    var tail = digits.slice(splitAt);
+    return tail ? head + "-" + tail : head;
+  }
+
+  var whatsappInput = form.querySelector('[data-quiz-field="whatsapp"]');
+  var whatsappError = form.querySelector('[data-quiz-error="whatsapp"]');
+
   form.querySelectorAll("[data-quiz-field]").forEach(function (input) {
     input.addEventListener("input", function () {
+      if (input === whatsappInput) {
+        var caretWasAtEnd = input.selectionStart === input.value.length;
+        input.value = maskPhoneBR(input.value);
+        if (caretWasAtEnd) input.setSelectionRange(input.value.length, input.value.length);
+        input.classList.remove("is-invalid");
+        if (whatsappError) whatsappError.hidden = true;
+      }
       answers[input.getAttribute("data-quiz-field")] = input.value.trim();
     });
     input.addEventListener("keydown", function (e) {
@@ -131,6 +153,15 @@
       if (textField.type === "email" && !textField.checkValidity()) {
         textField.reportValidity();
         return false;
+      }
+      if (textField === whatsappInput) {
+        var digits = textField.value.replace(/\D/g, "");
+        if (digits.length < 10 || digits.length > 11) {
+          textField.classList.add("is-invalid");
+          if (whatsappError) whatsappError.hidden = false;
+          textField.focus();
+          return false;
+        }
       }
     }
 
