@@ -257,100 +257,17 @@ body {
   color: var(--color-success);
 }
 
-/* ---------- Diagnóstico (tela final) ---------- */
-.quiz-diagnosis {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: var(--space-6);
-  background: var(--color-muted);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-}
-
-.quiz-diagnosis-title {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 1.0625rem;
-  font-weight: 700;
-  color: var(--color-foreground);
-}
-
-.quiz-diagnosis-text {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  line-height: 1.55;
-  color: var(--color-ink-soft);
-}
-
-.quiz-diagnosis-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.quiz-diagnosis-list li {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  color: var(--color-foreground);
-}
-
-.quiz-diagnosis-list li::before {
-  content: "✓";
-  color: var(--color-success);
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.quiz-diagnosis-cta {
-  margin: 0;
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--clay-vivid);
-}
-
-.quiz-diagnosis-email-btn {
-  align-self: flex-start;
+/* ---------- CTA do grupo de WhatsApp (tela final) ---------- */
+.quiz-group-cta-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 4px;
+  background: #25D366;
+  border-color: transparent;
 }
 
-.quiz-diagnosis-email-btn[hidden] {
-  display: none;
-}
-
-.quiz-email-status {
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  color: var(--color-muted-foreground);
-}
-
-.quiz-email-status:empty {
-  display: none;
-}
-
-.quiz-email-status[data-state="sending"] {
-  color: var(--color-muted-foreground);
-}
-
-.quiz-email-status[data-state="sent"] {
-  color: var(--color-success);
-  font-weight: 600;
-}
-
-.quiz-email-status[data-state="error"] {
-  color: var(--color-destructive);
+.quiz-group-cta-btn:hover {
+  filter: brightness(1.05);
 }
 
 @media (max-width: 560px) {

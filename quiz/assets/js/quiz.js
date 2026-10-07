@@ -297,75 +297,46 @@
   }
 
   /* Envio real via Vercel Function (/api/send-diagnosis), que guarda a
-     API key do Resend no servidor. Nunca mostra "enviado" sem resposta
-     de sucesso de verdade da API -- em caso de falha, mostra erro e
-     deixa um botão de tentar de novo, sem fingir que funcionou. */
+     API key do Resend no servidor. Dispara em segundo plano -- a
+     pessoa já está sendo redirecionada pro grupo, não fica esperando
+     essa resposta. Sem UI de status (não tem mais tela pra mostrar),
+     mas loga no console em caso de falha, pra dar pra debugar depois
+     olhando os logs da Vercel Function em vez do navegador. */
   function sendDiagnosisEmail(a, diag) {
-    var statusEl = document.querySelector("[data-quiz-email-status]");
-    var retryBtn = document.querySelector("[data-quiz-email-btn]");
     var content = diagnosisEmailContent(diag);
-
-    if (statusEl) {
-      statusEl.textContent = "Enviando seu resumo por e-mail...";
-      statusEl.setAttribute("data-state", "sending");
-    }
-    if (retryBtn) retryBtn.hidden = true;
-
     fetch("/api/send-diagnosis", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ to: a.email, subject: content.subject, text: content.text })
     })
-      .then(function (res) {
-        return res.json().then(function (data) {
-          return { ok: res.ok && data.ok, data: data };
-        });
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        if (!data.ok) console.warn("[quiz] falha ao enviar diagnóstico por e-mail:", data.error);
       })
-      .then(function (result) {
-        if (result.ok) {
-          if (statusEl) {
-            statusEl.textContent = "Enviado! Confira a caixa de entrada (e o spam, por garantia).";
-            statusEl.setAttribute("data-state", "sent");
-          }
-        } else {
-          throw new Error((result.data && result.data.error) || "falha_envio");
-        }
-      })
-      .catch(function () {
-        if (statusEl) {
-          statusEl.textContent = "Não consegui enviar o e-mail agora. O resumo acima continua valendo.";
-          statusEl.setAttribute("data-state", "error");
-        }
-        if (retryBtn) retryBtn.hidden = false;
+      .catch(function (err) {
+        console.warn("[quiz] erro ao chamar /api/send-diagnosis:", err);
       });
   }
 
-  function renderDiagnosis(a) {
-    var diag = buildDiagnosis(a);
-    var titleEl = document.querySelector("[data-quiz-diagnosis-title]");
-    var textEl = document.querySelector("[data-quiz-diagnosis-text]");
-    var listEl = document.querySelector("[data-quiz-diagnosis-list]");
-    var ctaEl = document.querySelector("[data-quiz-diagnosis-cta]");
+  /* ---------- Redirecionamento pro grupo do WhatsApp ----------
+     Troque o valor abaixo pelo link real assim que tiver
+     ("Convidar via link" dentro do grupo no WhatsApp). Enquanto for
+     "#", o quiz NÃO redireciona sozinho (ia mandar a pessoa pra lugar
+     nenhum) -- mostra a tela final com o aviso de link pendente. */
+  var WHATSAPP_GROUP_LINK = "#";
 
-    if (titleEl) titleEl.textContent = diag.titulo;
-    if (textEl) textEl.textContent = diag.texto;
-    if (listEl) {
-      listEl.innerHTML = "";
-      diag.acoes.forEach(function (item) {
-        var li = document.createElement("li");
-        li.textContent = item;
-        listEl.appendChild(li);
-      });
-    }
-    if (ctaEl) ctaEl.textContent = diag.cta;
+  function goToWhatsAppGroup() {
+    var isConfigured = WHATSAPP_GROUP_LINK && WHATSAPP_GROUP_LINK !== "#";
+    var link = document.querySelector("[data-quiz-group-link]");
+    var pendingNote = document.querySelector("[data-quiz-group-pending]");
 
-    sendDiagnosisEmail(a, diag);
+    if (link) link.href = WHATSAPP_GROUP_LINK;
+    if (pendingNote) pendingNote.hidden = isConfigured;
 
-    var retryBtn = document.querySelector("[data-quiz-email-btn]");
-    if (retryBtn) {
-      retryBtn.onclick = function () {
-        sendDiagnosisEmail(a, diag);
-      };
+    if (isConfigured) {
+      window.location.href = WHATSAPP_GROUP_LINK;
+    } else {
+      showStep("done");
     }
   }
 
@@ -395,8 +366,9 @@
     e.preventDefault();
     if (!currentStepValid()) return;
     submitQuiz(answers).then(function () {
-      renderDiagnosis(answers);
-      showStep("done");
+      var diag = buildDiagnosis(answers);
+      sendDiagnosisEmail(answers, diag); // segundo plano, não bloqueia o redirect
+      goToWhatsAppGroup();
     });
   });
 
