@@ -5,7 +5,7 @@
   if (!form) return;
 
   var steps = Array.prototype.slice.call(form.querySelectorAll("[data-quiz-step]"));
-  // Passos numerados (exclui "intro" e "done" da contagem de progresso)
+  // Passos numerados (exclui "done" da contagem de progresso)
   var numberedSteps = steps.filter(function (s) {
     return /^\d+$/.test(s.getAttribute("data-quiz-step"));
   });
@@ -17,7 +17,7 @@
   var progressPercent = document.querySelector("[data-quiz-progress-percent]");
 
   var answers = {};
-  var currentKey = "intro"; // "intro" | "1".."10" | "done"
+  var currentKey = "1"; // "1".."10" | "done"
 
   function stepByKey(key) {
     return steps.find(function (s) {
@@ -56,7 +56,6 @@
   }
 
   function nextKey(key) {
-    if (key === "intro") return "1";
     var n = parseInt(key, 10);
     return n >= TOTAL ? "done" : String(n + 1);
   }
@@ -166,13 +165,6 @@
     });
   });
 
-  var startBtn = form.querySelector("[data-quiz-start]");
-  if (startBtn) {
-    startBtn.addEventListener("click", function () {
-      showStep("1");
-    });
-  }
-
   /* ---------- Envio final ----------
      TODO(Supabase): trocar esse bloco pela chamada real assim que
      tivermos a Project URL + anon key do projeto Supabase já usado
@@ -203,5 +195,5 @@
     });
   });
 
-  showStep("intro");
+  showStep("1");
 })();

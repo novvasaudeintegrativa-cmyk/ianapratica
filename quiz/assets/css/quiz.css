@@ -198,10 +198,6 @@ body {
   margin-top: var(--space-2);
 }
 
-.quiz-nav-intro {
-  justify-content: flex-start;
-}
-
 .quiz-nav [data-quiz-back] {
   visibility: hidden;
 }

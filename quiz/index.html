@@ -61,27 +61,16 @@
       <div class="container quiz-container">
         <form id="quiz-form" novalidate>
 
-          <!-- INTRO -->
-          <div class="quiz-card quiz-step" data-quiz-step="intro">
+          <!-- 1. Intro + Nome completo -->
+          <div class="quiz-card quiz-step" data-quiz-step="1">
             <span class="quiz-step-eyebrow"><span class="dot"></span> Diagnóstico gratuito</span>
             <h1 class="quiz-question quiz-question-lg">Vamos entender o momento atual do seu negócio</h1>
-            <p class="quiz-intro-lead">
-              10 perguntas rápidas (menos de 2 minutos) pra gente entender seu contexto e te dar um
-              direcionamento real — sem enrolação, sem formulário genérico.
-            </p>
-            <div class="quiz-nav quiz-nav-intro">
-              <button type="button" class="btn btn-primary btn-cta-pulse" data-quiz-start>Começar agora</button>
-            </div>
-          </div>
-
-          <!-- 1. Nome completo -->
-          <div class="quiz-card quiz-step" data-quiz-step="1" hidden>
             <h2 class="quiz-question">Qual é o seu nome completo?</h2>
             <input type="text" class="input quiz-input" data-quiz-field="nome" name="nome" required
               autocomplete="name" placeholder="Seu nome completo" />
             <div class="quiz-nav">
               <button type="button" class="btn btn-ghost" data-quiz-back>Voltar</button>
-              <button type="button" class="btn btn-primary" data-quiz-next>Avançar</button>
+              <button type="button" class="btn btn-primary btn-cta-pulse" data-quiz-next>Avançar</button>
             </div>
           </div>
 
