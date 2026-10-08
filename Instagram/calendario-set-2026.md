@@ -51,7 +51,7 @@ removido da legenda (sem dado real disponível).
 | Qui, 01/10/2026 | Feed | Refs/4.jpeg — "Por trás do Claude tem a Anthropic" | Feed/F04 | Publicado (GitHub Actions, 01/10/2026 10:48, Post ID 18081371309374453) |
 | Sáb, 03/10/2026 | Reels | TikTok/V04 — "Dá pra conectar o Claude no Instagram?" | Reels/R04 | Publicado (GitHub Actions, 03/10/2026 16:08, Post ID 18221494315339902) |
 | Ter, 06/10/2026 | Feed | Refs/6.jpeg — "Você confiaria a rotina do seu Instagram a uma IA?" | Feed/F05 | Publicado (GitHub Actions, 06/10/2026 18:16, Post ID 17967596631187353) |
-| Qui, 08/10/2026 | Reels | TikTok/V05 — "O Claude consegue criar post pro Instagram sozinho?" | Reels/R05 | Agendado (GitHub Actions, 08/10 09h) |
+| Qui, 08/10/2026 | Reels | TikTok/V05 — "O Claude consegue criar post pro Instagram sozinho?" | Reels/R05 | Publicado (GitHub Actions, 08/10/2026 18:47, Post ID 18079993445380842) |
 | Sáb, 10/10/2026 | Feed | Refs/7.jpeg — "Quantas vezes você já tentou IA e não virou rotina?" | Feed/F06 | Agendado (GitHub Actions, 10/10 09h) |
 | Ter, 13/10/2026 | Reels | TikTok/V06 — "Dá pra fazer Reels com IA?" | Reels/R06 | Agendado (GitHub Actions, 13/10 09h) |
 | Qui, 15/10/2026 | Feed | Refs/8.jpeg — "A próxima turma da Imersão IA na Prática está chegando" | Feed/F07 | Agendado (GitHub Actions, 15/10 09h) |
