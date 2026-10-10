@@ -195,10 +195,13 @@
             de ponta a ponta — do texto à publicação, sem você tocar no celular.
           </p>
         </div>
-        <picture>
-          <source media="(min-width: 768px)" srcset="Imgs/orquestracao-instagram.png" />
-          <img class="orquestracao-img" src="Imgs/CaludeeInstagram_Bg.png" alt="Pessoa de costas observando telas holográficas onde o Claude envia uma postagem automaticamente para o Instagram" loading="lazy" />
-        </picture>
+        <div class="orquestracao-media">
+          <picture>
+            <source media="(min-width: 768px)" srcset="Imgs/orquestracao-instagram.png" />
+            <img class="orquestracao-img" src="Imgs/CaludeeInstagram_Bg.png" alt="Pessoa de costas observando telas holográficas onde o Claude envia uma postagem automaticamente para o Instagram" loading="lazy" />
+          </picture>
+          <canvas class="matrix-rain-canvas" aria-hidden="true" data-matrix-rain></canvas>
+        </div>
       </div>
     </section>
 
@@ -1488,7 +1491,6 @@
         <div class="pricing-grid pricing-grid-solo">
           <div class="card price-card price-card-cyber is-featured">
             <div class="price-card-cyber-bg" aria-hidden="true"></div>
-            <canvas class="price-card-matrix" aria-hidden="true" data-matrix-rain></canvas>
             <div class="price-card-body">
               <div class="price-card-head">
                 <span class="text-subtitle">Ingresso — imersão ao vivo</span>

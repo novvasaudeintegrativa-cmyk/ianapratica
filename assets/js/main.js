@@ -161,12 +161,13 @@
     setDay("1");
   }
 
-  /* "Chuva de código" no card de ingresso -- efeito estilo Matrix, só nas
-     cores da marca (laranja sobre preto), bem suave e discreto. Limpa o
-     canvas inteiro a cada frame (em vez de acumular um rastro semi-opaco)
-     pra arte CyberDraw.jpeg atrás nunca escurecer até sumir. Só anima
-     enquanto o card está visível na tela, e nem começa se a pessoa pediu
-     menos movimento no sistema. */
+  /* "Chuva de código" -- efeito estilo Matrix, só nas cores da marca
+     (laranja sobre preto), bem suave e discreto. Só 0 e 1 (binário,
+     ocidental -- sem katakana) pra combinar com o resto do site, que é
+     todo em português do Brasil. Limpa o canvas inteiro a cada frame (em
+     vez de acumular um rastro semi-opaco) pra imagem atrás nunca escurecer
+     até sumir. Só anima enquanto o elemento está visível na tela, e nem
+     começa se a pessoa pediu menos movimento no sistema. */
   var matrixCanvas = document.querySelector("[data-matrix-rain]");
   if (
     matrixCanvas &&
@@ -174,7 +175,7 @@
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   ) {
     var mCtx = matrixCanvas.getContext("2d");
-    var glyphs = "01アイウエオカキクケコサシスセソタチツテト<>{}+λ∞";
+    var glyphs = "01";
     var fontSize = 16;
     var trailLength = 9;
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -238,6 +239,18 @@
 
     resizeMatrix();
     window.addEventListener("resize", resizeMatrix);
+
+    /* Se o canvas estiver sobre uma <img> (ex: a cena da Orquestração), o
+       pai ainda não tem altura real na primeira medição -- a imagem carrega
+       de forma assíncrona. Remede assim que ela terminar de carregar. */
+    var matrixSiblingImg = matrixCanvas.parentElement.querySelector("img");
+    if (matrixSiblingImg) {
+      if (matrixSiblingImg.complete) {
+        resizeMatrix();
+      } else {
+        matrixSiblingImg.addEventListener("load", resizeMatrix, { once: true });
+      }
+    }
 
     if ("IntersectionObserver" in window) {
       var matrixObserver = new IntersectionObserver(

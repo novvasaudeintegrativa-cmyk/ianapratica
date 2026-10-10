@@ -1299,20 +1299,28 @@ body:has(.sticky-cta) {
   display: block;
 }
 
+.orquestracao-media {
+  position: relative;
+  max-width: 900px;
+  margin-inline: auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
 .orquestracao-img {
   display: block;
   width: 100%;
-  max-width: 900px;
   margin-top: 0;
-  margin-inline: auto;
-  border-radius: var(--radius-lg);
   box-shadow: var(--elevation-floating);
 }
 
 @media (max-width: 767px) {
-  .orquestracao-img {
+  .orquestracao-media {
     margin-top: -8px;
     border-radius: 0;
+  }
+
+  .orquestracao-img {
     box-shadow: none;
   }
 }
@@ -2352,12 +2360,16 @@ body:has(.sticky-cta) {
     linear-gradient(180deg, rgba(10, 8, 6, 0.82) 0%, rgba(10, 8, 6, 0.93) 48%, rgba(10, 8, 6, 0.88) 100%);
 }
 
-.price-card-matrix {
+/* Canvas da "chuva de código" -- genérico, reaproveitado em qualquer bloco
+   que precise do efeito (ver assets/js/main.js, data-matrix-rain). O pai
+   precisa ser position:relative (ou position:absolute já cuida disso). */
+.matrix-rain-canvas {
   position: absolute;
   inset: 0;
   z-index: 1;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 
 .price-card-body {
@@ -2438,10 +2450,11 @@ body:has(.sticky-cta) {
 .price-installment {
   margin-top: 6px;
   font-family: var(--font-sans);
-  font-size: 3.25rem;
-  font-weight: 700;
+  font-size: clamp(3.5rem, 9vw, 5.5rem);
+  font-weight: 800;
   color: var(--clay-vivid);
   letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .price-installment small {
