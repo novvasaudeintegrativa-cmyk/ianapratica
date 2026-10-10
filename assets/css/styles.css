@@ -1739,7 +1739,7 @@ body:has(.sticky-cta) {
 
 .instrutores-photo {
   display: block;
-  height: clamp(380px, 54vw, 640px);
+  height: clamp(285px, 40.5vw, 480px);
   width: auto;
   max-width: 100%;
   object-fit: contain;
