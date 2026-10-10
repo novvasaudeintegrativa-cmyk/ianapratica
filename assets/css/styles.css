@@ -1872,6 +1872,84 @@ body:has(.sticky-cta) {
    .pending dentro dos balões (ver index.html) são o mesmo mecanismo de
    placeholder usado no resto do site, só que dentro do formato de chat
    em vez de card comum. */
+/* Depoimentos em vídeo — 2 colunas (vídeos verticais 9:16), acima dos prints de WhatsApp */
+.depo-videos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+  max-width: 720px;
+  margin: 0 auto var(--space-12, 48px);
+}
+
+@media (max-width: 520px) {
+  .depo-videos {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+  }
+}
+
+.depo-video {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.depo-video-frame {
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #141413;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .15), 0 8px 16px rgba(0, 0, 0, .2), 0 24px 60px rgba(0, 0, 0, .25), inset 0 0 0 1.5px rgba(255, 255, 255, .08);
+}
+
+.depo-video-frame video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #141413;
+}
+
+.depo-video figcaption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+  font-family: var(--font-sans);
+}
+
+.depo-video figcaption strong {
+  font-size: 1rem;
+}
+
+.depo-video figcaption span {
+  font-size: 0.8125rem;
+  color: var(--color-muted-foreground);
+}
+
+/* espaço reservado (2º vídeo ainda não chegou) */
+.depo-video-vazio .depo-video-frame {
+  background: transparent;
+  border: 2px dashed rgba(20, 20, 19, 0.25);
+  box-shadow: none;
+}
+
+.depo-video-ph {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  color: var(--color-muted-foreground);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  text-align: center;
+  padding: var(--space-4);
+}
+
 .wa-grid {
   display: grid;
   grid-template-columns: 1fr;
