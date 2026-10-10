@@ -2473,6 +2473,10 @@ body:has(.sticky-cta) {
   margin-right: 6px;
 }
 
+.price-installment .price-currency {
+  vertical-align: top;
+}
+
 /* CTA de compra -- maior que o padrão do .btn, texto em caixa alta, pulso
    contínuo + um brilho que varre o botão a cada 5s, pra chamar mais
    atenção já que é o botão de conversão principal da página.
@@ -2487,7 +2491,8 @@ body:has(.sticky-cta) {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  animation: btn-cta-pulse 2.2s ease-in-out infinite;
+  transform-origin: center;
+  animation: btn-cta-pulse 1.6s ease-in-out infinite;
 }
 
 .btn-cta-pulse::after {
@@ -2504,8 +2509,14 @@ body:has(.sticky-cta) {
 }
 
 @keyframes btn-cta-pulse {
-  0%, 100% { box-shadow: 0 10px 30px -10px rgba(255, 90, 31, 0.5), 0 0 0 0 rgba(255, 90, 31, 0.55); }
-  50% { box-shadow: 0 10px 30px -10px rgba(255, 90, 31, 0.5), 0 0 0 10px rgba(255, 90, 31, 0); }
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 30px -8px rgba(255, 90, 31, 0.6), 0 0 0 0 rgba(255, 179, 92, 0.65);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 16px 42px -6px rgba(255, 90, 31, 0.85), 0 0 0 16px rgba(255, 179, 92, 0);
+  }
 }
 
 @keyframes btn-cta-shine {
