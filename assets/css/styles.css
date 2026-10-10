@@ -1536,7 +1536,7 @@ body:has(.sticky-cta) {
 .bonus-media img {
   display: block;
   width: 100%;
-  max-width: 480px;
+  max-width: 720px;
   filter: drop-shadow(0 30px 50px rgba(20, 20, 19, 0.28));
 }
 
