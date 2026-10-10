@@ -784,18 +784,45 @@ body:has(.sticky-cta) {
 
 /* Instrutores -- mesma nebulosa do .section-muted, com a arte "cyber" dos
    5 ícones (Instagram, VS Code, GitHub, Vercel, Claude) como camada de
-   fundo atrás da foto dos instrutores, gradiente translúcido em vez de
-   opaco pra ela aparecer por baixo dos glows de cor. */
+   fundo atrás da foto dos instrutores. A imagem fica num <div> próprio
+   (.instrutores-bg) em vez de ir direto no background da seção, porque
+   só assim dá pra aplicar um filter (saturação/brilho) só nela, sem
+   afetar o texto/cards por cima -- a tentativa anterior de deixar a cor
+   "mais neon" regerando a imagem pela IA saiu sutil demais; isso aqui
+   garante o efeito de verdade. O gradiente de cor fica em outro <div>
+   (.instrutores-tint) por cima da imagem, pra ela aparecer por baixo
+   dos glows sem ficar opaca. */
 #instrutores {
+  position: relative;
+}
+
+#instrutores .instrutores-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('../../Imgs/InstrutoresBg.png');
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  filter: saturate(2.4) brightness(1.3) contrast(1.08);
+  pointer-events: none;
+}
+
+#instrutores .instrutores-tint {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   background-image:
     radial-gradient(55% 55% at 12% 10%, rgba(255, 138, 61, 0.30) 0%, transparent 62%),
     radial-gradient(50% 60% at 88% 20%, rgba(142, 108, 255, 0.22) 0%, transparent 65%),
     radial-gradient(65% 65% at 50% 105%, rgba(255, 90, 31, 0.20) 0%, transparent 70%),
-    linear-gradient(180deg, rgba(12, 11, 10, 0.82) 0%, rgba(23, 19, 16, 0.68) 55%, rgba(12, 11, 10, 0.9) 100%),
-    url('../../Imgs/InstrutoresBg.png');
-  background-size: auto, auto, auto, auto, cover;
-  background-position: 0 0, 0 0, 0 0, 0 0, center 35%;
-  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    linear-gradient(180deg, rgba(12, 11, 10, 0.78) 0%, rgba(23, 19, 16, 0.62) 55%, rgba(12, 11, 10, 0.88) 100%);
+  pointer-events: none;
+}
+
+#instrutores > .container {
+  position: relative;
+  z-index: 2;
 }
 
 /* "Por que esta imersão" — mesma nebulosa, com a foto de orquestração como
