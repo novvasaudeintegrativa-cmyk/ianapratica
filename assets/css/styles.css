@@ -1413,13 +1413,12 @@ body:has(.sticky-cta) {
   background-size: cover;
   background-position: center 45%;
   background-repeat: no-repeat;
+  border-color: var(--clay-vivid);
   transition: transform var(--duration-gentle) var(--ease-out),
-    box-shadow var(--duration-gentle) var(--ease-out),
-    border-color var(--duration-gentle) var(--ease-out);
+    box-shadow var(--duration-gentle) var(--ease-out);
 }
 
 .bastidor-timeline .schedule-item-media:hover {
-  border-color: var(--clay-vivid);
   box-shadow: 0 20px 50px -10px rgba(255, 90, 31, 0.55);
   transform: scale(1.02);
 }
