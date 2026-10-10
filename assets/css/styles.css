@@ -1314,6 +1314,14 @@ body:has(.sticky-cta) {
   box-shadow: var(--elevation-floating);
 }
 
+/* A imagem é um PNG com fundo transparente (ilustração recortada) -- com
+   a chuva atrás dela (z-index negativo), os glifos aparecem por trás/entre
+   os espaços vazios da cena, cobertos pelas partes opacas (mesa, cadeira,
+   telas), em vez de por cima de tudo. */
+.orquestracao-media .matrix-rain-canvas {
+  z-index: -1;
+}
+
 @media (max-width: 767px) {
   .orquestracao-media {
     margin-top: -8px;
