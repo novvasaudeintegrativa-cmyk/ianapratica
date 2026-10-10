@@ -2319,6 +2319,79 @@ body:has(.sticky-cta) {
   font-weight: 700;
 }
 
+/* ---------- Card de ingresso "cyber" — fundo com a arte CyberDraw.jpeg +
+   chuva de código em laranja (estilo Matrix, só nas cores da marca), bem
+   suave, animada em assets/js/main.js. O card vira o ponto mais "wow" da
+   página, já que é a única seção de conversão de verdade. */
+.price-card-cyber.is-featured {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 600px;
+  justify-content: center;
+  padding: var(--space-12) var(--space-8);
+  background: #0a0806;
+  border-color: var(--clay-vivid);
+  box-shadow: 0 0 0 1px rgba(255, 90, 31, 0.45), 0 40px 90px -24px rgba(255, 90, 31, 0.5);
+}
+
+.price-card-cyber-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('../../Imgs/CyberDraw.jpeg');
+  background-size: cover;
+  background-position: center 38%;
+}
+
+.price-card-cyber-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 12%, rgba(255, 90, 31, 0.3), transparent 58%),
+    linear-gradient(180deg, rgba(10, 8, 6, 0.82) 0%, rgba(10, 8, 6, 0.93) 48%, rgba(10, 8, 6, 0.88) 100%);
+}
+
+.price-card-matrix {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.price-card-body {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.price-card-cyber .text-subtitle,
+.price-card-cyber .price-installment small {
+  color: #faf9f5;
+}
+
+.price-card-cyber .price-was {
+  color: rgba(250, 249, 245, 0.5);
+}
+
+.price-card-cyber .price-now,
+.price-card-cyber .price-now small {
+  color: rgba(250, 249, 245, 0.78);
+}
+
+.price-card-cyber .price-includes li {
+  color: rgba(250, 249, 245, 0.88);
+}
+
+.price-card-cyber .price-includes li::before {
+  color: var(--clay-vivid);
+}
+
 .price-card-head {
   display: flex;
   align-items: baseline;

@@ -160,4 +160,104 @@
     });
     setDay("1");
   }
+
+  /* "Chuva de código" no card de ingresso -- efeito estilo Matrix, só nas
+     cores da marca (laranja sobre preto), bem suave e discreto. Limpa o
+     canvas inteiro a cada frame (em vez de acumular um rastro semi-opaco)
+     pra arte CyberDraw.jpeg atrás nunca escurecer até sumir. Só anima
+     enquanto o card está visível na tela, e nem começa se a pessoa pediu
+     menos movimento no sistema. */
+  var matrixCanvas = document.querySelector("[data-matrix-rain]");
+  if (
+    matrixCanvas &&
+    matrixCanvas.getContext &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    var mCtx = matrixCanvas.getContext("2d");
+    var glyphs = "01アイウエオカキクケコサシスセソタチツテト<>{}+λ∞";
+    var fontSize = 16;
+    var trailLength = 9;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var columns = 0;
+    var drops = [];
+    var speeds = [];
+
+    var resizeMatrix = function () {
+      var rect = matrixCanvas.parentElement.getBoundingClientRect();
+      matrixCanvas.width = rect.width * dpr;
+      matrixCanvas.height = rect.height * dpr;
+      matrixCanvas.style.width = rect.width + "px";
+      matrixCanvas.style.height = rect.height + "px";
+      mCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      columns = Math.ceil(rect.width / fontSize);
+      drops = [];
+      speeds = [];
+      for (var c = 0; c < columns; c++) {
+        drops.push(Math.random() * -40);
+        speeds.push(0.12 + Math.random() * 0.16);
+      }
+    };
+
+    var drawMatrix = function () {
+      var rect = matrixCanvas.getBoundingClientRect();
+      mCtx.clearRect(0, 0, rect.width, rect.height);
+      mCtx.font = fontSize + "px monospace";
+      mCtx.textBaseline = "top";
+      for (var i = 0; i < columns; i++) {
+        var headY = drops[i] * fontSize;
+        for (var t = 0; t < trailLength; t++) {
+          var y = headY - t * fontSize;
+          if (y < -fontSize || y > rect.height) continue;
+          var alpha = Math.max(0, 1 - t / trailLength);
+          var glyph = glyphs[Math.floor(Math.random() * glyphs.length)];
+          mCtx.fillStyle = t === 0
+            ? "rgba(255, 226, 199, " + (alpha * 0.95) + ")"
+            : "rgba(255, 90, 31, " + (alpha * 0.8) + ")";
+          mCtx.fillText(glyph, i * fontSize, y);
+        }
+        drops[i] += speeds[i];
+        if (headY - trailLength * fontSize > rect.height && Math.random() > 0.985) {
+          drops[i] = Math.random() * -20;
+        }
+      }
+    };
+
+    var matrixVisible = false;
+    var matrixRafId = null;
+    var lastFrameTime = 0;
+    var frameInterval = 90; /* ~11fps -- "filme bem suave", não 60fps nervoso */
+
+    var matrixLoop = function (time) {
+      if (!matrixVisible) return;
+      if (time - lastFrameTime >= frameInterval) {
+        lastFrameTime = time;
+        drawMatrix();
+      }
+      matrixRafId = requestAnimationFrame(matrixLoop);
+    };
+
+    resizeMatrix();
+    window.addEventListener("resize", resizeMatrix);
+
+    if ("IntersectionObserver" in window) {
+      var matrixObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            matrixVisible = entry.isIntersecting;
+            if (matrixVisible && matrixRafId === null) {
+              matrixRafId = requestAnimationFrame(matrixLoop);
+            } else if (!matrixVisible && matrixRafId !== null) {
+              cancelAnimationFrame(matrixRafId);
+              matrixRafId = null;
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      matrixObserver.observe(matrixCanvas);
+    } else {
+      matrixVisible = true;
+      matrixRafId = requestAnimationFrame(matrixLoop);
+    }
+  }
 })();
