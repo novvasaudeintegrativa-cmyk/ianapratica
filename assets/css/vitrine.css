@@ -3,7 +3,7 @@
 #tutorial { overflow-x: clip; }
 .vt { --vt-laranja: var(--clay-vivid, #ff5a1f); --vt-tint: rgba(255, 90, 31, .12); position: relative; padding-bottom: 150px; }
 .vt-abas { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-.vt-aba { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 2px solid var(--color-foreground); background: transparent; color: var(--color-foreground); font: 600 15px var(--font-sans); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.vt-aba { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: var(--radius-pill); border: 2px solid var(--color-foreground); background: transparent; color: var(--color-foreground); font: 600 15px var(--font-sans); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
 .vt-aba:hover { background: var(--color-card); }
 .vt-aba[aria-selected="true"] { background: var(--vt-laranja); border-color: var(--vt-laranja); color: #fff; }
 .vt-aba:focus-visible, .vt-jor .no:focus-visible { outline: 3px solid var(--vt-laranja); outline-offset: 2px; }
@@ -13,7 +13,7 @@
 .vt-cab { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
 .vt-cab h3 { font: 700 clamp(26px, 3.4vw, 36px)/1.1 var(--font-sans); margin: 0 0 8px; }
 .vt-cab p { max-width: 640px; margin: 0; color: var(--color-muted-foreground); font-size: 17px; line-height: 1.5; }
-.vt-pill { flex: none; background: var(--vt-laranja); color: #fff; border-radius: 999px; padding: 8px 16px; font: 700 13px var(--font-sans); white-space: nowrap; }
+.vt-pill { flex: none; background: var(--vt-laranja); color: #fff; border-radius: var(--radius-pill); padding: 8px 16px; font: 700 13px var(--font-sans); white-space: nowrap; }
 .vt-pill--off { background: var(--color-muted); color: var(--color-muted-foreground); }
 
 .vt-pal { position: relative; perspective: 2400px; padding: 40px 0 20px; }
@@ -49,7 +49,7 @@
 .vt-ext-btn { margin-left: auto; background: var(--color-card); border: 1px solid var(--color-border); border-radius: 8px; padding: 5px 10px; font: 600 12px var(--font-sans); }
 .vt-diff { min-height: 0; } .vt-acoes { display: flex; gap: 8px; }
 .vt-btn { border: 1px solid var(--color-border); border-radius: 10px; padding: 7px 14px; font: 600 13px var(--font-sans); background: var(--color-card); } .vt-btn-ok { background: var(--vt-laranja); color: #fff; border-color: var(--vt-laranja); }
-.vt-modos { display: flex; flex-wrap: wrap; gap: 8px; } .vt-chip { border: 1px solid var(--color-border); border-radius: 999px; padding: 6px 12px; font: 600 13px var(--font-sans); background: var(--color-muted); }
+.vt-modos { display: flex; flex-wrap: wrap; gap: 8px; } .vt-chip { border: 1px solid var(--color-border); border-radius: var(--radius-pill); padding: 6px 12px; font: 600 13px var(--font-sans); background: var(--color-muted); }
 .vt-chip.on { background: var(--vt-laranja); border-color: var(--vt-laranja); color: #fff; }
 .vt-req { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .vt-req li { display: flex; align-items: center; gap: 10px; background: var(--color-muted); border-radius: 12px; padding: 10px 12px; font-weight: 600; font-size: 14px; }

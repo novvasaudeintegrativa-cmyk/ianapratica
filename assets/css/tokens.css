@@ -140,12 +140,19 @@
   --container-max: 1400px;
   --reading-column: 640px;
 
-  /* Raio */
+  /* Raio
+     Regra do design system: nenhum botão, tag ou pill deve passar de 15px de
+     raio (nunca virar formato de cápsula/estádio) -- use --radius-pill pra
+     esses casos. --radius-full (9999px) é só pra elementos genuinamente
+     circulares, onde largura e altura são iguais (ícones redondos, avatares,
+     bolinhas numeradas) -- aí sim o raio precisa ser maior que a metade do
+     lado pra fechar o círculo. */
   --radius-none: 0px;
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
   --radius-xl: 16px;
+  --radius-pill: 15px;
   --radius-full: 9999px;
 
   /* Movimento */
@@ -521,7 +528,7 @@ a { color: inherit; }
   background: var(--color-muted);
   color: var(--color-muted-foreground);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-pill);
   padding: 4px 10px;
   font-family: var(--font-sans);
   font-size: 0.75rem;

@@ -545,7 +545,7 @@ a.guide-nav-item:hover {
   align-items: center;
   gap: 8px;
   padding: 8px 14px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-pill);
   background: var(--color-muted);
   border: 1px solid var(--color-border);
   font-family: var(--font-sans);
@@ -575,7 +575,7 @@ a.guide-nav-item:hover {
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-pill);
   background: var(--color-card);
   border: 1px solid var(--color-border);
   font-family: var(--font-sans);
@@ -1105,6 +1105,51 @@ a.guide-nav-item:hover {
   vertical-align: text-bottom;
   margin-left: 2px;
   animation: mockup-blink 1s step-end infinite;
+}
+
+/* Tela inicial do Claude Code (caixa de boas-vindas + mascote), montada em HTML pra não depender da largura dos caracteres */
+.cc-banner-wrap { white-space: normal; line-height: 1.5; }
+.cc-banner {
+  border: 1px solid #d97757;
+  border-radius: 8px;
+  position: relative;
+  padding: 18px 14px 12px;
+  margin-top: 6px;
+}
+.cc-banner-title {
+  position: absolute;
+  top: -10px;
+  left: 14px;
+  background: #1a1a1a;
+  padding: 0 8px;
+  color: #d97757;
+  font-weight: 600;
+}
+.cc-banner-body { display: flex; flex-wrap: wrap; gap: 16px 0; }
+.cc-left {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  padding-right: 14px;
+}
+.cc-right {
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 14px;
+  border-left: 1px solid #d97757;
+}
+.cc-right strong { color: #d97757; font-weight: 600; }
+.cc-right hr { border: 0; border-top: 1px solid rgba(217, 119, 87, 0.5); margin: 4px 0; width: 100%; }
+.cc-mascot { display: block; margin: 4px 0; }
+.cc-hint { display: block; margin-top: 10px; }
+@media (max-width: 560px) {
+  .cc-left { padding-right: 0; }
+  .cc-right { padding-left: 0; border-left: 0; border-top: 1px solid #d97757; padding-top: 12px; }
 }
 
 @keyframes mockup-blink {
@@ -1704,7 +1749,7 @@ a.guide-nav-item:hover {
   letter-spacing: 0.03em;
   text-transform: uppercase;
   padding: 3px 9px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-pill);
 }
 
 .guide-hub-status-available {
@@ -2220,7 +2265,7 @@ a.guide-day-item-link:hover {
   justify-content: center;
   height: 26px;
   padding: 0 12px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-pill);
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 700;
@@ -2252,7 +2297,7 @@ a.guide-day-item-link:hover .guide-day-item-num {
   letter-spacing: 0.02em;
   text-transform: uppercase;
   padding: 3px 9px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-pill);
   border: 1px solid transparent;
   background: none;
   cursor: default;
@@ -2284,4 +2329,24 @@ button.guide-day-item-status.not-done:hover {
 .guide-day-item-status.soon {
   background: var(--day-badge-soon-bg);
   color: var(--day-badge-soon-fg);
+}
+
+/* Print real (imagem) dentro de uma lição */
+.guide-shot {
+  margin: var(--space-5, 24px) 0;
+  text-align: center;
+}
+.guide-shot img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.12));
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+.guide-shot figcaption {
+  margin-top: 10px;
+  font-size: 0.8125rem;
+  color: var(--text-muted, #6b6a63);
 }
