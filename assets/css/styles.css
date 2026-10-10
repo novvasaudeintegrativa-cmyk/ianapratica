@@ -1751,6 +1751,12 @@ body:has(.sticky-cta) {
   max-width: 340px;
 }
 
+@media (max-width: 859px) {
+  .instrutores-photo {
+    height: clamp(360px, 95vw, 480px);
+  }
+}
+
 @media (min-width: 860px) {
   .instrutores-showcase {
     /* min-height reserva espaço suficiente pros dois cards (que saem do
