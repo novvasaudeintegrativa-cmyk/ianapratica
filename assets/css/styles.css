@@ -945,7 +945,7 @@ body:has(.sticky-cta) {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 300px;
+  min-height: 375px;
   padding: 0;
   overflow: hidden;
   background-size: cover;
