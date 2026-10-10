@@ -2473,18 +2473,45 @@ body:has(.sticky-cta) {
   margin-right: 6px;
 }
 
-/* CTA de compra -- texto maior que o padrão do .btn e um pulso contínuo
-   pra chamar mais atenção, já que é o botão de conversão principal da
-   página. prefers-reduced-motion:reduce (tokens.css) já neutraliza a
-   animação pra quem pediu menos movimento. */
+/* CTA de compra -- maior que o padrão do .btn, texto em caixa alta, pulso
+   contínuo + um brilho que varre o botão a cada 5s, pra chamar mais
+   atenção já que é o botão de conversão principal da página.
+   prefers-reduced-motion:reduce (tokens.css) já neutraliza as duas
+   animações pra quem pediu menos movimento. */
 .btn-cta-pulse {
-  font-size: 1.0625rem;
+  position: relative;
+  overflow: hidden;
+  height: 64px;
+  padding: 0 40px;
+  font-size: 1.1875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   animation: btn-cta-pulse 2.2s ease-in-out infinite;
+}
+
+.btn-cta-pulse::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 35%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.75) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  animation: btn-cta-shine 5s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes btn-cta-pulse {
   0%, 100% { box-shadow: 0 10px 30px -10px rgba(255, 90, 31, 0.5), 0 0 0 0 rgba(255, 90, 31, 0.55); }
   50% { box-shadow: 0 10px 30px -10px rgba(255, 90, 31, 0.5), 0 0 0 10px rgba(255, 90, 31, 0); }
+}
+
+@keyframes btn-cta-shine {
+  0% { left: -60%; }
+  18% { left: 130%; }
+  100% { left: 130%; }
 }
 
 .price-includes {
@@ -2597,6 +2624,15 @@ body:has(.sticky-cta) {
   color: rgba(250, 249, 245, 0.85);
   border-color: rgba(250, 249, 245, 0.18);
   margin-bottom: var(--space-4);
+}
+
+.final-cta p.final-cta-brand {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(250, 249, 245, 0.85);
 }
 
 /* ---------- FAQ ---------- */
