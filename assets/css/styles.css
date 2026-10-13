@@ -1948,10 +1948,17 @@ body:has(.sticky-cta) {
 /* Depoimentos em vídeo — 2 colunas (vídeos verticais 9:16), acima dos prints de WhatsApp */
 .depo-videos {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-6);
-  max-width: 720px;
+  max-width: 980px;
   margin: 0 auto var(--space-12, 48px);
+}
+
+@media (max-width: 860px) {
+  .depo-videos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 720px;
+  }
 }
 
 @media (max-width: 520px) {
