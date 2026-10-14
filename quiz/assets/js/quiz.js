@@ -341,15 +341,23 @@
   }
 
   /* ---------- Envio final ----------
-     TODO(Supabase): trocar esse bloco pela chamada real assim que
-     tivermos a Project URL + anon key do projeto Supabase já usado
-     no CRM. Formato sugerido da tabela "clientes_qualificados":
-       nome, empresa, cargo, whatsapp, email, objetivo, objetivo_outro,
-       desafio, desafio_outro, tamanho, investimento, prazo,
-       criado_em (default now()).
-     Por enquanto, salva local (localStorage) pra não perder a resposta
-     enquanto a conexão não existe, e sempre mostra a tela de
-     confirmação pro usuário (igual ficaria com o Supabase ligado). */
+     Grava o lead na tabela "leads" do Supabase do CRM (projeto "New CRM",
+     tenant "IA na Prática") -- mesma base que o CRM usa de verdade, pra
+     esses leads aparecerem junto com os outros e darem pra fazer
+     remarketing depois. A chave aqui é a "publishable" (pública, feita
+     pra rodar no navegador) -- a segurança não vem de esconder a chave,
+     vem da política de RLS no banco: só aceita insert anônimo pro tenant
+     "IA na Prática", canal "site", e força ia_ativa=false (não deixa a
+     automação de IA do CRM responder esse lead sozinha).
+     localStorage continua como registro local extra, não é o principal. */
+  var SUPABASE_URL = "https://kufydscarokfppyobdjy.supabase.co";
+  /* Chave "anon" legada (JWT), não a "publishable" nova -- a publishable
+     não estava sendo reconhecida como papel "anon" pela política de RLS
+     (testado, deu 401 "row-level security policy"). A legada funciona
+     porque o próprio token já declara "role":"anon". */
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt1Znlkc2Nhcm9rZnBweW9iZGp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAxOTgzMzIsImV4cCI6MjEwNTc3NDMzMn0.EtdXRhbEiv9cI0xSsx7qd0ZXOubJ-cA5NyyLQIoCNWU";
+  var SUPABASE_TENANT_ID = "4dbf2fe9-db81-4528-b0c6-0c2b11e2c42e";
+
   function submitQuiz(data) {
     try {
       var key = "quiz_submissions";
@@ -359,7 +367,58 @@
     } catch (err) {
       /* localStorage indisponível (modo privado etc.) -- não bloqueia o fluxo */
     }
-    return Promise.resolve();
+
+    var whatsappDigits = (data.whatsapp || "").replace(/\D/g, "");
+    var nota = [
+      "Empresa: " + (data.empresa || "-"),
+      "Objetivo: " + (data.objetivo === "Outro" ? data.objetivo_outro : data.objetivo || "-"),
+      "Desafio: " + (data.desafio === "Outro" ? data.desafio_outro : data.desafio || "-"),
+      "Tamanho: " + (data.tamanho || "-"),
+      "Investimento: " + (data.investimento || "-"),
+      "Prazo: " + (data.prazo || "-"),
+      "WhatsApp: " + (data.whatsapp || "-"),
+    ].join(" | ");
+
+    var payload = {
+      tenant_id: SUPABASE_TENANT_ID,
+      canal: "site",
+      id_canal: whatsappDigits || data.email || ("quiz-" + Date.now()),
+      nome: data.nome,
+      email: data.email,
+      profissao: data.cargo,
+      origem: "quiz-ia-na-pratica",
+      ia_ativa: false,
+      nota: nota,
+    };
+
+    /* Insert simples, sem upsert (resolution=merge-duplicates) e sem pedir
+       o registro de volta (return=minimal): testado e confirmado que as
+       duas coisas disparam uma leitura interna da linha pra resolver
+       conflito/retornar representação, e isso exige RLS de SELECT que o
+       anônimo não tem (de propósito, pra não deixar visitante ler leads
+       de outras pessoas) -- dá 42501 mesmo a política de INSERT estando
+       certa. Reenvio do mesmo WhatsApp em duas submissões vira erro de
+       chave duplicada (409), só logado, não trava o fluxo do usuário. */
+    return fetch(SUPABASE_URL + "/rest/v1/leads", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: "Bearer " + SUPABASE_ANON_KEY,
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(function (res) {
+        if (!res.ok) {
+          return res.text().then(function (text) {
+            console.warn("[quiz] Supabase recusou o lead (" + res.status + "):", text);
+          });
+        }
+      })
+      .catch(function (err) {
+        console.warn("[quiz] erro de rede ao gravar lead no Supabase:", err);
+      });
   }
 
   form.addEventListener("submit", function (e) {
