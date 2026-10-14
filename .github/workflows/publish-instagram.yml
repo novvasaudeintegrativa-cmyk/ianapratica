@@ -14,14 +14,21 @@ name: Publicar Instagram agendado
 
 on:
   schedule:
-    # 12:07 UTC = ~09:07 horário de Brasília (sem horário de verão desde
-    # 2019, então o offset -03:00 é fixo o ano inteiro). Minuto 7 em vez
-    # de 0 de propósito -- atualizado em 01/10/2026, depois de notar que
-    # TODAS as execuções anteriores atrasaram de 2h a 7h. Minuto cheio
-    # (:00) é o pico de congestionamento dos runners compartilhados do
-    # GitHub (o mundo inteiro agenda cron "em ponto"); minuto quebrado
-    # reduz a fila. Terça (2), Quinta (4) e Sábado (6).
-    - cron: '7 12 * * 2,4,6'
+    # Atualizado em 14/10/2026 -- a correção de 01/10 (trocar :00 por :07)
+    # NÃO resolveu: toda execução de 01/10 a 13/10 continuou atrasando de
+    # 4h a 7h (ex. Reels/R06 de 13/10, programado 09:07, só disparou de
+    # verdade às 16:11 Brasília). Causa real: o GitHub Actions deprioriza
+    # agendamentos de baixa frequência (3x/semana é "raro" pra fila deles)
+    # -- o minuto exato nunca foi o problema.
+    # Correção de verdade: rodar a cada 10 min, numa janela de 11h-19h59
+    # UTC (08h-16h59 Brasília), só terça/quinta/sábado. publish_scheduled.py
+    # já é seguro pra isso -- só publica o que está agendado pra HOJE e
+    # ainda não foi publicado; sem isso, sai sem fazer nada (run barato,
+    # ~10-20s). Frequência alta reduz o atraso porque o GitHub trata
+    # agendamentos frequentes com prioridade maior na fila -- repo é
+    # público, minutos do Actions são ilimitados, então rodar mais vezes
+    # não tem custo.
+    - cron: '*/10 11-19 * * 2,4,6'
   workflow_dispatch:
     inputs:
       code:

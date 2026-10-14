@@ -30,6 +30,21 @@ segunda/quinta) — cadência nova, mais frequente. O cron do workflow foi
 atualizado junto (`0 12 * * 2,4,6` = terça/quinta/sábado 09h de
 Brasília).
 
+**Ajuste de 14/10/2026:** descoberto que a correção de 01/10 (trocar o
+minuto do cron de `:00` pra `:07`) não resolveu nada — todas as 6
+execuções entre 01/10 e 13/10 continuaram atrasando de 4h a 7h (ex.
+Reels/R06 de 13/10, programado 09:07, só disparou às 16:11 Brasília).
+Causa real: o GitHub Actions deprioriza agendamentos de baixa frequência
+(3x/semana) na fila de runners compartilhados — o minuto exato nunca foi
+o problema. Corrigido trocando o cron pra rodar a cada 10 min numa janela
+de 08h-16h59 Brasília, só terça/quinta/sábado (`*/10 11-19 * * 2,4,6`) —
+`publish_scheduled.py` já é seguro pra isso (só publica o que está
+agendado pra hoje e ainda não foi publicado, senão sai sem fazer nada).
+Repo é público, então minutos extras do Actions não têm custo. **Horário
+"09h" na tabela abaixo continua sendo a meta/intenção, não mais garantia
+de precisão exata — o publish real deve cair entre 08h e ~09h-10h Brasília
+a partir de agora, bem mais perto do que os atrasos de horas vistos antes.**
+
 **Automação real:** 13 tarefas foram criadas no Windows Task Scheduler
 (`IANaPratica-F02` a `IANaPratica-R07`, ver `scripts/setup-tasks-instagram.ps1`)
 em 03/09/2026, mas **migradas pro GitHub Actions em 07/09/2026** (ver
