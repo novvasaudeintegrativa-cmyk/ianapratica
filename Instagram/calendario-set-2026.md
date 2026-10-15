@@ -45,6 +45,25 @@ Repo é público, então minutos extras do Actions não têm custo. **Horário
 de precisão exata — o publish real deve cair entre 08h e ~09h-10h Brasília
 a partir de agora, bem mais perto do que os atrasos de horas vistos antes.**
 
+**Ajuste de 15/10/2026:** a correção de 14/10 (cron a cada 10 min) também
+não resolveu — o Feed/F07 de hoje, programado 09:07, só disparou às
+15:29 Brasília (~6h20 de atraso), e checando a API do GitHub, o `schedule`
+só rodou **2 vezes** no dia inteiro (15:29 e 19:21), não as ~54 vezes que
+o cron `*/10` deveria ter tentado. Confirma que o GitHub aplica algum
+throttling próprio nos runners compartilhados que não depende da
+frequência configurada — não dá pra resolver só ajustando o cron.
+
+**Correção de verdade:** criado um **Vercel Cron Job** (`vercel.json` +
+`api/cron-publish-instagram.js`) que dispara o workflow via
+`workflow_dispatch` da API do GitHub no horário exato (12:05 UTC =
+09:05 Brasília, terça/quinta/sábado) — `workflow_dispatch` roda na hora,
+sem passar pela fila do `schedule`. O `schedule` do GitHub continua
+ativo como rede de segurança (se o cron da Vercel falhar, ele ainda
+tenta, só que mais devagar) — os dois são seguros juntos porque
+`publish_scheduled.py` já é idempotente. **Pendente:** o `GITHUB_TOKEN`
+atual não tem permissão `Actions: Read and write`, precisa ajustar antes
+disso funcionar (ver instrução no chat/commit).
+
 **Automação real:** 13 tarefas foram criadas no Windows Task Scheduler
 (`IANaPratica-F02` a `IANaPratica-R07`, ver `scripts/setup-tasks-instagram.ps1`)
 em 03/09/2026, mas **migradas pro GitHub Actions em 07/09/2026** (ver
