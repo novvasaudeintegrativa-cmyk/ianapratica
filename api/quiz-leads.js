@@ -64,11 +64,11 @@ export default async function handler(req, res) {
         : "-";
       return (
         "<tr>" +
-        "<td>" + escapeHtml(criadoEm) + "</td>" +
-        "<td>" + escapeHtml(lead.nome) + "</td>" +
-        "<td>" + escapeHtml(lead.email) + "</td>" +
-        "<td>" + escapeHtml(lead.profissao) + "</td>" +
-        "<td class=\"nota\">" + escapeHtml(lead.nota) + "</td>" +
+        "<td data-label=\"Quando\">" + escapeHtml(criadoEm) + "</td>" +
+        "<td data-label=\"Nome\">" + escapeHtml(lead.nome) + "</td>" +
+        "<td data-label=\"E-mail\">" + escapeHtml(lead.email) + "</td>" +
+        "<td data-label=\"Cargo\">" + escapeHtml(lead.profissao) + "</td>" +
+        "<td class=\"nota\" data-label=\"Detalhes\">" + escapeHtml(lead.nota) + "</td>" +
         "</tr>"
       );
     })
@@ -89,6 +89,19 @@ export default async function handler(req, res) {
     "tr:hover{background:rgba(255,255,255,.03);}" +
     ".erro{background:rgba(180,50,50,.15);border:1px solid rgba(180,50,50,.4);padding:12px 16px;border-radius:8px;margin-bottom:16px;}" +
     ".vazio{color:rgba(250,249,245,.5);padding:24px 0;}" +
+    /* Abaixo de 640px a tabela normal (table-layout:auto) espreme as 5
+       colunas até ficarem estreitas demais, e o texto longo da coluna
+       "Detalhes" quebra palavra a palavra -- cada linha vira um bloco
+       gigante de altura. Troca pra layout de cartão empilhado nesse
+       breakpoint: cada <td> vira uma linha cheia, com o nome da coluna
+       como rótulo (via data-label), e cada <tr> vira um cartão. */
+    "@media (max-width:640px){" +
+    "table,thead,tbody,th,td,tr{display:block;}" +
+    "thead{display:none;}" +
+    "tr{border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 12px;margin-bottom:12px;}" +
+    "td{border:none;padding:6px 0;}" +
+    "td::before{content:attr(data-label);display:block;color:rgba(250,249,245,.5);font-weight:600;font-size:.6875rem;text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px;}" +
+    "}" +
     "</style></head><body>" +
     "<h1>Leads do Quiz — IA na Prática</h1>" +
     "<p class=\"sub\">" + leads.length + " lead(s), mais recente primeiro. Atualiza recarregando a página.</p>" +
