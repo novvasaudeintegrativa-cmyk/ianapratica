@@ -424,6 +424,13 @@
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!currentStepValid()) return;
+    /* Evento padrão "Lead" do Meta Pixel -- é esse evento que a campanha
+       de anúncios usa como meta de conversão (ver Gerenciador de
+       Anúncios). Dispara aqui, no envio confirmado do quiz, antes do
+       redirect pro WhatsApp. */
+    if (typeof fbq === "function") {
+      fbq("track", "Lead");
+    }
     submitQuiz(answers).then(function () {
       var diag = buildDiagnosis(answers);
       sendDiagnosisEmail(answers, diag); // segundo plano, não bloqueia o redirect
