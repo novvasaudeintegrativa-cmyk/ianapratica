@@ -42,6 +42,127 @@
   <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=1104376235675261&ev=PageView&noscript=1" /></noscript>
   <!-- End Meta Pixel Code -->
+
+  <!-- Tracker do New CRM (site_key "ec1d84b4...89a2") -- manda PageView,
+       cliques em link de WhatsApp, profundidade de scroll, tempo na
+       página e progresso de vídeo pro mesmo Supabase do CRM, pra
+       aparecer junto com os leads. -->
+  <script>
+(function(){
+  var NEWCRM_SITE_KEY = "ec1d84b4-e545-4ed3-8dbe-2ac0cbef89a2";
+  var NEWCRM_URL = "https://kufydscarokfppyobdjy.supabase.co/functions/v1/coletar-evento";
+  function uid(){ try { return crypto.randomUUID(); } catch(e){ return Date.now().toString(36)+Math.random().toString(36).slice(2); } }
+  var vid, sid;
+  try { vid = localStorage.getItem('ncrm_vid') || uid(); localStorage.setItem('ncrm_vid', vid); } catch(e){ vid = uid(); }
+  try { sid = sessionStorage.getItem('ncrm_sid') || uid(); sessionStorage.setItem('ncrm_sid', sid); } catch(e){ sid = uid(); }
+  var CAMP_KEYS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+  var camp = {};
+  try {
+    var qs = new URLSearchParams(location.search);
+    var TTL = 30*24*60*60*1000, stored = {};
+    try { var s = JSON.parse(localStorage.getItem('ncrm_camp')||'null'); if (s && s.t && Date.now()-s.t < TTL) stored = s.d || {}; } catch(e){}
+    var temUrl = CAMP_KEYS.some(function(k){ return qs.get(k); });
+    CAMP_KEYS.forEach(function(k){ camp[k] = qs.get(k) || (temUrl ? null : stored[k]) || null; });
+    if (temUrl) try { localStorage.setItem('ncrm_camp', JSON.stringify({t:Date.now(), d:camp})); } catch(e){}
+  } catch(e){}
+  function deviceClass(){
+    var ua = navigator.userAgent||'';
+    if (/Tablet|iPad|Android(?!.*Mobi)/i.test(ua)) return 'tablet';
+    if (/Mobi|Android|iPhone|iPod/i.test(ua)) return 'mobile';
+    return 'desktop';
+  }
+  function send(event, props){
+    try {
+      fetch(NEWCRM_URL, { method:'POST', keepalive:true, headers:{'Content-Type':'application/json'}, body: JSON.stringify(Object.assign({
+        site_key: NEWCRM_SITE_KEY, visitor_id: vid, session_id: sid, event: event, props: props||{},
+        path: location.pathname+location.search, referrer: document.referrer||null,
+        screen_w: (window.screen && screen.width) || null, device: deviceClass()
+      }, camp)) }).catch(function(){});
+    } catch(e){}
+  }
+  send('PageView', {});
+  document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]').forEach(function(a){
+    a.addEventListener('click', function(){ send('Contact', { content_name: 'WhatsApp' }); });
+  });
+  (function(){
+    var marks=[25,50,75,90], hit={}, timer;
+    function check(){
+      var doc=document.documentElement, scrollable=doc.scrollHeight-window.innerHeight;
+      if (scrollable<=0) return;
+      var pct=(window.scrollY||doc.scrollTop)/scrollable*100;
+      marks.forEach(function(m){ if(!hit[m] && pct>=m){ hit[m]=1; send('ScrollDepth',{percent:m}); } });
+      if (hit[90]) window.removeEventListener('scroll', onScroll);
+    }
+    function onScroll(){ clearTimeout(timer); timer=setTimeout(check,200); }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    check();
+  })();
+  [30,60,120].forEach(function(s){ setTimeout(function(){ send('TimeOnPage',{seconds:s}); }, s*1000); });
+  var ytRe = new RegExp('youtube(-nocookie)?.com/embed/');
+  var ytApiReady = false, ytApiLoading = false, ytQueue = [];
+  function ensureYtApi(cb){
+    if (ytApiReady){ cb(); return; }
+    ytQueue.push(cb);
+    if (ytApiLoading) return;
+    ytApiLoading = true;
+    var anterior = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function(){
+      if (typeof anterior === 'function') try { anterior(); } catch(e){}
+      ytApiReady = true;
+      ytQueue.forEach(function(fn){ fn(); });
+      ytQueue = [];
+    };
+    var tag = document.createElement('script'); tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  }
+  var ytVistos = {};
+  function attachYt(f){
+    if (!f || !f.getAttribute || !ytRe.test(f.src || '')) return;
+    if (!f.id) f.id = 'ncrm-yt-' + Math.random().toString(36).slice(2);
+    if (ytVistos[f.id]) return;
+    ytVistos[f.id] = true;
+    if (f.src.indexOf('enablejsapi=') === -1) f.src += (f.src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1';
+    ensureYtApi(function(){
+      var placement = f.getAttribute('data-placement') || 'vsl';
+      var title = f.getAttribute('title') || f.id;
+      var base = { video_provider:'youtube', video_title:title, placement:placement };
+      var hit = {}, poll = null, played = false;
+      new YT.Player(f.id, { events: { onStateChange: function(e){
+        if (e.data === YT.PlayerState.PLAYING){
+          if (!played){ played = true; send('VideoPlay', base); }
+          clearInterval(poll);
+          poll = setInterval(function(){
+            var d = this.getDuration ? this.getDuration() : 0; var c = this.getCurrentTime ? this.getCurrentTime() : 0;
+            if (!d) return;
+            var pct = c / d * 100;
+            [25,50,75,95].forEach(function(m){ if (!hit[m] && pct >= m){ hit[m]=1; send('VideoProgress', Object.assign({percent:m}, base)); } });
+          }.bind(e.target), 1000);
+        } else if (e.data === YT.PlayerState.ENDED){ clearInterval(poll); send('VideoComplete', base); }
+        else if (e.data === YT.PlayerState.PAUSED){ clearInterval(poll); }
+      } } });
+    });
+  }
+  document.querySelectorAll('iframe').forEach(attachYt);
+  try {
+    new MutationObserver(function(muts){
+      muts.forEach(function(m){
+        (m.addedNodes || []).forEach(function(n){
+          if (n.nodeType !== 1) return;
+          if (n.tagName === 'IFRAME') attachYt(n);
+          else if (n.querySelectorAll) n.querySelectorAll('iframe').forEach(attachYt);
+        });
+      });
+    }).observe(document.documentElement, { childList:true, subtree:true });
+  } catch(e){}
+  window.addEventListener('message', function(e){
+    var d = e.data; if (!d || d.source !== 'ncrm-video') return;
+    var base = { video_provider: d.provider || 'custom', video_title: d.title || 'VSL', placement: d.placement || 'vsl' };
+    if (d.type === 'play') send('VideoPlay', base);
+    else if (d.type === 'progress' && d.percent) send('VideoProgress', Object.assign({percent:d.percent}, base));
+    else if (d.type === 'complete') send('VideoComplete', base);
+  });
+})();
+  </script>
 </head>
 
 <body>
