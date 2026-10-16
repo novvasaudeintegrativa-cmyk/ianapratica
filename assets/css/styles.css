@@ -1830,14 +1830,13 @@ body:has(.sticky-cta) {
   margin-bottom: 0;
 }
 
-/* Sem foto ainda: só um símbolo no círculo, na cor de acento da marca. */
-.avatar-symbol {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Retrato do Dr. José Augusto é um enquadramento aberto, com fundo
+   transparente -- zoom no rosto e fundo neutro pro círculo não ficar vazio. */
+.avatar-photo-jose {
   background: var(--color-muted);
-  color: var(--color-accent);
-  border: 1px solid var(--color-border);
+  object-position: center top;
+  transform: scale(1.7);
+  transform-origin: 38% 34%;
 }
 
 @media (max-width: 640px) {
