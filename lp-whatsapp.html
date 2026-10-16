@@ -144,7 +144,7 @@
     .live .no-hire strong { color: var(--orange); }
     .live .btn-wa { max-width: 380px; }
     .chart {
-      position: relative; height: 340px; padding: 24px 28px 0;
+      position: relative; height: 480px; padding: 24px 28px 0;
       border: 1px solid var(--line); border-radius: 22px;
       background: linear-gradient(180deg, #121214, #0d0d0f); overflow: hidden;
     }
@@ -158,9 +158,9 @@
     .bars { position: relative; z-index: 1; height: 100%; display: flex; align-items: flex-end; justify-content: space-around; padding-bottom: 20px; }
     .bar-col { display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: flex-end; height: 100%; }
     .bar-tag { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; }
-    .bar { width: 76px; border-radius: 38px 38px 6px 6px; display: grid; place-items: center; }
-    .bar-a { height: 74px; background: linear-gradient(180deg, #1f8f7d, #0f4d44); box-shadow: 0 0 24px rgba(31, 143, 125, .35); }
-    .bar-b { height: 200px; background: linear-gradient(180deg, #ff7a3d, var(--orange-deep)); box-shadow: 0 0 40px rgba(255, 90, 31, .55); align-content: start; padding-top: 14px; }
+    .bar { width: 84px; border-radius: 38px 38px 6px 6px; display: grid; place-items: center; }
+    .bar-a { height: 100px; background: linear-gradient(180deg, #1f8f7d, #0f4d44); box-shadow: 0 0 24px rgba(31, 143, 125, .35); }
+    .bar-b { height: 350px; background: linear-gradient(180deg, #ff7a3d, var(--orange-deep)); box-shadow: 0 0 40px rgba(255, 90, 31, .55); align-content: start; padding-top: 14px; }
     .bar-name { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 15px; margin-top: 6px; }
 
     /* Seções */
@@ -295,7 +295,8 @@
       <div class="wrap hero-grid">
         <div>
           <div class="badges">
-            <span class="badge badge-live"><span class="dot"></span> LIVE ao vivo via ZOOM · 2h de duração</span>
+            <span class="badge badge-live badge-big"><span class="dot"></span> Ao vivo no Zoom</span>
+            <span class="badge badge-date badge-big">17/10/26 · às 14h</span>
           </div>
           <img class="claude-logo" src="Imgs/ClaudeLogo-Ivory.svg" alt="Claude" />
           <h1>Vamos criar juntos com você seu <em>Time de Agentes de IA</em> <small>— sem programar nada.</small></h1>
@@ -326,16 +327,11 @@
     <section class="live" id="live">
       <div class="wrap live-grid">
         <div>
-          <div class="badges">
-            <span class="badge badge-live badge-big"><span class="dot"></span> Ao vivo no Zoom</span>
-            <span class="badge badge-date badge-big">17/10/26 · às 14h</span>
-          </div>
           <div class="product"><img src="Imgs/ClaudeSpark-Clay.svg" alt="" /><b>Claude Code</b></div>
           <p class="tagline">Inteligência artificial que trabalha por você</p>
           <h2>Tenha um <em>time de agentes de IA</em> trabalhando</h2>
           <span class="tag247">24/7</span>
           <p class="no-hire">Sem contratar mais <strong>ninguém</strong>.</p>
-          <a class="btn-wa" href="#form" data-goto-form>Inscreva-se grátis</a>
         </div>
 
         <div class="chart" role="img" aria-label="Gráfico ilustrativo: iniciantes usam ChatGPT, profissionais usam Claude">
