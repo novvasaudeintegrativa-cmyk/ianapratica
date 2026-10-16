@@ -80,8 +80,9 @@
 
     .hero h1 { font-size: clamp(30px, 5.6vw, 52px); font-weight: 800; }
     .claude-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-    .claude-logo { height: clamp(36px, 10vw, 58px); width: auto; max-width: 60%; }
-    .claude-code { font-family: "Poppins", sans-serif; font-weight: 700; font-size: clamp(26px, 7.6vw, 44px); line-height: 1; color: var(--orange); }
+    .claude-logo { height: clamp(40px, 11vw, 66px); width: auto; }
+    .claude-name { font-family: "Poppins", sans-serif; font-weight: 700; font-size: clamp(32px, 9.4vw, 56px); line-height: 1; color: var(--text); }
+    .claude-code { color: var(--orange); }
     .hero h1 small { display: block; margin-top: 6px; font-size: .5em; font-weight: 700; text-transform: none; color: var(--text); }
     .hero h1 em { font-style: normal; color: var(--orange); }
     .lead { margin: 20px 0 28px; color: var(--muted); font-size: clamp(17px, 2.4vw, 20px); max-width: 540px; }
@@ -133,7 +134,7 @@
     .live-grid { display: grid; gap: 36px; align-items: center; }
     @media (min-width: 900px) { .live-grid { grid-template-columns: 1fr 1fr; gap: 56px; } }
     .live .badges { margin-bottom: 20px; }
-    .badge-big { font-size: 18px; padding: 10px 16px; }
+    .badge-big { font-size: clamp(17px, 4.6vw, 24px); padding: 12px 20px; }
     .badge-live .dot { flex: none; }
     .live .product { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
     .live .product img { height: 30px; width: auto; }
@@ -299,7 +300,7 @@
             <span class="badge badge-live badge-big"><span class="dot"></span> Ao vivo no Zoom</span>
             <span class="badge badge-date badge-big">17/10/26 · às 14h</span>
           </div>
-          <div class="claude-brand"><img class="claude-logo" src="Imgs/ClaudeLogo-Ivory.svg" alt="Claude" /><span class="claude-code">Code</span></div>
+          <div class="claude-brand"><img class="claude-logo" src="Imgs/Claude_AI_symbol.svg.webp" alt="" width="58" height="58" /><span class="claude-name">Claude <span class="claude-code">Code</span></span></div>
           <h1>Vamos criar juntos com você seu <em>Time de Agentes de IA</em> <small>— sem programar nada.</small></h1>
           <p class="lead">Um time que trabalha 24h por você, enquanto você foca no que só você pode fazer.
             Você sai da live sem precisar mais fazer tudo sozinho.</p>
