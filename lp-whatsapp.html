@@ -78,7 +78,9 @@
     .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--orange); animation: pulse 1.6s infinite; }
     @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 90, 31, .6); } 100% { box-shadow: 0 0 0 10px rgba(255, 90, 31, 0); } }
 
-    .hero h1 { font-size: clamp(32px, 6.2vw, 56px); font-weight: 800; text-transform: uppercase; }
+    .hero h1 { font-size: clamp(30px, 5.6vw, 52px); font-weight: 800; }
+    .claude-logo { height: 34px; width: auto; margin-bottom: 18px; }
+    .hero h1 small { display: block; margin-top: 6px; font-size: .5em; font-weight: 700; text-transform: none; color: var(--text); }
     .hero h1 em { font-style: normal; color: var(--orange); }
     .lead { margin: 20px 0 28px; color: var(--muted); font-size: clamp(17px, 2.4vw, 20px); max-width: 540px; }
     .lead strong { color: var(--text); }
@@ -137,6 +139,10 @@
     .card .ico { width: 42px; height: 42px; border-radius: 12px; background: var(--orange-soft); color: var(--orange); display: grid; place-items: center; margin-bottom: 14px; }
     .card h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
     .card p { color: var(--muted); font-size: 16px; }
+
+    .req { margin-top: 20px; padding: 16px 20px; border-radius: 12px; background: var(--orange-soft); border: 1px solid rgba(255, 90, 31, .4); font-size: 16px; }
+    .req strong { color: var(--orange); }
+    .card p b { color: var(--text); }
 
     .steps { display: grid; gap: 16px; counter-reset: s; }
     @media (min-width: 720px) { .steps { grid-template-columns: repeat(3, 1fr); } }
@@ -252,12 +258,12 @@
       <div class="wrap hero-grid">
         <div>
           <div class="badges">
-            <span class="badge badge-live"><span class="dot"></span> Ao vivo no Zoom</span>
-            <span class="badge badge-date">17/10/26 · 14h</span>
+            <span class="badge badge-live"><span class="dot"></span> Imersão ao vivo via Zoom · 2 dias</span>
           </div>
-          <h1>Tenha um <em>time de agentes de IA</em> trabalhando 24/7</h1>
-          <p class="lead">Sem contratar mais ninguém e <strong>sem programar nada</strong>. Entre no grupo do WhatsApp,
-            receba o link da live gratuita e veja o Claude Code fazendo o trabalho pesado do seu negócio.</p>
+          <img class="claude-logo" src="Imgs/ClaudeLogo-Ivory.svg" alt="Claude" />
+          <h1>Vamos criar juntos com você seu <em>Time de Agentes de IA</em> <small>— sem programar nada.</small></h1>
+          <p class="lead">Um time que trabalha 24h por você, enquanto você foca no que só você pode fazer.
+            Você sai da imersão sem precisar mais fazer tudo sozinho.</p>
         </div>
 
         <form class="form-card" id="form" novalidate>
@@ -267,11 +273,6 @@
             <label for="f-nome">Nome</label>
             <input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome" required />
             <span class="err">Digite seu nome.</span>
-          </div>
-          <div class="field">
-            <label for="f-email">E-mail</label>
-            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="voce@email.com" required />
-            <span class="err">Digite um e-mail válido.</span>
           </div>
           <div class="field">
             <label for="f-whats">WhatsApp</label>
@@ -288,39 +289,33 @@
     <section class="sec-alt" id="o-que-voce-ve">
       <div class="wrap">
         <p class="eyebrow">Na live</p>
-        <h2>O que você vai ver, ao vivo</h2>
-        <p class="sub">Nada de teoria solta. É a demonstração de um sistema real, passo a passo, para você sair sabendo
-          por onde começar.</p>
+        <h2>Do zero ao ambiente pronto</h2>
+        <p class="sub">A maior frustração de quem tenta usar IA avançada é pular etapas. Por isso a gente começa pelo que
+          a maioria ignora, e na ordem exata em que cada peça precisa estar no lugar.</p>
         <div class="cards">
           <article class="card">
-            <div class="ico" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            </div>
-            <h3>Um time que não para</h3>
-            <p>Como agentes de IA criam, organizam e agendam o trabalho enquanto você cuida do que só você pode fazer.</p>
+            <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M6 8.5v7M8.3 7l7.4 3.8M8.3 17l7.4-3.8"/></svg></div>
+            <h3>Instalar o Git</h3>
+            <p>O histórico de versões do seu projeto: o que dá segurança pra deixar a IA mexer sem medo de perder nada.</p>
           </article>
           <article class="card">
-            <div class="ico" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
-            </div>
-            <h3>Claude Code, sem programar</h3>
-            <p>O que é, como instalar e por que ele é diferente de simplesmente conversar com um chat de IA.</p>
+            <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.3-4-2-6-2.5m12 4.5v-3.3a2.9 2.9 0 0 0-.8-2.2c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.3 1.3a11.4 11.4 0 0 0-6 0C6.7 2.5 5.7 2.8 5.7 2.8a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.3 9.2c0 4.6 2.8 5.7 5.5 6a2.9 2.9 0 0 0-.8 2.2V21"/></svg></div>
+            <h3>Criar sua conta no GitHub</h3>
+            <p>Onde o seu trabalho fica guardado, e a base para o Claude publicar e agendar por você.</p>
           </article>
           <article class="card">
-            <div class="ico" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg>
-            </div>
-            <h3>Instagram postando sozinho</h3>
-            <p>Do texto à imagem e ao agendamento: o fluxo que tira o Instagram do seu "peso constante".</p>
+            <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div>
+            <h3>Instalar o Claude Code</h3>
+            <p>Instalação e primeiro login, passo a passo e todo mundo junto. Ao fim, o comando <b>claude</b> abre na sua máquina.</p>
           </article>
           <article class="card">
-            <div class="ico" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            </div>
-            <h3>Onde você pode economizar</h3>
-            <p>Quais tarefas costumam ser terceirizadas e podem ser feitas com IA, e quanto isso pode pesar no seu bolso.</p>
+            <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M13 9l2 2-2 2"/></svg></div>
+            <h3>Claude Code dentro do VS Code</h3>
+            <p>Abrir a pasta do projeto, instalar a extensão oficial e aceitar ou rejeitar cada mudança do Claude direto no editor.</p>
           </article>
         </div>
+        <p class="req"><strong>Requisito:</strong> conta Claude Pro ou Max. Sem um desses planos o Claude Code não libera o
+          acesso, então deixe a sua pronta antes da live para não perder tempo de tela.</p>
       </div>
     </section>
 
@@ -333,7 +328,7 @@
         <div class="steps">
           <div class="step">
             <h3>Preencha seus dados</h3>
-            <p>Nome, e-mail e WhatsApp. Leva menos de 30 segundos.</p>
+            <p>Só nome e WhatsApp. Leva menos de 30 segundos.</p>
           </div>
           <div class="step">
             <h3>Entre no grupo</h3>
@@ -382,7 +377,6 @@
     var form = document.getElementById("form");
     var btn = document.getElementById("btn-submit");
     var fNome = document.getElementById("f-nome");
-    var fEmail = document.getElementById("f-email");
     var fWhats = document.getElementById("f-whats");
 
     // Botões de baixo e barra fixa rolam até o formulário
@@ -408,18 +402,16 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var nome = fNome.value.trim();
-      var email = fEmail.value.trim();
       var digits = fWhats.value.replace(/\D/g, "");
       var ok = true;
       ok = mark(fNome, nome.length < 2) && ok;
-      ok = mark(fEmail, !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) && ok;
       ok = mark(fWhats, digits.length < 10 || digits.length > 11) && ok;
       if (!ok) { form.querySelector('[aria-invalid="true"]').focus(); return; }
 
       btn.disabled = true;
       btn.textContent = "Abrindo o grupo...";
 
-      var body = { nome: nome, email: email, whatsapp: "55" + digits };
+      var body = { nome: nome, whatsapp: "55" + digits };
       ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(function (k) {
         var v = new URLSearchParams(location.search).get(k);
         if (v) body[k] = v;
