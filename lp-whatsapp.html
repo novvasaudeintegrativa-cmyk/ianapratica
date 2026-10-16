@@ -79,7 +79,9 @@
     @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 90, 31, .6); } 100% { box-shadow: 0 0 0 10px rgba(255, 90, 31, 0); } }
 
     .hero h1 { font-size: clamp(30px, 5.6vw, 52px); font-weight: 800; }
-    .claude-logo { height: 34px; width: auto; margin-bottom: 18px; }
+    .claude-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .claude-logo { height: 58px; width: auto; }
+    .claude-code { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 44px; line-height: 1; color: var(--orange); }
     .hero h1 small { display: block; margin-top: 6px; font-size: .5em; font-weight: 700; text-transform: none; color: var(--text); }
     .hero h1 em { font-style: normal; color: var(--orange); }
     .lead { margin: 20px 0 28px; color: var(--muted); font-size: clamp(17px, 2.4vw, 20px); max-width: 540px; }
@@ -297,7 +299,7 @@
             <span class="badge badge-live badge-big"><span class="dot"></span> Ao vivo no Zoom</span>
             <span class="badge badge-date badge-big">17/10/26 · às 14h</span>
           </div>
-          <img class="claude-logo" src="Imgs/ClaudeLogo-Ivory.svg" alt="Claude" />
+          <div class="claude-brand"><img class="claude-logo" src="Imgs/ClaudeLogo-Ivory.svg" alt="Claude" /><span class="claude-code">Code</span></div>
           <h1>Vamos criar juntos com você seu <em>Time de Agentes de IA</em> <small>— sem programar nada.</small></h1>
           <p class="lead">Um time que trabalha 24h por você, enquanto você foca no que só você pode fazer.
             Você sai da live sem precisar mais fazer tudo sozinho.</p>
@@ -326,7 +328,6 @@
     <section class="live" id="live">
       <div class="wrap live-grid">
         <div>
-          <div class="product"><img src="Imgs/ClaudeSpark-Clay.svg" alt="" /><b>Claude Code</b></div>
           <p class="tagline">Inteligência artificial que trabalha por você</p>
           <h2>Tenha um <em>time de agentes de IA</em> trabalhando</h2>
           <span class="tag247">24/7</span>
