@@ -126,6 +126,43 @@
     .form-card .btn-wa[disabled] { opacity: .7; cursor: progress; }
     .form-card .micro { text-align: center; }
 
+    /* Faixa do criativo campeão (abaixo do hero) */
+    .live { padding: 56px 0; border-top: 1px solid var(--line); }
+    .live-grid { display: grid; gap: 36px; align-items: center; }
+    @media (min-width: 900px) { .live-grid { grid-template-columns: 1fr 1fr; gap: 56px; } }
+    .live .badges { margin-bottom: 20px; }
+    .badge-big { font-size: 18px; padding: 10px 16px; }
+    .badge-live .dot { flex: none; }
+    .live .product { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+    .live .product img { height: 30px; width: auto; }
+    .live .product b { font-family: "Poppins", sans-serif; font-size: 26px; color: var(--orange); }
+    .live .tagline { color: var(--muted); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 18px; }
+    .live h2 { text-transform: uppercase; }
+    .live h2 em { font-style: normal; color: var(--orange); }
+    .tag247 { display: inline-block; margin: 4px 0 14px; padding: 4px 14px; border-radius: 8px; background: var(--orange); color: #1a0a03; font-family: "Poppins", sans-serif; font-weight: 800; font-size: 22px; }
+    .live .no-hire { color: var(--muted); font-size: 18px; margin-bottom: 24px; }
+    .live .no-hire strong { color: var(--orange); }
+    .live .btn-wa { max-width: 380px; }
+    .chart {
+      position: relative; height: 340px; padding: 24px 28px 0;
+      border: 1px solid var(--line); border-radius: 22px;
+      background: linear-gradient(180deg, #121214, #0d0d0f); overflow: hidden;
+    }
+    .chart::before {
+      content: ""; position: absolute; inset: 0; opacity: .5;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 38px 38px;
+    }
+    .chart::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: radial-gradient(60% 100% at 50% 100%, rgba(255, 90, 31, .45), transparent 70%); }
+    .chart-note { position: absolute; z-index: 2; top: 14px; left: 20px; font-size: 12px; color: var(--muted); }
+    .bars { position: relative; z-index: 1; height: 100%; display: flex; align-items: flex-end; justify-content: space-around; padding-bottom: 20px; }
+    .bar-col { display: flex; flex-direction: column; align-items: center; gap: 8px; justify-content: flex-end; height: 100%; }
+    .bar-tag { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; }
+    .bar { width: 76px; border-radius: 38px 38px 6px 6px; display: grid; place-items: center; }
+    .bar-a { height: 74px; background: linear-gradient(180deg, #1f8f7d, #0f4d44); box-shadow: 0 0 24px rgba(31, 143, 125, .35); }
+    .bar-b { height: 200px; background: linear-gradient(180deg, #ff7a3d, var(--orange-deep)); box-shadow: 0 0 40px rgba(255, 90, 31, .55); align-content: start; padding-top: 14px; }
+    .bar-name { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 15px; margin-top: 6px; }
+
     /* Seções */
     section { padding: 64px 0; }
     .sec-alt { background: var(--bg-soft); }
@@ -282,6 +319,40 @@
           <button class="btn-wa" id="btn-submit" type="submit">Entrar no grupo agora</button>
           <p class="micro"><span>●</span> 100% gratuito · Seus dados não são compartilhados</p>
         </form>
+      </div>
+    </section>
+
+    <!-- INFORMAÇÕES DO CRIATIVO CAMPEÃO -->
+    <section class="live" id="live">
+      <div class="wrap live-grid">
+        <div>
+          <div class="badges">
+            <span class="badge badge-live badge-big"><span class="dot"></span> Ao vivo no Zoom</span>
+            <span class="badge badge-date badge-big">17/10/26 · às 14h</span>
+          </div>
+          <div class="product"><img src="Imgs/ClaudeSpark-Clay.svg" alt="" /><b>Claude Code</b></div>
+          <p class="tagline">Inteligência artificial que trabalha por você</p>
+          <h2>Tenha um <em>time de agentes de IA</em> trabalhando</h2>
+          <span class="tag247">24/7</span>
+          <p class="no-hire">Sem contratar mais <strong>ninguém</strong>.</p>
+          <a class="btn-wa" href="#form" data-goto-form>Inscreva-se grátis</a>
+        </div>
+
+        <div class="chart" role="img" aria-label="Gráfico ilustrativo: iniciantes usam ChatGPT, profissionais usam Claude">
+          <span class="chart-note">Ilustrativo</span>
+          <div class="bars">
+            <div class="bar-col">
+              <span class="bar-tag">Iniciantes</span>
+              <div class="bar bar-a"></div>
+              <span class="bar-name">ChatGPT</span>
+            </div>
+            <div class="bar-col">
+              <span class="bar-tag" style="color:var(--orange)">Profissionais</span>
+              <div class="bar bar-b"><img src="Imgs/ClaudeSpark-Clay.svg" alt="" width="34" height="34" style="filter:brightness(0) invert(1)" /></div>
+              <span class="bar-name">Claude</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
