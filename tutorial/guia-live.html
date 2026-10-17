@@ -129,7 +129,7 @@
           </div>
 
           <nav class="guide-step-nav" data-step-nav aria-label="Passos deste guia">
-            <a href="#live-passo-1">1. Node.js, Git e PowerShell</a>
+            <a href="#live-passo-1">1. PowerShell, Node.js e Git</a>
             <a href="#live-passo-2">2. Validar instalação</a>
             <a href="#live-passo-3">3. Conta no GitHub</a>
             <a href="#live-passo-4">4. Instalar o Claude Code</a>
@@ -144,11 +144,41 @@
               <span class="guide-step-num">1</span>
               <div class="guide-step-titles">
                 <p class="guide-step-kicker">Preparar o ambiente</p>
-                <h2>Instalar o Node.js e o Git e liberar o PowerShell</h2>
+                <h2>Liberar o PowerShell e instalar o Node.js e o Git</h2>
               </div>
             </div>
             <div class="guide-step-body">
-              <p class="text-body"><strong>Node.js</strong> — mecanismo que instala e roda o Claude Code por trás
+              <p class="text-body">
+                <strong>Liberar o Windows PowerShell</strong> — por padrão, o Windows bloqueia a
+                execução de scripts e comandos globais do Node/npm. Vamos liberar isso uma única vez,
+                só para o seu usuário, antes de instalar o Node.js e o Git.
+              </p>
+
+              <ol class="text-body">
+                <li>Clique no menu <strong>Iniciar</strong> e digite <strong>PowerShell</strong>.</li>
+                <li>Clique com o botão direito no ícone e selecione <strong>"Executar como
+                    Administrador"</strong>.</li>
+                <li>Cole o comando abaixo e pressione Enter:</li>
+              </ol>
+
+              <div class="code-block">
+                <div class="code-block-head">
+                  <span class="code-block-label">PowerShell (como Administrador)</span>
+                  <button class="code-copy-btn" type="button" data-copy-target="live-cmd-execpolicy">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
+                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
+                    </svg>
+                    <span data-copy-label>Copiar</span>
+                  </button>
+                </div>
+                <pre><code id="live-cmd-execpolicy">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></pre>
+              </div>
+
+              <p class="text-body">Digite <code>S</code> (ou <code>Y</code>) para confirmar e feche essa janela do
+                PowerShell — as próximas etapas usam uma janela comum, sem ser Administrador.</p>
+
+              <p class="text-body" style="margin-top: var(--space-5);"><strong>Node.js</strong> — mecanismo que instala e roda o Claude Code por trás
                 dos panos:</p>
 
               <a class="guide-download-card" href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">
@@ -186,36 +216,6 @@
                 </span>
                 <span class="guide-download-card-arrow" aria-hidden="true">↗</span>
               </a>
-
-              <p class="text-body" style="margin-top: var(--space-5);">
-                <strong>Liberar o Windows PowerShell</strong> — por padrão, o Windows bloqueia a
-                execução de scripts e comandos globais do Node/npm. Depois de instalar o Node.js e
-                o Git, vamos liberar isso uma única vez, só para o seu usuário.
-              </p>
-
-              <ol class="text-body">
-                <li>Clique no menu <strong>Iniciar</strong> e digite <strong>PowerShell</strong>.</li>
-                <li>Clique com o botão direito no ícone e selecione <strong>"Executar como
-                    Administrador"</strong>.</li>
-                <li>Cole o comando abaixo e pressione Enter:</li>
-              </ol>
-
-              <div class="code-block">
-                <div class="code-block-head">
-                  <span class="code-block-label">PowerShell (como Administrador)</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="live-cmd-execpolicy">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                      <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
-                      <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
-                    </svg>
-                    <span data-copy-label>Copiar</span>
-                  </button>
-                </div>
-                <pre><code id="live-cmd-execpolicy">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></pre>
-              </div>
-
-              <p class="text-body">Digite <code>S</code> (ou <code>Y</code>) para confirmar e feche essa janela do
-                PowerShell — as próximas etapas usam uma janela comum, sem ser Administrador.</p>
             </div>
           </article>
 
