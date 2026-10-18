@@ -939,7 +939,6 @@ a.guide-nav-item:hover {
 
 .guide-complete-btn[data-completed="true"] {
   background: var(--color-success);
-  cursor: default;
 }
 
 .guide-complete-btn[data-completed="true"] .guide-complete-check {

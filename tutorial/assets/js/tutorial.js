@@ -493,12 +493,21 @@
   var nextLink = document.querySelector(".guide-pagination-next");
   var nextHasRealHref = nextLink && nextLink.getAttribute("href") && nextLink.getAttribute("href") !== "#";
 
+  var markNote = document.querySelector(".guide-complete-note");
+  var markNoteDefault = markNote ? markNote.textContent : "";
+
   function setButtonState(isDone) {
     if (!markBtn) return;
     var label = markBtn.querySelector("[data-complete-label]");
     markBtn.setAttribute("data-completed", isDone ? "true" : "false");
-    markBtn.disabled = isDone;
+    markBtn.disabled = false;
+    markBtn.title = isDone ? "Clique para desmarcar esta lição" : "";
     if (label) label.textContent = isDone ? "Lição concluída" : "Marcar esta lição como concluída";
+    if (markNote) {
+      markNote.textContent = isDone
+        ? "Clique de novo no botão pra desmarcar quando quiser — a lição volta a não concluída."
+        : markNoteDefault;
+    }
   }
 
   function setNextLinkLocked(isLocked) {
@@ -517,9 +526,18 @@
     setNextLinkLocked(nextHasRealHref && !alreadyDone);
 
     markBtn.addEventListener("click", function () {
-      if (markBtn.getAttribute("data-completed") === "true") return;
       var completed = readCompleted();
-      if (completed.indexOf(currentFile) === -1) {
+      var idx = completed.indexOf(currentFile);
+      if (markBtn.getAttribute("data-completed") === "true") {
+        /* Já concluída: o clique desmarca (pode voltar atrás quando quiser). */
+        if (idx !== -1) completed.splice(idx, 1);
+        writeCompleted(completed);
+        setButtonState(false);
+        setNextLinkLocked(nextHasRealHref);
+        if (navItems.length) renderTrail();
+        return;
+      }
+      if (idx === -1) {
         completed.push(currentFile);
         writeCompleted(completed);
       }
