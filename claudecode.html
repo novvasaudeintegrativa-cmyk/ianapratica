@@ -83,6 +83,41 @@
       color: var(--clay-vivid);
     }
 
+    .rec-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      vertical-align: middle;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(229, 24, 24, 0.14);
+      border: 1.5px solid #e51818;
+      color: #e51818;
+      font-family: var(--font-sans);
+      font-size: 0.4em;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1;
+      -webkit-text-stroke: 0;
+    }
+
+    .rec-badge i {
+      width: 0.9em;
+      height: 0.9em;
+      border-radius: 50%;
+      background: #e51818;
+      animation: rec-blink 1.1s ease-in-out infinite;
+    }
+
+    @keyframes rec-blink {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(229, 24, 24, 0.6); }
+      50% { opacity: 0.25; box-shadow: 0 0 0 6px rgba(229, 24, 24, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rec-badge i { animation: none; }
+    }
+
     #orquestracao {
       padding-top: clamp(4.5rem, 8vw, 7.5rem);
     }
@@ -411,7 +446,7 @@
       <div class="container">
         <div class="section-header">
           <span class="text-eyebrow">Para quem é?</span>
-          <h2 class="text-heading">Essa imersão <span class="text-accent">ao vivo</span> é para quem quer:</h2>
+          <h2 class="text-heading">Essa imersão <span class="text-accent">ao vivo</span> <span class="rec-badge" aria-hidden="true"><i></i>REC</span> é para quem quer:</h2>
           <ul class="benefit-list">
             <li>Instalar o Claude Code sem travar em erro de terminal</li>
             <li>Ter alguém do lado resolvendo na hora, ao vivo</li>
