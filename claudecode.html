@@ -26,6 +26,25 @@
       color: #faf9f5;
     }
 
+    .price-now-big {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .price-now-big .price-47 {
+      color: var(--clay-vivid);
+      font-size: clamp(4rem, 6vw + 2rem, 6.5rem);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .price-now-big small {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
     .price-card-headline {
       font-size: clamp(1.9rem, 2vw + 1.1rem, 2.9rem);
       color: #faf9f5;
@@ -889,7 +908,7 @@
                 <span class="text-subtitle">Ingresso — imersão Claude Code</span>
               </div>
               <div class="price-tag">
-                <span class="price-now">R$ 47<small>&nbsp;à vista</small></span>
+                <span class="price-now price-now-big"><small>R$</small><span class="price-47">47,00</span><small>à vista</small></span>
               </div>
               <ul class="price-includes">
                 <li>Imersão ao vivo no dia 5 de novembro</li>
