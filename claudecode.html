@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Live Claude Code — IA na Prática | 5 de novembro</title>
+  <meta name="description"
+    content="Live ao vivo no dia 5 de novembro: instale e configure o Claude Code do zero, junto com a gente, sem programar. Ingresso por R$ 47." />
+  <meta property="og:title" content="Live Claude Code — IA na Prática" />
+  <meta property="og:description"
+    content="Saia da live com o Claude Code instalado, logado e funcionando no seu computador. 5 de novembro, R$ 47." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/vitrine.css" />
+
+  <!-- TODO: trocar CHECKOUT_LIVE_CLAUDECODE pelo link do checkout (Kiwify) da live de R$ 47,
+       com o order bump (gravação) de R$ 47 já configurado no próprio checkout. -->
+
+  <!-- Meta Pixel Code ("Pixel IA na Pratica", id 1104376235675261) -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1104376235675261');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1104376235675261&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <!-- Tracker do New CRM (site_key "ec1d84b4...89a2") -- manda PageView,
+       cliques em link de WhatsApp, profundidade de scroll, tempo na
+       página e progresso de vídeo pro mesmo Supabase do CRM, pra
+       aparecer junto com os leads. -->
+  <script>
+(function(){
+  var NEWCRM_SITE_KEY = "ec1d84b4-e545-4ed3-8dbe-2ac0cbef89a2";
+  var NEWCRM_URL = "https://kufydscarokfppyobdjy.supabase.co/functions/v1/coletar-evento";
+  function uid(){ try { return crypto.randomUUID(); } catch(e){ return Date.now().toString(36)+Math.random().toString(36).slice(2); } }
+  var vid, sid;
+  try { vid = localStorage.getItem('ncrm_vid') || uid(); localStorage.setItem('ncrm_vid', vid); } catch(e){ vid = uid(); }
+  try { sid = sessionStorage.getItem('ncrm_sid') || uid(); sessionStorage.setItem('ncrm_sid', sid); } catch(e){ sid = uid(); }
+  var CAMP_KEYS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+  var camp = {};
+  try {
+    var qs = new URLSearchParams(location.search);
+    var TTL = 30*24*60*60*1000, stored = {};
+    try { var s = JSON.parse(localStorage.getItem('ncrm_camp')||'null'); if (s && s.t && Date.now()-s.t < TTL) stored = s.d || {}; } catch(e){}
+    var temUrl = CAMP_KEYS.some(function(k){ return qs.get(k); });
+    CAMP_KEYS.forEach(function(k){ camp[k] = qs.get(k) || (temUrl ? null : stored[k]) || null; });
+    if (temUrl) try { localStorage.setItem('ncrm_camp', JSON.stringify({t:Date.now(), d:camp})); } catch(e){}
+  } catch(e){}
+  function deviceClass(){
+    var ua = navigator.userAgent||'';
+    if (/Tablet|iPad|Android(?!.*Mobi)/i.test(ua)) return 'tablet';
+    if (/Mobi|Android|iPhone|iPod/i.test(ua)) return 'mobile';
+    return 'desktop';
+  }
+  function send(event, props){
+    try {
+      fetch(NEWCRM_URL, { method:'POST', keepalive:true, headers:{'Content-Type':'application/json'}, body: JSON.stringify(Object.assign({
+        site_key: NEWCRM_SITE_KEY, visitor_id: vid, session_id: sid, event: event, props: props||{},
+        path: location.pathname+location.search, referrer: document.referrer||null,
+        screen_w: (window.screen && screen.width) || null, device: deviceClass()
+      }, camp)) }).catch(function(){});
+    } catch(e){}
+  }
+  send('PageView', {});
+  document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]').forEach(function(a){
+    a.addEventListener('click', function(){ send('Contact', { content_name: 'WhatsApp' }); });
+  });
+  (function(){
+    var marks=[25,50,75,90], hit={}, timer;
+    function check(){
+      var doc=document.documentElement, scrollable=doc.scrollHeight-window.innerHeight;
+      if (scrollable<=0) return;
+      var pct=(window.scrollY||doc.scrollTop)/scrollable*100;
+      marks.forEach(function(m){ if(!hit[m] && pct>=m){ hit[m]=1; send('ScrollDepth',{percent:m}); } });
+      if (hit[90]) window.removeEventListener('scroll', onScroll);
+    }
+    function onScroll(){ clearTimeout(timer); timer=setTimeout(check,200); }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    check();
+  })();
+  [30,60,120].forEach(function(s){ setTimeout(function(){ send('TimeOnPage',{seconds:s}); }, s*1000); });
+  var ytRe = new RegExp('youtube(-nocookie)?.com/embed/');
+  var ytApiReady = false, ytApiLoading = false, ytQueue = [];
+  function ensureYtApi(cb){
+    if (ytApiReady){ cb(); return; }
+    ytQueue.push(cb);
+    if (ytApiLoading) return;
+    ytApiLoading = true;
+    var anterior = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function(){
+      if (typeof anterior === 'function') try { anterior(); } catch(e){}
+      ytApiReady = true;
+      ytQueue.forEach(function(fn){ fn(); });
+      ytQueue = [];
+    };
+    var tag = document.createElement('script'); tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  }
+  var ytVistos = {};
+  function attachYt(f){
+    if (!f || !f.getAttribute || !ytRe.test(f.src || '')) return;
+    if (!f.id) f.id = 'ncrm-yt-' + Math.random().toString(36).slice(2);
+    if (ytVistos[f.id]) return;
+    ytVistos[f.id] = true;
+    if (f.src.indexOf('enablejsapi=') === -1) f.src += (f.src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1';
+    ensureYtApi(function(){
+      var placement = f.getAttribute('data-placement') || 'vsl';
+      var title = f.getAttribute('title') || f.id;
+      var base = { video_provider:'youtube', video_title:title, placement:placement };
+      var hit = {}, poll = null, played = false;
+      new YT.Player(f.id, { events: { onStateChange: function(e){
+        if (e.data === YT.PlayerState.PLAYING){
+          if (!played){ played = true; send('VideoPlay', base); }
+          clearInterval(poll);
+          poll = setInterval(function(){
+            var d = this.getDuration ? this.getDuration() : 0; var c = this.getCurrentTime ? this.getCurrentTime() : 0;
+            if (!d) return;
+            var pct = c / d * 100;
+            [25,50,75,95].forEach(function(m){ if (!hit[m] && pct >= m){ hit[m]=1; send('VideoProgress', Object.assign({percent:m}, base)); } });
+          }.bind(e.target), 1000);
+        } else if (e.data === YT.PlayerState.ENDED){ clearInterval(poll); send('VideoComplete', base); }
+        else if (e.data === YT.PlayerState.PAUSED){ clearInterval(poll); }
+      } } });
+    });
+  }
+  document.querySelectorAll('iframe').forEach(attachYt);
+  try {
+    new MutationObserver(function(muts){
+      muts.forEach(function(m){
+        (m.addedNodes || []).forEach(function(n){
+          if (n.nodeType !== 1) return;
+          if (n.tagName === 'IFRAME') attachYt(n);
+          else if (n.querySelectorAll) n.querySelectorAll('iframe').forEach(attachYt);
+        });
+      });
+    }).observe(document.documentElement, { childList:true, subtree:true });
+  } catch(e){}
+  window.addEventListener('message', function(e){
+    var d = e.data; if (!d || d.source !== 'ncrm-video') return;
+    var base = { video_provider: d.provider || 'custom', video_title: d.title || 'VSL', placement: d.placement || 'vsl' };
+    if (d.type === 'play') send('VideoPlay', base);
+    else if (d.type === 'progress' && d.percent) send('VideoProgress', Object.assign({percent:d.percent}, base));
+    else if (d.type === 'complete') send('VideoComplete', base);
+  });
+})();
+  </script>
+
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header nav-header" data-site-header>
+    <div class="container">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">IA </span>na Prática
+      </a>
+
+      <ul class="nav-list">
+        <li><a href="#o-que-voce-leva">O que você leva</a></li>
+        <li><a href="#passo-a-passo">Passo a passo</a></li>
+        <li><a href="#para-quem-e">Para quem é</a></li>
+        <li><a href="#investimento">Investimento</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" type="button" data-theme-cycle
+          aria-label="Tema: sistema. Clique para alternar.">
+          <svg class="theme-icon theme-icon-system" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <rect x="2" y="3.5" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4" />
+            <path d="M6.5 15.5H11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <svg class="theme-icon theme-icon-light" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <circle cx="9" cy="9" r="3.4" stroke="currentColor" stroke-width="1.4" />
+            <path
+              d="M9 1.6V3.4M9 14.6V16.4M16.4 9H14.6M3.4 9H1.6M14.1 3.9L12.8 5.2M5.2 12.8L3.9 14.1M14.1 14.1L12.8 12.8M5.2 5.2L3.9 3.9"
+              stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <svg class="theme-icon theme-icon-dark" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <path d="M15.5 10.4A6.5 6.5 0 0 1 7.6 2.5a6.5 6.5 0 1 0 7.9 7.9Z" stroke="currentColor" stroke-width="1.4"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+        <button class="mobile-nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav"
+          aria-label="Abrir menu">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M2 5H16M2 9H16M2 13H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+          <span>MENU</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Menu principal">
+      <a href="#o-que-voce-leva">O que você leva</a>
+      <a href="#passo-a-passo">Passo a passo</a>
+      <a href="#para-quem-e">Para quem é</a>
+      <a href="#investimento">Investimento</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- HERO -->
+    <section class="hero hero-impact" id="topo">
+      <div class="hero-impact-glow" aria-hidden="true"></div>
+      <div class="hero-impact-figure" aria-hidden="true">
+        <img src="Imgs/Cyber001.png" alt="" />
+      </div>
+      <div class="hero-impact-motif hero-impact-motif-1" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-col-top">
+          <span class="hero-eyebrow text-eyebrow"><span class="dot"></span> Live ao vivo · 5 de novembro</span>
+          <img class="hero-claude-logo" src="Imgs/ClaudeLogo-Ivory.svg" alt="Claude" />
+          <h1 class="text-display">Instale e configure o <span class="text-accent">Claude Code</span>
+            <span class="hero-h1-small">— junto com a gente, ao vivo, sem programar nada.</span></h1>
+          <p class="hero-lead text-body-lg">
+            Você sai da live com o Claude Code instalado, logado e funcionando no seu computador —
+            pronto para trabalhar dentro do VS Code e guardar tudo no seu GitHub.
+          </p>
+        </div>
+
+        <div class="hero-media hero-media-impact hero-media-video">
+          <video class="hero-vsl" controls autoplay loop muted playsinline preload="auto"
+            poster="assets/img/hero-device-mockup.jpg">
+            <source src="Videos/Code.mp4" type="video/mp4" />
+            Seu navegador não suporta a reprodução de vídeo.
+          </video>
+        </div>
+
+        <div class="hero-col-bottom">
+          <p class="hero-lead-note">Um passo de cada vez, com a gente do seu lado — se travar, a gente resolve na hora.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#investimento">Garantir minha vaga</a>
+            <a class="btn btn-ghost" href="#passo-a-passo">Ver o passo a passo</a>
+          </div>
+          <div class="hero-meta">
+            <div class="hero-meta-pill">
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <rect x="2" y="3" width="14" height="12.5" rx="2" stroke="currentColor" stroke-width="1.4" />
+                <path d="M2 6.5H16" stroke="currentColor" stroke-width="1.4" />
+                <path d="M5.5 1.5V4M12.5 1.5V4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+              </svg>
+              <span><strong>Data</strong> · 5 de novembro</span>
+            </div>
+            <div class="hero-meta-pill">
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                <circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.4" />
+                <path d="M9 5.5V9L11.5 10.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <span><strong>Formato</strong> · ao vivo, online · nível iniciante</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- O QUE VOCÊ LEVA -->
+    <section class="section" id="o-que-voce-leva">
+      <div class="container">
+        <div class="section-header">
+          <span class="text-eyebrow">O que você leva da live</span>
+          <h2 class="text-heading">Do computador vazio ao <span class="text-accent">Claude Code funcionando</span></h2>
+          <p class="text-body">
+            A parte que mais trava quem tenta sozinho é a instalação. Na live a gente faz tudo na ordem certa,
+            ao vivo, e você acompanha no seu próprio computador.
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card card-hover">
+            <p class="text-body"><strong>Ambiente pronto</strong> — PowerShell liberado, Node.js e Git instalados e
+              validados no terminal.</p>
+          </article>
+          <article class="card card-hover">
+            <p class="text-body"><strong>Claude Code instalado e logado</strong> — instalado via npm e autenticado com
+              a sua conta na Anthropic.</p>
+          </article>
+          <article class="card card-hover">
+            <p class="text-body"><strong>Conta no GitHub</strong> — o seu projeto com histórico e backup automático na
+              nuvem, sem perder trabalho.</p>
+          </article>
+          <article class="card card-hover">
+            <p class="text-body"><strong>Claude dentro do VS Code</strong> — abrindo a pasta do projeto e conversando
+              com o Claude direto no terminal do editor.</p>
+          </article>
+          <article class="card card-hover">
+            <p class="text-body"><strong>Primeiro projeto no GitHub</strong> — repositório criado e conectado, com o
+              primeiro commit enviado.</p>
+          </article>
+          <article class="card card-hover">
+            <p class="text-body"><strong>Zero jargão</strong> — cada comando explicado, para você entender o que está
+              fazendo e não só copiar e colar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PASSO A PASSO -->
+    <section class="section section-muted" id="passo-a-passo">
+      <div class="container">
+        <div class="section-header">
+          <span class="text-eyebrow">Passo a passo da live</span>
+          <h2 class="text-heading">7 passos, <span class="text-accent">na ordem certa</span></h2>
+          <p class="text-body">Cada passo depende do anterior — por isso a gente faz junto, sem pular nada.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="simple-item">
+            <span class="icon" aria-hidden="true">1</span>
+            <p><strong>PowerShell, Node.js e Git</strong> — liberar o PowerShell uma única vez e instalar as duas
+              ferramentas que fazem o Claude Code rodar.</p>
+          </div>
+          <div class="simple-item">
+            <span class="icon" aria-hidden="true">2</span>
+            <p><strong>Validar a instalação</strong> — três comandos no terminal para confirmar que o ambiente está
+              pronto.</p>
+          </div>
+          <div class="simple-item">
+            <span class="icon" aria-hidden="true">3</span>
+            <p><strong>Conta no GitHub</strong> — onde o histórico do seu projeto fica guardado na nuvem.</p>
+          </div>
+          <div class="simple-item">
+            <span class="icon" aria-hidden="true">4</span>
+            <p><strong>Instalar o Claude Code</strong> — um único comando via npm.</p>
+          </div>
+          <div class="simple-item">
+            <span class="icon" aria-hidden="true">5</span>
+            <p><strong>Conta na Anthropic</strong> — criar o acesso que autentica o Claude Code.</p>
+          </div>
+          <div class="simple-item">
+            <span class="icon" aria-hidden="true">6</span>
+            <p><strong>Primeiro acesso</strong> — abrir o <code>claude</code> no terminal e autenticar pelo
+              navegador.</p>
+          </div>
+          <div class="simple-item">
+            <span class="icon" aria-hidden="true">7</span>
+            <p><strong>VS Code + GitHub</strong> — abrir seu projeto no editor, conectá-lo a um repositório e conversar
+              com o Claude ali dentro.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARA QUEM É -->
+    <section class="section" id="para-quem-e">
+      <div class="container">
+        <div class="section-header">
+          <span class="text-eyebrow">Para quem é?</span>
+          <h2 class="text-heading">Essa live é para quem quer:</h2>
+          <ul class="benefit-list">
+            <li>Instalar o Claude Code sem travar em erro de terminal</li>
+            <li>Ter alguém do lado resolvendo na hora, ao vivo</li>
+            <li>Começar a usar IA de verdade, sem saber programar</li>
+            <li>Sair com tudo funcionando no próprio computador</li>
+          </ul>
+        </div>
+
+        <div class="grid-2">
+          <div class="simple-item">
+            <span class="icon" aria-hidden="true">→</span>
+            <p><strong>Quem já tentou instalar sozinho</strong> e desistiu na primeira mensagem de erro — ou nem sabe
+              por onde começar.</p>
+          </div>
+          <div class="simple-item">
+            <span class="icon" aria-hidden="true">→</span>
+            <p><strong>Empreendedores e profissionais de marketing</strong> que querem colocar a IA para trabalhar no
+              dia a dia, sem depender de programador.</p>
+          </div>
+          <div class="simple-item">
+            <span class="icon" aria-hidden="true">→</span>
+            <p><strong>Quem pretende fazer a Imersão IA na Prática</strong> e quer chegar com a base já montada.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVESTIMENTO -->
+    <section class="section section-muted" id="investimento">
+      <div class="container">
+        <div class="section-header">
+          <span class="text-eyebrow">Investimento</span>
+          <h2 class="text-heading">Uma live, dois jeitos de aproveitar</h2>
+          <p class="text-body">O ingresso garante sua vaga na live ao vivo do dia 5 de novembro. A gravação é um
+            complemento opcional, oferecido só no momento do checkout.</p>
+        </div>
+
+        <div class="pricing-grid pricing-grid-solo">
+          <div class="card price-card price-card-cyber is-featured">
+            <div class="price-card-cyber-bg" aria-hidden="true"></div>
+            <div class="price-card-body">
+              <div class="price-card-head">
+                <span class="text-subtitle">Ingresso — live Claude Code</span>
+              </div>
+              <div class="price-tag">
+                <span class="price-now">R$ 47<small>&nbsp;à vista</small></span>
+              </div>
+              <ul class="price-includes">
+                <li>Live ao vivo no dia 5 de novembro</li>
+                <li>Instalação e configuração do Claude Code, passo a passo</li>
+                <li>Interação em tempo real para tirar dúvidas</li>
+              </ul>
+              <a class="btn btn-primary btn-cta-pulse" href="CHECKOUT_LIVE_CLAUDECODE" target="_blank"
+                rel="noopener">Garantir minha vaga</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pricing-grid pricing-grid-solo" style="margin-top: var(--space-5);">
+          <div class="card price-card price-card-bump">
+            <div class="price-card-body">
+              <div class="price-card-head">
+                <span class="bump-tag">Oferta no checkout</span>
+                <span class="text-subtitle">Gravação da live</span>
+              </div>
+              <div class="price-tag">
+                <span class="price-now">+ R$ 47</span>
+              </div>
+              <ul class="price-includes">
+                <li>Assista de novo quantas vezes precisar, no seu ritmo</li>
+                <li>Ideal para refazer a instalação com calma</li>
+              </ul>
+              <p class="bump-note">Aparece só na tela de pagamento — é opcional.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-caption text-muted" style="margin-top: var(--space-6); text-align: center;">
+          Pagamento processado via Kiwify.
+        </p>
+        <img class="kiwify-logo" src="Imgs/kiwify-logo.webp" alt="Kiwify" loading="lazy" />
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="final-cta inverse-section">
+      <div class="site-motif site-motif-alpha" style="width:310px; top:-6%; right:4%; transform:rotate(-10deg);"
+        aria-hidden="true"></div>
+      <div class="container">
+        <span class="badge">Live no dia 5 de novembro</span>
+        <h2 class="text-heading">Chega de travar na instalação. Venha fazer <span class="text-accent">junto com a
+            gente.</span></h2>
+        <p class="text-body-lg">
+          Por R$ 47 você sai com o Claude Code funcionando — e o caminho aberto para o resto da IA na Prática.
+        </p>
+        <a class="btn btn-primary btn-cta-pulse" href="#investimento">Garantir minha vaga</a>
+        <p class="final-cta-brand"><span class="text-accent">IA</span> na Prática</p>
+        <p class="text-body-sm" style="margin-top: var(--space-6); color: rgba(250,249,245,0.6);">
+          Quer ir além da live? <a href="index.html" style="color:#faf9f5; text-decoration: underline;">Conheça a
+            imersão completa de 2 dias</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <span class="text-eyebrow">Perguntas frequentes</span>
+          <h2 class="text-heading">FAQ</h2>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item" data-faq-item data-open="false">
+            <button class="faq-question" data-faq-question aria-expanded="false">
+              <span>Preciso saber programar?</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Não. A live é para iniciantes: cada comando é explicado e a gente faz tudo junto, um passo de cada
+                vez.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-item data-open="false">
+            <button class="faq-question" data-faq-question aria-expanded="false">
+              <span>Preciso de algum equipamento especial?</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Apenas um computador (o passo a passo é feito no Windows) com internet. As instalações a gente faz
+                durante a live.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-item data-open="false">
+            <button class="faq-question" data-faq-question aria-expanded="false">
+              <span>Preciso assinar o Claude Pro ou Max?</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Na live você cria uma conta no console da Anthropic, que é o caminho que usamos para autenticar o
+                Claude Code. Como as condições de créditos da Anthropic mudam, confira na hora do cadastro o que sua
+                conta recebe.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-item data-open="false">
+            <button class="faq-question" data-faq-question aria-expanded="false">
+              <span>E se eu não conseguir participar ao vivo?</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>Se você incluir a gravação na tela de pagamento (+ R$ 47), pode assistir depois. Sem ela, a live não
+                é recuperável.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-item data-open="false">
+            <button class="faq-question" data-faq-question aria-expanded="false">
+              <span>Como funciona o pagamento?</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>O ingresso custa R$ 47, com a gravação como complemento opcional de R$ 47 durante a compra, processado
+                via Kiwify. Formas de pagamento: cartão, pix ou boleto.</p>
+            </div>
+          </div>
+
+          <div class="faq-item" data-faq-item data-open="false">
+            <button class="faq-question" data-faq-question aria-expanded="false">
+              <span>Qual a diferença para a Imersão IA na Prática?</span>
+              <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p>A live foca em deixar o Claude Code instalado e funcionando. A <a href="index.html">imersão de 2
+                  dias</a> vai além: você monta o time de agentes que posta sozinho no seu Instagram.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="index.html"><span class="brand-mark">IA</span> na Prática</a>
+          <p class="text-body-sm text-muted" style="margin-top: var(--space-3); max-width: 32ch;">
+            Live ao vivo para instalar e configurar o Claude Code.
+          </p>
+        </div>
+        <div>
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#passo-a-passo">Passo a passo</a></li>
+            <li><a href="#investimento">Investimento</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="index.html">Imersão completa</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 IA na Prática. Todos os direitos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="sticky-cta">
+    <div class="sticky-cta-inner">
+      <div class="sticky-cta-price">
+        <strong>R$ 47 <small>à vista</small></strong>
+      </div>
+      <a class="btn btn-primary" href="#investimento">Garantir minha vaga</a>
+    </div>
+  </div>
+
+  <a class="whatsapp-float" href="https://wa.me/5521997836113" target="_blank" rel="noopener"
+    aria-label="Falar no WhatsApp">
+    <svg width="30" height="30" viewBox="0 0 32 32" fill="#fff" aria-hidden="true">
+      <path
+        d="M16.004 2.667c-7.364 0-13.333 5.97-13.333 13.333 0 2.352.615 4.56 1.692 6.475L2.667 29.333l7.028-1.843a13.26 13.26 0 0 0 6.309 1.61h.006c7.363 0 13.333-5.97 13.333-13.333s-5.976-13.1-13.339-13.1Zm0 24.396a11.03 11.03 0 0 1-5.624-1.541l-.403-.24-4.172 1.094 1.114-4.067-.263-.418a11.02 11.02 0 0 1-1.69-5.891c0-6.095 4.961-11.056 11.064-11.056 2.955 0 5.733 1.153 7.823 3.246a10.98 10.98 0 0 1 3.235 7.82c0 6.097-4.98 11.053-11.084 11.053Zm6.063-8.282c-.332-.166-1.966-.97-2.272-1.08-.306-.111-.528-.166-.75.166-.222.333-.86 1.08-1.056 1.302-.194.222-.389.25-.721.083-.333-.166-1.404-.517-2.675-1.65-.989-.883-1.657-1.973-1.852-2.305-.194-.333-.021-.513.146-.679.15-.149.333-.389.5-.583.166-.195.222-.334.333-.556.111-.223.055-.417-.028-.584-.083-.166-.75-1.807-1.028-2.474-.27-.65-.545-.562-.75-.572l-.639-.011c-.222 0-.583.083-.889.417-.305.333-1.166 1.14-1.166 2.78 0 1.64 1.194 3.225 1.36 3.448.167.222 2.351 3.588 5.696 5.032.796.344 1.417.549 1.901.703.799.254 1.526.218 2.101.132.641-.096 1.966-.804 2.244-1.581.277-.777.277-1.443.194-1.581-.083-.139-.305-.222-.638-.389Z" />
+    </svg>
+  </a>
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
