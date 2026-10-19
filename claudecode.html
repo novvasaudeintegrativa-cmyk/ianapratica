@@ -41,6 +41,13 @@
       text-transform: uppercase;
     }
 
+    /* Hero: vídeo alinhado ao topo da coluna do texto (em vez de centralizado na altura toda) */
+    @media (min-width: 960px) {
+      .hero-impact .hero-media {
+        align-self: start;
+      }
+    }
+
     #orquestracao {
       padding-top: clamp(4.5rem, 8vw, 7.5rem);
     }
