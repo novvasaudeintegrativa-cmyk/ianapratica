@@ -19,6 +19,21 @@
     .hero-impact h1.text-display {
       font-size: clamp(1.6rem, 1.6vw + 1rem, 2.7rem);
     }
+    .hero-claude-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: var(--space-4);
+      color: #faf9f5;
+      font-size: 1.7rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .hero-claude-brand .hero-claude-logo {
+      margin-bottom: 0;
+      height: 36px;
+    }
   </style>
 
   <!-- TODO: trocar CHECKOUT_LIVE_CLAUDECODE pelo link do checkout (Kiwify) da live de R$ 47,
@@ -233,11 +248,14 @@
       <div class="container hero-grid">
         <div class="hero-col-top">
           <span class="hero-eyebrow text-eyebrow"><span class="dot"></span> Imersão ao vivo · 5 de novembro</span>
-          <img class="hero-claude-logo" src="Imgs/ClaudeLogo-Ivory.svg" alt="Claude" />
+          <div class="hero-claude-brand">
+            <img class="hero-claude-logo" src="Imgs/Claude_AI_symbol.svg.webp" alt="" />
+            <span>Claude Code</span>
+          </div>
           <h1 class="text-display">Transforme o <span class="text-accent">Claude Code</span> em um aliado para
             <span class="text-accent" style="font-style: italic;">economizar tempo e aumentar o faturamento</span> do seu negócio.</h1>
           <p class="hero-lead text-body-lg">
-            Você sai da imersão com Aprenda a instalar, configurar e autorizar o Claude Code para começar a explorar o potencial da inteligência artificial na automação de tarefas, otimização de processos e criação de soluções que podem ajudar sua empresa a crescer.
+            Aprenda a instalar, configurar e autorizar o Claude Code para começar a explorar o potencial da inteligência artificial na automação de tarefas, otimização de processos e criação de soluções que podem ajudar sua empresa a crescer.
           </p>
         </div>
 
