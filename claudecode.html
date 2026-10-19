@@ -41,10 +41,16 @@
       text-transform: uppercase;
     }
 
-    /* Hero: vídeo alinhado ao topo da coluna do texto (em vez de centralizado na altura toda) */
+    /* Hero: vídeo na mesma altura do bloco título + parágrafo (e não da coluna inteira, que inclui os botões) */
     @media (min-width: 960px) {
+      .hero-impact .hero-grid {
+        grid-template-areas:
+          "top    media"
+          "bottom .";
+      }
+
       .hero-impact .hero-media {
-        align-self: start;
+        align-self: center;
       }
     }
 
