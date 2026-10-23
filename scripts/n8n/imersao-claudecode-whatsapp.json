@@ -1,0 +1,436 @@
+{
+  "name": "Imersão Claude Code — WhatsApp após a compra (Kiwify)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "kiwify-imersao-claudecode",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook",
+      "name": "Venda na Kiwify (webhook)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        300
+      ],
+      "webhookId": "kiwify-imersao-claudecode"
+    },
+    {
+      "parameters": {
+        "includeOtherFields": true,
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1",
+              "name": "nome",
+              "type": "string",
+              "value": "={{ $json.body.Customer.first_name || String($json.body.Customer.full_name || '').split(' ')[0] || 'tudo bem' }}"
+            },
+            {
+              "id": "a2",
+              "name": "telefone",
+              "type": "string",
+              "value": "={{ (() => { let d = String($json.body.Customer.mobile || '').replace(/D/g,''); if (d.length <= 11) d = '55' + d; return d; })() }}"
+            },
+            {
+              "id": "a3",
+              "name": "grupo_link",
+              "type": "string",
+              "value": "https://chat.whatsapp.com/CwqFEIlHEjc6Zfy9IPhv9K"
+            },
+            {
+              "id": "a4",
+              "name": "zoom_link",
+              "type": "string",
+              "value": "COLE-O-LINK-DO-ZOOM-AQUI"
+            },
+            {
+              "id": "a5",
+              "name": "produto_filtro",
+              "type": "string",
+              "value": "Claude Code"
+            },
+            {
+              "id": "a6",
+              "name": "wa_send_url",
+              "type": "string",
+              "value": "https://api.z-api.io/instances/SEU_ID_DA_INSTANCIA/token/SEU_TOKEN/send-text"
+            },
+            {
+              "id": "a7",
+              "name": "wa_client_token",
+              "type": "string",
+              "value": "SEU_CLIENT_TOKEN_DA_ZAPI"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "config",
+      "name": "Config e dados",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "k1",
+              "leftValue": "={{ $json.body.order_status }}",
+              "rightValue": "paid",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "k2",
+              "leftValue": "={{ $json.body.Product.product_name }}",
+              "rightValue": "={{ $json.produto_filtro }}",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "aprovada",
+      "name": "Venda aprovada deste produto?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        480,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config e dados').first().json.wa_send_url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Client-Token",
+              "value": "={{ $('Config e dados').first().json.wa_client_token }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ phone: $('Config e dados').first().json.telefone, message: `Olá, ${$('Config e dados').first().json.nome}! 🎉 Sua vaga na Imersão Claude Code – IA na Prática está confirmada.\n\n📅 5 de novembro de 2026\n⏰ 20h, ao vivo no Zoom\n\n👉 Entre agora no grupo oficial. É lá que enviamos o link do Zoom e os avisos importantes:\n${$('Config e dados').first().json.grupo_link}\n\nNos vemos lá!` }) }}",
+        "options": {}
+      },
+      "id": "boasvindascomlinkdogrupo",
+      "name": "Boas-vindas com link do grupo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        200
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ new Date() < new Date('2026-11-04T12:00:00-03:00') }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "aindadtempodavspera",
+      "name": "Ainda dá tempo da véspera?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        960,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "specificTime",
+        "dateTime": "2026-11-04T12:00:00-03:00"
+      },
+      "id": "esperaratavspera",
+      "name": "Esperar até a véspera",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        100
+      ],
+      "webhookId": "esperaratavspera-wh"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config e dados').first().json.wa_send_url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Client-Token",
+              "value": "={{ $('Config e dados').first().json.wa_client_token }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ phone: $('Config e dados').first().json.telefone, message: `Oi, ${$('Config e dados').first().json.nome}! 📅 Amanhã, 5 de novembro, às 20h, tem a Imersão Claude Code.\n\nConfira se você já está no grupo, porque o link do Zoom será enviado lá:\n${$('Config e dados').first().json.grupo_link}\n\nDica: deixe o computador carregado e com internet estável.` }) }}",
+        "options": {}
+      },
+      "id": "lembretedavspera",
+      "name": "Lembrete da véspera",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        100
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ new Date() < new Date('2026-11-05T19:00:00-03:00') }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "aindadtempoda1hantes",
+      "name": "Ainda dá tempo da 1h antes?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1680,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "specificTime",
+        "dateTime": "2026-11-05T19:00:00-03:00"
+      },
+      "id": "esperarat1hantes",
+      "name": "Esperar até 1h antes",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1920,
+        100
+      ],
+      "webhookId": "esperarat1hantes-wh"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config e dados').first().json.wa_send_url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Client-Token",
+              "value": "={{ $('Config e dados').first().json.wa_client_token }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ phone: $('Config e dados').first().json.telefone, message: `${$('Config e dados').first().json.nome}, falta 1 hora! ⏰ A Imersão Claude Code começa às 20h.\n\n🔗 Link do Zoom: ${$('Config e dados').first().json.zoom_link}\n\nPode entrar assim que estiver pronto(a). Até já! 🚀` }) }}",
+        "options": {}
+      },
+      "id": "lembrete1hantescomlinkdozoom",
+      "name": "Lembrete 1h antes com link do Zoom",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2160,
+        100
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000
+    }
+  ],
+  "connections": {
+    "Venda na Kiwify (webhook)": {
+      "main": [
+        [
+          {
+            "node": "Config e dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Config e dados": {
+      "main": [
+        [
+          {
+            "node": "Venda aprovada deste produto?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Venda aprovada deste produto?": {
+      "main": [
+        [
+          {
+            "node": "Boas-vindas com link do grupo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Boas-vindas com link do grupo": {
+      "main": [
+        [
+          {
+            "node": "Ainda dá tempo da véspera?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ainda dá tempo da véspera?": {
+      "main": [
+        [
+          {
+            "node": "Esperar até a véspera",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ainda dá tempo da 1h antes?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar até a véspera": {
+      "main": [
+        [
+          {
+            "node": "Lembrete da véspera",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lembrete da véspera": {
+      "main": [
+        [
+          {
+            "node": "Ainda dá tempo da 1h antes?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ainda dá tempo da 1h antes?": {
+      "main": [
+        [
+          {
+            "node": "Esperar até 1h antes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar até 1h antes": {
+      "main": [
+        [
+          {
+            "node": "Lembrete 1h antes com link do Zoom",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Sao_Paulo"
+  },
+  "active": false,
+  "tags": []
+}
