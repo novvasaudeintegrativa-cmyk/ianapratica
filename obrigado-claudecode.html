@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compra confirmada — Imersão Claude Code | IA na Prática</title>
+  <meta name="description" content="Compra confirmada! Entre no grupo do WhatsApp para receber o link do Zoom da imersão de 5 de novembro." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/vitrine.css" />
+  <style>
+    /* Título do hero desta página é mais longo que o da index — fonte menor pra caber em menos linhas */
+    .hero-impact h1.text-display {
+      font-size: clamp(1.6rem, 1.6vw + 1rem, 2.7rem);
+    }
+    /* Cards da seção da persona ficam sobre fundo escuro — texto claro */
+    #o-que-voce-leva .card p,
+    #o-que-voce-leva .card strong,
+    #o-que-voce-leva .card code {
+      color: #faf9f5;
+    }
+
+    .price-date-badge {
+      align-self: center;
+      display: inline-block;
+      margin: 0 auto var(--space-4);
+      padding: 6px 16px;
+      border-radius: var(--radius-pill);
+      background: var(--clay-vivid);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Hero: vídeo na mesma altura do bloco título + parágrafo (e não da coluna inteira, que inclui os botões) */
+    @media (min-width: 960px) {
+      .hero-impact .hero-grid {
+        grid-template-areas:
+          "top    media"
+          "bottom .";
+      }
+
+      .hero-impact .hero-media {
+        align-self: center;
+      }
+    }
+
+    .hero-eyebrow-live {
+      gap: 12px;
+      padding: 10px 22px 10px 16px;
+      border: 1.5px solid var(--clay-vivid);
+      border-radius: var(--radius-pill);
+      background: rgba(255, 90, 31, 0.12);
+      backdrop-filter: blur(4px);
+      font-size: clamp(1.05rem, 0.6vw + 0.9rem, 1.35rem);
+      font-weight: 600;
+    }
+
+    .hero-eyebrow-white {
+      color: #faf9f5;
+    }
+
+    .hero-eyebrow-sep {
+      color: #faf9f5;
+      margin: 0 -4px;
+    }
+
+    .hero-eyebrow-orange {
+      color: var(--clay-vivid);
+    }
+
+    .hero-eyebrow-icon {
+      flex: none;
+      color: var(--clay-vivid);
+    }
+
+    .rec-dot {
+      display: inline-block;
+      width: 0.36em;
+      height: 0.36em;
+      margin-right: 0.3em;
+      vertical-align: middle;
+      border-radius: 50%;
+      background: #e51818;
+      animation: rec-blink 1.1s ease-in-out infinite;
+    }
+
+    @keyframes rec-blink {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(229, 24, 24, 0.6); }
+      50% { opacity: 0.25; box-shadow: 0 0 0 6px rgba(229, 24, 24, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rec-dot { animation: none; }
+    }
+
+    #orquestracao {
+      padding-top: clamp(4.5rem, 8vw, 7.5rem);
+    }
+
+    .price-now-big {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .price-now-big .price-47 {
+      color: var(--clay-vivid);
+      font-size: clamp(4rem, 6vw + 2rem, 6.5rem);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .price-now-big .price-cents {
+      font-size: 0.45em;
+      font-weight: 700;
+    }
+
+    .price-now-big small {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .price-card-headline {
+      font-size: clamp(1.9rem, 2vw + 1.1rem, 2.9rem);
+      color: #faf9f5;
+      text-align: center;
+      margin: 0 0 var(--space-5);
+      padding-bottom: var(--space-8);
+    }
+
+    .hero-claude-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: var(--space-4);
+      color: #faf9f5;
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      -webkit-text-stroke: 0.4px currentColor;
+      line-height: 1;
+    }
+
+    .hero-claude-brand .hero-claude-logo {
+      margin-bottom: 0;
+      height: 48px;
+    }
+  </style>
+
+  <!-- Checkout (Kiwify) da imersão de R$ 47 — 
+       order bump (gravação, R$ 47) configurado no próprio checkout. -->
+
+  <!-- Meta Pixel Code ("Pixel IA na Pratica", id 1104376235675261) -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1104376235675261');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1104376235675261&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <!-- Tracker do New CRM (site_key "ec1d84b4...89a2") -- manda PageView,
+       cliques em link de WhatsApp, profundidade de scroll, tempo na
+       página e progresso de vídeo pro mesmo Supabase do CRM, pra
+       aparecer junto com os leads. -->
+  <script>
+(function(){
+  var NEWCRM_SITE_KEY = "ec1d84b4-e545-4ed3-8dbe-2ac0cbef89a2";
+  var NEWCRM_URL = "https://kufydscarokfppyobdjy.supabase.co/functions/v1/coletar-evento";
+  function uid(){ try { return crypto.randomUUID(); } catch(e){ return Date.now().toString(36)+Math.random().toString(36).slice(2); } }
+  var vid, sid;
+  try { vid = localStorage.getItem('ncrm_vid') || uid(); localStorage.setItem('ncrm_vid', vid); } catch(e){ vid = uid(); }
+  try { sid = sessionStorage.getItem('ncrm_sid') || uid(); sessionStorage.setItem('ncrm_sid', sid); } catch(e){ sid = uid(); }
+  var CAMP_KEYS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+  var camp = {};
+  try {
+    var qs = new URLSearchParams(location.search);
+    var TTL = 30*24*60*60*1000, stored = {};
+    try { var s = JSON.parse(localStorage.getItem('ncrm_camp')||'null'); if (s && s.t && Date.now()-s.t < TTL) stored = s.d || {}; } catch(e){}
+    var temUrl = CAMP_KEYS.some(function(k){ return qs.get(k); });
+    CAMP_KEYS.forEach(function(k){ camp[k] = qs.get(k) || (temUrl ? null : stored[k]) || null; });
+    if (temUrl) try { localStorage.setItem('ncrm_camp', JSON.stringify({t:Date.now(), d:camp})); } catch(e){}
+  } catch(e){}
+  function deviceClass(){
+    var ua = navigator.userAgent||'';
+    if (/Tablet|iPad|Android(?!.*Mobi)/i.test(ua)) return 'tablet';
+    if (/Mobi|Android|iPhone|iPod/i.test(ua)) return 'mobile';
+    return 'desktop';
+  }
+  function send(event, props){
+    try {
+      fetch(NEWCRM_URL, { method:'POST', keepalive:true, headers:{'Content-Type':'application/json'}, body: JSON.stringify(Object.assign({
+        site_key: NEWCRM_SITE_KEY, visitor_id: vid, session_id: sid, event: event, props: props||{},
+        path: location.pathname+location.search, referrer: document.referrer||null,
+        screen_w: (window.screen && screen.width) || null, device: deviceClass()
+      }, camp)) }).catch(function(){});
+    } catch(e){}
+  }
+  send('PageView', {});
+  document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]').forEach(function(a){
+    a.addEventListener('click', function(){ send('Contact', { content_name: 'WhatsApp' }); });
+  });
+  (function(){
+    var marks=[25,50,75,90], hit={}, timer;
+    function check(){
+      var doc=document.documentElement, scrollable=doc.scrollHeight-window.innerHeight;
+      if (scrollable<=0) return;
+      var pct=(window.scrollY||doc.scrollTop)/scrollable*100;
+      marks.forEach(function(m){ if(!hit[m] && pct>=m){ hit[m]=1; send('ScrollDepth',{percent:m}); } });
+      if (hit[90]) window.removeEventListener('scroll', onScroll);
+    }
+    function onScroll(){ clearTimeout(timer); timer=setTimeout(check,200); }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    check();
+  })();
+  [30,60,120].forEach(function(s){ setTimeout(function(){ send('TimeOnPage',{seconds:s}); }, s*1000); });
+  var ytRe = new RegExp('youtube(-nocookie)?.com/embed/');
+  var ytApiReady = false, ytApiLoading = false, ytQueue = [];
+  function ensureYtApi(cb){
+    if (ytApiReady){ cb(); return; }
+    ytQueue.push(cb);
+    if (ytApiLoading) return;
+    ytApiLoading = true;
+    var anterior = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function(){
+      if (typeof anterior === 'function') try { anterior(); } catch(e){}
+      ytApiReady = true;
+      ytQueue.forEach(function(fn){ fn(); });
+      ytQueue = [];
+    };
+    var tag = document.createElement('script'); tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  }
+  var ytVistos = {};
+  function attachYt(f){
+    if (!f || !f.getAttribute || !ytRe.test(f.src || '')) return;
+    if (!f.id) f.id = 'ncrm-yt-' + Math.random().toString(36).slice(2);
+    if (ytVistos[f.id]) return;
+    ytVistos[f.id] = true;
+    if (f.src.indexOf('enablejsapi=') === -1) f.src += (f.src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1';
+    ensureYtApi(function(){
+      var placement = f.getAttribute('data-placement') || 'vsl';
+      var title = f.getAttribute('title') || f.id;
+      var base = { video_provider:'youtube', video_title:title, placement:placement };
+      var hit = {}, poll = null, played = false;
+      new YT.Player(f.id, { events: { onStateChange: function(e){
+        if (e.data === YT.PlayerState.PLAYING){
+          if (!played){ played = true; send('VideoPlay', base); }
+          clearInterval(poll);
+          poll = setInterval(function(){
+            var d = this.getDuration ? this.getDuration() : 0; var c = this.getCurrentTime ? this.getCurrentTime() : 0;
+            if (!d) return;
+            var pct = c / d * 100;
+            [25,50,75,95].forEach(function(m){ if (!hit[m] && pct >= m){ hit[m]=1; send('VideoProgress', Object.assign({percent:m}, base)); } });
+          }.bind(e.target), 1000);
+        } else if (e.data === YT.PlayerState.ENDED){ clearInterval(poll); send('VideoComplete', base); }
+        else if (e.data === YT.PlayerState.PAUSED){ clearInterval(poll); }
+      } } });
+    });
+  }
+  document.querySelectorAll('iframe').forEach(attachYt);
+  try {
+    new MutationObserver(function(muts){
+      muts.forEach(function(m){
+        (m.addedNodes || []).forEach(function(n){
+          if (n.nodeType !== 1) return;
+          if (n.tagName === 'IFRAME') attachYt(n);
+          else if (n.querySelectorAll) n.querySelectorAll('iframe').forEach(attachYt);
+        });
+      });
+    }).observe(document.documentElement, { childList:true, subtree:true });
+  } catch(e){}
+  window.addEventListener('message', function(e){
+    var d = e.data; if (!d || d.source !== 'ncrm-video') return;
+    var base = { video_provider: d.provider || 'custom', video_title: d.title || 'VSL', placement: d.placement || 'vsl' };
+    if (d.type === 'play') send('VideoPlay', base);
+    else if (d.type === 'progress' && d.percent) send('VideoProgress', Object.assign({percent:d.percent}, base));
+    else if (d.type === 'complete') send('VideoComplete', base);
+  });
+})();
+  </script>
+
+</head>
+
+<body>
+<header class="site-header nav-header" data-site-header>
+    <div class="container">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">IA </span>na Prática
+      </a>
+
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" type="button" data-theme-cycle
+          aria-label="Tema: sistema. Clique para alternar.">
+          <svg class="theme-icon theme-icon-system" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <rect x="2" y="3.5" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4" />
+            <path d="M6.5 15.5H11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <svg class="theme-icon theme-icon-light" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <circle cx="9" cy="9" r="3.4" stroke="currentColor" stroke-width="1.4" />
+            <path
+              d="M9 1.6V3.4M9 14.6V16.4M16.4 9H14.6M3.4 9H1.6M14.1 3.9L12.8 5.2M5.2 12.8L3.9 14.1M14.1 14.1L12.8 12.8M5.2 5.2L3.9 3.9"
+              stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+          <svg class="theme-icon theme-icon-dark" width="18" height="18" viewBox="0 0 18 18" fill="none"
+            aria-hidden="true">
+            <path d="M15.5 10.4A6.5 6.5 0 0 1 7.6 2.5a6.5 6.5 0 1 0 7.9 7.9Z" stroke="currentColor" stroke-width="1.4"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </header>
+
+  <main id="conteudo">
+
+    <section class="hero hero-impact obrigado-hero" id="topo">
+      <div class="hero-impact-glow" aria-hidden="true"></div>
+      <div class="hero-impact-motif hero-impact-motif-1" aria-hidden="true"></div>
+      <div class="container obrigado-wrap">
+        <span class="hero-eyebrow hero-eyebrow-live text-eyebrow">
+          <svg class="hero-eyebrow-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.8" />
+            <path d="M7.5 12.3L10.6 15.4L16.6 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="hero-eyebrow-white">Compra confirmada</span>
+        </span>
+
+        <h1 class="text-display">Falta só <span class="text-accent">um passo</span>: entre no grupo do WhatsApp.</h1>
+        <p class="hero-lead text-body-lg">
+          É lá que a gente envia o <strong>link do Zoom</strong> da imersão do dia 5 de novembro, os lembretes
+          e os avisos importantes. Quem não entra no grupo corre o risco de ficar sem o link.
+        </p>
+
+        <a class="btn btn-primary btn-cta-pulse obrigado-btn" href="https://chat.whatsapp.com/COLE-O-LINK-DO-GRUPO" target="_blank" rel="noopener">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+            <path d="M16.004 2.667c-7.364 0-13.333 5.97-13.333 13.333 0 2.352.615 4.56 1.692 6.475L2.667 29.333l7.028-1.843a13.26 13.26 0 0 0 6.309 1.61h.006c7.363 0 13.333-5.97 13.333-13.333s-5.976-13.1-13.339-13.1Zm0 24.396a11.03 11.03 0 0 1-5.624-1.541l-.403-.24-4.172 1.094 1.114-4.067-.263-.418a11.02 11.02 0 0 1-1.69-5.891c0-6.095 4.961-11.056 11.064-11.056 2.955 0 5.733 1.153 7.823 3.246a10.98 10.98 0 0 1 3.235 7.82c0 6.097-4.98 11.053-11.084 11.053Zm6.063-8.282c-.332-.166-1.966-.97-2.272-1.08-.306-.111-.528-.166-.75.166-.222.333-.86 1.08-1.056 1.302-.194.222-.389.25-.721.083-.333-.166-1.404-.517-2.675-1.65-.989-.883-1.657-1.973-1.852-2.305-.194-.333-.021-.513.146-.679.15-.149.333-.389.5-.583.166-.195.222-.334.333-.556.111-.223.055-.417-.028-.584-.083-.166-.75-1.807-1.028-2.474-.27-.65-.545-.562-.75-.572l-.639-.011c-.222 0-.583.083-.889.417-.305.333-1.166 1.14-1.166 2.78 0 1.64 1.194 3.225 1.36 3.448.167.222 2.351 3.588 5.696 5.032.796.344 1.417.549 1.901.703.799.254 1.526.218 2.101.132.641-.096 1.966-.804 2.244-1.581.277-.777.277-1.443.194-1.581-.083-.139-.305-.222-.638-.389Z" />
+          </svg>
+          Entrar no grupo do WhatsApp
+        </a>
+        <p class="obrigado-note">Clique no botão e confirme "Participar do grupo" no WhatsApp.</p>
+      </div>
+    </section>
+
+    <section class="section" id="proximos-passos">
+      <div class="container">
+        <div class="section-header">
+          <span class="text-eyebrow">Próximos passos</span>
+          <h2 class="text-heading">Como vai ser a <span class="text-accent">imersão</span></h2>
+        </div>
+
+        <div class="grid-3">
+          <article class="card card-hover">
+            <p class="text-body"><strong>1. Entre no grupo</strong> — é por lá que você recebe o link do Zoom, os
+              lembretes e tira dúvidas com a gente antes do dia.</p>
+          </article>
+          <article class="card card-hover">
+            <p class="text-body"><strong>2. Reserve o dia 5 de novembro</strong> — coloque na agenda agora. No dia
+              anterior e uma hora antes a gente reenvia o link no grupo.</p>
+          </article>
+          <article class="card card-hover">
+            <p class="text-body"><strong>3. Prepare o computador</strong> — um computador com internet e o Zoom
+              instalado. As instalações do Claude Code a gente faz juntos, ao vivo.</p>
+          </article>
+        </div>
+
+        <p class="text-body obrigado-help">
+          Não conseguiu entrar no grupo? <a href="https://wa.me/5521997836113" target="_blank" rel="noopener">Fale com a gente no WhatsApp</a>
+          e informe o e-mail usado na compra.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 IA na Prática. Todos os direitos reservados.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Compra confirmada (Kiwify redireciona pra cá após o pagamento aprovado)
+    if (window.fbq) { fbq('track', 'Purchase', { value: 47.00, currency: 'BRL' }); }
+  </script>
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
