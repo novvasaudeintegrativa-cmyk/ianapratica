@@ -1073,7 +1073,7 @@
                 <li>Instalação e configuração do Claude Code, passo a passo</li>
                 <li>Interação em tempo real para tirar dúvidas</li>
               </ul>
-              <a class="btn btn-primary btn-cta-pulse" href="https://pay.kiwify.com.br/b9KLlUi" target="_blank"
+              <a class="btn btn-primary btn-cta-pulse" id="btn-comprar" data-track="comprar" href="https://pay.kiwify.com.br/b9KLlUi" target="_blank"
                 rel="noopener">Garantir minha vaga</a>
             </div>
           </div>
@@ -1193,6 +1193,59 @@
     </svg>
   </a>
 
+  <script>
+    // Rastreamento do botão de compra: Pixel da Meta (InitiateCheckout) + CRM + repasse das UTMs pra Kiwify
+    (function () {
+      var btn = document.getElementById('btn-comprar');
+      if (!btn) return;
+      var CRM_URL = 'https://kufydscarokfppyobdjy.supabase.co/functions/v1/coletar-evento';
+      var CRM_KEY = 'ec1d84b4-e545-4ed3-8dbe-2ac0cbef89a2';
+      var UTM = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+      var baseHref = btn.getAttribute('href');
+
+      function utms() {
+        var out = {};
+        try {
+          var qs = new URLSearchParams(location.search);
+          var stored = {};
+          try { var s = JSON.parse(localStorage.getItem('ncrm_camp') || 'null'); if (s && s.d) stored = s.d; } catch (e) {}
+          UTM.forEach(function (k) { var v = qs.get(k) || stored[k]; if (v) out[k] = v; });
+        } catch (e) {}
+        return out;
+      }
+
+      // repassa as UTMs no link do checkout pra Kiwify atribuir a venda ao anúncio
+      var u = utms(), q = Object.keys(u).map(function (k) { return k + '=' + encodeURIComponent(u[k]); }).join('&');
+      if (q) btn.setAttribute('href', baseHref + (baseHref.indexOf('?') === -1 ? '?' : '&') + q);
+
+      function crm(event, props) {
+        try {
+          var vid = localStorage.getItem('ncrm_vid'), sid = sessionStorage.getItem('ncrm_sid');
+          fetch(CRM_URL, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.assign({ site_key: CRM_KEY, visitor_id: vid, session_id: sid, event: event, props: props || {},
+              path: location.pathname + location.search, referrer: document.referrer || null }, u)) }).catch(function () {});
+        } catch (e) {}
+      }
+
+      btn.addEventListener('click', function () {
+        if (window.fbq) fbq('track', 'InitiateCheckout', { value: 47.00, currency: 'BRL', content_name: 'Imersão Claude Code' });
+        crm('InitiateCheckout', { value: 47, currency: 'BRL', content_name: 'Imersão Claude Code' });
+      });
+
+      // Quando a pessoa chega na seção de preço (ViewContent), uma vez só
+      var secao = document.getElementById('investimento');
+      if (secao && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (es) {
+          if (es.some(function (e) { return e.isIntersecting; })) {
+            io.disconnect();
+            if (window.fbq) fbq('track', 'ViewContent', { value: 47.00, currency: 'BRL', content_name: 'Imersão Claude Code' });
+            crm('ViewContent', { content_name: 'Imersão Claude Code' });
+          }
+        }, { threshold: 0.4 });
+        io.observe(secao);
+      }
+    })();
+  </script>
   <script src="assets/js/main.js"></script>
 </body>
 
