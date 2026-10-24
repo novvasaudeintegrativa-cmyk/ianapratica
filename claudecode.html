@@ -116,6 +116,18 @@
     .hero-impact .hero-media-video { aspect-ratio: 16 / 9; }
     .hero-impact .hero-media-video video { object-fit: contain; }
 
+    /* Celular: parágrafo do hero menor pra o vídeo aparecer mais cedo na tela */
+    @media (max-width: 959px) {
+      .hero-impact .hero-lead {
+        font-size: 0.95rem;
+        line-height: 1.45;
+      }
+
+      .hero-impact .hero-grid {
+        gap: var(--space-5);
+      }
+    }
+
     #orquestracao {
       padding-top: clamp(4.5rem, 8vw, 7.5rem);
     }
