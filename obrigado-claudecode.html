@@ -401,10 +401,7 @@
     </div>
   </footer>
 
-  <script>
-    // Compra confirmada (Kiwify redireciona pra cá após o pagamento aprovado)
-    if (window.fbq) { fbq('track', 'Purchase', { value: 47.00, currency: 'BRL' }); }
-  </script>
+  <!-- O evento Purchase vem da Kiwify (API de Conversões), por isso não é disparado aqui — evita compra contada em dobro. -->
   <script src="assets/js/main.js"></script>
 </body>
 
