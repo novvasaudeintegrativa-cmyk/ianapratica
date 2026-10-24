@@ -1246,6 +1246,45 @@
       }
     })();
   </script>
+  <script>
+    // WhatsApp (Pixel) e VSL do hero (Pixel + CRM). O tracker do CRM já registra o clique no WhatsApp sozinho.
+    (function () {
+      document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (window.fbq) fbq('track', 'Contact', { content_name: 'WhatsApp' });
+        });
+      });
+
+      var v = document.querySelector('.hero-vsl');
+      if (!v) return;
+      var titulo = 'VSL Imersão Claude Code', played = false, hit = {};
+      function crmVideo(type, percent) {
+        // o tracker do CRM escuta esse formato de mensagem e envia VideoPlay/VideoProgress/VideoComplete
+        window.postMessage({ source: 'ncrm-video', type: type, percent: percent, provider: 'html5', title: titulo, placement: 'hero-vsl' }, '*');
+      }
+      v.addEventListener('play', function () {
+        if (played) return;
+        played = true;
+        if (window.fbq) fbq('trackCustom', 'VSLPlay', { content_name: titulo });
+        crmVideo('play');
+      });
+      v.addEventListener('timeupdate', function () {
+        if (!v.duration) return;
+        var pct = v.currentTime / v.duration * 100;
+        [25, 50, 75, 95].forEach(function (m) {
+          if (!hit[m] && pct >= m) {
+            hit[m] = true;
+            if (window.fbq) fbq('trackCustom', 'VSLProgress' + m, { content_name: titulo, percent: m });
+            crmVideo('progress', m);
+          }
+        });
+      });
+      v.addEventListener('ended', function () {
+        if (window.fbq) fbq('trackCustom', 'VSLComplete', { content_name: titulo });
+        crmVideo('complete');
+      });
+    })();
+  </script>
   <script src="assets/js/main.js"></script>
 </body>
 
