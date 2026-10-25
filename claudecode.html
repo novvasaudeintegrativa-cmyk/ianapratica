@@ -392,7 +392,7 @@
         </div>
 
         <div class="hero-media hero-media-impact hero-media-video">
-          <video class="hero-vsl" controls playsinline preload="metadata"
+          <video class="hero-vsl" controls playsinline preload="none"
             poster="Videos/VSL/vsl-poster.jpg" aria-label="Vídeo de apresentação da imersão, com Leandro Carvalho">
             <source src="Videos/VSL/VSL_Leandro.mp4" type="video/mp4" />
             Seu navegador não suporta a reprodução de vídeo.
@@ -628,7 +628,7 @@
         <div class="depo-videos">
           <figure class="depo-video">
             <div class="depo-video-frame">
-              <video controls playsinline preload="metadata"
+              <video controls playsinline preload="none"
                 src="Imgs/Depoimentos/Depoimento_Daniel.mp4#t=0.1"
                 aria-label="Depoimento em vídeo do Daniel">
                 Seu navegador não suporta a reprodução de vídeo.
@@ -639,7 +639,7 @@
 
           <figure class="depo-video">
             <div class="depo-video-frame">
-              <video controls playsinline preload="metadata"
+              <video controls playsinline preload="none"
                 src="Imgs/Depoimentos/Depoimento_Christian.mp4#t=0.1"
                 aria-label="Depoimento em vídeo do Christian">
                 Seu navegador não suporta a reprodução de vídeo.
@@ -650,7 +650,7 @@
 
           <figure class="depo-video">
             <div class="depo-video-frame">
-              <video controls playsinline preload="metadata"
+              <video controls playsinline preload="none"
                 src="Imgs/Depoimentos/Depoimento003_Gilson.mp4#t=0.1"
                 aria-label="Depoimento em vídeo do Gilson">
                 Seu navegador não suporta a reprodução de vídeo.
@@ -1295,6 +1295,22 @@
         if (window.fbq) fbq('trackCustom', 'VSLComplete', { content_name: titulo });
         crmVideo('complete');
       });
+    })();
+  </script>
+  <script>
+    // Vídeos de depoimento começam com preload="none" (não competem por banda com
+    // o Pixel/CSS no carregamento); só ao chegar perto da tela carregam o 1º frame.
+    (function () {
+      var vids = document.querySelectorAll('.depo-video video');
+      if (!vids.length) return;
+      function carregar(v) { v.preload = 'metadata'; }
+      if (!('IntersectionObserver' in window)) { vids.forEach(carregar); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { carregar(e.target); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '400px 0px' });
+      vids.forEach(function (v) { io.observe(v); });
     })();
   </script>
   <script src="assets/js/main.js"></script>
