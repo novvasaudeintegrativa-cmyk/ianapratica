@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta name="facebook-domain-verification" content="ewqzqnkqtrspd80jmtmpfwa8fcryaf" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Assista agora — Imersão Claude Code | IA na Prática</title>
+  <meta name="description" content="Assista ao vídeo até o fim para conhecer a Imersão Claude Code — IA na Prática." />
+  <style>
+    :root {
+      --bg: #141413;
+      --fg: #faf9f5;
+      --accent: #d97757;
+      --cta: #ff5a1f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Anthropic Sans", Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 16px;
+    }
+    .brand { font-weight: 800; font-size: 1.1rem; letter-spacing: .02em; }
+    .brand span { color: var(--accent); }
+    h1 { font-size: clamp(1rem, 1.2vw + .8rem, 1.5rem); text-align: center; font-weight: 700; max-width: 780px; line-height: 1.3; }
+    .player {
+      position: relative;
+      width: min(100%, 880px);
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 20px 60px -20px rgba(0,0,0,.8);
+    }
+    .player video { width: 100%; height: 100%; display: block; object-fit: contain; background: #000; }
+    .bar { position: absolute; left: 0; bottom: 0; height: 4px; width: 0; background: var(--accent); transition: width .25s linear; pointer-events: none; }
+
+    .overlay {
+      position: absolute; inset: 0;
+      display: none; align-items: center; justify-content: center; flex-direction: column; gap: 12px;
+      background: rgba(0,0,0,.55);
+      text-align: center; padding: 16px;
+      font-weight: 800; text-transform: uppercase; letter-spacing: .03em;
+      font-size: clamp(1rem, 2.6vw, 1.6rem);
+    }
+    .overlay.show { display: flex; }
+    .overlay .icon { width: clamp(48px, 9vw, 72px); height: clamp(48px, 9vw, 72px); border-radius: 50%; background: var(--accent); display: grid; place-items: center; }
+    .overlay .icon svg { width: 50%; height: 50%; fill: #fff; }
+    #ov-pause .txt, #ov-pause .icon { animation: blink 1s steps(2, start) infinite; }
+    #ov-som .icon { animation: pulse 1.4s ease-in-out infinite; }
+    @keyframes blink { 50% { opacity: .15; } }
+    @keyframes pulse { 50% { transform: scale(1.12); } }
+
+    .cta-wrap { min-height: 72px; display: flex; align-items: center; }
+    .btn-cta {
+      display: none;
+      align-items: center; justify-content: center;
+      height: 64px; padding: 0 40px;
+      border-radius: 999px;
+      background: var(--cta); color: #fff;
+      font-weight: 800; font-size: 1.1875rem; text-transform: uppercase; letter-spacing: .03em;
+      text-decoration: none;
+      animation: cta-pulse 1.6s ease-in-out infinite;
+    }
+    .btn-cta.show { display: inline-flex; }
+    @keyframes cta-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 30px -8px rgba(255,90,31,.6), 0 0 0 0 rgba(255,179,92,.65); }
+      50% { transform: scale(1.06); box-shadow: 0 16px 42px -6px rgba(255,90,31,.85), 0 0 0 16px rgba(255,179,92,0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #ov-pause .txt, #ov-pause .icon, #ov-som .icon, .btn-cta { animation: none; }
+    }
+  </style>
+
+  <!-- Meta Pixel Code ("Pixel IA na Pratica", id 1104376235675261) -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1104376235675261');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1104376235675261&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <!-- Tracker do New CRM (site_key "ec1d84b4...89a2") -- manda PageView,
+       cliques em link de WhatsApp, profundidade de scroll, tempo na
+       página e progresso de vídeo pro mesmo Supabase do CRM, pra
+       aparecer junto com os leads. -->
+  <script>
+(function(){
+  var NEWCRM_SITE_KEY = "ec1d84b4-e545-4ed3-8dbe-2ac0cbef89a2";
+  var NEWCRM_URL = "https://kufydscarokfppyobdjy.supabase.co/functions/v1/coletar-evento";
+  function uid(){ try { return crypto.randomUUID(); } catch(e){ return Date.now().toString(36)+Math.random().toString(36).slice(2); } }
+  var vid, sid;
+  try { vid = localStorage.getItem('ncrm_vid') || uid(); localStorage.setItem('ncrm_vid', vid); } catch(e){ vid = uid(); }
+  try { sid = sessionStorage.getItem('ncrm_sid') || uid(); sessionStorage.setItem('ncrm_sid', sid); } catch(e){ sid = uid(); }
+  var CAMP_KEYS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+  var camp = {};
+  try {
+    var qs = new URLSearchParams(location.search);
+    var TTL = 30*24*60*60*1000, stored = {};
+    try { var s = JSON.parse(localStorage.getItem('ncrm_camp')||'null'); if (s && s.t && Date.now()-s.t < TTL) stored = s.d || {}; } catch(e){}
+    var temUrl = CAMP_KEYS.some(function(k){ return qs.get(k); });
+    CAMP_KEYS.forEach(function(k){ camp[k] = qs.get(k) || (temUrl ? null : stored[k]) || null; });
+    if (temUrl) try { localStorage.setItem('ncrm_camp', JSON.stringify({t:Date.now(), d:camp})); } catch(e){}
+  } catch(e){}
+  function deviceClass(){
+    var ua = navigator.userAgent||'';
+    if (/Tablet|iPad|Android(?!.*Mobi)/i.test(ua)) return 'tablet';
+    if (/Mobi|Android|iPhone|iPod/i.test(ua)) return 'mobile';
+    return 'desktop';
+  }
+  function send(event, props){
+    try {
+      fetch(NEWCRM_URL, { method:'POST', keepalive:true, headers:{'Content-Type':'application/json'}, body: JSON.stringify(Object.assign({
+        site_key: NEWCRM_SITE_KEY, visitor_id: vid, session_id: sid, event: event, props: props||{},
+        path: location.pathname+location.search, referrer: document.referrer||null,
+        screen_w: (window.screen && screen.width) || null, device: deviceClass()
+      }, camp)) }).catch(function(){});
+    } catch(e){}
+  }
+  send('PageView', {});
+  document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]').forEach(function(a){
+    a.addEventListener('click', function(){ send('Contact', { content_name: 'WhatsApp' }); });
+  });
+  (function(){
+    var marks=[25,50,75,90], hit={}, timer;
+    function check(){
+      var doc=document.documentElement, scrollable=doc.scrollHeight-window.innerHeight;
+      if (scrollable<=0) return;
+      var pct=(window.scrollY||doc.scrollTop)/scrollable*100;
+      marks.forEach(function(m){ if(!hit[m] && pct>=m){ hit[m]=1; send('ScrollDepth',{percent:m}); } });
+      if (hit[90]) window.removeEventListener('scroll', onScroll);
+    }
+    function onScroll(){ clearTimeout(timer); timer=setTimeout(check,200); }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    check();
+  })();
+  [30,60,120].forEach(function(s){ setTimeout(function(){ send('TimeOnPage',{seconds:s}); }, s*1000); });
+  var ytRe = new RegExp('youtube(-nocookie)?.com/embed/');
+  var ytApiReady = false, ytApiLoading = false, ytQueue = [];
+  function ensureYtApi(cb){
+    if (ytApiReady){ cb(); return; }
+    ytQueue.push(cb);
+    if (ytApiLoading) return;
+    ytApiLoading = true;
+    var anterior = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function(){
+      if (typeof anterior === 'function') try { anterior(); } catch(e){}
+      ytApiReady = true;
+      ytQueue.forEach(function(fn){ fn(); });
+      ytQueue = [];
+    };
+    var tag = document.createElement('script'); tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+  }
+  var ytVistos = {};
+  function attachYt(f){
+    if (!f || !f.getAttribute || !ytRe.test(f.src || '')) return;
+    if (!f.id) f.id = 'ncrm-yt-' + Math.random().toString(36).slice(2);
+    if (ytVistos[f.id]) return;
+    ytVistos[f.id] = true;
+    if (f.src.indexOf('enablejsapi=') === -1) f.src += (f.src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1';
+    ensureYtApi(function(){
+      var placement = f.getAttribute('data-placement') || 'vsl';
+      var title = f.getAttribute('title') || f.id;
+      var base = { video_provider:'youtube', video_title:title, placement:placement };
+      var hit = {}, poll = null, played = false;
+      new YT.Player(f.id, { events: { onStateChange: function(e){
+        if (e.data === YT.PlayerState.PLAYING){
+          if (!played){ played = true; send('VideoPlay', base); }
+          clearInterval(poll);
+          poll = setInterval(function(){
+            var d = this.getDuration ? this.getDuration() : 0; var c = this.getCurrentTime ? this.getCurrentTime() : 0;
+            if (!d) return;
+            var pct = c / d * 100;
+            [25,50,75,95].forEach(function(m){ if (!hit[m] && pct >= m){ hit[m]=1; send('VideoProgress', Object.assign({percent:m}, base)); } });
+          }.bind(e.target), 1000);
+        } else if (e.data === YT.PlayerState.ENDED){ clearInterval(poll); send('VideoComplete', base); }
+        else if (e.data === YT.PlayerState.PAUSED){ clearInterval(poll); }
+      } } });
+    });
+  }
+  document.querySelectorAll('iframe').forEach(attachYt);
+  try {
+    new MutationObserver(function(muts){
+      muts.forEach(function(m){
+        (m.addedNodes || []).forEach(function(n){
+          if (n.nodeType !== 1) return;
+          if (n.tagName === 'IFRAME') attachYt(n);
+          else if (n.querySelectorAll) n.querySelectorAll('iframe').forEach(attachYt);
+        });
+      });
+    }).observe(document.documentElement, { childList:true, subtree:true });
+  } catch(e){}
+  window.addEventListener('message', function(e){
+    var d = e.data; if (!d || d.source !== 'ncrm-video') return;
+    var base = { video_provider: d.provider || 'custom', video_title: d.title || 'VSL', placement: d.placement || 'vsl' };
+    if (d.type === 'play') send('VideoPlay', base);
+    else if (d.type === 'progress' && d.percent) send('VideoProgress', Object.assign({percent:d.percent}, base));
+    else if (d.type === 'complete') send('VideoComplete', base);
+  });
+})();
+  </script>
+
+</head>
+
+<body>
+  <div class="brand"><span>IA </span>na Prática</div>
+  <h1>Assista ao vídeo até o final — no fim, liberamos o acesso à página da imersão.</h1>
+
+  <div class="player" id="player">
+    <video id="vsl" playsinline webkit-playsinline preload="auto" autoplay
+      poster="Videos/VSL/vsl-poster.jpg" aria-label="Vídeo de apresentação da imersão, com Leandro Carvalho">
+      <source src="Videos/VSL/VSL_Leandro.mp4" type="video/mp4" />
+    </video>
+    <div class="bar" id="bar"></div>
+
+    <div class="overlay" id="ov-som">
+      <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg></div>
+      <div class="txt">Toque para ativar o som</div>
+    </div>
+
+    <div class="overlay" id="ov-pause">
+      <div class="icon"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      <div class="txt">Continue a ver o vídeo</div>
+    </div>
+  </div>
+
+  <div class="cta-wrap">
+    <a class="btn-cta" id="btn-pagina" href="claudecode.html">Quero entrar na imersão</a>
+  </div>
+
+  <script>
+    (function () {
+      var v = document.getElementById('vsl');
+      var player = document.getElementById('player');
+      var ovSom = document.getElementById('ov-som');
+      var ovPause = document.getElementById('ov-pause');
+      var bar = document.getElementById('bar');
+      var btn = document.getElementById('btn-pagina');
+      var LIBERA_EM = 0.9; // libera o botão com 90% do vídeo
+      var titulo = 'VSL Imersão Claude Code (página de vídeo)';
+      var played = false, hit = {}, liberado = false, maxVisto = 0, semSom = false;
+
+      // repassa UTMs pra página de vendas (mesma lógica do claudecode.html)
+      try {
+        var qs = new URLSearchParams(location.search), stored = {};
+        try { var s = JSON.parse(localStorage.getItem('ncrm_camp') || 'null'); if (s && s.d) stored = s.d; } catch (e) {}
+        var out = [];
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+          var val = qs.get(k) || stored[k];
+          if (val) out.push(k + '=' + encodeURIComponent(val));
+        });
+        if (out.length) btn.setAttribute('href', btn.getAttribute('href') + '?' + out.join('&'));
+      } catch (e) {}
+
+      function crmVideo(type, percent) {
+        window.postMessage({ source: 'ncrm-video', type: type, percent: percent, provider: 'html5', title: titulo, placement: 'pagina-video' }, '*');
+      }
+
+      function liberar() {
+        if (liberado) return;
+        liberado = true;
+        btn.classList.add('show');
+        if (window.fbq) fbq('trackCustom', 'VSLButtonUnlocked', { content_name: titulo });
+      }
+
+      // tenta autoplay COM som; se o navegador barrar, cai pro mudo + aviso "toque para ativar o som"
+      function mudo() {
+        semSom = true;
+        v.muted = true;
+        ovSom.classList.add('show');
+        v.play().catch(function () {});
+      }
+      v.muted = false;
+      var p = v.play();
+      if (p && p.catch) p.catch(mudo);
+
+      // clique no player: ativa o som (1º toque) ou pausa/retoma
+      player.addEventListener('click', function () {
+        if (semSom) {
+          semSom = false;
+          v.muted = false;
+          ovSom.classList.remove('show');
+          if (v.paused) v.play();
+          return;
+        }
+        if (v.ended) return;
+        if (v.paused) v.play(); else v.pause();
+      });
+
+      // pausado (e não terminado) -> "Continue a ver o vídeo" piscando
+      v.addEventListener('pause', function () {
+        if (!v.ended && !document.hidden) ovPause.classList.add('show');
+      });
+      v.addEventListener('play', function () {
+        ovPause.classList.remove('show');
+        if (played) return;
+        played = true;
+        if (window.fbq) fbq('trackCustom', 'VSLPlay', { content_name: titulo });
+        crmVideo('play');
+      });
+
+      // progresso, métricas e liberação do botão aos 90%
+      v.addEventListener('timeupdate', function () {
+        if (!v.duration) return;
+        var frac = v.currentTime / v.duration;
+        if (v.currentTime > maxVisto) maxVisto = v.currentTime;
+        bar.style.width = (frac * 100) + '%';
+        [25, 50, 75, 95].forEach(function (m) {
+          if (!hit[m] && frac * 100 >= m) {
+            hit[m] = true;
+            if (window.fbq) fbq('trackCustom', 'VSLProgress' + m, { content_name: titulo, percent: m });
+            crmVideo('progress', m);
+          }
+        });
+        if (frac >= LIBERA_EM) liberar();
+      });
+      v.addEventListener('ended', function () {
+        ovPause.classList.remove('show');
+        liberar();
+        if (window.fbq) fbq('trackCustom', 'VSLComplete', { content_name: titulo });
+        crmVideo('complete');
+      });
+
+      // sem pular pra frente do que a pessoa já assistiu
+      v.addEventListener('seeking', function () {
+        if (v.currentTime > maxVisto + 1) v.currentTime = maxVisto;
+      });
+
+      btn.addEventListener('click', function () {
+        if (window.fbq) fbq('trackCustom', 'VSLButtonClick', { content_name: titulo });
+      });
+    })();
+  </script>
+</body>
+
+</html>
