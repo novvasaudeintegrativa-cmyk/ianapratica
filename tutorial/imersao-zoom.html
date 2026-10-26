@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Guia da Live — Setup do Claude Code | IA na Prática</title>
+  <title>Guia da Imersão Claude Code — Setup do Claude Code | IA na Prática</title>
   <meta name="description"
-    content="Guia rápido de instalação e configuração do Claude Code para quem está acompanhando a Live — PowerShell, Node.js, Git, npm, conta na Anthropic e primeiro acesso no VS Code." />
+    content="Guia rápido de instalação e configuração do Claude Code para quem vai participar da Imersão Claude Code — PowerShell, Node.js, Git, npm, conta na Anthropic e primeiro acesso no VS Code." />
   <link rel="stylesheet" href="../assets/css/tokens.css" />
   <link rel="stylesheet" href="../assets/css/styles.css" />
   <link rel="stylesheet" href="assets/css/tutorial.css" />
@@ -23,7 +23,7 @@
 
       <ul class="nav-list">
         <li><a href="index.html">Trilha do curso</a></li>
-        <li><a href="../index.html#investimento">Garantir minha vaga</a></li>
+        <li><a href="../claudecode.html#investimento">Garantir minha vaga</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -59,7 +59,7 @@
 
     <nav class="mobile-nav" id="mobile-nav" data-mobile-nav aria-label="Menu principal">
       <a href="index.html">Trilha do curso</a>
-      <a href="../index.html#investimento">Garantir minha vaga</a>
+      <a href="../claudecode.html#investimento">Garantir minha vaga</a>
     </nav>
   </header>
 
@@ -68,9 +68,9 @@
       <div class="guide-breadcrumb">
         <a href="index.html">Tutorial</a>
         <span aria-hidden="true">/</span>
-        <span class="is-current">Guia da Live</span>
+        <span class="is-current">Guia da Imersão Claude Code</span>
       </div>
-      <span class="guide-context-badge"><span class="dot"></span> Live · Setup rápido</span>
+      <span class="guide-context-badge"><span class="dot"></span> Imersão Claude Code · Setup rápido</span>
     </div>
   </div>
 
@@ -81,10 +81,10 @@
         <div class="guide-content">
 
           <div class="guide-lesson-header">
-            <span class="guide-lesson-eyebrow"><span class="dot"></span> Guia da Live</span>
-            <h1 class="text-heading">Setup do Claude Code para a Live</h1>
+            <span class="guide-lesson-eyebrow"><span class="dot"></span> Guia da Imersão Claude Code</span>
+            <h1 class="text-heading">Setup do Claude Code para a Imersão</h1>
             <p class="guide-lesson-lead text-body">
-              Esse é o passo a passo que vamos seguir ao vivo: liberar o PowerShell, instalar
+              Esse é o passo a passo que vamos seguir juntos na Imersão Claude Code, ao vivo e online: liberar o PowerShell, instalar
               o Node.js e o Git, instalar o Claude Code via npm, criar sua conta na Anthropic
               e deixar tudo pronto dentro do VS Code. Siga na ordem — cada passo depende do
               anterior.
@@ -121,25 +121,25 @@
             <div class="callout-body">
               <strong>Esse guia usa um caminho diferente do resto do tutorial</strong>
               Aqui a gente instala o Claude Code via <code>npm</code> e autentica com uma
-              conta gratuita do <code>console.anthropic.com</code> (créditos de teste, sem
-              assinatura). Se você já fez o setup da trilha completa da Imersão com conta
-              Pro/Max, não precisa repetir — esse guia é só para quem está entrando agora,
-              direto pela Live.
+              conta do <code>console.anthropic.com</code> (sem precisar assinar o Claude Pro ou Max).
+              Se você já fez o setup da trilha completa do tutorial com conta Pro/Max, não
+              precisa repetir — esse guia é só para quem está entrando agora, direto pela
+              Imersão Claude Code.
             </div>
           </div>
 
           <nav class="guide-step-nav" data-step-nav aria-label="Passos deste guia">
-            <a href="#live-passo-1">1. PowerShell, Node.js e Git</a>
-            <a href="#live-passo-2">2. Validar instalação</a>
-            <a href="#live-passo-3">3. Conta no GitHub</a>
-            <a href="#live-passo-4">4. Instalar o Claude Code</a>
-            <a href="#live-passo-5">5. Conta na Anthropic</a>
-            <a href="#live-passo-6">6. Primeiro acesso</a>
-            <a href="#live-passo-7">7. VS Code e GitHub</a>
+            <a href="#imersao-passo-1">1. PowerShell, Node.js e Git</a>
+            <a href="#imersao-passo-2">2. Validar instalação</a>
+            <a href="#imersao-passo-3">3. Conta no GitHub</a>
+            <a href="#imersao-passo-4">4. Instalar o Claude Code</a>
+            <a href="#imersao-passo-5">5. Conta na Anthropic</a>
+            <a href="#imersao-passo-6">6. Primeiro acesso</a>
+            <a href="#imersao-passo-7">7. VS Code e GitHub</a>
           </nav>
 
           <!-- PASSO 1 -->
-          <article class="guide-step" id="live-passo-1">
+          <article class="guide-step" id="imersao-passo-1">
             <div class="guide-step-head">
               <span class="guide-step-num">1</span>
               <div class="guide-step-titles">
@@ -164,7 +164,7 @@
               <div class="code-block">
                 <div class="code-block-head">
                   <span class="code-block-label">PowerShell (como Administrador)</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="live-cmd-execpolicy">
+                  <button class="code-copy-btn" type="button" data-copy-target="imersao-cmd-execpolicy">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -172,7 +172,7 @@
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="live-cmd-execpolicy">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></pre>
+                <pre><code id="imersao-cmd-execpolicy">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></pre>
               </div>
 
               <p class="text-body">Digite <code>S</code> (ou <code>Y</code>) para confirmar e feche essa janela do
@@ -220,7 +220,7 @@
           </article>
 
           <!-- PASSO 2 -->
-          <article class="guide-step" id="live-passo-2">
+          <article class="guide-step" id="imersao-passo-2">
             <div class="guide-step-head">
               <span class="guide-step-num">2</span>
               <div class="guide-step-titles">
@@ -237,7 +237,7 @@
               <div class="code-block">
                 <div class="code-block-head">
                   <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="live-cmd-validate">
+                  <button class="code-copy-btn" type="button" data-copy-target="imersao-cmd-validate">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -245,7 +245,7 @@
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="live-cmd-validate">node -v
+                <pre><code id="imersao-cmd-validate">node -v
 npm -v
 git --version</code></pre>
               </div>
@@ -268,7 +268,7 @@ git --version</code></pre>
           </article>
 
           <!-- PASSO 3 -->
-          <article class="guide-step" id="live-passo-3">
+          <article class="guide-step" id="imersao-passo-3">
             <div class="guide-step-head">
               <span class="guide-step-num">3</span>
               <div class="guide-step-titles">
@@ -328,7 +328,7 @@ git --version</code></pre>
           </article>
 
           <!-- PASSO 4 -->
-          <article class="guide-step" id="live-passo-4">
+          <article class="guide-step" id="imersao-passo-4">
             <div class="guide-step-head">
               <span class="guide-step-num">4</span>
               <div class="guide-step-titles">
@@ -343,7 +343,7 @@ git --version</code></pre>
               <div class="code-block">
                 <div class="code-block-head">
                   <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="live-cmd-npm-install">
+                  <button class="code-copy-btn" type="button" data-copy-target="imersao-cmd-npm-install">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -351,13 +351,13 @@ git --version</code></pre>
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="live-cmd-npm-install">npm install -g @anthropic-ai/claude-code</code></pre>
+                <pre><code id="imersao-cmd-npm-install">npm install -g @anthropic-ai/claude-code</code></pre>
               </div>
             </div>
           </article>
 
           <!-- PASSO 5 -->
-          <article class="guide-step" id="live-passo-5">
+          <article class="guide-step" id="imersao-passo-5">
             <div class="guide-step-head">
               <span class="guide-step-num">5</span>
               <div class="guide-step-titles">
@@ -370,15 +370,16 @@ git --version</code></pre>
                 <li>Acesse o <a href="https://console.anthropic.com" target="_blank"
                     rel="noopener noreferrer">console.anthropic.com</a>.</li>
                 <li>Crie uma conta de desenvolvedor e realize a validação via SMS.</li>
-                <li>Novas contas recebem <strong>US$ 5,00 em créditos de teste gratuitos</strong>, o
-                  que elimina a necessidade de assinar o plano mensal Claude Pro só para começar.
+                <li>Como as condições de créditos da Anthropic mudam, <strong>confira na hora do
+                    cadastro o que a sua conta recebe</strong> — você não precisa assinar o plano
+                  mensal Claude Pro ou Max só para começar.
                 </li>
               </ol>
             </div>
           </article>
 
           <!-- PASSO 6 -->
-          <article class="guide-step" id="live-passo-6">
+          <article class="guide-step" id="imersao-passo-6">
             <div class="guide-step-head">
               <span class="guide-step-num">6</span>
               <div class="guide-step-titles">
@@ -392,7 +393,7 @@ git --version</code></pre>
               <div class="code-block">
                 <div class="code-block-head">
                   <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="live-cmd-start">
+                  <button class="code-copy-btn" type="button" data-copy-target="imersao-cmd-start">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -400,7 +401,7 @@ git --version</code></pre>
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="live-cmd-start">claude</code></pre>
+                <pre><code id="imersao-cmd-start">claude</code></pre>
               </div>
 
               <ul class="text-body">
@@ -412,7 +413,7 @@ git --version</code></pre>
           </article>
 
           <!-- PASSO 7 -->
-          <article class="guide-step" id="live-passo-7">
+          <article class="guide-step" id="imersao-passo-7">
             <div class="guide-step-head">
               <span class="guide-step-num">7</span>
               <div class="guide-step-titles">
@@ -430,7 +431,7 @@ git --version</code></pre>
               <div class="code-block">
                 <div class="code-block-head">
                   <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="live-cmd-gitinit">
+                  <button class="code-copy-btn" type="button" data-copy-target="imersao-cmd-gitinit">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -438,7 +439,7 @@ git --version</code></pre>
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="live-cmd-gitinit">git init</code></pre>
+                <pre><code id="imersao-cmd-gitinit">git init</code></pre>
               </div>
 
               <p class="text-body">Agora crie o repositório que vai receber esse projeto na
@@ -468,7 +469,7 @@ git --version</code></pre>
               <div class="code-block">
                 <div class="code-block-head">
                   <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="live-cmd-remote">
+                  <button class="code-copy-btn" type="button" data-copy-target="imersao-cmd-remote">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -476,7 +477,7 @@ git --version</code></pre>
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="live-cmd-remote">git remote add origin https://github.com/seu-usuario/seu-projeto.git
+                <pre><code id="imersao-cmd-remote">git remote add origin https://github.com/seu-usuario/seu-projeto.git
 git branch -M main
 git add .
 git commit -m "Primeiro commit"
@@ -544,7 +545,7 @@ git push -u origin main</code></pre>
               <div class="code-block">
                 <div class="code-block-head">
                   <span class="code-block-label">PowerShell</span>
-                  <button class="code-copy-btn" type="button" data-copy-target="live-cmd-claude-vscode">
+                  <button class="code-copy-btn" type="button" data-copy-target="imersao-cmd-claude-vscode">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                       <rect x="4.5" y="4.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.2" />
                       <path d="M2.5 9.5V2.5a1 1 0 0 1 1-1h7" stroke="currentColor" stroke-width="1.2" />
@@ -552,7 +553,7 @@ git push -u origin main</code></pre>
                     <span data-copy-label>Copiar</span>
                   </button>
                 </div>
-                <pre><code id="live-cmd-claude-vscode">claude</code></pre>
+                <pre><code id="imersao-cmd-claude-vscode">claude</code></pre>
               </div>
 
               <div class="callout callout-success">
@@ -566,14 +567,14 @@ git push -u origin main</code></pre>
                 <div class="callout-body">
                   <strong>Pronto!</strong>
                   Com isso, seu ambiente está configurado, conectado ao GitHub, e você já
-                  pode acompanhar o resto da Live direto no seu computador.
+                  pode acompanhar o resto da Imersão direto no seu computador.
                 </div>
               </div>
             </div>
           </article>
 
           <div class="guide-sidebar-cta" style="margin-top: var(--space-10);">
-            <p>Quer continuar depois da Live com a trilha completa, lição por lição, no seu
+            <p>Quer continuar depois da Imersão com a trilha completa, lição por lição, no seu
               ritmo?</p>
             <a class="btn btn-primary btn-sm" href="index.html" style="width:100%;">Ver a trilha do
               curso</a>
