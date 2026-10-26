@@ -2371,7 +2371,7 @@ button.guide-day-item-status.not-done:hover {
   align-items: center;
   gap: var(--space-4);
   margin: var(--space-8) 0;
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-4) 20px;
   border: 2px dashed var(--clay-vivid);
   border-radius: var(--radius-lg, 12px);
   background: color-mix(in srgb, var(--clay-vivid) 8%, transparent);
