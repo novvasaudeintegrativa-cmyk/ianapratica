@@ -2361,3 +2361,47 @@ button.guide-day-item-status.not-done:hover {
   font-size: 0.8125rem;
   color: var(--text-muted, #6b6a63);
 }
+
+/* ==========================================================================
+   Ponto de pausa — sinaliza onde o instrutor para pra checar se a turma toda
+   acompanhou antes de seguir pro próximo passo (guia da Imersão).
+   ========================================================================== */
+.pause-point {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: var(--space-8) 0;
+  padding: var(--space-4) var(--space-5);
+  border: 2px dashed var(--clay-vivid);
+  border-radius: var(--radius-lg, 12px);
+  background: color-mix(in srgb, var(--clay-vivid) 8%, transparent);
+}
+
+.pause-point-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--clay-vivid);
+  color: #ffffff;
+}
+
+.pause-point-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-body);
+  line-height: 1.45;
+}
+
+.pause-point-label {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clay-vivid);
+}
