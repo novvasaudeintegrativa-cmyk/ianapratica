@@ -601,6 +601,10 @@
             Enquanto você foca no que só você pode fazer, o Claude Code cuida das tarefas
             de ponta a ponta — do pedido à entrega, sem você precisar fazer tudo na mão.
           </p>
+          <p style="margin-top: var(--space-6); text-align: center;">
+            <a class="btn btn-primary btn-cta-pulse" data-track="comprar" href="https://pay.kiwify.com.br/b9KLlUi" target="_blank"
+              rel="noopener">Garantir minha vaga</a>
+          </p>
         </div>
         <div class="orquestracao-media">
           <picture>
@@ -1210,12 +1214,11 @@
   <script>
     // Rastreamento do botão de compra: Pixel da Meta (InitiateCheckout) + CRM + repasse das UTMs pra Kiwify
     (function () {
-      var btn = document.getElementById('btn-comprar');
-      if (!btn) return;
+      var btns = document.querySelectorAll('[data-track="comprar"]');
+      if (!btns.length) return;
       var CRM_URL = 'https://kufydscarokfppyobdjy.supabase.co/functions/v1/coletar-evento';
       var CRM_KEY = 'ec1d84b4-e545-4ed3-8dbe-2ac0cbef89a2';
       var UTM = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
-      var baseHref = btn.getAttribute('href');
 
       function utms() {
         var out = {};
@@ -1230,7 +1233,10 @@
 
       // repassa as UTMs no link do checkout pra Kiwify atribuir a venda ao anúncio
       var u = utms(), q = Object.keys(u).map(function (k) { return k + '=' + encodeURIComponent(u[k]); }).join('&');
-      if (q) btn.setAttribute('href', baseHref + (baseHref.indexOf('?') === -1 ? '?' : '&') + q);
+      if (q) btns.forEach(function (btn) {
+        var baseHref = btn.getAttribute('href');
+        btn.setAttribute('href', baseHref + (baseHref.indexOf('?') === -1 ? '?' : '&') + q);
+      });
 
       function crm(event, props) {
         try {
@@ -1241,9 +1247,11 @@
         } catch (e) {}
       }
 
-      btn.addEventListener('click', function () {
-        if (window.fbq) fbq('track', 'InitiateCheckout', { value: 47.00, currency: 'BRL', content_name: 'Imersão Claude Code' });
-        crm('InitiateCheckout', { value: 47, currency: 'BRL', content_name: 'Imersão Claude Code' });
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (window.fbq) fbq('track', 'InitiateCheckout', { value: 47.00, currency: 'BRL', content_name: 'Imersão Claude Code' });
+          crm('InitiateCheckout', { value: 47, currency: 'BRL', content_name: 'Imersão Claude Code' });
+        });
       });
 
       // Quando a pessoa chega na seção de preço (ViewContent), uma vez só
