@@ -2924,3 +2924,8 @@ body:has(.sticky-cta) {
 body:not(:has(.sticky-cta)) .whatsapp-float {
   bottom: 20px;
 }
+/* Faixa de logos de ferramentas de IA (mesma do claudecode.html, usada também na index) */
+.logos-ia-title { text-align: center; margin-bottom: var(--space-4); }
+.logos-ia-strip { margin-top: 0; padding-top: 0; border-top: 0; }
+.logo-ia { max-height: 34px; max-width: 120px; }
+.logos-ia-note { text-align: center; margin: var(--space-3) 0 0; font-size: 0.8rem; color: rgba(250, 249, 245, 0.55); }
