@@ -1623,7 +1623,7 @@
                 <li>Interação em tempo real com os instrutores</li>
                 <li>Materiais e templates usados em aula</li>
               </ul>
-              <a class="btn btn-primary btn-cta-pulse" href="https://pay.kiwify.com.br/c4yghfN"
+              <a class="btn btn-primary btn-cta-pulse" data-track="comprar" href="https://pay.kiwify.com.br/c4yghfN"
                 target="_blank" rel="noopener">Garantir minha vaga</a>
             </div>
           </div>
@@ -1832,6 +1832,67 @@
 
   <script src="assets/js/main.js"></script>
   <script src="assets/js/vitrine.js"></script>
+  <script>
+    // Rastreamento (mesmo padrão do claudecode.html): botão de compra -> Pixel (InitiateCheckout) + CRM + repasse das
+    // UTMs pra Kiwify; seção de preço -> ViewContent; clique no WhatsApp -> Pixel (Contact).
+    (function () {
+      var NOME = 'Imersão IA na Prática (2 dias)', VALOR = 97.00;
+      var CRM_URL = 'https://kufydscarokfppyobdjy.supabase.co/functions/v1/coletar-evento';
+      var CRM_KEY = 'ec1d84b4-e545-4ed3-8dbe-2ac0cbef89a2';
+      var UTM = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+
+      function utms() {
+        var out = {};
+        try {
+          var qs = new URLSearchParams(location.search);
+          var stored = {};
+          try { var s = JSON.parse(localStorage.getItem('ncrm_camp') || 'null'); if (s && s.d) stored = s.d; } catch (e) {}
+          UTM.forEach(function (k) { var v = qs.get(k) || stored[k]; if (v) out[k] = v; });
+        } catch (e) {}
+        return out;
+      }
+      var u = utms();
+
+      function crm(event, props) {
+        try {
+          var vid = localStorage.getItem('ncrm_vid'), sid = sessionStorage.getItem('ncrm_sid');
+          fetch(CRM_URL, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.assign({ site_key: CRM_KEY, visitor_id: vid, session_id: sid, event: event, props: props || {},
+              path: location.pathname + location.search, referrer: document.referrer || null }, u)) }).catch(function () {});
+        } catch (e) {}
+      }
+
+      var q = Object.keys(u).map(function (k) { return k + '=' + encodeURIComponent(u[k]); }).join('&');
+      document.querySelectorAll('[data-track="comprar"]').forEach(function (btn) {
+        if (q) {
+          var base = btn.getAttribute('href');
+          btn.setAttribute('href', base + (base.indexOf('?') === -1 ? '?' : '&') + q);
+        }
+        btn.addEventListener('click', function () {
+          if (window.fbq) fbq('track', 'InitiateCheckout', { value: VALOR, currency: 'BRL', content_name: NOME });
+          crm('InitiateCheckout', { value: VALOR, currency: 'BRL', content_name: NOME });
+        });
+      });
+
+      document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (window.fbq) fbq('track', 'Contact', { content_name: 'WhatsApp' });
+        });
+      });
+
+      var secao = document.getElementById('investimento');
+      if (secao && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (es) {
+          if (es.some(function (e) { return e.isIntersecting; })) {
+            io.disconnect();
+            if (window.fbq) fbq('track', 'ViewContent', { value: VALOR, currency: 'BRL', content_name: NOME });
+            crm('ViewContent', { content_name: NOME });
+          }
+        }, { threshold: 0.4 });
+        io.observe(secao);
+      }
+    })();
+  </script>
 </body>
 
 </html>
