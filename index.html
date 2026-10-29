@@ -1826,6 +1826,25 @@
         });
       });
 
+      // Profundidade de rolagem no Pixel (o CRM já recebe pelo tracker acima): ScrollDepth25/50/75/90, uma vez cada
+      (function () {
+        var marks = [25, 50, 75, 90], hit = {}, timer;
+        function check() {
+          var doc = document.documentElement, scrollable = doc.scrollHeight - window.innerHeight;
+          if (scrollable <= 0) return;
+          var pct = (window.scrollY || doc.scrollTop) / scrollable * 100;
+          marks.forEach(function (m) {
+            if (!hit[m] && pct >= m) {
+              hit[m] = true;
+              if (window.fbq) fbq('trackCustom', 'ScrollDepth' + m, { percent: m, content_name: NOME });
+            }
+          });
+          if (hit[90]) window.removeEventListener('scroll', onScroll);
+        }
+        function onScroll() { clearTimeout(timer); timer = setTimeout(check, 200); }
+        window.addEventListener('scroll', onScroll, { passive: true });
+      })();
+
       // VSL do hero (Pixel + CRM). O tracker do CRM escuta o postMessage e envia VideoPlay/VideoProgress/VideoComplete.
       var v = document.querySelector('.hero-vsl');
       if (v) {
