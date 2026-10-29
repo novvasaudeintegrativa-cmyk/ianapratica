@@ -2940,3 +2940,19 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
     column-gap: var(--space-10, 40px);
   }
 }
+
+/* Hero da index (desktop): robô no canto direito, só metade visível (cortada pela borda da tela),
+   e o conteúdo ganha folga à direita pra o robô não ficar atrás do vídeo */
+@media (min-width: 960px) {
+  .hero-impact-figure {
+    left: auto;
+    right: 0;
+    height: 105%;
+    max-height: 760px;
+    transform: translate(55%, -46%);
+  }
+
+  .hero-impact .container {
+    padding-right: clamp(0px, 6vw, 120px);
+  }
+}
