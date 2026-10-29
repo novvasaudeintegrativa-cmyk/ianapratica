@@ -2975,3 +2975,9 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
   text-transform: uppercase;
   color: var(--color-muted-foreground);
 }
+
+/* Divisor sem texto entre duas partes de um mesmo card da programação */
+.schedule-divider {
+  margin: var(--space-6) 0 var(--space-4);
+  border-top: 1px dashed var(--color-border);
+}
