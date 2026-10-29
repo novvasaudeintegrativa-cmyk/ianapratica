@@ -2941,18 +2941,24 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
   }
 }
 
-/* Hero da index (desktop): robô no canto direito, só metade visível (cortada pela borda da tela),
-   e o conteúdo ganha folga à direita pra o robô não ficar atrás do vídeo */
+/* Hero da index (desktop): robô ao lado do vídeo, com metade dele aparecendo.
+   O centro do robô fica na borda direita do vídeo (a metade esquerda fica atrás do vídeo);
+   o conteúdo ganha folga à direita (--hero-extra) pra sobrar espaço pra metade visível. */
 @media (min-width: 960px) {
-  .hero-impact-figure {
-    left: auto;
-    right: 0;
-    height: 105%;
-    max-height: 760px;
-    transform: translate(55%, -46%);
+  .hero-impact {
+    --hero-pad: clamp(1.25rem, 3vw, var(--space-site-margin));
+    --hero-extra: clamp(0px, 8vw, 160px);
   }
 
   .hero-impact .container {
-    padding-right: clamp(0px, 6vw, 120px);
+    padding-right: calc(var(--hero-pad) + var(--hero-extra));
+  }
+
+  .hero-impact-figure {
+    left: auto;
+    right: calc(max(0px, (100vw - var(--container-max)) / 2) + var(--hero-pad) + var(--hero-extra));
+    height: 92%;
+    max-height: 700px;
+    transform: translate(52%, -46%);
   }
 }
