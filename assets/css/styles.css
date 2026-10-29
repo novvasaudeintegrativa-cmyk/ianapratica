@@ -2957,8 +2957,8 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
   .hero-impact-figure {
     left: auto;
     right: calc(max(0px, (100vw - var(--container-max)) / 2) + var(--hero-pad) + var(--hero-extra));
-    height: 92%;
-    max-height: 700px;
+    height: 138%;
+    max-height: 1050px;
     transform: translate(52%, -46%);
   }
 }
