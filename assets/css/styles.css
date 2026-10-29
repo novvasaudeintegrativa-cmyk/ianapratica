@@ -2932,3 +2932,11 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
 
 /* Vídeo do hero (VSL 16:9): mostra o quadro inteiro, sem cortar as bordas */
 .hero-impact .hero-media-video video { object-fit: contain; }
+
+/* Hero da index: vídeo (VSL) maior no desktop — coluna do vídeo mais larga e menos espaço entre as colunas */
+@media (min-width: 960px) {
+  .hero-impact .hero-grid {
+    grid-template-columns: 0.8fr 1.2fr;
+    column-gap: var(--space-10, 40px);
+  }
+}
