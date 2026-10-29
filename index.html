@@ -249,9 +249,9 @@
         </div>
 
         <div class="hero-media hero-media-impact hero-media-video">
-          <video class="hero-vsl" controls autoplay loop muted playsinline preload="auto"
-            poster="assets/img/hero-device-mockup.jpg">
-            <source src="Videos/Code.mp4" type="video/mp4" />
+          <video class="hero-vsl" controls playsinline preload="none"
+            poster="Videos/VSL/vsl-poster.jpg" aria-label="Vídeo de apresentação da imersão, com Leandro Carvalho">
+            <source src="Videos/VSL/VSL_Leandro.mp4" type="video/mp4" />
             Seu navegador não suporta a reprodução de vídeo.
           </video>
         </div>
@@ -1841,6 +1841,36 @@
           if (window.fbq) fbq('track', 'Contact', { content_name: 'WhatsApp' });
         });
       });
+
+      // VSL do hero (Pixel + CRM). O tracker do CRM escuta o postMessage e envia VideoPlay/VideoProgress/VideoComplete.
+      var v = document.querySelector('.hero-vsl');
+      if (v) {
+        var titulo = 'VSL Imersão IA na Prática', played = false, hit = {};
+        var crmVideo = function (type, percent) {
+          window.postMessage({ source: 'ncrm-video', type: type, percent: percent, provider: 'html5', title: titulo, placement: 'hero-vsl' }, '*');
+        };
+        v.addEventListener('play', function () {
+          if (played) return;
+          played = true;
+          if (window.fbq) fbq('trackCustom', 'VSLPlay', { content_name: titulo });
+          crmVideo('play');
+        });
+        v.addEventListener('timeupdate', function () {
+          if (!v.duration) return;
+          var pct = v.currentTime / v.duration * 100;
+          [25, 50, 75, 95].forEach(function (m) {
+            if (!hit[m] && pct >= m) {
+              hit[m] = true;
+              if (window.fbq) fbq('trackCustom', 'VSLProgress' + m, { content_name: titulo, percent: m });
+              crmVideo('progress', m);
+            }
+          });
+        });
+        v.addEventListener('ended', function () {
+          if (window.fbq) fbq('trackCustom', 'VSLComplete', { content_name: titulo });
+          crmVideo('complete');
+        });
+      }
 
       var secao = document.getElementById('investimento');
       if (secao && 'IntersectionObserver' in window) {

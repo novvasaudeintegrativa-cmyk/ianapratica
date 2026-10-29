@@ -2929,3 +2929,6 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
 .logos-ia-strip { margin-top: 0; padding-top: 0; border-top: 0; }
 .logo-ia { max-height: 34px; max-width: 120px; }
 .logos-ia-note { text-align: center; margin: var(--space-3) 0 0; font-size: 0.8rem; color: rgba(250, 249, 245, 0.55); }
+
+/* Vídeo do hero (VSL 16:9): mostra o quadro inteiro, sem cortar as bordas */
+.hero-impact .hero-media-video video { object-fit: contain; }
