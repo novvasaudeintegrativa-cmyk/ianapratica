@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Escolha o jeito de convencer</title>
+<style>
+  :root{
+    --bg:#141413; --bg-glow:radial-gradient(circle at 15% 0%, rgba(255,90,31,.16), transparent 45%),
+      radial-gradient(circle at 100% 30%, rgba(217,119,87,.12), transparent 50%);
+    --surface:#242322; --surface-raised:#2c2b29; --ink:#faf9f5; --ink-muted:#a8a6a0;
+    --border:#3d3d3a; --border-soft:#333230;
+    --accent:#ff5a1f; --accent-bright:#ffb35c; --accent-soft:rgba(255,90,31,.16); --accent-deep:#c6613f;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,"Segoe UI",Arial,sans-serif;background-color:var(--bg);background-image:var(--bg-glow);color:var(--ink);padding:40px 24px 80px;}
+  .wrap{max-width:1040px;margin:0 auto;}
+  .brand{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-bright);background:var(--accent-soft);border:1px solid rgba(255,90,31,.35);padding:6px 14px;border-radius:999px;margin-bottom:16px;}
+  h1{font-size:28px;margin:0 0 10px;color:#fff;letter-spacing:-.01em;line-height:1.2;max-width:760px;}
+  .sub{color:var(--ink-muted);margin:0 0 24px;font-size:14px;line-height:1.5;max-width:720px;}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:28px;}
+  .step{display:flex;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;}
+  .step-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;}
+  .step strong{display:block;color:#fff;font-size:14px;margin-bottom:4px;}
+  .step p{margin:0;color:var(--ink-muted);font-size:12.5px;line-height:1.5;}
+  .step b{color:var(--accent-bright);}
+  .section-label{font-size:13px;font-weight:800;color:#fff;margin:0 0 12px;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:32px;}
+  .card{border:1px solid var(--border);border-radius:16px;padding:18px;background:var(--surface);}
+  .card:has(.badge:not(.hidden)){border-color:var(--accent);box-shadow:0 0 0 1px var(--accent), 0 12px 32px rgba(255,90,31,.15);}
+  .card h3{margin:0 0 6px;font-size:17px;display:flex;align-items:center;gap:8px;color:#fff;}
+  .badge{font-size:10px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;background:var(--accent);color:#fff;padding:3px 9px;border-radius:999px;}
+  .badge.hidden{display:none;}
+  .role{margin:0 0 8px;font-size:11px;color:var(--accent-bright);font-weight:700;text-transform:uppercase;letter-spacing:.02em;}
+  .rec-reason{margin:0 0 10px;font-size:12px;color:#fff;background:var(--accent-soft);border:1px solid rgba(255,90,31,.35);border-radius:10px;padding:9px 11px;line-height:1.45;}
+  .rec-reason.hidden{display:none;}
+  .desc{margin:0 0 12px;font-size:12px;color:var(--ink-muted);line-height:1.45;}
+  .source-link{display:inline-block;margin:-4px 0 12px;font-size:11px;color:var(--accent-bright);text-decoration:underline;}
+  .source-link:hover{color:#fff;}
+  .variations{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+  .variation{border:1.5px solid var(--border-soft);background:var(--surface-raised);color:var(--ink);border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.45;cursor:pointer;transition:border-color .15s,background .15s;}
+  .variation:hover{border-color:var(--accent-bright);}
+  .variation.selected{border-color:var(--accent);background:var(--accent-soft);}
+  .regen{width:100%;background:none;border:1px dashed var(--border);color:var(--ink-muted);padding:8px;border-radius:8px;font-size:12px;cursor:pointer;}
+  .regen:hover{border-color:var(--accent-bright);color:var(--accent-bright);}
+  .regen.primary{border-style:solid;border-color:var(--accent);color:#fff;background:var(--accent-soft);font-weight:700;padding:12px;}
+  .placeholder{font-size:12px;color:var(--ink-muted);margin:0 0 10px;font-style:italic;}
+  .pieces{margin-top:12px;padding-top:12px;border-top:1px dashed var(--border);}
+  .pieces:empty{display:none;}
+  .pieces-count{font-size:11px;color:var(--ink-muted);margin:0 0 8px;text-transform:uppercase;letter-spacing:.02em;font-weight:700;}
+  .piece-chip{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--surface-raised);border:1px solid var(--border-soft);border-radius:8px;padding:7px 10px;font-size:12px;margin-bottom:6px;}
+  .piece-chip a{color:var(--ink);text-decoration:none;font-weight:600;}
+  .piece-chip a:hover{color:var(--accent-bright);}
+  .piece-del{background:none;border:none;color:var(--ink-muted);cursor:pointer;font-size:14px;padding:2px 6px;border-radius:6px;line-height:1;}
+  .piece-del:hover{color:#ff6b6b;background:rgba(255,107,107,.12);}
+  .pieces-full{font-size:11.5px;color:var(--accent-bright);margin:0 0 8px;}
+  .formats{display:flex;gap:12px;margin-bottom:28px;flex-wrap:wrap;}
+  .fmt{flex:1;min-width:140px;border:1.5px solid var(--border);border-radius:12px;padding:14px;text-align:center;cursor:pointer;background:var(--surface);color:var(--ink);font-weight:700;font-size:14px;transition:border-color .15s,background .15s,color .15s;}
+  .fmt:hover{border-color:var(--accent-bright);}
+  .fmt.selected{border-color:var(--accent);background:var(--accent);color:#fff;}
+  .fmt-rec{display:block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;margin-top:2px;opacity:.9;}
+  .fmt-rec.hidden{display:none;}
+  .preselect-note{font-size:12.5px;color:var(--ink-muted);margin:10px 0 0;}
+  .preselect-note strong{color:var(--accent-bright);}
+  .preselect-note.hidden{display:none;}
+  .result{border-radius:16px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);color:#fff;padding:26px;font-size:14px;line-height:1.6;box-shadow:0 16px 40px rgba(255,90,31,.25);}
+  .result strong{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5);}
+  .result-text{background:rgba(0,0,0,.22);border-radius:10px;padding:12px;margin:12px 0;font-family:ui-monospace,Consolas,monospace;font-size:13px;white-space:pre-wrap;}
+  button.copy{background:#141413;color:#fff;border:none;padding:12px 24px;border-radius:999px;cursor:pointer;font-weight:700;font-size:13px;}
+  button.copy:hover{background:#000;}
+  .hint{color:var(--ink-muted);font-size:12px;margin-top:20px;}
+  .links{margin-top:28px;padding-top:20px;border-top:1px solid var(--border);}
+  .links h2{font-size:15px;margin:0 0 10px;color:#fff;}
+  .links a{display:inline-block;margin:0 12px 8px 0;font-size:13px;color:var(--accent-bright);text-decoration:underline;}
+  .links.hidden{display:none;}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#fff;color:#141413;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .meta-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 18px;margin-bottom:28px;font-size:13px;color:var(--ink-muted);}
+  .meta-banner strong{display:block;font-size:14px;margin-bottom:2px;color:#fff;}
+  .meta-banner a{color:#fff;background:var(--accent-deep);text-decoration:none;padding:8px 16px;border-radius:999px;font-weight:700;font-size:12px;white-space:nowrap;}
+  .meta-banner a:hover{background:var(--accent);color:#fff;}
+  .calendar-btns{display:flex;gap:8px;flex-wrap:wrap;}
+  .calendar-btn{background:none;border:1.5px solid var(--accent);color:var(--accent-bright);padding:8px 14px;border-radius:999px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;}
+  .calendar-btn:hover{background:var(--accent);color:#fff;}
+  .conn-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-radius:14px;padding:14px 18px;margin-bottom:28px;font-size:13px;}
+  .conn-banner.is-connected{background:rgba(52,199,89,.1);border:1px solid rgba(52,199,89,.35);}
+  .conn-banner.is-disconnected{background:var(--surface);border:1px solid var(--border);}
+  .conn-left{display:flex;align-items:center;gap:10px;}
+  .conn-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+  .conn-dot.is-connected{background:#34c759;box-shadow:0 0 0 rgba(52,199,89,.6);animation:conn-pulse 1.8s infinite;}
+  .conn-dot.is-disconnected{background:#5a5952;}
+  @keyframes conn-pulse{
+    0%{box-shadow:0 0 0 0 rgba(52,199,89,.55);}
+    70%{box-shadow:0 0 0 8px rgba(52,199,89,0);}
+    100%{box-shadow:0 0 0 0 rgba(52,199,89,0);}
+  }
+  .conn-label strong{display:block;color:#fff;font-size:14px;}
+  .conn-label span{color:var(--ink-muted);font-size:12px;}
+  .conn-action{text-decoration:none;padding:9px 18px;border-radius:999px;font-weight:800;font-size:12px;white-space:nowrap;border:none;cursor:pointer;}
+  .conn-action.is-connected{background:#34c759;color:#0a1f0f;}
+  .conn-action.is-connected:hover{background:#2fb350;}
+  .conn-action.is-disconnected{background:none;border:1.5px solid var(--border);color:var(--ink-muted);}
+  .conn-action.is-disconnected:hover{border-color:var(--accent-bright);color:var(--accent-bright);}
+  .calendar-context{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px dashed var(--border);border-radius:12px;padding:12px 16px;margin-top:14px;font-size:13px;color:var(--ink-muted);}
+  .calendar-context.hidden{display:none;}
+  .piece-preview{display:block;max-width:220px;width:100%;border-radius:10px;border:1px solid rgba(255,255,255,.25);margin:0 0 12px;}
+  .piece-carousel{max-width:220px;margin:0 0 12px;}
+  .piece-carousel-viewport{position:relative;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.25);background:#000;}
+  .piece-carousel-img{display:none;width:100%;}
+  .piece-carousel-img.active{display:block;}
+  .piece-carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.55);color:#fff;border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;}
+  .piece-carousel-arrow.prev{left:6px;}
+  .piece-carousel-arrow.next{right:6px;}
+  .piece-carousel-arrow:hover{background:var(--accent);}
+  .piece-carousel-count{position:absolute;bottom:6px;right:8px;background:rgba(0,0,0,.6);color:#fff;font-size:10px;padding:2px 7px;border-radius:999px;}
+  .piece-carousel-dots{display:flex;gap:4px;justify-content:center;margin-top:6px;flex-wrap:wrap;}
+  .piece-carousel-dot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;border:none;padding:0;}
+  .piece-carousel-dot.active{background:var(--accent);}
+  .is-connected [data-conn-disconnected], .is-disconnected [data-conn-connected]{display:none;}
+  .conn-action:disabled{opacity:.55;cursor:default;}
+  .media-gen-banner{border:1px dashed var(--border);border-radius:14px;padding:16px 18px;margin-bottom:28px;background:transparent;}
+  .media-gen-banner-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px;}
+  .media-gen-banner strong{display:block;font-size:13.5px;color:#fff;margin-bottom:2px;}
+  .media-gen-banner p{margin:0;font-size:12px;color:var(--ink-muted);line-height:1.5;max-width:560px;}
+  .media-gen-btn{background:none;border:1.5px solid var(--border);color:var(--ink-muted);padding:9px 16px;border-radius:999px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block;}
+  .media-gen-btn:hover{border-color:var(--accent-bright);color:var(--accent-bright);}
+  .media-gen-table{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:4px;}
+  .media-gen-table th, .media-gen-table td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--border-soft);color:var(--ink-muted);}
+  .media-gen-table th{color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:10.5px;}
+  .media-gen-table td:first-child, .media-gen-table th:first-child{padding-left:0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="brand">✨ {{NEGOCIO}}</span>
+  <h1>🏆 Monte seu time de marketing mundial</h1>
+  <p class="sub">Você está prestes a colocar 5 estrategistas de persuasão pra trabalhar na sua peça — as mesmas técnicas usadas por gigantes americanas como a Apple (Steve Jobs) e por referências atuais de marketing direto como Alex Hormozi pra vender bilhões. Não é achismo nem teoria de curso: é validado, comprovado, e agora está no seu time.</p>
+
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">1</span>
+      <div>
+        <strong>Escolha quem lidera essa peça</strong>
+        <p>Cada card abaixo é um estrategista diferente, com uma técnica validada — nenhum deles é "menos bom". A estrelinha ⭐ mostra quem a gente recomenda pro seu objetivo agora, mas os 5 já provaram que funcionam. Escolha quem combina mais com você.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <div>
+        <strong>Escolha onde isso vai aparecer</strong>
+        <p>📱 <b>Feed</b> = uma imagem só, com legenda. 🎠 <b>Carrossel</b> = várias telinhas pra deslizar. 🎬 <b>Story/Reels</b> = um vídeo curto.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="sub" style="margin-top:0;">Peça: {{TEMA}} · Objetivo: {{OBJETIVO}}</p>
+
+  <div class="conn-banner is-{{CONN_STATUS}}">
+    <div class="conn-left">
+      <span class="conn-dot is-{{CONN_STATUS}}"></span>
+      <div class="conn-label">
+        <strong>{{CONN_LABEL}}</strong>
+        <span data-conn-connected>Pronto pra publicar essa peça no Instagram quando quiser.</span>
+        <span data-conn-disconnected>Conecte sua conta Meta uma vez — depois é só publicar direto daqui.</span>
+      </div>
+    </div>
+    <button class="conn-action is-{{CONN_STATUS}}" id="connBtn" data-piece-code="{{CODIGO_PECA}}">
+      <span data-conn-connected>📤 Publicar no Instagram</span>
+      <span data-conn-disconnected>🔗 Conectar Instagram</span>
+    </button>
+  </div>
+
+  <div class="calendar-context hidden" id="calendarContext">{{CALENDAR_CONTEXT}}</div>
+
+  <div class="media-gen-banner">
+    <div class="media-gen-banner-head">
+      <div>
+        <strong>🎨 O visual desta peça já sai grátis por padrão</strong>
+        <p>Imagem própria ou card padrão, vídeo do Reels via ffmpeg — sem custo, sem conta em lugar nenhum. Se um dia quiser gerar imagem/vídeo por IA de verdade, é opcional, com dois provedores de imagem à escolha:</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <a class="media-gen-btn" id="hireAiBtnGemini" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">🤖 Criar chave — Gemini</a>
+        <a class="media-gen-btn" id="hireAiBtnGpt" href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">🤖 Criar chave — GPT</a>
+      </div>
+    </div>
+    <table class="media-gen-table">
+      <tr><th>Exemplo (calendário de 16 peças/mês)</th><th>Custo estimado</th></tr>
+      <tr><td>Imagem por IA (Gemini Nano Banana) — todas as peças de imagem</td><td>~$0,47/mês (12 imagens)</td></tr>
+      <tr><td>Imagem por IA (GPT Image 2) — todas as peças de imagem</td><td>~$0,40 – $0,65/mês (12 imagens)</td></tr>
+      <tr><td>Reels de 15s por IA (Veo 3.1, tier Fast — só Gemini)</td><td>~$5,60 – $6,72/mês (4 Reels)</td></tr>
+      <tr><td>Reels de 30s por IA (Veo 3.1, tier Fast — só Gemini)</td><td>~$12,80/mês (4 Reels)</td></tr>
+      <tr><td>Reels de 60s por IA (Veo 3.1, tier Fast — só Gemini)</td><td>~$25,60/mês (4 Reels)</td></tr>
+    </table>
+  </div>
+
+  <div class="meta-banner">
+    <div>
+      <strong>📅 Quer planejar um período inteiro em vez de só essa peça?</strong>
+      O Maestro monta um calendário misturando Feed, Carrossel, Stories e Reels ao longo do período. Todos saem prontos — texto, imagem (própria, card padrão ou gerada por IA) e vídeo do Reels (via ffmpeg, grátis, ou por IA).
+    </div>
+    <div class="calendar-btns">
+      <button class="calendar-btn" data-periodo="semanal">📅 Calendário semanal</button>
+      <button class="calendar-btn" data-periodo="mensal">📅 Calendário mensal</button>
+    </div>
+  </div>
+
+  <p class="section-label">👉 Escolha um card abaixo:</p>
+  <div class="cards">
+    <div class="card" data-fw="PAS">
+      <h3>🎯 PAS <span class="badge hidden" data-fw-badge="PAS">⭐ Recomendado</span></h3>
+      <p class="role">Especialista em dor direta — o estilo de ofertas de Alex Hormozi</p>
+      <p class="rec-reason hidden" data-fw-reason="PAS">🏆 Recomendado pra vender agora: é a mesma estrutura que Alex Hormozi usa nas ofertas dele — nomear a dor, mostrar o custo de não resolver, entregar a solução — testada em bilhões de dólares em vendas.</p>
+      <p class="desc">Problema → Agitação → Solução. Mostra a dor, aumenta a dor, entrega a solução — direto e rápido.</p>
+      <a class="source-link" href="https://instacopy.ai/blog/pas-copywriting-formula/" target="_blank" rel="noopener">📚 Fonte sobre o PAS</a>
+      {{PAS_BODY}}
+      <div class="pieces">{{PAS_PIECES}}</div>
+    </div>
+
+    <div class="card" data-fw="AIDA">
+      <h3>👀 AIDA <span class="badge hidden" data-fw-badge="AIDA">⭐ Recomendado</span></h3>
+      <p class="role">Especialista em atenção — o clássico da publicidade americana</p>
+      <p class="rec-reason hidden" data-fw-reason="AIDA">🏆 Recomendado pra engajar: é o framework publicitário mais usado do mundo há mais de 100 anos, feito pra prender atenção logo na primeira linha.</p>
+      <p class="desc">Atenção → Interesse → Desejo → Ação. O clássico: chama atenção, gera interesse, cria desejo, pede a ação.</p>
+      <a class="source-link" href="https://instacopy.ai/blog/aida-copywriting-formula/" target="_blank" rel="noopener">📚 Fonte sobre o AIDA</a>
+      {{AIDA_BODY}}
+      <div class="pieces">{{AIDA_PIECES}}</div>
+    </div>
+
+    <div class="card" data-fw="BAB">
+      <h3>🔁 BAB <span class="badge hidden" data-fw-badge="BAB">⭐ Recomendado</span></h3>
+      <p class="role">Especialista em transformação — contraste que gera identificação</p>
+      <p class="rec-reason hidden" data-fw-reason="BAB">🏆 Recomendado pra gerar identificação: o contraste antes/depois é o que mais faz a pessoa se ver na peça e comentar/compartilhar.</p>
+      <p class="desc">Antes → Depois → Ponte. Mostra o antes e o depois, com a virada no meio.</p>
+      <a class="source-link" href="https://instacopy.ai/blog/bab-copywriting-formula-explained-with-examples/" target="_blank" rel="noopener">📚 Fonte sobre o BAB</a>
+      {{BAB_BODY}}
+      <div class="pieces">{{BAB_PIECES}}</div>
+    </div>
+
+    <div class="card" data-fw="PASTOR">
+      <h3>📖 PASTOR <span class="badge hidden" data-fw-badge="PASTOR">⭐ Recomendado</span></h3>
+      <p class="role">Especialista em história — pra peças mais longas e envolventes</p>
+      <p class="rec-reason hidden" data-fw-reason="PASTOR">🏆 Recomendado quando a peça pede mais contexto: junta história com oferta, bom pra Carrossel ou Reels mais longos.</p>
+      <p class="desc">Problema, Amplificação, Solução/Story, Transformação, Oferta, Resposta. Mais completo, com história no meio.</p>
+      <a class="source-link" href="https://instacopy.ai/blog/pastor-copywriting-formula/" target="_blank" rel="noopener">📚 Fonte sobre o PASTOR</a>
+      {{PASTOR_BODY}}
+      <div class="pieces">{{PASTOR_PIECES}}</div>
+    </div>
+
+    <div class="card" data-fw="4 Ps">
+      <h3>🖼️ 4 Ps <span class="badge hidden" data-fw-badge="4 Ps">⭐ Recomendado</span></h3>
+      <p class="role">Especialista em prova — pra quando você tem resultado real pra mostrar</p>
+      <p class="rec-reason hidden" data-fw-reason="4 Ps">🏆 Recomendado quando você já tem prova real (depoimento, número, resultado) pra mostrar — sem prova, os outros 4 funcionam melhor.</p>
+      <p class="desc">Picture → Promise → Proof → Push. Pinta o cenário, promete o resultado, mostra prova, empurra pra ação.</p>
+      <a class="source-link" href="https://instacopy.ai/blog/4-ps-copywriting-formula/" target="_blank" rel="noopener">📚 Fonte sobre os 4 Ps</a>
+      {{4PS_BODY}}
+      <div class="pieces">{{4PS_PIECES}}</div>
+    </div>
+  </div>
+
+  <p class="section-label">👉 Agora escolha onde essa peça vai aparecer:</p>
+  <div class="formats">
+    <div class="fmt {{SEL_FEED}}" data-fmt="Feed">📱 Feed <span class="fmt-rec hidden" data-fmt-rec="Feed">(Recomendado)</span></div>
+    <div class="fmt {{SEL_CARROSSEL}}" data-fmt="Carrossel">🎠 Carrossel <span class="fmt-rec hidden" data-fmt-rec="Carrossel">(Recomendado)</span></div>
+    <div class="fmt {{SEL_STORYREELS}}" data-fmt="Story/Reels">🎬 Story / Reels <span class="fmt-rec hidden" data-fmt-rec="Story/Reels">(Recomendado)</span></div>
+  </div>
+  <p class="preselect-note hidden" id="preselectNote">✅ Já marcamos <strong>{{FMT_PRESELECT}}</strong> porque foi o que você pediu — pode trocar pra outro formato a qualquer momento, é só clicar.</p>
+
+  <div class="result">
+    <div id="resultText">👉 Escolha uma variação de texto (dentro de um dos cards) e um formato acima.</div>
+    <div class="result-text" id="resultBox" style="display:none"></div>
+    <button class="copy" id="copyBtn" style="display:none">📋 Copiar escolha pro chat</button>
+  </div>
+
+  <p class="hint">💡 Depois de copiar, volte pra conversa com o Claude e cole — ele aciona o Copywriter (e o Designer, se houver visual) de verdade com essa escolha.</p>
+
+  <div class="links hidden" id="resultLinks">
+    <h2>✅ Resultado gerado</h2>
+    {{RESULT_LINKS}}
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  let selectedFw = null, selectedText = null, selectedFmt = null;
+
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  function copyToClipboard(text){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); return true; }
+    catch(e) { return false; }
+    finally { document.body.removeChild(ta); }
+  }
+
+  const hireAiBtnGemini = document.getElementById('hireAiBtnGemini');
+  if (hireAiBtnGemini) {
+    hireAiBtnGemini.addEventListener('click', () => {
+      const phrase = 'Quero conectar o Gemini pra gerar imagem/vídeo';
+      const ok = copyToClipboard(phrase);
+      toast(ok ? 'Abrindo o Google AI Studio — depois cole no chat: "' + phrase + '"' : 'Copie manualmente: ' + phrase);
+    });
+  }
+
+  const hireAiBtnGpt = document.getElementById('hireAiBtnGpt');
+  if (hireAiBtnGpt) {
+    hireAiBtnGpt.addEventListener('click', () => {
+      const phrase = 'Quero conectar o GPT pra gerar imagem';
+      const ok = copyToClipboard(phrase);
+      toast(ok ? 'Abrindo a OpenAI Platform — depois cole no chat: "' + phrase + '"' : 'Copie manualmente: ' + phrase);
+    });
+  }
+
+  const connBtn = document.getElementById('connBtn');
+  if (connBtn) {
+    const isConnected = connBtn.classList.contains('is-connected');
+    const pieceCode = connBtn.dataset.pieceCode || '';
+    if (isConnected && !pieceCode) {
+      connBtn.disabled = true;
+      connBtn.querySelectorAll('span').forEach(s => s.style.display = 'none');
+      connBtn.textContent = '✅ Publica quando a peça estiver pronta';
+    } else {
+      connBtn.addEventListener('click', () => {
+        const phrase = isConnected
+          ? 'Publicar ' + pieceCode + ' no Instagram'
+          : 'Verificar minha conexão com o Instagram';
+        const ok = copyToClipboard(phrase);
+        toast(ok ? 'Copiado — cole no chat com o Claude: "' + phrase + '"' : 'Copie manualmente: ' + phrase);
+      });
+    }
+  }
+
+  document.querySelectorAll('.calendar-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const periodo = btn.dataset.periodo;
+      const phrase = 'Quero um calendário ' + periodo + ' de conteúdo';
+      const ok = copyToClipboard(phrase);
+      toast(ok ? 'Copiado — cole no chat com o Claude: "' + phrase + '"' : 'Copie manualmente: ' + phrase);
+    });
+  });
+
+  document.querySelectorAll('.piece-del').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const codigo = btn.dataset.piece;
+      const phrase = 'Apagar a peça ' + codigo;
+      const ok = copyToClipboard(phrase);
+      toast(ok ? 'Copiado — cole no chat com o Claude: "' + phrase + '"' : 'Copie manualmente: ' + phrase);
+    });
+  });
+
+  document.querySelectorAll('.variation').forEach(v => {
+    v.addEventListener('click', () => {
+      document.querySelectorAll('.variation').forEach(x => x.classList.remove('selected'));
+      v.classList.add('selected');
+      selectedFw = v.closest('.card').dataset.fw;
+      selectedText = v.dataset.text;
+      updateResult();
+    });
+  });
+
+  document.querySelectorAll('.fmt').forEach(f => {
+    if (f.classList.contains('selected')) selectedFmt = f.dataset.fmt;
+    f.addEventListener('click', () => {
+      document.querySelectorAll('.fmt').forEach(x => x.classList.remove('selected'));
+      f.classList.add('selected');
+      selectedFmt = f.dataset.fmt;
+      updateResult();
+    });
+  });
+
+  document.querySelectorAll('.regen').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const fw = btn.dataset.fwName;
+      const phrase = 'Gerar prévia do card ' + fw;
+      const ok = copyToClipboard(phrase);
+      toast(ok ? 'Copiado — cole no chat com o Claude: "' + phrase + '"' : 'Copie manualmente: ' + phrase);
+    });
+  });
+
+  document.querySelectorAll('.piece-carousel').forEach(function(carousel){
+    const imgs = carousel.querySelectorAll('.piece-carousel-img');
+    const dots = carousel.querySelectorAll('.piece-carousel-dot');
+    const countEl = carousel.querySelector('.piece-carousel-count');
+    let idx = 0;
+    function show(i){
+      idx = (i + imgs.length) % imgs.length;
+      imgs.forEach((img, n) => img.classList.toggle('active', n === idx));
+      dots.forEach((d, n) => d.classList.toggle('active', n === idx));
+      if (countEl) countEl.textContent = (idx + 1) + '/' + imgs.length;
+    }
+    const prevBtn = carousel.querySelector('.piece-carousel-arrow.prev');
+    const nextBtn = carousel.querySelector('.piece-carousel-arrow.next');
+    if (prevBtn) prevBtn.addEventListener('click', () => show(idx - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => show(idx + 1));
+    dots.forEach((d, n) => d.addEventListener('click', () => show(n)));
+    show(0);
+  });
+
+  function updateResult(){
+    const box = document.getElementById('resultText');
+    const resultBox = document.getElementById('resultBox');
+    const btn = document.getElementById('copyBtn');
+    if (selectedFw && selectedFmt && selectedText){
+      const finalText = 'Quero gerar: Formato = ' + selectedFmt + ' | Framework = ' + selectedFw + ' | Texto base: "' + selectedText + '"';
+      box.innerHTML = 'Sua escolha: <strong>' + selectedFw + '</strong> + <strong>' + selectedFmt + '</strong>. Copie abaixo e cole no chat com o Claude:';
+      resultBox.textContent = finalText;
+      resultBox.style.display = 'block';
+      btn.style.display = 'inline-block';
+      btn.onclick = () => {
+        const ok = copyToClipboard(finalText);
+        toast(ok ? 'Copiado!' : 'Selecione o texto acima e copie manualmente');
+      };
+    } else {
+      box.textContent = 'Escolha uma variação de texto (dentro de um dos cards) e um formato acima.';
+      resultBox.style.display = 'none';
+      btn.style.display = 'none';
+    }
+  }
+</script>
+</body>
+</html>
