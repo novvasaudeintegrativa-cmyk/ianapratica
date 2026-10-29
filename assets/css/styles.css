@@ -2962,3 +2962,16 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
     transform: translate(52%, -46%);
   }
 }
+
+/* Divisor de almoço dentro de um card da programação (card que atravessa o horário do almoço) */
+.schedule-lunch {
+  margin: var(--space-6) 0 var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--color-border);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
