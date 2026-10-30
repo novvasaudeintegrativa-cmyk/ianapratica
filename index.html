@@ -1850,7 +1850,7 @@
       if (v) {
         var titulo = 'VSL Imersão IA na Prática', played = false, hit = {};
         var crmVideo = function (type, percent) {
-          window.postMessage({ source: 'ncrm-video', type: type, percent: percent, provider: 'html5', title: titulo, placement: 'hero-vsl' }, '*');
+          window.postMessage({ source: 'ncrm-video', type: type, percent: percent, provider: 'html5', title: titulo, placement: 'vsl' }, '*');
         };
         v.addEventListener('play', function () {
           if (played) return;
