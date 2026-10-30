@@ -188,22 +188,6 @@
   <!-- Checkout (Kiwify) da imersão de R$ 47 — 
        order bump (gravação, R$ 47) configurado no próprio checkout. -->
 
-  <!-- Meta Pixel Code ("Pixel IA na Pratica", id 1104376235675261) -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1104376235675261');
-    fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1104376235675261&ev=PageView&noscript=1" /></noscript>
-  <!-- End Meta Pixel Code -->
 
 
 </head>
@@ -1092,7 +1076,7 @@
   </a>
 
   <script>
-    // Rastreamento do botão de compra: Pixel da Meta (InitiateCheckout) + repasse das UTMs pra Kiwify
+    // Repasse das UTMs pro checkout da Kiwify (a venda é atribuída ao anúncio)
     (function () {
       var btns = document.querySelectorAll('[data-track="comprar"]');
       if (!btns.length) return;
@@ -1113,56 +1097,6 @@
       if (q) btns.forEach(function (btn) {
         var baseHref = btn.getAttribute('href');
         btn.setAttribute('href', baseHref + (baseHref.indexOf('?') === -1 ? '?' : '&') + q);
-      });
-
-      btns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          if (window.fbq) fbq('track', 'InitiateCheckout', { value: 47.00, currency: 'BRL', content_name: 'Imersão Claude Code' });
-        });
-      });
-
-      // Quando a pessoa chega na seção de preço (ViewContent), uma vez só
-      var secao = document.getElementById('investimento');
-      if (secao && 'IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (es) {
-          if (es.some(function (e) { return e.isIntersecting; })) {
-            io.disconnect();
-            if (window.fbq) fbq('track', 'ViewContent', { value: 47.00, currency: 'BRL', content_name: 'Imersão Claude Code' });
-          }
-        }, { threshold: 0.4 });
-        io.observe(secao);
-      }
-    })();
-  </script>
-  <script>
-    // WhatsApp e VSL do hero (Pixel)
-    (function () {
-      document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
-        a.addEventListener('click', function () {
-          if (window.fbq) fbq('track', 'Contact', { content_name: 'WhatsApp' });
-        });
-      });
-
-      var v = document.querySelector('.hero-vsl');
-      if (!v) return;
-      var titulo = 'VSL Imersão Claude Code', played = false, hit = {};
-      v.addEventListener('play', function () {
-        if (played) return;
-        played = true;
-        if (window.fbq) fbq('trackCustom', 'VSLPlay', { content_name: titulo });
-      });
-      v.addEventListener('timeupdate', function () {
-        if (!v.duration) return;
-        var pct = v.currentTime / v.duration * 100;
-        [25, 50, 75, 95].forEach(function (m) {
-          if (!hit[m] && pct >= m) {
-            hit[m] = true;
-            if (window.fbq) fbq('trackCustom', 'VSLProgress' + m, { content_name: titulo, percent: m });
-          }
-        });
-      });
-      v.addEventListener('ended', function () {
-        if (window.fbq) fbq('trackCustom', 'VSLComplete', { content_name: titulo });
       });
     })();
   </script>
