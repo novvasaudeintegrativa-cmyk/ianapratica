@@ -2981,3 +2981,8 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
   margin: var(--space-6) 0 var(--space-4);
   border-top: 1px dashed var(--color-border);
 }
+
+/* Hero com headline longa: fonte menor pra caber em menos linhas na coluna do texto */
+.hero-impact h1.text-display {
+  font-size: clamp(1.6rem, 1.6vw + 1rem, 2.7rem);
+}
