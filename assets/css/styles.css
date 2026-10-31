@@ -2986,3 +2986,33 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
 .hero-impact h1.text-display {
   font-size: clamp(1.6rem, 1.6vw + 1rem, 2.7rem);
 }
+
+/* Selo "Imersão ao vivo" do hero (pílula laranja com ícone de câmera) — mesmo visual do claudecode.html */
+.hero-eyebrow-live {
+  gap: 12px;
+  padding: 10px 22px 10px 16px;
+  border: 1.5px solid var(--clay-vivid);
+  border-radius: var(--radius-pill);
+  background: rgba(255, 90, 31, 0.12);
+  backdrop-filter: blur(4px);
+  font-size: clamp(1.05rem, 0.6vw + 0.9rem, 1.35rem);
+  font-weight: 600;
+}
+
+.hero-eyebrow-white {
+  color: #faf9f5;
+}
+
+.hero-eyebrow-sep {
+  color: #faf9f5;
+  margin: 0 -4px;
+}
+
+.hero-eyebrow-orange {
+  color: var(--clay-vivid);
+}
+
+.hero-eyebrow-icon {
+  flex: none;
+  color: var(--clay-vivid);
+}
