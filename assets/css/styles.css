@@ -3016,3 +3016,35 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
   flex: none;
   color: var(--clay-vivid);
 }
+
+/* Marca "Claude Code" do hero (símbolo + texto) — mesmo visual do claudecode.html */
+.hero-claude-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-4);
+  color: #faf9f5;
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  -webkit-text-stroke: 0.4px currentColor;
+  line-height: 1;
+}
+
+.hero-claude-brand .hero-claude-logo {
+  margin-bottom: 0;
+  height: 48px;
+}
+
+/* Selo "Imersão ao vivo" da index: um pouco menor */
+.hero-impact .hero-eyebrow-live {
+  gap: 10px;
+  padding: 8px 18px 8px 14px;
+  font-size: clamp(0.95rem, 0.5vw + 0.8rem, 1.15rem);
+}
+
+.hero-impact .hero-eyebrow-live .hero-eyebrow-icon {
+  width: 22px;
+  height: 22px;
+}
