@@ -973,7 +973,7 @@
               configurado (terminal + VS Code + Git), pronto pra usar em qualquer projeto, não só na imersão.</p>
           </article>
 
-          <article class="card card-hover">
+          <article class="card card-hover is-active">
             <p class="text-body"><strong>Domínio dos comandos essenciais</strong> — <code>/help</code>,
               <code>/model</code> e os 3 modos de execução (padrão, auto-aceitar, planejamento), sem precisar decorar
               nada.</p>
@@ -1896,6 +1896,21 @@
         }, { threshold: 0.4 });
         io.observe(secao);
       }
+    })();
+  </script>
+  <script>
+    // "O que você vai aprender": um card fica em destaque (laranja escuro); ao passar o mouse em outro,
+    // o destaque vai pra ele e o anterior volta ao tom claro.
+    (function () {
+      var cards = document.querySelectorAll('#resultados .card-hover');
+      if (!cards.length) return;
+      function ativar(c) {
+        cards.forEach(function (x) { x.classList.toggle('is-active', x === c); });
+      }
+      cards.forEach(function (c) {
+        c.addEventListener('pointerenter', function () { ativar(c); });
+        c.addEventListener('click', function () { ativar(c); });
+      });
     })();
   </script>
 </body>

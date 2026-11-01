@@ -3077,3 +3077,28 @@ body:not(:has(.sticky-cta)) .whatsapp-float {
     linear-gradient(180deg, #fff4ec 0%, #fbe2cf 55%, #f7d3b8 100%);
   background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
 }
+
+/* "O que você vai aprender": só o card ativo fica em laranja escuro; os outros ficam no tom claro
+   (o destaque é trocado por script ao passar o mouse). */
+#resultados .card-hover:not(.is-active):hover {
+  background: rgba(255, 90, 31, 0.2);
+  border-color: var(--clay-vivid);
+  color: inherit;
+  box-shadow: none;
+  animation: none;
+}
+
+#resultados .card-hover.is-active {
+  background: var(--clay-vivid);
+  border-color: var(--clay-vivid);
+  color: #ffffff;
+  box-shadow: var(--elevation-floating);
+  position: relative;
+  z-index: 2;
+}
+
+#resultados .card-hover.is-active p,
+#resultados .card-hover.is-active strong,
+#resultados .card-hover.is-active code {
+  color: #ffffff;
+}
