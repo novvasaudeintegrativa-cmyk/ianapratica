@@ -349,6 +349,18 @@
     .cron-day small { font-size: 0.75rem; }
     .cron-day strong { margin: 2px 0; font-size: clamp(1.8rem, 2vw + 1rem, 2.6rem); }
     .cron-day span { font-size: 0.8rem; }
+
+    /* Contagem regressiva: os 4 cards ocupam a mesma largura dos 2 cards dos dias (2 x 210px + espaço) */
+    #cron-countdown-wrap { width: 100%; }
+
+    .cron-count {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-3);
+      width: min(100%, calc(210px * 2 + var(--space-3)));
+    }
+
+    .cron-count-box { min-width: 0; }
   </style>
 </head>
 
