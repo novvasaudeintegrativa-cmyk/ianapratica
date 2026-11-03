@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Cronograma — Imersão IA na Prática</title>
+  <meta name="description"
+    content="Salve as datas da Imersão IA na Prática na sua agenda: 28 e 29 de novembro, das 9h às 16h, ao vivo [100% Online] via Zoom." />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    /* Faixa de marca rolando no topo */
+    .cron-ticker {
+      overflow: hidden;
+      background: var(--clay-vivid);
+      color: #1a0d05;
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .cron-ticker-track {
+      display: inline-flex;
+      gap: 32px;
+      padding: 8px 0;
+      animation: cron-ticker 28s linear infinite;
+    }
+
+    @keyframes cron-ticker {
+      to { transform: translateX(-50%); }
+    }
+
+    .cron-top {
+      background: #0c0b0a;
+      padding: 14px 0;
+    }
+
+    .cron-top .brand {
+      color: #faf9f5;
+    }
+
+    .cron-hero {
+      padding-block: clamp(40px, 6vw, 72px);
+      text-align: center;
+    }
+
+    .cron-hero .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-6);
+    }
+
+    .cron-hero h1.text-display {
+      font-size: clamp(2rem, 3.2vw + 1rem, 3.6rem);
+      max-width: 18ch;
+    }
+
+    .cron-count-label {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(250, 249, 245, 0.75);
+    }
+
+    .cron-count {
+      display: flex;
+      gap: var(--space-3);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cron-count-box {
+      min-width: 78px;
+      padding: 12px 10px;
+      border: 1.5px solid rgba(255, 90, 31, 0.6);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 90, 31, 0.12);
+      color: #faf9f5;
+      font-family: var(--font-sans);
+    }
+
+    .cron-count-box strong {
+      display: block;
+      font-size: clamp(1.6rem, 2.4vw + 0.8rem, 2.4rem);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cron-count-box span {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clay-vivid);
+    }
+
+    .cron-count-done {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--clay-vivid);
+    }
+
+    .cron-days {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 260px));
+      gap: var(--space-4);
+      justify-content: center;
+      width: 100%;
+    }
+
+    .cron-day {
+      padding: 20px 16px;
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--clay-vivid);
+      background: rgba(255, 90, 31, 0.16);
+      color: #faf9f5;
+      font-family: var(--font-sans);
+      text-align: center;
+    }
+
+    .cron-day small {
+      display: block;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clay-vivid);
+    }
+
+    .cron-day strong {
+      display: block;
+      margin: 6px 0;
+      font-size: clamp(1.7rem, 2vw + 1rem, 2.4rem);
+      line-height: 1.05;
+    }
+
+    .cron-day span {
+      font-size: 0.9rem;
+      color: rgba(250, 249, 245, 0.8);
+    }
+
+    .cron-when {
+      margin: 0;
+      color: rgba(250, 249, 245, 0.88);
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: clamp(1rem, 0.6vw + 0.9rem, 1.2rem);
+    }
+
+    .cron-note {
+      margin: 0;
+      color: rgba(250, 249, 245, 0.7);
+      font-size: 0.95rem;
+    }
+
+    .cron-note a {
+      color: #faf9f5;
+      text-decoration: underline;
+    }
+
+    .cron-ics {
+      background: none;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      color: rgba(250, 249, 245, 0.7);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .cron-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+      text-align: left;
+    }
+
+    .cron-step {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--clay-vivid);
+      background: rgba(255, 90, 31, 0.12);
+    }
+
+    .cron-step-num {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--clay-vivid);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-weight: 800;
+    }
+
+    .cron-step h3 {
+      margin: var(--space-3) 0 var(--space-2);
+      font-size: 1.15rem;
+    }
+
+    .cron-step p {
+      margin: 0;
+    }
+
+    .cron-help {
+      margin: var(--space-8) auto 0;
+      max-width: 62ch;
+      text-align: center;
+    }
+
+    .cron-cta {
+      margin-top: var(--space-8);
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      .cron-steps { grid-template-columns: 1fr; }
+      .cron-days { grid-template-columns: 1fr 1fr; }
+      .cron-count-box { min-width: 66px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cron-ticker-track { animation: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cron-ticker" aria-hidden="true">
+    <div class="cron-ticker-track">
+      <span>IA na Prática</span><span>·</span><span>Imersão ao vivo [100% Online]</span><span>·</span><span>28 e 29 de novembro</span><span>·</span><span>IA na Prática</span><span>·</span><span>Imersão ao vivo [100% Online]</span><span>·</span><span>28 e 29 de novembro</span><span>·</span>
+      <span>IA na Prática</span><span>·</span><span>Imersão ao vivo [100% Online]</span><span>·</span><span>28 e 29 de novembro</span><span>·</span><span>IA na Prática</span><span>·</span><span>Imersão ao vivo [100% Online]</span><span>·</span><span>28 e 29 de novembro</span><span>·</span>
+    </div>
+  </div>
+
+  <header class="cron-top">
+    <div class="container">
+      <a class="brand" href="index.html"><span class="brand-mark">IA </span>na Prática</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-impact cron-hero" id="topo">
+      <div class="hero-impact-glow" aria-hidden="true"></div>
+      <div class="container">
+        <span class="hero-eyebrow hero-eyebrow-live text-eyebrow">
+          <svg class="hero-eyebrow-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2.5" y="6" width="13" height="12" rx="2.5" stroke="currentColor" stroke-width="1.8" />
+            <path d="M15.5 10.5L21 7.5V16.5L15.5 13.5" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+          </svg>
+          <span class="hero-eyebrow-white">Imersão ao Vivo [100% Online]</span>
+        </span>
+
+        <h1 class="text-display">Salve as datas <span class="text-accent">na sua agenda</span></h1>
+
+        <div id="cron-countdown-wrap" style="display:flex;flex-direction:column;align-items:center;gap:var(--space-3);">
+          <p class="cron-count-label" id="cron-count-label">Começa em:</p>
+          <div class="cron-count" id="cron-count" role="timer" aria-live="off">
+            <div class="cron-count-box"><strong id="cd-d">--</strong><span>Dias</span></div>
+            <div class="cron-count-box"><strong id="cd-h">--</strong><span>Hrs</span></div>
+            <div class="cron-count-box"><strong id="cd-m">--</strong><span>Mins</span></div>
+            <div class="cron-count-box"><strong id="cd-s">--</strong><span>Segs</span></div>
+          </div>
+        </div>
+
+        <div class="cron-days">
+          <div class="cron-day">
+            <small>Sábado</small>
+            <strong>28 NOV</strong>
+            <span>Dia 1 · das 9h às 16h</span>
+          </div>
+          <div class="cron-day">
+            <small>Domingo</small>
+            <strong>29 NOV</strong>
+            <span>Dia 2 · das 9h às 16h</span>
+          </div>
+        </div>
+
+        <p class="cron-when">Sempre das 9h às 16h (horário de Brasília), ao vivo [100% Online] via Zoom</p>
+
+        <a class="btn btn-primary btn-cta-pulse" id="btn-gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Imers%C3%A3o%20IA%20na%20Pr%C3%A1tica%20%5B100%25%20Online%5D&amp;dates=20261128T090000/20261128T160000&amp;ctz=America/Sao_Paulo&amp;details=Imers%C3%A3o%20ao%20vivo%20100%25%20online%20via%20Zoom%2C%20nos%20dois%20dias%2C%20das%209h%20%C3%A0s%2016h%20%28hor%C3%A1rio%20de%20Bras%C3%ADlia%29.%0AO%20link%20do%20Zoom%20e%20as%20dicas%20para%20o%20dia%20saem%20no%20grupo%20do%20WhatsApp%20da%20turma.%0Ahttps%3A//www.imersaoianapratica.com.br/&amp;location=Online%20%28Zoom%29&amp;recur=RRULE:FREQ=DAILY;COUNT=2" target="_blank" rel="noopener">Adicionar ao meu calendário</a>
+
+        <p class="cron-note">Vagas limitadas. <a href="#como-salvar">Veja como salvar ↓</a></p>
+      </div>
+    </section>
+
+    <section class="section" id="como-salvar">
+      <div class="container">
+        <div class="section-header">
+          <span class="text-eyebrow">Passo a passo</span>
+          <h2 class="text-heading">Como salvar em <span class="text-accent">3 passos</span></h2>
+        </div>
+
+        <div class="cron-steps">
+          <article class="cron-step">
+            <span class="cron-step-num">1</span>
+            <h3>Toque no botão</h3>
+            <p class="text-body">Clique em <strong>"Adicionar ao meu calendário"</strong>.</p>
+          </article>
+          <article class="cron-step">
+            <span class="cron-step-num">2</span>
+            <h3>Abra o Google Agenda</h3>
+            <p class="text-body">O evento abre já preenchido, com as datas e o horário dos dois dias.</p>
+          </article>
+          <article class="cron-step">
+            <span class="cron-step-num">3</span>
+            <h3>Toque em "Salvar"</h3>
+            <p class="text-body">Pronto: os dois dias da imersão ficam salvos na sua agenda.</p>
+          </article>
+        </div>
+
+        <p class="text-body cron-help">
+          <strong>O link do Zoom e as dicas para o dia chegam no grupo do WhatsApp da turma.</strong>
+          Para a melhor experiência, tenha um computador ou notebook com o Zoom instalado e entre uns minutos antes do início.
+        </p>
+
+        <div class="cron-cta">
+          <a class="btn btn-primary btn-cta-pulse" id="btn-gcal-2" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Imers%C3%A3o%20IA%20na%20Pr%C3%A1tica%20%5B100%25%20Online%5D&amp;dates=20261128T090000/20261128T160000&amp;ctz=America/Sao_Paulo&amp;details=Imers%C3%A3o%20ao%20vivo%20100%25%20online%20via%20Zoom%2C%20nos%20dois%20dias%2C%20das%209h%20%C3%A0s%2016h%20%28hor%C3%A1rio%20de%20Bras%C3%ADlia%29.%0AO%20link%20do%20Zoom%20e%20as%20dicas%20para%20o%20dia%20saem%20no%20grupo%20do%20WhatsApp%20da%20turma.%0Ahttps%3A//www.imersaoianapratica.com.br/&amp;location=Online%20%28Zoom%29&amp;recur=RRULE:FREQ=DAILY;COUNT=2" target="_blank" rel="noopener">Adicionar ao meu calendário</a>
+          <p class="text-body-sm text-muted" style="margin-top: var(--space-4);">
+            Usa Outlook ou Apple Calendar? <button type="button" class="cron-ics" id="btn-ics">Baixar o arquivo de calendário (.ics)</button>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 IA na Prática. Todos os direitos reservados.</span>
+        <span><a href="privacy.html">Política de Privacidade</a> · <a href="terms.html">Termos de Uso</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // Contagem regressiva até o início do Dia 1 (28/11/2026, 9h, horário de Brasília)
+      var INICIO = new Date('2026-11-28T09:00:00-03:00').getTime();
+      var FIM = new Date('2026-11-29T16:00:00-03:00').getTime();
+      var d = document.getElementById('cd-d'), h = document.getElementById('cd-h'),
+        m = document.getElementById('cd-m'), s = document.getElementById('cd-s');
+      var box = document.getElementById('cron-count'), label = document.getElementById('cron-count-label');
+      function dois(n) { return String(n).padStart(2, '0'); }
+      function tick() {
+        var agora = Date.now(), falta = INICIO - agora;
+        if (falta <= 0) {
+          box.style.display = 'none';
+          label.className = 'cron-count-done';
+          label.textContent = agora < FIM ? 'A imersão já começou! Entre pelo link do grupo.' : 'Obrigado por participar!';
+          return;
+        }
+        var seg = Math.floor(falta / 1000);
+        d.textContent = dois(Math.floor(seg / 86400));
+        h.textContent = dois(Math.floor(seg % 86400 / 3600));
+        m.textContent = dois(Math.floor(seg % 3600 / 60));
+        s.textContent = dois(seg % 60);
+        setTimeout(tick, 1000);
+      }
+      tick();
+
+      // Arquivo .ics (Outlook, Apple Calendar etc.): um evento por dia, 9h–16h (12h–19h UTC, Brasília sem horário de verão)
+      document.getElementById('btn-ics').addEventListener('click', function () {
+        var dias = [['20261128', 'Dia 1'], ['20261129', 'Dia 2']];
+        var linhas = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//IA na Pratica//Imersao//PT', 'CALSCALE:GREGORIAN'];
+        dias.forEach(function (x) {
+          linhas.push('BEGIN:VEVENT',
+            'UID:imersao-ia-na-pratica-' + x[0] + '@imersaoianapratica.com.br',
+            'DTSTAMP:20261101T000000Z',
+            'DTSTART:' + x[0] + 'T120000Z',
+            'DTEND:' + x[0] + 'T190000Z',
+            'SUMMARY:Imersão IA na Prática (' + x[1] + ') [100% Online]',
+            'LOCATION:Online (Zoom)',
+            'DESCRIPTION:Imersão ao vivo 100% online via Zoom. O link e as dicas para o dia saem no grupo do WhatsApp da turma.',
+            'END:VEVENT');
+        });
+        linhas.push('END:VCALENDAR');
+        var blob = new Blob([linhas.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'imersao-ia-na-pratica.ics';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+      });
+    })();
+  </script>
+</body>
+
+</html>
